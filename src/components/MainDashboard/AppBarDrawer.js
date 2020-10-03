@@ -11,9 +11,10 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems } from './listItems';
-import { InputBase } from '@material-ui/core';
+import { Avatar, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { AccountCircle } from '@material-ui/icons';
+import avatar from '../../images/avatar.png'
 
 const drawerWidth = 240;
 
@@ -163,15 +164,9 @@ const AppBarDrawer = () => {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </div>
-                    <IconButton
-                        className="ml-auto"
-                        edge="end"
-                        aria-label="account of current user"
-                        aria-haspopup="true"
-                        color="inherit"
-                    >
-                        <AccountCircle />
-                    </IconButton>
+                    <Avatar aria-label="recipe" variant="circle" className={classes.avatar}>
+                        <img width="100%" src={avatar} alt="" />
+                    </Avatar>
                 </Toolbar>
             </AppBar>
 
