@@ -1,10 +1,12 @@
 import React from 'react';
 import Dashboard from './components/MainDashboard/Dashboard';
+import SignInSide from './components/SignIn/SignIn';
 
 function App() {
   return (
     <div>
-       <Dashboard />
+      <SignInSide />
+       {/* <Dashboard /> */}
     </div>
   );
 }
