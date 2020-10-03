@@ -1,30 +1,13 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        color: '#fff',
+        marginTop: '130px'
+        
     },
     avatar: {
         margin: theme.spacing(1),
@@ -50,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
+        backgroundColor: '#213F7E',
+        borderRadius: '0',
+        padding: '0.6rem 0'
     },
 }));
 
@@ -60,45 +49,53 @@ export default function SignInSide() {
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
             <Grid item xs={false} sm={4} md={6} className={classes.signInRight} >
-                <Typography variant="h6" style={{textAlign:'center', color:'#fff'}}>
-                    Welcome to <br/> Client Web Application
+                <div style={{margin: '10rem 0'}}>
+                    <Typography variant="h6" style={{ textAlign: 'center', color: '#fff', fontSize: '52px' }}>
+                        Welcome to <br /> Client Web App
                 </Typography>
+                <Typography style={{ width: '60%', color: '#fff', fontSize: "14px", textAlign: 'center', margin: '0 auto' }}>
+                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+                </Typography>
+                </div>
             </Grid>
-            <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+            <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square
+                style={{ backgroundColor: '#4195D1'}}
+            >
                 <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
+                    <Typography component="h1" variant="body1">
+                        SIGN IN
                     </Typography>
                     <form className={classes.form} noValidate>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
+                        <div>
+                            <label htmlFor=""> Email </label>
+                            <TextField
+                                style={{ backgroundColor: '#fff' }}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                                placeholder="user@email.com"
+                            />
+                        </div>
+                        <div className="mt-3">
+                            <label htmlFor=""> Password </label>
+                            <TextField
+                                style={{ backgroundColor: '#fff' }}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                placeholder="***********"
+                            />
+                        </div>
                         <Button
                             type="submit"
                             fullWidth
@@ -110,19 +107,11 @@ export default function SignInSide() {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
+                                <Link href="#" variant="body2" style={{color: '#fff', display:'block', textAlign:'center'}}>
                                     Forgot password?
                                 </Link>
                             </Grid>
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
                         </Grid>
-                        <Box mt={5}>
-                            <Copyright />
-                        </Box>
                     </form>
                 </div>
             </Grid>
