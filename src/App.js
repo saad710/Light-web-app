@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import InboxDetails from './components/MainDashboard/Inbox/InboxDetails';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           </Route>
           <Route path="/inbox">
             <Dashboard />
+          </Route>
+          <Route path="/details/:inboxId">
+            <InboxDetails />
           </Route>
         </Switch>
       </Router>

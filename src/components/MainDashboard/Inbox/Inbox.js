@@ -1,6 +1,8 @@
 import React from 'react';
-import { Avatar, Card, CardHeader, Divider, Grid, IconButton, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Avatar, Divider, makeStyles, Typography } from '@material-ui/core';
 import inboxData from '../../../data/inboxData';
+import avatar from '../../../images/avatar.png'
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,12 +34,14 @@ const Inbox = () => {
                         <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
                         <div className="d-flex align-items-center my-3" style={{ color: '#fff' }}>
                             <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
-                                R
-                    </Avatar>
-                            <Typography variant="body5" style={{ margin: '0.5rem 0.5rem' }}>
-                                <strong> Marie Winter </strong> <br />
-                                <strong> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
-                    </Typography>
+                                <img width="100%" src={avatar} alt=""/>
+                            </Avatar>
+                            <Link to={`details/${inbox.id}`} style={{textDecoration: 'none', color: '#fff'}}>
+                                <Typography variant="body5" style={{ margin: '0.5rem 0.5rem' }}>
+                                    <strong> Marie Winter </strong> <br />
+                                    <strong style={{marginLeft:'0.5rem'}}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                </Typography>
+                            </Link>
                             <Typography variant="body6">
                                 <small> just now </small>
                             </Typography>

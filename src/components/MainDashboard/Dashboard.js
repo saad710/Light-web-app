@@ -24,6 +24,7 @@ import { InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { AccountCircle } from '@material-ui/icons';
 import Inbox from './Inbox/Inbox'
+import InboxDetails from './Inbox/InboxDetails';
 
 function Copyright() {
   return (
@@ -242,9 +243,8 @@ export default function Dashboard() {
           <Grid container spacing={3}>
             {/* Inbox */}
             <Grid item xs={12}>
-              {/* <Paper className={classes.paper}> */}
                 <Inbox />
-              {/* </Paper> */}
+                {/* <InboxDetails /> */}
             </Grid>
           </Grid>
           <Box pt={4}>
