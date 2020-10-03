@@ -23,6 +23,7 @@ import Orders from './Orders';
 import { InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { AccountCircle } from '@material-ui/icons';
+import Inbox from './Inbox/Inbox'
 
 function Copyright() {
   return (
@@ -42,6 +43,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    backgroundColor: '#4195D1'
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -146,6 +148,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
+    
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -237,23 +240,11 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
+            {/* Inbox */}
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
+              {/* <Paper className={classes.paper}> */}
+                <Inbox />
+              {/* </Paper> */}
             </Grid>
           </Grid>
           <Box pt={4}>
