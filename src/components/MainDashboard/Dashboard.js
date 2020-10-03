@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -10,18 +10,19 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems} from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import { InputBase } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import { AccountCircle } from '@material-ui/icons';
 
 function Copyright() {
   return (
@@ -58,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor: '#4195D1'
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -76,6 +78,47 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(3),
+      width: 'auto',
+      backgroundColor: '#fff',
+    },
+    
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#2d2d2d'
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+   
+  },
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
@@ -84,6 +127,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    backgroundColor: '#213F7E',
+    color: '#fff'
   },
   drawerPaperClose: {
     overflowX: 'hidden',
@@ -142,13 +187,29 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
+          <div className={classes.search}>
+            <div className={classes.searchIcon} >
+              <SearchIcon
+              />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              style={{color:'#2d2d2d'}}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </div>
+          <IconButton
+            className="ml-auto"
+            edge="end"
+            aria-label="account of current user"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <AccountCircle />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -159,15 +220,18 @@ export default function Dashboard() {
         }}
         open={open}
       >
+        
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
+          <Typography>
+            Client Web App
+          </Typography>
+          <IconButton onClick={handleDrawerClose} style={{color:'#fff'}}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
         <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
+       
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

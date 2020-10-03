@@ -9,62 +9,92 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import {Link} from 'react-router-dom'
 
 export const mainListItems = (
   <div>
+    <Link to="/">
+      <ListItem button>
+        <ListItemIcon style={{color: '#fff'}}>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Inbox" />
+      </ListItem>
+    </Link>
     <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
+      <ListItemIcon style={{color: '#fff'}}>
+        <ShoppingCartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Contact" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon style={{color: '#fff'}}>
+        <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText primary="Sent" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon style={{color: '#fff'}}>
+        <BarChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Company/Customers" />
+    </ListItem>
+    <ListItem >
+      <ListItemIcon style={{color: '#fff'}}>
+        <LayersIcon />
+      </ListItemIcon>
+      <ListItemText primary="Setting" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon style={{ color: '#fff' }}>
+        <BarChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Profile" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon style={{ color: '#fff' }}>
+        <BarChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Privacy" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon style={{ color: '#fff' }}>
+        <BarChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Team" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon style={{ color: '#fff' }}>
+        <BarChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Email Signature" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon style={{ color: '#fff' }}>
+        <BarChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Company Details" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon style={{ color: '#fff' }}>
+        <BarChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Ticket" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon style={{ color: '#fff' }}>
+        <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
     <ListItem button>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
+      <ListItemIcon style={{ color: '#fff' }}>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="Log Out" />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItem>
+      
   </div>
 );
 
-export const secondaryListItems = (
-  <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItem>
-  </div>
-);
+
