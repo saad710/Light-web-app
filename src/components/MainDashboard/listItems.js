@@ -12,85 +12,87 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import {Link} from 'react-router-dom'
 
 export const mainListItems = (
-  <div>
+  <div style={{marginLeft: '1rem'}}>
     <Link to="/">
       <ListItem button>
-        <ListItemIcon style={{color: '#fff'}}>
+        {/* <ListItemIcon style={{color: '#fff'}}>
           <DashboardIcon />
-        </ListItemIcon>
+        </ListItemIcon> */}
         <ListItemText primary="Inbox" />
       </ListItem>
     </Link>
     <ListItem button>
-      <ListItemIcon style={{color: '#fff'}}>
+      {/* <ListItemIcon style={{color: '#fff'}}>
         <ShoppingCartIcon />
-      </ListItemIcon>
+      </ListItemIcon> */}
       <ListItemText primary="Contact" />
     </ListItem>
     <ListItem button>
-      <ListItemIcon style={{color: '#fff'}}>
+      {/* <ListItemIcon style={{color: '#fff'}}>
         <PeopleIcon />
-      </ListItemIcon>
+      </ListItemIcon> */}
       <ListItemText primary="Sent" />
     </ListItem>
     <ListItem button>
-      <ListItemIcon style={{color: '#fff'}}>
+      {/* <ListItemIcon style={{color: '#fff'}}>
         <BarChartIcon />
-      </ListItemIcon>
+      </ListItemIcon> */}
       <ListItemText primary="Company/Customers" />
     </ListItem>
     <ListItem >
-      <ListItemIcon style={{color: '#fff'}}>
+      {/* <ListItemIcon style={{color: '#fff'}}>
         <LayersIcon />
-      </ListItemIcon>
+      </ListItemIcon> */}
       <ListItemText primary="Setting" />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon style={{ color: '#fff' }}>
+    <div style={{marginLeft:'1rem'}}>
+      <ListItem button>
+        {/* <ListItemIcon style={{ color: '#fff' }}>
         <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Profile" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon style={{ color: '#fff' }}>
+      </ListItemIcon> */}
+        <ListItemText primary="Profile" />
+      </ListItem>
+      <ListItem button>
+        {/* <ListItemIcon style={{ color: '#fff' }}>
         <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Privacy" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon style={{ color: '#fff' }}>
+      </ListItemIcon> */}
+        <ListItemText primary="Privacy" />
+      </ListItem>
+      <ListItem button>
+        {/* <ListItemIcon style={{ color: '#fff' }}>
         <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Team" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon style={{ color: '#fff' }}>
+      </ListItemIcon> */}
+        <ListItemText primary="Team" />
+      </ListItem>
+      <ListItem button>
+        {/* <ListItemIcon style={{ color: '#fff' }}>
         <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Email Signature" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon style={{ color: '#fff' }}>
+      </ListItemIcon> */}
+        <ListItemText primary="Email Signature" />
+      </ListItem>
+      <ListItem button>
+        {/* <ListItemIcon style={{ color: '#fff' }}>
         <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Company Details" />
-    </ListItem>
+      </ListItemIcon> */}
+        <ListItemText primary="Company Details" />
+      </ListItem>
+    </div>
     <ListItem button>
-      <ListItemIcon style={{ color: '#fff' }}>
+      {/* <ListItemIcon style={{ color: '#fff' }}>
         <BarChartIcon />
-      </ListItemIcon>
+      </ListItemIcon> */}
       <ListItemText primary="Ticket" />
     </ListItem>
     <ListItem button>
-      <ListItemIcon style={{ color: '#fff' }}>
+      {/* <ListItemIcon style={{ color: '#fff' }}>
         <BarChartIcon />
-      </ListItemIcon>
+      </ListItemIcon> */}
       <ListItemText primary="Dashboard" />
     </ListItem>
     <ListItem button>
-      <ListItemIcon style={{ color: '#fff' }}>
+      {/* <ListItemIcon style={{ color: '#fff' }}>
         <BarChartIcon />
-      </ListItemIcon>
+      </ListItemIcon> */}
       <ListItemText primary="Log Out" />
     </ListItem>
       

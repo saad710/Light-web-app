@@ -69,8 +69,9 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(3),
-            width: 'auto',
+            width: '100%',
             backgroundColor: '#fff',
+            borderRadius:'1rem'
         },
 
     },
@@ -121,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     appBarSpacer: theme.mixins.toolbar,
-    
+
 }));
 
 const AppBarDrawer = () => {
@@ -134,8 +135,8 @@ const AppBarDrawer = () => {
         setOpen(false);
     };
     return (
-        
-            <div>
+
+        <div>
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
                     <IconButton
@@ -186,7 +187,7 @@ const AppBarDrawer = () => {
                 <div className={classes.toolbarIcon}>
                     <Typography>
                         Client Web App
-          </Typography>
+                    </Typography>
                     <IconButton onClick={handleDrawerClose} style={{ color: '#fff' }}>
                         <ChevronLeftIcon />
                     </IconButton>
@@ -195,7 +196,7 @@ const AppBarDrawer = () => {
                 <List>{mainListItems}</List>
 
             </Drawer>
-            </div>
+        </div>
     );
 };
 
