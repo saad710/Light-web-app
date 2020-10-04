@@ -100,6 +100,12 @@ const useStyles = makeStyles((theme) => ({
         },
 
     },
+    horizontalDivider: {
+        backgroundColor: '#fff',
+        marginRight: '1rem',
+        height: '2rem',
+        marginTop: '1rem',
+    },
     drawerPaper: {
         position: 'relative',
         whiteSpace: 'nowrap',
@@ -122,6 +128,7 @@ const useStyles = makeStyles((theme) => ({
             width: theme.spacing(9),
         },
     },
+    
     appBarSpacer: theme.mixins.toolbar,
 
 }));
@@ -136,7 +143,6 @@ const AppBarDrawer = () => {
         setOpen(false);
     };
     return (
-
         <div>
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
@@ -164,6 +170,7 @@ const AppBarDrawer = () => {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </div>
+                    <Divider className={classes.horizontalDivider} orientation="vertical" flexItem />
                     <Avatar aria-label="recipe" variant="circle" className={classes.avatar}>
                         <img width="100%" src={avatar} alt="" />
                     </Avatar>

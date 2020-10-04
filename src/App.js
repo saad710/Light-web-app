@@ -7,6 +7,7 @@ import {
   Route,
 } from "react-router-dom";
 import InboxDetails from './components/MainDashboard/Inbox/InboxDetails';
+import Contact from './components/MainDashboard/Contact/Contact'
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route path="/details/:inboxId">
             <InboxDetails />
+          </Route>
+          <Route path="/contact">
+            <Contact />
           </Route>
         </Switch>
       </Router>

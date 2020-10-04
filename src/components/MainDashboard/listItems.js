@@ -10,6 +10,7 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import {Link} from 'react-router-dom'
+import './listItems.css'
 const componseStyle = {
   backgroundColor: '#4195D1',
   width: '65%',
@@ -17,6 +18,7 @@ const componseStyle = {
   padding: '0.2rem 0rem',
   margin: '1rem auto',
 }
+
 export const mainListItems = (
   <div >
     <div >
@@ -36,12 +38,14 @@ export const mainListItems = (
           <ListItemText primary="Inbox" />
         </ListItem>
       </Link>
-      <ListItem button>
+      <Link to="/contact">
+        <ListItem button>
         {/* <ListItemIcon style={{color: '#fff'}}>
         <ShoppingCartIcon />
       </ListItemIcon> */}
         <ListItemText primary="Contact" />
       </ListItem>
+      </Link>
       <ListItem button>
         {/* <ListItemIcon style={{color: '#fff'}}>
         <PeopleIcon />
