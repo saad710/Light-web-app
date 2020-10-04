@@ -12,6 +12,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { Button, ButtonGroup } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -42,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 650,
     },
     btnStyle: {
-        backgroundColor: '#213F7E',
-        color: '#fff',
+        backgroundColor: '#fff',
+        color: '#2d2d2d',
         borderRadius: 0,
         padding: '0.5rem 5rem',
     }
@@ -58,33 +59,44 @@ const Customers = () => {
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Container maxWidth="md" className={classes.container}>
+                <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
+                        <Button style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
+                            CREATE NEW
+                        </Button>
                         <TableContainer component={Paper}>
                             <Table className={classes.table} aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell> # </TableCell>
-                                        <TableCell align="right"> NAME </TableCell>
-                                        <TableCell align="right"> EMAIL </TableCell>
-                                        <TableCell align="right"> DESCRIPTION </TableCell>
-                                        <TableCell align="right"> DATE OF PURCHASES </TableCell>
-                                        <TableCell align="right"> DATE OF RENEWAL </TableCell>
-                                        <TableCell align="right"> ACTION </TableCell>
+                                        <TableCell align="center"> NAME </TableCell>
+                                        <TableCell align="center"> EMAIL </TableCell>
+                                        <TableCell align="center"> DESCRIPTION </TableCell>
+                                        <TableCell align="center"> DATE OF PURCHASES </TableCell>
+                                        <TableCell align="center"> DATE OF RENEWAL </TableCell>
+                                        <TableCell align="center"> ACTION </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {
-                                        customerData.map(customer => (
+                                        customerData.map((customer, i) => (
                                             <TableRow key={customer.id}>
                                                 <TableCell component="th" scope="row">
-                                                    {customer.id}
+                                                    {i+1}
                                                 </TableCell>
-                                                <TableCell align="right">{customer.name}</TableCell>
-                                                <TableCell align="right">{customer.email}</TableCell>
-                                                <TableCell align="right">{customer.description}</TableCell>
-                                                <TableCell align="right">{customer.dateOfPurchase}</TableCell>
-                                                <TableCell align="right">{customer.dateOfRenewwal}</TableCell>
+                                                <TableCell align="center">{customer.name}</TableCell>
+                                                <TableCell align="center">{customer.email}</TableCell>
+                                                <TableCell align="center">{customer.description}</TableCell>
+                                                <TableCell align="center">{customer.dateOfPurchase}</TableCell>
+                                                <TableCell align="center">{customer.dateOfRenewwal}</TableCell>
+                                                <TableCell align="center"> 
+                                                    <div>
+                                                        <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+                                                            <Button>UPDATE</Button>
+                                                            <Button style={{ backgroundColor: '#4195D1'}}>DELETE</Button>
+                                                        </ButtonGroup>
+                                                    </div>
+                                                </TableCell>
                                             </TableRow>
                                         ))
                                     }

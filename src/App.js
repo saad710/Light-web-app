@@ -11,6 +11,8 @@ import Contact from './components/MainDashboard/Contact/Contact'
 import Sent from './components/MainDashboard/Sent/Sent'
 import SentDetails from './components/MainDashboard/Sent/SentDetails';
 import Customers from './components/MainDashboard/Customers/Customers';
+import MenuItem from './components/MainDashboard/MenuItem/MenuItem';
+
 
 
 function App() {
@@ -38,6 +40,9 @@ function App() {
           </Route>
           <Route path="/customers">
             <Customers />
+          </Route>
+          <Route path="menu">
+            <MenuItem />
           </Route>
         </Switch>
       </Router>

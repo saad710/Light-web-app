@@ -15,6 +15,7 @@ import { Avatar, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { AccountCircle } from '@material-ui/icons';
 import avatar from '../../images/avatar.png'
+import MenuItem from '../../components/MainDashboard/MenuItem/MenuItem'
 
 const drawerWidth = 240;
 

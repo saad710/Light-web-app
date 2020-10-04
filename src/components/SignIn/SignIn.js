@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {NavLink} from 'react-router-dom'
+import './SignIn.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,7 +71,7 @@ export default function SignInSide() {
                         <div>
                             <label htmlFor=""> Email </label>
                             <TextField
-                                style={{ backgroundColor: '#fff' }}
+                                style={{ backgroundColor: '#fff'}}
                                 variant="outlined"
                                 margin="normal"
                                 required

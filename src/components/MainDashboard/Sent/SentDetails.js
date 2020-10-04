@@ -11,7 +11,8 @@ import avatar from '../../../images/avatar.png'
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        backgroundColor: '#4195D1'
+        backgroundColor: '#4195D1',
+        // fontFamily: 'Montserrat'
     },
 
     appBarSpacer: theme.mixins.toolbar,

@@ -63,7 +63,7 @@ const Sent = () => {
                                         <Link to={`sentDetails/${sent.id}`} style={{ textDecoration: 'none', color: '#fff' }}>
                                             <Typography variant="body5" style={{ margin: '0.5rem 0.5rem' }}>
                                                 <strong> Marie Winter </strong> <br />
-                                                <strong > Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry's standard
+                                                <strong style={{marginLeft:'0.5rem'}} > Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry's standard
                                         </Typography>
                                         </Link>
                                         <Typography variant="body6">
