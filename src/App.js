@@ -10,6 +10,7 @@ import InboxDetails from './components/MainDashboard/Inbox/InboxDetails';
 import Contact from './components/MainDashboard/Contact/Contact'
 import Sent from './components/MainDashboard/Sent/Sent'
 import SentDetails from './components/MainDashboard/Sent/SentDetails';
+import Customers from './components/MainDashboard/Customers/Customers';
 
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route path="/sentDetails/:sentId">
             <SentDetails />
+          </Route>
+          <Route path="/customers">
+            <Customers />
           </Route>
         </Switch>
       </Router>

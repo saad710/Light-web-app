@@ -56,12 +56,16 @@ export const mainListItems = (
         </ListItem>
       </Link>
 
-      <ListItem button>
-        {/* <ListItemIcon style={{color: '#fff'}}>
+      <Link to="/customers">
+        <ListItem button>
+          {/* <ListItemIcon style={{color: '#fff'}}>
         <BarChartIcon />
       </ListItemIcon> */}
-        <ListItemText primary="Company/Customers" />
-      </ListItem>
+          <ListItemText primary="Company/Customers" />
+        </ListItem>
+      </Link>
+
+
       <ListItem >
         {/* <ListItemIcon style={{color: '#fff'}}>
         <LayersIcon />
