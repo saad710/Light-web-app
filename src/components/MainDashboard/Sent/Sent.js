@@ -1,0 +1,86 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import AppBarDrawer from '../AppBarDrawer';
+import inboxData from '../../../data/inboxData';
+import { Avatar, Button, Chip, Divider, Typography } from '@material-ui/core';
+import avatar from '../../../images/avatar.png'
+import { Link } from 'react-router-dom'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        backgroundColor: '#4195D1'
+    },
+
+    appBarSpacer: theme.mixins.toolbar,
+    content: {
+        flexGrow: 1,
+        height: '100vh',
+        overflow: 'auto',
+
+    },
+    container: {
+        paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(4),
+    },
+    paper: {
+        padding: theme.spacing(2),
+        display: 'flex',
+        overflow: 'auto',
+        flexDirection: 'column',
+    },
+    fixedHeight: {
+        height: 240,
+    },
+    btnStyle: {
+        backgroundColor: '#213F7E',
+        color: '#fff',
+        borderRadius: 0,
+        padding: '0.5rem 5rem',
+    }
+}));
+const Sent = () => {
+    const classes = useStyles();
+    return (
+        <div className={classes.root}>
+            <CssBaseline />
+            <AppBarDrawer />
+            <main className={classes.content}>
+                <div className={classes.appBarSpacer} />
+                <Container maxWidth="md" className={classes.container}>
+                    <Grid container spacing={3}>
+                        {
+                            inboxData.map(sent => (
+                                <div>
+                                    <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
+                                    <div className="d-flex align-items-center my-3" style={{ color: '#fff' }}>
+                                        <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
+                                            <img width="100%" src={avatar} alt="" />
+                                        </Avatar>
+                                        <Link to={`sentDetails/${sent.id}`} style={{ textDecoration: 'none', color: '#fff' }}>
+                                            <Typography variant="body5" style={{ margin: '0.5rem 0.5rem' }}>
+                                                <strong> Marie Winter </strong> <br />
+                                                <strong > Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry's standard
+                                        </Typography>
+                                        </Link>
+                                        <Typography variant="body6">
+                                            <small> just now </small>
+                                        </Typography>
+                                    </div>
+                                    <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
+                                </div>
+                            ))
+                        }
+
+                    </Grid>
+                   
+                </Container>
+            </main>
+        </div>
+    );
+};
+
+export default Sent;

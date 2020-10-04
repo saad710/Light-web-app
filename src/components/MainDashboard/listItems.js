@@ -46,12 +46,16 @@ export const mainListItems = (
         <ListItemText primary="Contact" />
       </ListItem>
       </Link>
-      <ListItem button>
-        {/* <ListItemIcon style={{color: '#fff'}}>
+      
+      <Link to="/sent">
+        <ListItem button>
+          {/* <ListItemIcon style={{color: '#fff'}}>
         <PeopleIcon />
       </ListItemIcon> */}
-        <ListItemText primary="Sent" />
-      </ListItem>
+          <ListItemText primary="Sent" />
+        </ListItem>
+      </Link>
+
       <ListItem button>
         {/* <ListItemIcon style={{color: '#fff'}}>
         <BarChartIcon />
