@@ -14,6 +14,8 @@ import Customers from './components/MainDashboard/Customers/Customers';
 import Compose from './components/MainDashboard/Coompose/Coompose'
 import Profile from './components/MainDashboard/Profile/Profile';
 import Privacy from './components/MainDashboard/Privacy/Privacy';
+import Team from './components/MainDashboard/Team/Team';
+import CompanyDetails from './components/MainDashboard/CompanyDetails/CompanyDetails';
 
 
 
@@ -48,6 +50,12 @@ function App() {
           </Route>
           <Route path="/privacy">
             <Privacy />
+          </Route>
+          <Route path="/team">
+            <Team />
+          </Route>
+          <Route path="/companydetails">
+            <CompanyDetails />
           </Route>
           <Route>
             <Compose />

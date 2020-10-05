@@ -70,19 +70,23 @@ export const mainListItems = (
             </Link>
 
 
-            <ListItem button>
-              <ListItemText primary="Team" />
-            </ListItem>
+            <Link to="/team">
+              <ListItem button>
+                <ListItemText primary="Team" />
+              </ListItem>
+            </Link>
 
 
             <ListItem button>
               <ListItemText primary="Email Signature" />
             </ListItem>
+            
+            <Link to="/companydetails">
+              <ListItem button>
+                <ListItemText primary="Company Details" />
+              </ListItem>
+            </Link>
 
-
-            <ListItem button>
-              <ListItemText primary="Company Details" />
-            </ListItem>
           </div>
         </Accordion.Collapse>
       </Accordion>
