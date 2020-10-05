@@ -4,18 +4,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import { useParams } from 'react-router-dom';
 import inboxData from '../../../data/inboxData';
-import { Avatar, Typography } from '@material-ui/core';
+import {Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
 import Paper from '@material-ui/core/Paper';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
 import './Contact.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -57,15 +54,18 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
     },
     modalPaper: {
-        backgroundColor: theme.palette.background.paper,
+        // backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+        backgroundColor: '#213F7E'
     },
     cardRoot: {
         minWidth: 275,
         textAlign: 'center',
-        color: '#fff'
+        color: '#fff',
+        backgroundColor: '#213F7E',
+        boxShadow: 'none'
         
     }
 }));

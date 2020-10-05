@@ -11,6 +11,7 @@ import Contact from './components/MainDashboard/Contact/Contact'
 import Sent from './components/MainDashboard/Sent/Sent'
 import SentDetails from './components/MainDashboard/Sent/SentDetails';
 import Customers from './components/MainDashboard/Customers/Customers';
+import Compose from './components/MainDashboard/Coompose/Coompose'
 
 
 
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route path="/customers">
             <Customers />
+          </Route>
+          <Route>
+            <Compose />
           </Route>
         </Switch>
       </Router>

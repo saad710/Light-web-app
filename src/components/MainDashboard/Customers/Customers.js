@@ -12,7 +12,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Button, ButtonGroup } from '@material-ui/core';
+import { Button, ButtonGroup, Typography } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import avatar from '../../../images/avatar.png'
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -47,12 +53,43 @@ const useStyles = makeStyles((theme) => ({
         color: '#2d2d2d',
         borderRadius: 0,
         padding: '0.5rem 5rem',
+    },
+    fixedHeight: {
+        height: 240,
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalPaper: {
+        // backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        backgroundColor: '#213F7E'
+    },
+    cardRoot: {
+        minWidth: 275,
+        textAlign: 'center',
+        color: '#fff',
+        backgroundColor: '#213F7E',
+        boxShadow: 'none'
+
     }
 }));
 
 
 const Customers = () => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -92,8 +129,8 @@ const Customers = () => {
                                                 <TableCell align="center"> 
                                                     <div>
                                                         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                                                            <Button>UPDATE</Button>
-                                                            <Button style={{ backgroundColor: '#4195D1'}}>DELETE</Button>
+                                                            <Button onClick={handleOpen}>UPDATE</Button>
+                                                            <Button onClick={handleOpen} style={{ backgroundColor: '#4195D1'}}>DELETE</Button>
                                                         </ButtonGroup>
                                                     </div>
                                                 </TableCell>
@@ -103,7 +140,36 @@ const Customers = () => {
                                 </TableBody>
                             </Table>
                         </TableContainer>
-
+                        <Modal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            className={classes.modal}
+                            open={open}
+                            onClose={handleClose}
+                            closeAfterTransition
+                            BackdropComponent={Backdrop}
+                            BackdropProps={{
+                                timeout: 500,
+                            }}
+                        >
+                            <Fade in={open}>
+                                <div className={classes.modalPaper}>
+                                    <div className="mt-3">
+                                        <Card className={classes.cardRoot}>
+                                            <img className="pt-2" width="50%" src={avatar} alt="" />
+                                            <CardContent style={{ background: 'none !important' }}>
+                                                <Typography variant="body2">
+                                                    Marie Winter
+                                                                    </Typography>
+                                                <Typography variant="body6">
+                                                    mariewinter@mail.com
+                                                                    </Typography>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                </div>
+                            </Fade>
+                        </Modal>
                     </Grid>
                     
                 </Container>

@@ -15,9 +15,11 @@ const componseStyle = {
 export const mainListItems = (
   <div >
     <div >
-      <ListItem button style={componseStyle} >
-        <ListItemText primary="Compose" />
+      <Link to="/compose">
+        <ListItem button style={componseStyle} >
+          <ListItemText primary="Compose" />
         </ListItem>
+      </Link>
     </div>
     <div style={{ marginLeft: '1rem' }}>
       <Link to="/inbox">
