@@ -4,6 +4,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom'
 import './listItems.css'
 import { Accordion, Button } from 'react-bootstrap';
+
+
 const componseStyle = {
   backgroundColor: '#4195D1',
   width: '65%',
@@ -53,18 +55,31 @@ export const mainListItems = (
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="0">
           <div style={{ marginLeft: '1rem' }}>
-            <ListItem button>
-              <ListItemText primary="Profile" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Privacy" />
-            </ListItem>
+            
+            <Link to="/profile">
+              <ListItem button>
+                <ListItemText primary="Profile" />
+              </ListItem>
+            </Link>
+
+
+            <Link to="/privacy">
+              <ListItem button>
+                <ListItemText primary="Privacy" />
+              </ListItem>
+            </Link>
+
+
             <ListItem button>
               <ListItemText primary="Team" />
             </ListItem>
+
+
             <ListItem button>
               <ListItemText primary="Email Signature" />
             </ListItem>
+
+
             <ListItem button>
               <ListItemText primary="Company Details" />
             </ListItem>

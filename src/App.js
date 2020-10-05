@@ -12,6 +12,8 @@ import Sent from './components/MainDashboard/Sent/Sent'
 import SentDetails from './components/MainDashboard/Sent/SentDetails';
 import Customers from './components/MainDashboard/Customers/Customers';
 import Compose from './components/MainDashboard/Coompose/Coompose'
+import Profile from './components/MainDashboard/Profile/Profile';
+import Privacy from './components/MainDashboard/Privacy/Privacy';
 
 
 
@@ -40,6 +42,12 @@ function App() {
           </Route>
           <Route path="/customers">
             <Customers />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/privacy">
+            <Privacy />
           </Route>
           <Route>
             <Compose />
