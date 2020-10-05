@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
@@ -12,13 +12,15 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Button, ButtonGroup, Typography } from '@material-ui/core';
+import { Button, ButtonGroup, TextField, Typography } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import avatar from '../../../images/avatar.png'
+import Link from '@material-ui/core/Link';
+import { NavLink } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -63,33 +65,59 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
     },
     modalPaper: {
-        // backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
-        backgroundColor: '#213F7E'
+        backgroundColor: '#3A86BC'
+    },
+    customerPaper: {
+        width: '50%',
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        backgroundColor: '#3A86BC'
     },
     cardRoot: {
         minWidth: 275,
         textAlign: 'center',
         color: '#fff',
-        backgroundColor: '#213F7E',
+        backgroundColor: '#3A86BC',
         boxShadow: 'none'
 
-    }
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+        textAlign: 'start'
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+        backgroundColor: '#213F7E',
+        borderRadius: '0',
+        padding: '0.6rem 0'
+    },
 }));
 
 
 const Customers = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [userModelOpen, setUserModelOpen] = useState(false)
+
     const handleOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handelUserModelOpen = () => {
+        setUserModelOpen(true)
+    }
+    const handelUserModelClise = () => {
+        setUserModelOpen(false)
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -98,7 +126,7 @@ const Customers = () => {
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <Button style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
+                        <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
                             CREATE NEW
                         </Button>
                         <TableContainer component={Paper}>
@@ -140,6 +168,9 @@ const Customers = () => {
                                 </TableBody>
                             </Table>
                         </TableContainer>
+                        
+                        {/* update/delete modal */}
+
                         <Modal
                             aria-labelledby="transition-modal-title"
                             aria-describedby="transition-modal-description"
@@ -170,6 +201,96 @@ const Customers = () => {
                                 </div>
                             </Fade>
                         </Modal>
+
+
+                        {/* create user modal  */}
+
+                        <Modal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            className={classes.modal}
+                            open={userModelOpen}
+                            onClose={handelUserModelClise}
+                            closeAfterTransition
+                            BackdropComponent={Backdrop}
+                            BackdropProps={{
+                                timeout: 500,
+                            }}
+                        >
+                            <Fade in={userModelOpen}>
+                                <div className={classes.customerPaper}>
+                                    <div className="mt-3">
+                                        <Card className={classes.cardRoot}>
+                                            <CardContent style={{ background: 'none !important' }}>
+                                                <div className={classes.paper}>
+                                                    <Typography component="body6" variant="body6">
+                                                        CREATE CUSTOMER ACCOUNT
+                                                    </Typography>
+                                                    <form className={classes.form} noValidate>
+                                                        <div style={{margin: '1rem 0'}}>
+                                                            <label htmlFor=""> Name </label>
+                                                            <TextField
+                                                                style={{ backgroundColor: '#fff' }}
+                                                                variant="outlined"
+                                                                margin="normal"
+                                                                required
+                                                                fullWidth
+                                                                id="name"
+                                                                name="name"
+                                                                autoComplete="name"
+                                                                autoFocus
+                                                                placeholder="Marie Winter"
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <label htmlFor=""> Email </label>
+                                                            <TextField
+                                                                style={{ backgroundColor: '#fff' }}
+                                                                variant="outlined"
+                                                                margin="normal"
+                                                                required
+                                                                fullWidth
+                                                                id="email"
+                                                                name="email"
+                                                                autoComplete="email"
+                                                                autoFocus
+                                                                placeholder="user@email.com"
+                                                            />
+                                                        </div>
+                                                        <div className="mt-3">
+                                                            <label htmlFor=""> Password </label>
+                                                            <TextField
+                                                                style={{ backgroundColor: '#fff' }}
+                                                                variant="outlined"
+                                                                margin="normal"
+                                                                required
+                                                                fullWidth
+                                                                name="password"
+                                                                type="password"
+                                                                id="password"
+                                                                autoComplete="current-password"
+                                                                placeholder="***********"
+                                                            />
+                                                        </div>
+                                                        <Button
+                                                            type="submit"
+                                                            fullWidth
+                                                            variant="contained"
+                                                            color="primary"
+                                                            className={classes.submit}
+                                                        >
+                                                           CREATE USER
+                                                        </Button>
+                                                    </form>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                </div>
+                            </Fade>
+                        </Modal>
+
+
                     </Grid>
                     
                 </Container>

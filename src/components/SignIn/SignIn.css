@@ -2,6 +2,9 @@
     margin-top: 0px;
     margin-bottom: 8px;
 }
+input#name {
+    padding: 13.5px 14px;
+}
 input#email {
     padding: 13.5px 14px;
 }
