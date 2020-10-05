@@ -4,19 +4,26 @@ import 'suneditor/dist/css/suneditor.min.css';
 import './Compose.css'
 
 const Coompose = () => {
+    
     return (
         <div>
-            <SunEditor
-                showToolbar={true} 
-                enableToolbar={true}
-                lang="en"
-                name="my-editor"
-                width="50%"
-                placeholder="Please type here..."
-                autoFocus={true}
-                setDefaultStyle="font-family: cursive; font-size: 10px;"
-                enable={true} 
-            />
+            <form>
+                <SunEditor
+                    width="60%"
+                    placeholder="Please type here..."
+                    setOptions={{
+                        height: 200,
+                        buttonList: [
+                            ['font', 'fontSize', 'formatBlock'],
+                            ['bold', 'underline', 'italic',],
+                            ['align', 'horizontalRule', 'list', 'lineHeight'],
+                            ['link', 'image', 'video',],
+                            ['fullScreen', 'codeView'],
+                        ]
+                    }}
+                />
+                
+            </form>
         </div>
     );
 };
