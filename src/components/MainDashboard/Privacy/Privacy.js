@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        backgroundColor: '#4195D1'
+        backgroundColor: '#fff'
     },
 
     appBarSpacer: theme.mixins.toolbar,
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
         flexDirection: 'column',
         width: '100%',
-        color: '#fff'
+        color: '#2d2d2d'
     },
     fixedHeight: {
         height: 240,
@@ -67,7 +67,7 @@ const Privacy = () => {
                                 <div style={{ margin: '1rem 0' }}>
                                     <label htmlFor=""> Name </label>
                                     <TextField
-                                        style={{ backgroundColor: '#fff', borderRadius: '4px' }}
+                                        style={{ borderRadius: '4px' }}
                                         variant="outlined"
                                         margin="normal"
                                         required
@@ -83,7 +83,7 @@ const Privacy = () => {
                                 <div>
                                     <label htmlFor=""> Email </label>
                                     <TextField
-                                        style={{ backgroundColor: '#fff', borderRadius: '4px' }}
+                                        style={{  borderRadius: '4px' }}
                                         variant="outlined"
                                         margin="normal"
                                         required

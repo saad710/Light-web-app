@@ -5,6 +5,13 @@
 ul.MuiList-root.MuiList-padding {
     height: 100vh;
 }
-#setting {
+/* #setting {
     margin-left: -0.8rem;
+} */
+
+.MuiButtonBase-root.MuiListItem-root.makeStyles-nested-32.MuiListItem-gutters.MuiListItem-button {
+    padding-left: 22px;
+}
+.MuiListItemIcon-root{
+    color: #fff !important;
 }

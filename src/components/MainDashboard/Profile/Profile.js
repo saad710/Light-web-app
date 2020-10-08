@@ -4,17 +4,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import inboxData from '../../../data/inboxData';
-import { Avatar, Button, Chip, Divider, TextField, Typography } from '@material-ui/core';
+import {Button, TextField, Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
-import { Link } from 'react-router-dom'
-
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        backgroundColor: '#4195D1'
+        backgroundColor: '#fff'
     },
 
     appBarSpacer: theme.mixins.toolbar,
@@ -58,14 +54,14 @@ const Profile = () => {
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
                             <img className="pt-2" style={{margin: ' 0 auto '}} width="20%" src={avatar} alt="" />
-                            <Typography component="body6" variant="body6">
+                            <Typography style={{color: '#2d2d2d'}} component="body6" variant="body6">
                                 Personal Details
                             </Typography>
-                            <form className={classes.form} noValidate>
+                            <form className={classes.form} noValidate style={{color: '#2d2d2d'}}>
                                 <div style={{ margin: '1rem 0'}}>
                                     <label htmlFor=""> Name </label>
                                     <TextField
-                                        style={{ backgroundColor: '#fff', borderRadius:'4px' }}
+                                        style={{ borderRadius:'4px' }}
                                         variant="outlined"
                                         margin="normal"
                                         required
@@ -81,7 +77,7 @@ const Profile = () => {
                                 <div>
                                     <label htmlFor=""> Email </label>
                                     <TextField
-                                        style={{ backgroundColor: '#fff', borderRadius: '4px' }}
+                                        style={{borderRadius: '4px' }}
                                         variant="outlined"
                                         margin="normal"
                                         required
@@ -99,7 +95,7 @@ const Profile = () => {
                                 <div className="mt-3">
                                     <label htmlFor=""> Enter your old password </label>
                                     <TextField
-                                        style={{ backgroundColor: '#fff', borderRadius: '4px' }}
+                                        style={{borderRadius: '4px' }}
                                         variant="outlined"
                                         margin="normal"
                                         required
@@ -115,7 +111,7 @@ const Profile = () => {
                                 <div className="mt-3">
                                     <label htmlFor=""> Enter new password </label>
                                     <TextField
-                                        style={{ backgroundColor: '#fff', borderRadius: '4px' }}
+                                        style={{borderRadius: '4px' }}
                                         variant="outlined"
                                         margin="normal"
                                         required

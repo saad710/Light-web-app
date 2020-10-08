@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
     },
     signInRight: {
         width: '100vh',
-        backgroundColor: '#213F7E'
+        // backgroundColor: '#213F7E'
+        backgroundImage: "linear-gradient(#213F7E, #4195D1)",
     },
     paper: {
         margin: theme.spacing(8, 4),
@@ -35,12 +36,13 @@ const useStyles = makeStyles((theme) => ({
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(1),
+        color: '#2d2d2d'
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
         backgroundColor: '#213F7E',
-        borderRadius: '0',
-        padding: '0.6rem 0'
+        borderRadius: '0.5rem',
+        padding: '0.5rem 0'
     },
 }));
 
@@ -61,10 +63,10 @@ export default function SignInSide() {
                 </div>
             </Grid>
             <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square
-                style={{ backgroundColor: '#4195D1'}}
+                style={{ backgroundColor: '#fff'}}
             >
                 <div className={classes.paper}>
-                    <Typography component="h1" variant="body1">
+                    <Typography component="h1" variant="body1" style={{color: '#2d2d2d'}}>
                         SIGN IN
                     </Typography>
                     <form className={classes.form} noValidate>
@@ -98,6 +100,7 @@ export default function SignInSide() {
                                 placeholder="***********"
                             />
                         </div>
+                        <NavLink to="/inbox">
                         <Button
                             type="submit"
                             fullWidth
@@ -105,13 +108,14 @@ export default function SignInSide() {
                             color="primary"
                             className={classes.submit}
                         >
-                            <NavLink to="/inbox">
+                           
                                 Sign In
-                            </NavLink>
+                            
                         </Button>
+                        </NavLink>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2" style={{color: '#fff', display:'block', textAlign:'center'}}>
+                                <Link href="#" variant="body2" style={{color: '#2d2d2d', display:'block', textAlign:'center'}}>
                                     Forgot password?
                                 </Link>
                             </Grid>

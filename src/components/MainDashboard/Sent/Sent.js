@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        backgroundColor: '#4195D1'
+        backgroundColor: '#fff'
     },
 
     appBarSpacer: theme.mixins.toolbar,
@@ -60,13 +60,13 @@ const Sent = () => {
                                         <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
                                             <img width="100%" src={avatar} alt="" />
                                         </Avatar>
-                                        <Link to={`sentDetails/${sent.id}`} style={{ textDecoration: 'none', color: '#fff' }}>
+                                        <Link to={`sentDetails/${sent.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
                                             <Typography variant="body5" style={{ margin: '0.5rem 0.5rem' }}>
                                                 <strong> Marie Winter </strong> <br />
                                                 <strong style={{marginLeft:'0.5rem'}} > Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry's standard
                                         </Typography>
                                         </Link>
-                                        <Typography variant="body6">
+                                        <Typography style={{color: '#2d2d2d'}} variant="body6">
                                             <small> just now </small>
                                         </Typography>
                                     </div>

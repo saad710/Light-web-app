@@ -4,16 +4,13 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems } from './listItems';
 import { Avatar, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import { AccountCircle } from '@material-ui/icons';
 import avatar from '../../images/avatar.png'
 import MenuItem from '../../components/MainDashboard/MenuItem/MenuItem'
 
@@ -22,7 +19,8 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        backgroundColor: '#4195D1'
+        // backgroundColor: '#4195D1'
+        backgroundImage: "linear-gradient(90deg, #213F7E, #4195D1)",
     },
     toolbar: {
         paddingRight: 24, // keep right padding when drawer closed
@@ -40,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        backgroundColor: '#4195D1'
+        // backgroundColor: '#4195D1'
+        backgroundImage: "linear-gradient(90deg, #213F7E, #4195D1)",
     },
     appBarShift: {
         marginLeft: drawerWidth,
@@ -115,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
-        backgroundColor: '#213F7E',
+        backgroundImage: "linear-gradient(#213F7E, #4195D1)",
         color: '#fff'
     },
     drawerPaperClose: {
@@ -196,7 +195,8 @@ const AppBarDrawer = () => {
                     </IconButton>
                 </div>
                 <Divider />
-                <List>{mainListItems}</List>
+                {/* <List>{mainListItems}</List> */}
+                <MenuItem />
 
             </Drawer>
         </div>

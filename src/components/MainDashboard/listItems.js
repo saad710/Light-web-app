@@ -51,11 +51,11 @@ export const mainListItems = (
         <Accordion.Toggle as={Button} variant="link" eventKey="0">
           <ListItem button >
             <ListItemText id="setting" primary="Setting" />
-          </ListItem> 
+          </ListItem>
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="0">
           <div style={{ marginLeft: '1rem' }}>
-            
+
             <Link to="/profile">
               <ListItem button>
                 <ListItemText primary="Profile" />
@@ -80,7 +80,7 @@ export const mainListItems = (
             <ListItem button>
               <ListItemText primary="Email Signature" />
             </ListItem>
-            
+
             <Link to="/companydetails">
               <ListItem button>
                 <ListItemText primary="Company Details" />

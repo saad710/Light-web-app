@@ -9,7 +9,7 @@ import AppBarDrawer from './AppBarDrawer';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    backgroundColor: '#4195D1'
+    backgroundColor: '#fff'
   },
   
   appBarSpacer: theme.mixins.toolbar,

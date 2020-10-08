@@ -19,7 +19,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        backgroundColor: '#4195D1'
+        backgroundColor: '#fff'
     },
 
     appBarSpacer: theme.mixins.toolbar,
@@ -48,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
         padding: '0.6rem 0px',
         marginTop: '0.5rem',
         marginLeft: '38rem',
-        width: '7rem'
+        width: '7rem',
+        backgroundColor: '#4195D1'
     },
     form: {
         margin: '0 auto'

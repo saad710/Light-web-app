@@ -14,6 +14,19 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import { List, makeStyles } from '@material-ui/core';
+import WcIcon from '@material-ui/icons/Wc';
+import ReportIcon from '@material-ui/icons/Report';
+import SettingsIcon from '@material-ui/icons/Settings';
+import PersonIcon from '@material-ui/icons/Person';
+import HttpsIcon from '@material-ui/icons/Https';
+import GroupWorkIcon from '@material-ui/icons/GroupWork';
+import LabelImportantIcon from '@material-ui/icons/LabelImportant';
+import BusinessIcon from '@material-ui/icons/Business';
+import avatar from '../../../images/avatar.png'
+import BugReportIcon from '@material-ui/icons/BugReport';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import MarkunreadMailboxIcon from '@material-ui/icons/MarkunreadMailbox';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,7 +49,7 @@ const componseStyle = {
 
 const MenuItem = () => {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     const handleClick = () => {
         setOpen(!open);
@@ -44,93 +57,134 @@ const MenuItem = () => {
     return (
         <div >
             <div >
-                <ListItem button style={componseStyle} >
-                    <ListItemText primary="Compose" />
-                </ListItem>
+                
             </div>
-            <div style={{ marginLeft: '1rem' }}>
+            <div style={{ height:'100ch'}}>
+                
+                <Link to="/compose">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MarkunreadMailboxIcon />
+                        </ListItemIcon>
+                        <ListItemText style={componseStyle} primary="Compose" />
+                    </ListItem>
+                </Link>
 
                 <Link to="/inbox">
                     <ListItem button>
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
                         <ListItemText primary="Inbox" />
                     </ListItem>
                 </Link>
 
 
-                <Link to="/contact">
+                <Link>
                     <ListItem button>
-                        <ListItemText primary="Contact" />
+                        <ListItemIcon>
+                            <WcIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Customers" />
                     </ListItem>
                 </Link>
 
 
                 <Link to="/sent">
                     <ListItem button>
+                        <ListItemIcon>
+                            <SendIcon />
+                        </ListItemIcon>
                         <ListItemText primary="Sent" />
                     </ListItem>
                 </Link>
 
 
-                <Link to="/customers">
+                <Link >
                     <ListItem button>
-                        <ListItemText primary="Company/Customers" />
+                        <ListItemIcon>
+                            <ReportIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Report" />
                     </ListItem>
                 </Link>
 
-
-                <ListItem >
-                    <ListItemText primary="Setting" />
-                </ListItem>
-
                 <ListItem button onClick={handleClick}>
                     <ListItemIcon>
-                        <InboxIcon />
+                        <SettingsIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Inbox" />
+                    <ListItemText primary="Setting" />
                     {open ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
 
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
+                        <Link to="/profile">
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <PersonIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Profile" />
+                            </ListItem>
+                        </Link>
+                        <Link to="/privacy">
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <HttpsIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Privacy" />
+                            </ListItem>
+                        </Link>
+
+                        <Link to="/team">
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <GroupWorkIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Team" />
+                            </ListItem>
+                        </Link>
+
                         <ListItem button className={classes.nested}>
                             <ListItemIcon>
-                                <StarBorder />
+                                <LabelImportantIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Starred" />
+                            <ListItemText primary="Email Signature" />
                         </ListItem>
+
+                        <Link to="/companydetails">
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <BusinessIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Company Details" />
+                            </ListItem>    
+                        </Link>
+
+                        
                     </List>
                 </Collapse>
 
-                <div style={{ marginLeft: '1rem' }}>
-                    <ListItem button>
-                        <ListItemText primary="Profile" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Privacy" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Team" />
-                    </ListItem>
-                    <ListItem button>
-
-                        <ListItemText primary="Email Signature" />
-                    </ListItem>
-                    <ListItem button>
-
-                        <ListItemText primary="Company Details" />
-                    </ListItem>
-                </div>
-
-
                 <ListItem button>
+                    <ListItemIcon>
+                        <BugReportIcon />
+                    </ListItemIcon>
                     <ListItemText primary="Ticket" />
                 </ListItem>
                 <ListItem button>
+                    <ListItemIcon>
+                        <DashboardIcon />
+                    </ListItemIcon>
                     <ListItemText primary="Dashboard" />
                 </ListItem>
-                <ListItem button>
-                    <ListItemText primary="Log Out" />
-                </ListItem>
+                <Link to="/">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <ExitToAppIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Log Out" />
+                    </ListItem>
+                </Link>
             </div>
 
         </div>

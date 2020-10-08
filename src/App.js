@@ -33,7 +33,7 @@ function App() {
           <Route path="/details/:inboxId">
             <InboxDetails />
           </Route>
-          <Route path="/contact">
+          <Route path="/customers">
             <Contact />
           </Route>
           <Route path="/sent">
@@ -43,7 +43,7 @@ function App() {
             <SentDetails />
           </Route>
           <Route path="/customers">
-            <Customers />
+            {/* <Customers /> */}
           </Route>
           <Route path="/profile">
             <Profile />
@@ -57,7 +57,7 @@ function App() {
           <Route path="/companydetails">
             <CompanyDetails />
           </Route>
-          <Route>
+          <Route path="/compose">
             <Compose />
           </Route>
         </Switch>

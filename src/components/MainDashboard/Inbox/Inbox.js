@@ -36,13 +36,13 @@ const Inbox = () => {
                             <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
                                 <img width="100%" src={avatar} alt=""/>
                             </Avatar>
-                            <Link to={`details/${inbox.id}`} style={{textDecoration: 'none', color: '#fff'}}>
+                            <Link to={`details/${inbox.id}`} style={{textDecoration: 'none', color: '#2d2d2d'}}>
                                 <Typography variant="body5" style={{ margin: '0.5rem 0.5rem' }}>
                                     <strong> Marie Winter </strong> <br />
                                     <strong style={{marginLeft:'0.5rem'}}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
                                 </Typography>
                             </Link>
-                            <Typography variant="body6">
+                            <Typography style={{ color: '#2d2d2d' }} variant="body6">
                                 <small> just now </small>
                             </Typography>
                         </div>
