@@ -12,15 +12,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Button, ButtonGroup, TextField, Typography } from '@material-ui/core';
+import { Button, ButtonGroup, CardHeader, IconButton, TextareaAutosize, TextField, Typography } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import avatar from '../../../images/avatar.png'
-import Link from '@material-ui/core/Link';
-import { NavLink } from 'react-router-dom'
+import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -139,6 +138,7 @@ const Customers = () => {
                                         <TableCell align="center"> DESCRIPTION </TableCell>
                                         <TableCell align="center"> DATE OF PURCHASES </TableCell>
                                         <TableCell align="center"> DATE OF RENEWAL </TableCell>
+                                        <TableCell align="center"> GROUP </TableCell>
                                         <TableCell align="center"> ACTION </TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -147,18 +147,19 @@ const Customers = () => {
                                         customerData.map((customer, i) => (
                                             <TableRow key={customer.id}>
                                                 <TableCell component="th" scope="row">
-                                                    {i+1}
+                                                    {i + 1}
                                                 </TableCell>
                                                 <TableCell align="center">{customer.name}</TableCell>
                                                 <TableCell align="center">{customer.email}</TableCell>
                                                 <TableCell align="center">{customer.description}</TableCell>
                                                 <TableCell align="center">{customer.dateOfPurchase}</TableCell>
                                                 <TableCell align="center">{customer.dateOfRenewwal}</TableCell>
-                                                <TableCell align="center"> 
+                                                <TableCell align="center">{customer.group}</TableCell>
+                                                <TableCell align="center">
                                                     <div>
                                                         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
                                                             <Button onClick={handleOpen}>UPDATE</Button>
-                                                            <Button onClick={handleOpen} style={{ backgroundColor: '#4195D1'}}>DELETE</Button>
+                                                            <Button onClick={handleOpen} style={{ backgroundColor: '#4195D1' }}>DELETE</Button>
                                                         </ButtonGroup>
                                                     </div>
                                                 </TableCell>
@@ -168,7 +169,7 @@ const Customers = () => {
                                 </TableBody>
                             </Table>
                         </TableContainer>
-                        
+
                         {/* update/delete modal */}
 
                         <Modal
@@ -222,12 +223,13 @@ const Customers = () => {
                                     <div className="mt-3">
                                         <Card className={classes.cardRoot}>
                                             <CardContent style={{ background: 'none !important' }}>
+                                                
                                                 <div className={classes.paper}>
                                                     <Typography component="body6" variant="body6">
                                                         CREATE CUSTOMER ACCOUNT
                                                     </Typography>
                                                     <form className={classes.form} noValidate>
-                                                        <div style={{margin: '1rem 0'}}>
+                                                        <div style={{ margin: '1rem 0' }}>
                                                             <label htmlFor=""> Name </label>
                                                             <TextField
                                                                 style={{ backgroundColor: '#fff' }}
@@ -257,6 +259,24 @@ const Customers = () => {
                                                                 placeholder="user@email.com"
                                                             />
                                                         </div>
+                                                        <div>
+                                                            <label htmlFor=""> Physical Address </label>
+                                                            <br/>
+                                                            <TextareaAutosize
+                                                                style={{ backgroundColor: '#fff' }}
+                                                                variant="outlined"
+                                                                margin="normal"
+                                                                required
+                                                                width="100%"
+                                                                id="address"
+                                                                name="address"
+                                                                autoComplete="address"
+                                                                autoFocus
+                                                                aria-label="minimum height"
+                                                                rowsMin={3}
+                                                                placeholder="Physical Address"
+                                                            />
+                                                        </div>
                                                         <div className="mt-3">
                                                             <label htmlFor=""> Password </label>
                                                             <TextField
@@ -279,7 +299,7 @@ const Customers = () => {
                                                             color="primary"
                                                             className={classes.submit}
                                                         >
-                                                           CREATE USER
+                                                            CREATE USER
                                                         </Button>
                                                     </form>
                                                 </div>
@@ -292,7 +312,7 @@ const Customers = () => {
 
 
                     </Grid>
-                    
+
                 </Container>
             </main>
         </div>

@@ -8,11 +8,9 @@ import '../listItems.css'
 
 import Collapse from '@material-ui/core/Collapse';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
 import { List, makeStyles } from '@material-ui/core';
 import WcIcon from '@material-ui/icons/Wc';
 import ReportIcon from '@material-ui/icons/Report';
@@ -22,7 +20,6 @@ import HttpsIcon from '@material-ui/icons/Https';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import BusinessIcon from '@material-ui/icons/Business';
-import avatar from '../../../images/avatar.png'
 import BugReportIcon from '@material-ui/icons/BugReport';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -80,7 +77,7 @@ const MenuItem = () => {
                 </Link>
 
 
-                <Link>
+                <Link to="/customers">
                     <ListItem button>
                         <ListItemIcon>
                             <WcIcon />

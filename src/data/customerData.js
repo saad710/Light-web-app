@@ -5,7 +5,8 @@ const customerData = [
         email: 'mariewinter@gmail.com',
         description: 'Lorem ipsum dolor sit amet Consectetur',
         dateOfPurchase: '10/11/2020',
-        dateOfRenewwal: '10/11/2020'
+        dateOfRenewwal: '10/11/2020',
+        group: 'group-1'
     },
     {
         id: 2,
@@ -13,7 +14,8 @@ const customerData = [
         email: 'mariewinter@gmail.com',
         description: 'Lorem ipsum dolor sit amet Consectetur',
         dateOfPurchase: '10/11/2020',
-        dateOfRenewwal: '10/11/2020'
+        dateOfRenewwal: '10/11/2020',
+        group: 'group-1'
     },
     {
         id: 3,
@@ -21,7 +23,8 @@ const customerData = [
         email: 'mariewinter@gmail.com',
         description: 'Lorem ipsum dolor sit amet Consectetur',
         dateOfPurchase: '10/11/2020',
-        dateOfRenewwal: '10/11/2020'
+        dateOfRenewwal: '10/11/2020',
+        group: 'group-1'
     },
     {
         id: 4,
@@ -29,7 +32,8 @@ const customerData = [
         email: 'mariewinter@gmail.com',
         description: 'Lorem ipsum dolor sit amet Consectetur',
         dateOfPurchase: '10/11/2020',
-        dateOfRenewwal: '10/11/2020'
+        dateOfRenewwal: '10/11/2020',
+        group: 'group-1'
     },
     {
         id: 5,
@@ -37,7 +41,8 @@ const customerData = [
         email: 'mariewinter@gmail.com',
         description: 'Lorem ipsum dolor sit amet Consectetur',
         dateOfPurchase: '10/11/2020',
-        dateOfRenewwal: '10/11/2020'
+        dateOfRenewwal: '10/11/2020',
+        group: 'group-2'
     },
     {
         id: 6,
@@ -45,7 +50,8 @@ const customerData = [
         email: 'mariewinter@gmail.com',
         description: 'Lorem ipsum dolor sit amet Consectetur',
         dateOfPurchase: '10/11/2020',
-        dateOfRenewwal: '10/11/2020'
+        dateOfRenewwal: '10/11/2020',
+        group: 'group-1'
     },
     {
         id: 7,
@@ -53,7 +59,8 @@ const customerData = [
         email: 'mariewinter@gmail.com',
         description: 'Lorem ipsum dolor sit amet Consectetur',
         dateOfPurchase: '10/11/2020',
-        dateOfRenewwal: '10/11/2020'
+        dateOfRenewwal: '10/11/2020',
+        group: 'group-3'
     },
     {
         id: 8,
@@ -61,7 +68,8 @@ const customerData = [
         email: 'mariewinter@gmail.com',
         description: 'Lorem ipsum dolor sit amet Consectetur',
         dateOfPurchase: '10/11/2020',
-        dateOfRenewwal: '10/11/2020'
+        dateOfRenewwal: '10/11/2020',
+        group: 'group-1'
     },
     {
         id: 9,
@@ -69,7 +77,8 @@ const customerData = [
         email: 'mariewinter@gmail.com',
         description: 'Lorem ipsum dolor sit amet Consectetur',
         dateOfPurchase: '10/11/2020',
-        dateOfRenewwal: '10/11/2020'
+        dateOfRenewwal: '10/11/2020',
+        group: 'group-1'
     },
     {
         id: 10,
@@ -77,7 +86,8 @@ const customerData = [
         email: 'mariewinter@gmail.com',
         description: 'Lorem ipsum dolor sit amet Consectetur',
         dateOfPurchase: '10/11/2020',
-        dateOfRenewwal: '10/11/2020'
+        dateOfRenewwal: '10/11/2020',
+        group: 'group-4'
     },
 ]
 export default customerData

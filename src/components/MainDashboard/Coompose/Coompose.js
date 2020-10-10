@@ -4,15 +4,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import inboxData from '../../../data/inboxData';
-import { Avatar, Button, Card, CardContent, CardHeader, Chip, Divider, FormControl, IconButton, Input, InputAdornment, InputLabel, TextareaAutosize, TextField, Typography } from '@material-ui/core';
-import avatar from '../../../images/avatar.png'
-import { Link } from 'react-router-dom'
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import SunEditor, { buttonList } from 'suneditor-react';
+import { Button, Card, CardContent, CardHeader, FormControl, IconButton, InputAdornment, TextField } from '@material-ui/core';
+import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import './Compose.css'
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 
 
 
@@ -66,12 +62,13 @@ const Coompose = () => {
                 <Container maxWidth="md" className={classes.container}>
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
-                            <Card style={{ margin: '0 auto', background: '#213F7E'}}>
+                            <Card style={{ margin: '0 auto', background: '#213F7E' }}>
                                 <CardHeader
                                     action={
-                                        <IconButton aria-label="settings">
-                                            <MoreVertIcon />
+                                        <IconButton aria-label="settings" style={{color: '#fff'}}>
+                                            <CancelOutlinedIcon />
                                         </IconButton>
+
                                     }
                                 />
                                 <CardContent>

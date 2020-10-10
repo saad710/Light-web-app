@@ -30,20 +30,18 @@ function App() {
           <Route path="/inbox">
             <Dashboard />
           </Route>
+          <Route path="/customers">
+            <Customers />
+          </Route>
+
           <Route path="/details/:inboxId">
             <InboxDetails />
-          </Route>
-          <Route path="/customers">
-            <Contact />
           </Route>
           <Route path="/sent">
             <Sent />
           </Route>
           <Route path="/sentDetails/:sentId">
             <SentDetails />
-          </Route>
-          <Route path="/customers">
-            {/* <Customers /> */}
           </Route>
           <Route path="/profile">
             <Profile />
