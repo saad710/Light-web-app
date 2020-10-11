@@ -25,22 +25,22 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#3A86BC',
         boxShadow: 'none',
         margin: '5rem auto'
-    }
+    },
 }));
 
 const Ticket = () => {
-    const classes = useStyles();
-    const [ticketModal, setTicketModal] = React.useState(false);
+    // const classes = useStyles();
+    // const [ticketModal, setTicketModal] = React.useState(false);
 
-    const handleOpen = () => {
-        setTicketModal(true);
-    };
-    const handleClose = () => {
-        setTicketModal(false);
-    };
+    // const handleOpen = () => {
+    //     setTicketModal(true);
+    // };
+    // const handleClose = () => {
+    //     setTicketModal(false);
+    // };
     return (
         <div>
-            <h1 onClick={handleOpen}> Click </h1>
+            {/* <h1 onClick={handleOpen}> Click </h1>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -125,7 +125,7 @@ const Ticket = () => {
                         </div>
                     </div>
                 </Fade>
-            </Modal>
+            </Modal> */}
         </div>
 
     );
