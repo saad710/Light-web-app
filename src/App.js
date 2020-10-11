@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext } from 'react'
 import Dashboard from './components/MainDashboard/Dashboard'
 import SignInSide from './components/SignIn/SignIn'
 import {
@@ -15,6 +15,7 @@ import Profile from './components/MainDashboard/Profile/Profile'
 import Privacy from './components/MainDashboard/Privacy/Privacy'
 import Team from './components/MainDashboard/Team/Team'
 import CompanyDetails from './components/MainDashboard/CompanyDetails/CompanyDetails'
+import Ticket from './components/MainDashboard/Ticket/Ticket';
 
 
 function App() {
@@ -55,6 +56,9 @@ function App() {
           </Route>
           <Route path="/compose">
             <Compose />
+          </Route>
+          <Route path="/ticket">
+            <Ticket />
           </Route>
         </Switch>
       </Router>

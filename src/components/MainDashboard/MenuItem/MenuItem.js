@@ -160,12 +160,17 @@ const MenuItem = () => {
                     </List>
                 </Collapse>
 
-                <ListItem button>
-                    <ListItemIcon>
-                        <BugReportIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Ticket" />
-                </ListItem>
+                {/* <Link to="/ticket"> */}
+                    <ListItem  button>
+                        <div className="d-flex">
+                            <ListItemIcon>
+                                <BugReportIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Ticket" />
+                        </div>
+                    </ListItem>
+                {/* </Link> */}
+                
                 <ListItem button>
                     <ListItemIcon>
                         <DashboardIcon />

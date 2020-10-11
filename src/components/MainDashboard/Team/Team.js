@@ -1,10 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import {Button,TextField, Typography } from '@material-ui/core';
+import {Button,FormControl,InputBase,InputLabel,NativeSelect,TextField, Typography, withStyles } from '@material-ui/core';
+
+const BootstrapInput = withStyles((theme) => ({
+    root: {
+        'label + &': {
+            marginTop: theme.spacing(3),
+        },
+    },
+    input: {
+        borderRadius: 4,
+        position: 'relative',
+        backgroundColor: theme.palette.background.paper,
+        border: '1px solid #ced4da',
+        fontSize: 16,
+        padding: '10px 26px 10px 30rem',
+        transition: theme.transitions.create(['border-color', 'box-shadow']),
+        // Use the system font instead of the default Roboto font.
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"',
+        ].join(','),
+        '&:focus': {
+            borderRadius: 4,
+            borderColor: '#80bdff',
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+        },
+    },
+}))(InputBase);
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,6 +78,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Team = () => {
     const classes = useStyles();
+    const [teamRole, setTeamRole] = useState({});
+    console.log(teamRole);
+    
+    const handleTeamInput = (e) => {
+        const newRole = {...teamRole}
+        newRole[e.target.name] = e.target.value 
+        setTeamRole(newRole)
+    }
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -70,7 +113,25 @@ const Team = () => {
                                         autoComplete="email"
                                         autoFocus
                                         placeholder="user@email.com"
+                                        onChange={handleTeamInput}
                                     />
+                                </div>
+                                <div>
+                                    <FormControl className={classes.margin}>
+                                        <InputLabel htmlFor="demo-customized-select-native">Select Role</InputLabel>
+                                        <NativeSelect
+                                            id="demo-customized-select-native"
+                                            name="select"
+                                            value={teamRole.select}
+                                            onChange={handleTeamInput}
+                                            input={<BootstrapInput />}
+                                        >
+                                            <option aria-label="None" value="" />
+                                            <option value="client">Client</option>
+                                            <option value="admin">Admin</option>
+                                        </NativeSelect>
+                                    </FormControl>
+
                                 </div>
                                 
                                 <Button
