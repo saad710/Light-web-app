@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
 import inboxData from '../../../data/inboxData';
-import { Avatar, Button, Chip, Divider, Typography } from '@material-ui/core';
+import { Avatar, Divider, Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
 import { Link } from 'react-router-dom'
 

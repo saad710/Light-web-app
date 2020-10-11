@@ -1,22 +1,20 @@
-import React from 'react';
-import Dashboard from './components/MainDashboard/Dashboard';
-import SignInSide from './components/SignIn/SignIn';
+import React from 'react'
+import Dashboard from './components/MainDashboard/Dashboard'
+import SignInSide from './components/SignIn/SignIn'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import InboxDetails from './components/MainDashboard/Inbox/InboxDetails';
-import Contact from './components/MainDashboard/Contact/Contact'
+import InboxDetails from './components/MainDashboard/Inbox/InboxDetails'
 import Sent from './components/MainDashboard/Sent/Sent'
-import SentDetails from './components/MainDashboard/Sent/SentDetails';
-import Customers from './components/MainDashboard/Customers/Customers';
+import SentDetails from './components/MainDashboard/Sent/SentDetails'
+import Customers from './components/MainDashboard/Customers/Customers'
 import Compose from './components/MainDashboard/Coompose/Coompose'
-import Profile from './components/MainDashboard/Profile/Profile';
-import Privacy from './components/MainDashboard/Privacy/Privacy';
-import Team from './components/MainDashboard/Team/Team';
-import CompanyDetails from './components/MainDashboard/CompanyDetails/CompanyDetails';
-
+import Profile from './components/MainDashboard/Profile/Profile'
+import Privacy from './components/MainDashboard/Privacy/Privacy'
+import Team from './components/MainDashboard/Team/Team'
+import CompanyDetails from './components/MainDashboard/CompanyDetails/CompanyDetails'
 
 
 function App() {
