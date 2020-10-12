@@ -3,7 +3,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom'
-import '../listItems.css'
 import Collapse from '@material-ui/core/Collapse';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import SendIcon from '@material-ui/icons/Send';
@@ -23,6 +22,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MarkunreadMailboxIcon from '@material-ui/icons/MarkunreadMailbox';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
+import './MenuItem.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -188,12 +188,14 @@ const MenuItem = () => {
                             </ListItem>
                         </Link>
 
-                        <ListItem button className={classes.nested}>
-                            <ListItemIcon>
-                                <LabelImportantIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Email Signature" />
-                        </ListItem>
+                        <Link to="/email-signature">
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <LabelImportantIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Email Signature" />
+                            </ListItem>
+                        </Link>
 
                         <Link to="/companydetails">
                             <ListItem button className={classes.nested}>
@@ -208,16 +210,14 @@ const MenuItem = () => {
                     </List>
                 </Collapse>
 
-                {/* <Link to="/ticket"> */}
-                    <ListItem  button>
-                    <div className="d-flex" onClick={handleOpen}>
+                <ListItem onClick={handleOpen}  button>
+                    <div className="d-flex">
                             <ListItemIcon>
                                 <BugReportIcon />
                             </ListItemIcon>
                             <ListItemText primary="Ticket" />
-                        </div>
-                    </ListItem>
-                {/* </Link> */}
+                    </div>
+                </ListItem>
                 
                 <ListItem button>
                     <ListItemIcon>
@@ -225,6 +225,7 @@ const MenuItem = () => {
                     </ListItemIcon>
                     <ListItemText primary="Dashboard" />
                 </ListItem>
+
                 <Link to="/">
                     <ListItem button>
                         <ListItemIcon>

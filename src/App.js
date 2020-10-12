@@ -16,6 +16,7 @@ import Privacy from './components/MainDashboard/Privacy/Privacy'
 import Team from './components/MainDashboard/Team/Team'
 import CompanyDetails from './components/MainDashboard/CompanyDetails/CompanyDetails'
 import Ticket from './components/MainDashboard/Ticket/Ticket';
+import EmailSignature from './components/MainDashboard/EmailSignature/EmailSignature';
 
 
 function App() {
@@ -59,6 +60,9 @@ function App() {
           </Route>
           <Route path="/ticket">
             <Ticket />
+          </Route>
+          <Route path="/email-signature">
+            <EmailSignature />
           </Route>
         </Switch>
       </Router>
