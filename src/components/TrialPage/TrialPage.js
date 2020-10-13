@@ -7,6 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '0.5rem 0',
         margin: '1rem auto'
     }
-    
+
 }));
 
 
@@ -42,7 +43,7 @@ const TrialPage = () => {
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
             <Grid item xs={false} sm={4} md={4} className={classes.paper} >
-                <div style={{width: '80%'}} className="container">
+                <div style={{ width: '80%' }} className="container">
                     <Typography variant="h6">
                         Start Your Free Trial
                     </Typography>
@@ -56,17 +57,19 @@ const TrialPage = () => {
                             <li> Limited Access </li>
                         </ul>
                     </Typography>
-                    <Button className={classes.trialBtn} variant="contained" color="primary" size="small"> Continue </Button>
+                    <Link to="/inbox">
+                        <Button className={classes.trialBtn} variant="contained" color="primary" size="small"> Continue </Button>
+                    </Link>
                 </div>
             </Grid>
             <Grid item xs={12} sm={8} md={8} elevation={6} square>
                 <div className={classes.paper}>
-                    <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#213F7E'}}>
+                    <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#213F7E' }}>
                         <CardContent>
                             <Typography variant="body1">
                                 STARTER
                             </Typography>
-                            <div style={{padding: '2rem 0'}}>
+                            <div style={{ padding: '2rem 0' }}>
                                 <Typography variant="h3">
                                     $8
                             </Typography>
@@ -78,9 +81,11 @@ const TrialPage = () => {
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
-                        <CardActions >
-                            <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
-                        </CardActions>
+                        <Link to="/inbox">
+                            <CardActions >
+                                <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
+                            </CardActions>
+                        </Link>
                     </Card>
 
                     <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#4195D1' }}>
@@ -100,9 +105,11 @@ const TrialPage = () => {
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
-                        <CardActions >
-                            <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
-                        </CardActions>
+                        <Link to="/inbox">
+                            <CardActions >
+                                <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
+                            </CardActions>
+                        </Link>
                     </Card>
 
                     <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#43425D' }}>
@@ -122,14 +129,16 @@ const TrialPage = () => {
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
-                        <CardActions >
-                            <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
-                        </CardActions>
+                        <Link to="/inbox">
+                            <CardActions >
+                                <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
+                            </CardActions>
+                        </Link>
                     </Card>
 
                 </div>
             </Grid>
-                
+
         </Grid>
     );
 };
