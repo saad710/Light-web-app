@@ -18,52 +18,24 @@ import CompanyDetails from './components/MainDashboard/CompanyDetails/CompanyDet
 import Ticket from './components/MainDashboard/Ticket/Ticket';
 import EmailSignature from './components/MainDashboard/EmailSignature/EmailSignature';
 
-
 function App() {
   return (
     <div>
       <Router>
         <Switch>
-          <Route exact path="/">
-            <SignInSide />
-          </Route>
-          <Route path="/inbox">
-            <Dashboard />
-          </Route>
-          <Route path="/customers">
-            <Customers />
-          </Route>
-
-          <Route path="/details/:inboxId">
-            <InboxDetails />
-          </Route>
-          <Route path="/sent">
-            <Sent />
-          </Route>
-          <Route path="/sentDetails/:sentId">
-            <SentDetails />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/privacy">
-            <Privacy />
-          </Route>
-          <Route path="/team">
-            <Team />
-          </Route>
-          <Route path="/companydetails">
-            <CompanyDetails />
-          </Route>
-          <Route path="/compose">
-            <Compose />
-          </Route>
-          <Route path="/ticket">
-            <Ticket />
-          </Route>
-          <Route path="/email-signature">
-            <EmailSignature />
-          </Route>
+          <Route exact path="/" component={SignInSide} />
+          <Route path="/inbox" component={Dashboard} />
+          <Route path="/customers" component={Customers} />
+          <Route path="/details/:inboxId" component={InboxDetails} />
+          <Route path="/sent" component={Sent} />
+          <Route path="/sentDetails/:sentId" component={SentDetails} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/privacy" component={Privacy} />
+          <Route path="/team" component={Team} />
+          <Route path="/companydetails" component={CompanyDetails} />
+          <Route path="/compose" component={Compose} />
+          <Route path="/ticket" component={Ticket} />
+          <Route path="/email-signature" component={EmailSignature} />
         </Switch>
       </Router>
     </div>
