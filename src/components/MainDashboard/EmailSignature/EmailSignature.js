@@ -107,7 +107,7 @@ const EmailSignature = () => {
     };
 
     const handleUpdateEmailModalClose = () => {
-        setUpdateEmailModal(false);
+        setUpdateEmailModal (false);
     };
     return (
         <div className={classes.root}>
