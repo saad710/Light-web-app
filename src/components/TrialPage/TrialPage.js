@@ -10,7 +10,8 @@ import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        height: '100vh',
+        height: 'auto',
+        margin: '7rem auto'
     },
     paper: {
         display: 'flex',
@@ -19,7 +20,17 @@ const useStyles = makeStyles((theme) => ({
     trialCard: {
         width: 250,
         color: '#fff !important',
-        textAlign: 'center'
+        textAlign: 'center',
+        borderRadius: '0',
+        margin: '0 1rem',
+        padding: '1.5rem 0'
+    },
+    trialBtn: {
+        backgroundColor: '#2F2E41',
+        color: '#fff',
+        width: '45%',
+        padding: '0.5rem 0',
+        margin: '1rem auto'
     }
     
 }));
@@ -34,7 +45,7 @@ const TrialPage = () => {
                 <div style={{width: '80%'}} className="container">
                     <Typography variant="h6">
                         Start Your Free Trial
-                </Typography>
+                    </Typography>
                     <Typography>
                         You will not be billed during your free trial.
                         To keep your account running after the trial end upgrade to
@@ -45,6 +56,7 @@ const TrialPage = () => {
                             <li> Limited Access </li>
                         </ul>
                     </Typography>
+                    <Button className={classes.trialBtn} variant="contained" color="primary" size="small"> Continue </Button>
                 </div>
             </Grid>
             <Grid item xs={12} sm={8} md={8} elevation={6} square>
@@ -54,20 +66,64 @@ const TrialPage = () => {
                             <Typography variant="body1">
                                 STARTER
                             </Typography>
-                            <Typography variant="h3">
-                                $8
+                            <div style={{padding: '2rem 0'}}>
+                                <Typography variant="h3">
+                                    $8
                             </Typography>
-                            <Typography variant="body6">
-                                <small> per month </small>
-                            </Typography>
+                                <Typography variant="body6">
+                                    <small> per month </small>
+                                </Typography>
+                            </div>
                             <Typography variant="body1">
                                 Starter features for your business to grow
                             </Typography>
-                            
-                        
                         </CardContent>
-                        <CardActions>
-                            <Button size="small">Learn More</Button>
+                        <CardActions >
+                            <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
+                        </CardActions>
+                    </Card>
+
+                    <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#4195D1' }}>
+                        <CardContent>
+                            <Typography variant="body1">
+                                PROFESSIONAL
+                            </Typography>
+                            <div style={{ padding: '2rem 0' }}>
+                                <Typography variant="h3">
+                                    $18
+                            </Typography>
+                                <Typography variant="body6">
+                                    <small> per month </small>
+                                </Typography>
+                            </div>
+                            <Typography variant="body1">
+                                Starter features for your business to grow
+                            </Typography>
+                        </CardContent>
+                        <CardActions >
+                            <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
+                        </CardActions>
+                    </Card>
+
+                    <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#43425D' }}>
+                        <CardContent>
+                            <Typography variant="body1">
+                                ADVANCED
+                            </Typography>
+                            <div style={{ padding: '2rem 0' }}>
+                                <Typography variant="h3">
+                                    $48
+                            </Typography>
+                                <Typography variant="body6">
+                                    <small> per month </small>
+                                </Typography>
+                            </div>
+                            <Typography variant="body1">
+                                Starter features for your business to grow
+                            </Typography>
+                        </CardContent>
+                        <CardActions >
+                            <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
                         </CardActions>
                     </Card>
 
