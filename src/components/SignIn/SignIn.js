@@ -100,7 +100,7 @@ export default function SignInSide() {
                                 placeholder="***********"
                             />
                         </div>
-                        <NavLink to="/inbox">
+                        <NavLink to="/trial">
                         <Button
                             type="submit"
                             fullWidth
