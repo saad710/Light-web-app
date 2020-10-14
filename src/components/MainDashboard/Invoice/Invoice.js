@@ -11,7 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CancelIcon from '@material-ui/icons/Cancel';
-
+import {Link} from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -51,7 +51,9 @@ const Invoice = () => {
                         <Grid item xs={12}>
                             <div>
                                 <Typography align="right">
-                                    <CancelIcon color="action"/>
+                                    <Link to="/inbox">
+                                        <CancelIcon color="action" />
+                                    </Link>
                                 </Typography>
                                 <div className="d-flex justify-content-between py-4">
                                     <div>
@@ -64,16 +66,18 @@ const Invoice = () => {
                                     </div>
                                     <div>
                                         <Typography variant="h5" align="right"> Invoice </Typography>
-                                        <Button variant="contained" color="primary"
-                                            className="my-2"
-                                            style={{
-                                                backgroundColor: '#2d2d2d',
-                                                padding: '0.3rem 2rem',
-                                                color: '#fff',
-                                            }}
-                                        >
-                                            Print
+                                        <Link to="/inbox">
+                                            <Button variant="contained" color="primary"
+                                                className="my-2"
+                                                style={{
+                                                    backgroundColor: '#2d2d2d',
+                                                    padding: '0.3rem 2rem',
+                                                    color: '#fff',
+                                                }}
+                                            >
+                                                Print
                                         </Button>
+                                        </Link>
                                     </div>
                                 </div>
                                 <Divider />
@@ -160,18 +164,20 @@ const Invoice = () => {
                                         <b> USD 50.00 </b>
                                     </Typography>
                                     <Typography align="right">
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            className="my-3"
-                                            style={{ 
-                                                backgroundColor: '#4195D1',
-                                                padding: '0.3rem 2rem'
-                                            }}
-                                        
-                                        >
-                                            Download
+                                        <Link to="/inbox">
+                                            <Button
+                                                variant="contained"
+                                                color="primary"
+                                                className="my-3"
+                                                style={{
+                                                    backgroundColor: '#4195D1',
+                                                    padding: '0.3rem 2rem'
+                                                }}
+
+                                            >
+                                                Download
                                         </Button>
+                                        </Link>
                                     </Typography>
                                 </div>
                             </div>
