@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { useForm } from 'react-hook-form';
+import paymentImg from '../../../images/cardIcon.svg'
 import './Payment.css'
 
 
@@ -49,10 +50,17 @@ const Payment = () => {
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <div>
+                                <div style={{ textAlign: 'center', paddingBottom: '3rem'}}>
+                                    <h1> Payment </h1>
+                                    <p> Choose payment method bellow </p>
+                                    <div >
+                                        <img style={{ border: '2px solid #4195D1', padding: '1.5rem 5rem' }} src={paymentImg} alt=""/>
+                                    </div>
+                                </div>
                                 <form className='paymentForm' onSubmit={handleSubmit(onSubmit)}>
                                     <div className='d-flex'>  
                                         <div className='' style={{ width: '40%', margin: '0 2rem'}}>
-                                            <h6> Billing Info </h6>
+                                            <h6 className="my-4"> Billing Info </h6>
                                             <div>
                                                 <label htmlFor="name"> FULL NAME </label>
                                                 {errors.name && (
@@ -125,7 +133,7 @@ const Payment = () => {
                                         </div>
 
                                         <div className='' style={{ width: '40%', margin: '0 2rem' }}>
-                                            <h6> Credit Card Info </h6>
+                                            <h6 className="my-4"> Credit Card Info </h6>
                                             <div>
                                                 <label htmlFor="cardNumber"> CARD NUMBER </label>
                                                 {errors.cardNumber && (

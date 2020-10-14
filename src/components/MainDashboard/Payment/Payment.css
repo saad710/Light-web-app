@@ -33,4 +33,6 @@ select {
 #payment-btn {
     width: 87%;
     margin: 1rem 2rem;
+    background: none;
+    color: #2d2d2d;
 }
