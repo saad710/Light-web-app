@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
@@ -53,6 +53,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Coompose = () => {
     const classes = useStyles();
+    const [ccOpen, setCcOpen] = useState(false)
+    const [bccOpen, setBccOpen] = useState(false)
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -87,24 +89,44 @@ const Coompose = () => {
                                                 <TextField
                                                     id="filled-start-adornment"
                                                     InputProps={{
-                                                        startAdornment: <InputAdornment position="start">To</InputAdornment>,
+                                                        startAdornment: <InputAdornment position="start">
+                                                            <div className="d-flex">
+                                                                <div>
+                                                                    To
+                                                                </div>
+                                                                <div className="d-flex">
+                                                                    <div className="px-2" onClick={() => setCcOpen(!ccOpen)}>
+                                                                        Cc
+                                                                    </div>
+                                                                    <div className="px-2" onClick={() => setBccOpen(!bccOpen)}>
+                                                                        Bcc
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </InputAdornment>,
                                                     }}
                                                     variant="outlined"
-                                                />
-                                                <TextField
-                                                    id="filled-start-adornment"
-                                                    InputProps={{
-                                                        startAdornment: <InputAdornment position="start">Cc</InputAdornment>,
-                                                    }}
-                                                    variant="outlined"
-                                                />
-                                                <TextField
-                                                    id="filled-start-adornment"
-                                                    InputProps={{
-                                                        startAdornment: <InputAdornment position="start">Bcc</InputAdornment>,
-                                                    }}
-                                                    variant="outlined"
-                                                />
+                                                    />
+                                                {
+                                                    ccOpen && 
+                                                    <TextField
+                                                        id="filled-start-adornment"
+                                                        InputProps={{
+                                                            startAdornment: <InputAdornment position="start">Cc</InputAdornment>,
+                                                        }}
+                                                        variant="outlined"
+                                                    />
+                                                }
+                                                {
+                                                    bccOpen && 
+                                                    <TextField
+                                                        id="filled-start-adornment"
+                                                        InputProps={{
+                                                            startAdornment: <InputAdornment position="start">Bcc</InputAdornment>,
+                                                        }}
+                                                        variant="outlined"
+                                                    />
+                                                }
                                                 <TextField
                                                     id="filled-start-adornment"
                                                     InputProps={{
