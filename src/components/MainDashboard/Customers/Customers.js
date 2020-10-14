@@ -19,11 +19,12 @@ import Fade from '@material-ui/core/Fade';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import avatar from '../../../images/avatar.png'
+import { Pagination } from 'react-bootstrap';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        backgroundColor: '#4195D1'
+        backgroundColor: '#fff'
     },
 
     appBarSpacer: theme.mixins.toolbar,
@@ -95,6 +96,11 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '0',
         padding: '0.6rem 0'
     },
+    paginate: {
+        '& > *': {
+            marginTop: theme.spacing(2),
+        },
+    }
 }));
 
 
@@ -168,6 +174,7 @@ const Customers = () => {
                                     }
                                 </TableBody>
                             </Table>
+                            
                         </TableContainer>
 
                         {/* update/delete modal */}
