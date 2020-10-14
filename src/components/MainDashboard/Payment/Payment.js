@@ -65,18 +65,27 @@ const Payment = () => {
                                                     placeholder='Marie Winter'
                                                 />
                                             </div>
+                                            <br/>
                                             <div>
                                                 <label htmlFor="address"> ADDRESS </label>
+                                                {errors.address && (
+                                                    <li style={{ color: "red" }}>Address is required!</li>
+                                                )}
                                                 <input
                                                     name='address'
                                                     ref={register({ required: true })}
                                                     placeholder='4098 Water Street'
                                                 />
                                             </div>
+                                            <br/>
                                             <div className="d-flex justify-content-between">
                                                 <div>
                                                     <label htmlFor="city"> CITY </label>
+                                                    {errors.city && (
+                                                        <li style={{ color: "red" }}>City is required!</li>
+                                                    )}
                                                     <input
+                                                        style={{width: '95%'}}
                                                         name='city'
                                                         ref={register({ required: true })}
                                                         placeholder='San Francisco'
@@ -84,6 +93,9 @@ const Payment = () => {
                                                 </div>
                                                 <div>
                                                     <label htmlFor="zipCode"> ZIP CODE </label>
+                                                    {errors.zipCode && (
+                                                        <li style={{ color: "red" }}>Zip Code is required!</li>
+                                                    )}
                                                     <input
                                                         name='zipCode'
                                                         ref={register({ required: true })}
@@ -91,10 +103,14 @@ const Payment = () => {
                                                     />
                                                 </div>
                                             </div>
+                                            <br/>
                                             <div>
                                                 <label htmlFor="country"> COUNTRY </label>
+                                                {errors.country && (
+                                                    <li style={{ color: "red" }}>Country is required!</li>
+                                                )}
                                                 <select
-                                                    name='homeOwner'
+                                                    name='country'
                                                     className='mr-2'
                                                     ref={register({ required: true })}
                                                 >
@@ -105,12 +121,16 @@ const Payment = () => {
                                                     <option value='United Kingdom'>United Kingdom</option>
                                                 </select>
                                             </div>
+                                            <br/>
                                         </div>
 
                                         <div className='' style={{ width: '40%', margin: '0 2rem' }}>
                                             <h6> Credit Card Info </h6>
                                             <div>
                                                 <label htmlFor="cardNumber"> CARD NUMBER </label>
+                                                {errors.cardNumber && (
+                                                    <li style={{ color: "red" }}>Card Number is required!</li>
+                                                )}
                                                 <input
                                                     name='cardNumber'
                                                     className='mr-2'
@@ -118,32 +138,45 @@ const Payment = () => {
                                                     placeholder='42 42 42 42 42 42'
                                                 />
                                             </div>
+                                            <br/>
                                             <div>
                                                 <label htmlFor="cardHolder"> CARD HOLDER NAME </label>
+                                                {errors.cardHolder && (
+                                                    <li style={{ color: "red" }}>Card Holder Name is required!</li>
+                                                )}
                                                 <input
                                                     name='cardHolder'
                                                     ref={register({ required: true })}
                                                     placeholder='Marie Winter'
                                                 />
                                             </div>
+                                            <br/>
 
                                             <div>
                                                 <label htmlFor="expireDate"> EXPIRE DATE </label>
+                                                {errors.expireDate && (
+                                                    <li style={{ color: "red" }}>Expire date is required!</li>
+                                                )}
                                                 <input
                                                     name='expireDate'
                                                     ref={register({ required: true })}
                                                     placeholder='05/22'
                                                 />
                                             </div>
+                                            <br/>
 
                                             <div>
-                                                <label htmlFor="cardHolder"> CVV </label>
+                                                <label htmlFor="cvv"> CVV </label>
+                                                {errors.expireDate && (
+                                                    <li style={{ color: "red" }}>CVV date is required!</li>
+                                                )}
                                                 <input
-                                                    name='cardHolder'
+                                                    name='cvv'
                                                     ref={register({ required: true })}
                                                     placeholder='4098 Water Street'
                                                 />
                                             </div>
+                                            <br/>
                                         </div>
                                         
                                     </div>
