@@ -81,7 +81,7 @@ const TrialPage = () => {
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
-                        <Link to="/inbox">
+                        <Link to="/payment">
                             <CardActions >
                                 <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
                             </CardActions>
@@ -105,7 +105,7 @@ const TrialPage = () => {
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
-                        <Link to="/inbox">
+                        <Link to="/payment">
                             <CardActions >
                                 <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
                             </CardActions>
@@ -129,7 +129,7 @@ const TrialPage = () => {
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
-                        <Link to="/inbox">
+                        <Link to="/payment">
                             <CardActions >
                                 <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
                             </CardActions>

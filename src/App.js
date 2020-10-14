@@ -18,6 +18,7 @@ import CompanyDetails from './components/MainDashboard/CompanyDetails/CompanyDet
 import Ticket from './components/MainDashboard/Ticket/Ticket';
 import EmailSignature from './components/MainDashboard/EmailSignature/EmailSignature';
 import TrialPage from './components/TrialPage/TrialPage';
+import Payment from './components/MainDashboard/Payment/Payment';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/ticket" component={Ticket} />
           <Route path="/email-signature" component={EmailSignature} />
           <Route path="/trial" component={TrialPage} />
+          <Route path="/payment" component={Payment} />
         </Switch>
       </Router>
     </div>
