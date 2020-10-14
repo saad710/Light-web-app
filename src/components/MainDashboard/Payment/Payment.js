@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { useForm } from 'react-hook-form';
 import paymentImg from '../../../images/cardIcon.svg'
 import './Payment.css'
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +40,7 @@ const Payment = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        window.location = './invoice'
     };
     const classes = useStyles();
     return (
