@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { useForm } from 'react-hook-form';
 import paymentImg from '../../../images/cardIcon.svg'
 import './Payment.css'
-import { useHistory } from 'react-router-dom';
+import visa from '../../../images/Input.svg'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,8 +53,20 @@ const Payment = () => {
                         <Grid item xs={12}>
                             <div>
                                 <div style={{ textAlign: 'center', paddingBottom: '3rem'}}>
-                                    <h1> Payment </h1>
-                                    <p> Choose payment method bellow </p>
+                                    <h1 style={{
+                                            fontSize: '40px',
+                                            fontWeight: 'bold'
+                                        }}>
+                                            Payment
+                                    </h1>
+                                    <p
+                                        style={{
+                                            fontSize: '14px',
+                                            fontWeight: '400'
+                                        }}> 
+                                    
+                                        Choose payment method bellow
+                                    </p>
                                     <div >
                                         <img style={{ border: '2px solid #4195D1', padding: '1.5rem 5rem' }} src={paymentImg} alt=""/>
                                     </div>
@@ -62,7 +74,14 @@ const Payment = () => {
                                 <form className='paymentForm' onSubmit={handleSubmit(onSubmit)}>
                                     <div className='d-flex'>  
                                         <div className='' style={{ width: '40%', margin: '0 2rem'}}>
-                                            <h6 className="my-4"> Billing Info </h6>
+                                            <h6 className="my-4"
+                                                style={{
+                                                    fontSize: '20px',
+                                                    fontWeight: 'bold'
+                                                }}
+                                            >
+                                                Billing Info
+                                            </h6>
                                             <div>
                                                 <label htmlFor="name"> FULL NAME </label>
                                                 {errors.name && (
@@ -135,18 +154,28 @@ const Payment = () => {
                                         </div>
 
                                         <div className='' style={{ width: '40%', margin: '0 2rem' }}>
-                                            <h6 className="my-4"> Credit Card Info </h6>
+                                            <h6 className="my-4"
+                                                style={{
+                                                    fontSize: '20px',
+                                                    fontWeight: 'bold'
+                                                }}
+                                            >
+                                                Credit Card Info
+                                            </h6>
                                             <div>
                                                 <label htmlFor="cardNumber"> CARD NUMBER </label>
                                                 {errors.cardNumber && (
                                                     <li style={{ color: "red" }}>Card Number is required!</li>
                                                 )}
-                                                <input
-                                                    name='cardNumber'
-                                                    className='mr-2'
-                                                    ref={register({ required: true })}
-                                                    placeholder='42 42 42 42 42 42'
-                                                />
+                                                <div className="d-flex">
+                                                    <input
+                                                        name='cardNumber'
+                                                        className='mr-2'
+                                                        ref={register({ required: true })}
+                                                        placeholder='42 42 42 42 42 42'
+                                                    />
+                                                    <img src={visa} alt="" />
+                                                </div>
                                             </div>
                                             <br/>
                                             <div>

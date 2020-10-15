@@ -1,3 +1,7 @@
+.paymentForm label {
+    font-size: 12px;
+    font-weight: bold;
+}
 .paymentForm input,
 select {
     display: block;
@@ -5,6 +9,8 @@ select {
     border: 1px solid gray;
     border-radius: 5px;
     width: 100%;
+    font-size: 14px;
+    font-weight: 500;
 
 }
 
