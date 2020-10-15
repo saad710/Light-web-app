@@ -142,10 +142,10 @@ const Customers = () => {
                 <ToolBar />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
+                        {/* <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
                             CREATE NEW
-                        </Button>
-                        <TableContainer component={Paper} square elevation={0}>
+                        </Button> */}
+                        <TableContainer component={Paper} square elevation={0} className="mt-4">
                             <Table className={classes.table} aria-label="simple table"
                                 size='small'
                             >
