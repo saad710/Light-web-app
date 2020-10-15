@@ -50,32 +50,31 @@ const Sent = () => {
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Container maxWidth="md" className={classes.container}>
-                    <Grid container spacing={3}>
-                        {
-                            inboxData.map(sent => (
-                                <div>
-                                    <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
+                <Container maxWidth="lg" className={classes.container}>
+                    {
+                        inboxData.map(sent => (
+                            <div>
+                                < Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
+                                <div className="d-flex justify-content-between align-items-center">
                                     <div className="d-flex align-items-center my-3" style={{ color: '#fff' }}>
                                         <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
                                             <img width="100%" src={avatar} alt="" />
                                         </Avatar>
-                                        <Link to={`sentDetails/${sent.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
+                                        <Link to={`details/${sent.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
                                             <Typography variant="body5" style={{ margin: '0.5rem 0.5rem' }}>
                                                 <strong> Marie Winter </strong> <br />
-                                                <strong style={{marginLeft:'0.5rem'}} > Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                                        </Typography>
+                                                <strong style={{ marginLeft: '0.5rem' }}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry standara level
+                                                    </Typography>
                                         </Link>
-                                        <Typography style={{color: '#2d2d2d'}} variant="body6">
-                                            <small> just now </small>
-                                        </Typography>
                                     </div>
-                                    <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
+                                    <Typography style={{ color: '#2d2d2d' }} variant="body6" align="right">
+                                        <small> just now </small>
+                                    </Typography>
                                 </div>
-                            ))
-                        }
-
-                    </Grid>
+                                <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
+                            </div>
+                        ))
+                    }
                    
                 </Container>
             </main>

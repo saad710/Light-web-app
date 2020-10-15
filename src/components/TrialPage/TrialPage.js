@@ -8,6 +8,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom'
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import Payment from '../MainDashboard/Payment/Payment';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,13 +44,26 @@ const useStyles = makeStyles((theme) => ({
         padding: '0.5rem 0',
         margin: 'auto',
         fontSize: '8px'
-    }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 
 }));
 
 
 const TrialPage = () => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -125,7 +142,7 @@ const TrialPage = () => {
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
-                        <Link to="/payment">
+                        <Link onClick={handleOpen}>
                             <CardActions >
                                 <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
                             </CardActions>
@@ -170,7 +187,7 @@ const TrialPage = () => {
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
-                        <Link to="/payment">
+                        <Link onClick={handleOpen}>
                             <CardActions >
                                 <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
                             </CardActions>
@@ -215,7 +232,7 @@ const TrialPage = () => {
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
-                        <Link to="/payment">
+                        <Link onClick={handleOpen}>
                             <CardActions >
                                 <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
                             </CardActions>
@@ -224,6 +241,28 @@ const TrialPage = () => {
 
                 </div>
             </Grid>
+            <div>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={open}>
+                        <div className={classes.modalPaper}>
+                            <div className="mt-3">
+                                <Payment />
+                            </div>
+                        </div>
+                    </Fade>
+                </Modal>
+            </div>
 
         </Grid>
     );

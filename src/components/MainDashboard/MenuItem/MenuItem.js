@@ -10,7 +10,6 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { Backdrop, Button, Card, CardContent, CardHeader, Fade, IconButton, List, makeStyles, Modal, TextareaAutosize, TextField } from '@material-ui/core';
 import WcIcon from '@material-ui/icons/Wc';
-import ReportIcon from '@material-ui/icons/Report';
 import SettingsIcon from '@material-ui/icons/Settings';
 import PersonIcon from '@material-ui/icons/Person';
 import HttpsIcon from '@material-ui/icons/Https';
