@@ -186,8 +186,8 @@ const AppBarDrawer = () => {
                 open={open}
             >
 
-                <div className={classes.toolbarIcon}>
-                    <Typography>
+                <div className="d-flex align-items-center">
+                    <Typography style={{ padding: '0 2rem'}}>
                         Client Web App
                     </Typography>
                     <IconButton onClick={handleDrawerClose} style={{ color: '#fff' }}>

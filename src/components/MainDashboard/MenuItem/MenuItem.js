@@ -113,12 +113,14 @@ const MenuItem = () => {
             <div style={{ height:'100ch'}}>
                 
                 <Link to="/compose">
-                    <ListItem button>
-                        <ListItemIcon>
+                    <div style={{width: '60%', margin: '0 auto'}}>
+                        <ListItem button>
+                            {/* <ListItemIcon>
                             <MarkunreadMailboxIcon />
-                        </ListItemIcon>
-                        <ListItemText style={componseStyle} primary="Compose" />
-                    </ListItem>
+                        </ListItemIcon> */}
+                            <ListItemText style={componseStyle} primary="Compose" />
+                        </ListItem>
+                    </div>
                 </Link>
 
                 <Link to="/inbox">
