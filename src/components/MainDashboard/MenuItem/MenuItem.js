@@ -171,7 +171,7 @@ const MenuItem = () => {
                 <Collapse in={open} timeout="auto" unmountOnExit className={classes.collapse}>
                     <List component="div" disablePadding>
                         <Link to="/profile">
-                            <ListItem button className={classes.nested} className={classes.listItem}>
+                            <ListItem button  className={classes.listItem}>
                                 <ListItemIcon>
                                     <PersonIcon />
                                 </ListItemIcon>
@@ -179,7 +179,7 @@ const MenuItem = () => {
                             </ListItem>
                         </Link>
                         <Link to="/privacy">
-                            <ListItem button className={classes.nested} className={classes.listItem}>
+                            <ListItem button className={classes.listItem}>
                                 <ListItemIcon>
                                     <HttpsIcon />
                                 </ListItemIcon>
@@ -188,7 +188,7 @@ const MenuItem = () => {
                         </Link>
 
                         <Link to="/team">
-                            <ListItem button className={classes.nested} className={classes.listItem}>
+                            <ListItem button className={classes.listItem}>
                                 <ListItemIcon>
                                     <GroupWorkIcon />
                                 </ListItemIcon>
@@ -197,7 +197,7 @@ const MenuItem = () => {
                         </Link>
 
                         <Link to="/email-signature">
-                            <ListItem button className={classes.nested} className={classes.listItem}>
+                            <ListItem button className={classes.listItem}>
                                 <ListItemIcon>
                                     <LabelImportantIcon />
                                 </ListItemIcon>
@@ -206,7 +206,7 @@ const MenuItem = () => {
                         </Link>
 
                         <Link to="/companydetails">
-                            <ListItem button className={classes.nested} className={classes.listItem}>
+                            <ListItem button className={classes.listItem}>
                                 <ListItemIcon>
                                     <BusinessIcon />
                                 </ListItemIcon>

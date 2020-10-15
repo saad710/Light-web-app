@@ -53,11 +53,19 @@ export default function SignInSide() {
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
             <Grid item xs={false} sm={4} md={6} className={classes.signInRight} >
-                <div style={{margin: '10rem 0'}}>
+                <div style={{margin: '8.5rem 0'}}>
                     <Typography variant="h6" style={{ textAlign: 'center', color: '#fff', fontSize: '52px' }}>
                         Welcome to <br /> Client Web App
                 </Typography>
-                <Typography style={{ width: '60%', color: '#fff', fontSize: "14px", textAlign: 'center', margin: '0 auto' }}>
+                <Typography
+                    style={{ 
+                            width: '60%',
+                            color: '#fff',
+                            fontSize: "14px",
+                            textAlign: 'center',
+                            margin: '2rem auto',
+                            fontWeight: 'normal'
+                            }}>
                         There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
                 </Typography>
                 </div>

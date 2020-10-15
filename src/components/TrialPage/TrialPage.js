@@ -26,12 +26,20 @@ const useStyles = makeStyles((theme) => ({
         margin: '0 1rem',
         padding: '1.5rem 0'
     },
-    trialBtn: {
+    ulBtn :{
+        padding:'0.5rem 1rem',
         backgroundColor: '#2F2E41',
         color: '#fff',
         width: '45%',
-        padding: '0.5rem 0',
         margin: '1rem auto'
+    },
+    trialBtn: {
+        backgroundColor: '#2d2d2d !important',
+        color: '#fff',
+        width: '45%',
+        padding: '0.5rem 0',
+        margin: 'auto',
+        fontSize: '8px'
     }
 
 }));
@@ -44,21 +52,36 @@ const TrialPage = () => {
             <CssBaseline />
             <Grid item xs={false} sm={4} md={4} className={classes.paper} >
                 <div style={{ width: '80%' }} className="container">
-                    <Typography variant="h6">
+                    <Typography variant="h6" style={{fontSize: '32px'}}>
                         Start Your Free Trial
                     </Typography>
-                    <Typography>
+                    <Typography variant="body1"
+                        style={{ 
+                            fontSize: '14px',
+                            color: '#707070',
+                            margin: '0.5rem 0'
+                        }}
+                    
+                    >
                         You will not be billed during your free trial.
                         To keep your account running after the trial end upgrade to
                         a paid option.
-                        <ul>
-                            <li> 5 days trail </li>
-                            <li> 10 emails per day </li>
-                            <li> Limited Access </li>
+                    </Typography>
+                    <Typography
+                        style={{
+                            fontSize: '14px',
+                            color: '#707070',
+                            margin: '0.5rem 0'
+                        }}
+                    >
+                        <ul className="pt-3">
+                            <li className="py-2"> 5 days trail </li>
+                            <li className="py-2"> 10 emails per day </li>
+                            <li className="py-2"> Limited Access </li>
                         </ul>
                     </Typography>
                     <Link to="/inbox">
-                        <Button className={classes.trialBtn} variant="contained" color="primary" size="small"> Continue </Button>
+                        <Button className={classes.ulBtn} variant="contained" color="primary" size="small"> Continue </Button>
                     </Link>
                 </div>
             </Grid>
@@ -66,18 +89,39 @@ const TrialPage = () => {
                 <div className={classes.paper}>
                     <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#213F7E' }}>
                         <CardContent>
-                            <Typography variant="body1">
+                            <Typography variant="body1"
+                                style={{
+                                    fontSize: '12px',
+                                    fontWeight: 'bold',
+                                }}
+                            >
                                 STARTER
                             </Typography>
                             <div style={{ padding: '2rem 0' }}>
-                                <Typography variant="h3">
+                                <Typography variant="h3"
+                                    style={{
+                                        fontSize: '60px',
+                                        fontWeight: 'regular',
+                                    }}
+                                >
                                     $8
-                            </Typography>
-                                <Typography variant="body6">
+                                </Typography>
+                                <Typography variant="body6"
+                                    style={{
+                                        color: '#fff',
+                                        opacity: 0.5
+                                    }}
+                                >
                                     <small> per month </small>
                                 </Typography>
                             </div>
-                            <Typography variant="body1">
+                            <Typography variant="body1"
+                                style={{
+                                    fontSize: '20px',
+                                    fontWeight: '400',
+                                    marginBottom: '1rem'
+                                }}
+                            >
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
@@ -90,18 +134,39 @@ const TrialPage = () => {
 
                     <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#4195D1' }}>
                         <CardContent>
-                            <Typography variant="body1">
+                            <Typography variant="body1"
+                                style={{
+                                    fontSize: '12px',
+                                    fontWeight: 'bold',
+                                }}
+                            >
                                 PROFESSIONAL
                             </Typography>
                             <div style={{ padding: '2rem 0' }}>
-                                <Typography variant="h3">
+                                <Typography variant="h3"
+                                    style={{
+                                        fontSize: '60px',
+                                        fontWeight: 'regular',
+                                    }}
+                                >
                                     $18
-                            </Typography>
-                                <Typography variant="body6">
+                                </Typography>
+                                <Typography variant="body6"
+                                    style={{
+                                        color: '#fff',
+                                        opacity: 0.5
+                                    }}
+                                >
                                     <small> per month </small>
                                 </Typography>
                             </div>
-                            <Typography variant="body1">
+                            <Typography variant="body1"
+                                style={{
+                                    fontSize: '20px',
+                                    fontWeight: '400',
+                                    marginBottom: '1rem'
+                                }}
+                            >
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
@@ -114,18 +179,39 @@ const TrialPage = () => {
 
                     <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#43425D' }}>
                         <CardContent>
-                            <Typography variant="body1">
+                            <Typography variant="body1"
+                                style={{
+                                    fontSize: '12px',
+                                    fontWeight: 'bold',
+                                }}
+                            >
                                 ADVANCED
                             </Typography>
                             <div style={{ padding: '2rem 0' }}>
-                                <Typography variant="h3">
+                                <Typography variant="h3"
+                                    style={{
+                                        fontSize: '60px',
+                                        fontWeight: 'regular',
+                                    }}
+                                >
                                     $48
-                            </Typography>
-                                <Typography variant="body6">
+                                </Typography>
+                                <Typography variant="body6"
+                                    style={{
+                                        color: '#fff',
+                                        opacity: 0.5
+                                    }}
+                                >
                                     <small> per month </small>
                                 </Typography>
                             </div>
-                            <Typography variant="body1">
+                            <Typography variant="body1"
+                                style={{
+                                    fontSize: '20px',
+                                    fontWeight: '400',
+                                    marginBottom: '1rem'
+                                }}
+                            >
                                 Starter features for your business to grow
                             </Typography>
                         </CardContent>
