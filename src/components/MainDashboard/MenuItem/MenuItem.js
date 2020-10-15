@@ -59,6 +59,14 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    listItem: {
+        color: "#fff",
+        fontSize: "0.85em",
+        minHeight: 40,
+        "&:hover, &:focus": {
+            backgroundColor: "#2d2d2d",
+        },
+    },
     
 }));
 
@@ -114,7 +122,7 @@ const MenuItem = () => {
                 </Link>
 
                 <Link to="/inbox">
-                    <ListItem button>
+                    <ListItem button className={classes.listItem}>
                         <ListItemIcon>
                             <InboxIcon />
                         </ListItemIcon>
@@ -124,7 +132,7 @@ const MenuItem = () => {
 
 
                 <Link to="/customers">
-                    <ListItem button>
+                    <ListItem button className={classes.listItem}>
                         <ListItemIcon>
                             <WcIcon />
                         </ListItemIcon>
@@ -134,7 +142,7 @@ const MenuItem = () => {
 
 
                 <Link to="/sent">
-                    <ListItem button>
+                    <ListItem button className={classes.listItem}>
                         <ListItemIcon>
                             <SendIcon />
                         </ListItemIcon>
@@ -152,7 +160,7 @@ const MenuItem = () => {
                     </ListItem>
                 </Link> */}
 
-                <ListItem button onClick={handleClick}>
+                <ListItem button onClick={handleClick} className={classes.listItem}>
                     <ListItemIcon>
                         <SettingsIcon />
                     </ListItemIcon>
@@ -160,10 +168,10 @@ const MenuItem = () => {
                     {open ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
 
-                <Collapse in={open} timeout="auto" unmountOnExit>
+                <Collapse in={open} timeout="auto" unmountOnExit className={classes.collapse}>
                     <List component="div" disablePadding>
                         <Link to="/profile">
-                            <ListItem button className={classes.nested}>
+                            <ListItem button className={classes.nested} className={classes.listItem}>
                                 <ListItemIcon>
                                     <PersonIcon />
                                 </ListItemIcon>
@@ -171,7 +179,7 @@ const MenuItem = () => {
                             </ListItem>
                         </Link>
                         <Link to="/privacy">
-                            <ListItem button className={classes.nested}>
+                            <ListItem button className={classes.nested} className={classes.listItem}>
                                 <ListItemIcon>
                                     <HttpsIcon />
                                 </ListItemIcon>
@@ -180,7 +188,7 @@ const MenuItem = () => {
                         </Link>
 
                         <Link to="/team">
-                            <ListItem button className={classes.nested}>
+                            <ListItem button className={classes.nested} className={classes.listItem}>
                                 <ListItemIcon>
                                     <GroupWorkIcon />
                                 </ListItemIcon>
@@ -189,7 +197,7 @@ const MenuItem = () => {
                         </Link>
 
                         <Link to="/email-signature">
-                            <ListItem button className={classes.nested}>
+                            <ListItem button className={classes.nested} className={classes.listItem}>
                                 <ListItemIcon>
                                     <LabelImportantIcon />
                                 </ListItemIcon>
@@ -198,7 +206,7 @@ const MenuItem = () => {
                         </Link>
 
                         <Link to="/companydetails">
-                            <ListItem button className={classes.nested}>
+                            <ListItem button className={classes.nested} className={classes.listItem}>
                                 <ListItemIcon>
                                     <BusinessIcon />
                                 </ListItemIcon>
@@ -210,7 +218,7 @@ const MenuItem = () => {
                     </List>
                 </Collapse>
 
-                <ListItem onClick={handleOpen}  button>
+                <ListItem onClick={handleOpen}  button className={classes.listItem}>
                     <div className="d-flex">
                             <ListItemIcon>
                                 <BugReportIcon />
@@ -219,7 +227,7 @@ const MenuItem = () => {
                     </div>
                 </ListItem>
                 
-                <ListItem button>
+                <ListItem button className={classes.listItem}>
                     <ListItemIcon>
                         <DashboardIcon />
                     </ListItemIcon>
@@ -227,7 +235,7 @@ const MenuItem = () => {
                 </ListItem>
 
                 <Link to="/">
-                    <ListItem button>
+                    <ListItem button className={classes.listItem}>
                         <ListItemIcon>
                             <ExitToAppIcon />
                         </ListItemIcon>

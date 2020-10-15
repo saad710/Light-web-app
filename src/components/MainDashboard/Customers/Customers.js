@@ -19,7 +19,7 @@ import Fade from '@material-ui/core/Fade';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import avatar from '../../../images/avatar.png'
-import { Pagination } from 'react-bootstrap';
+import { Pagination } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,6 +49,11 @@ const useStyles = makeStyles((theme) => ({
     },
     table: {
         minWidth: 650,
+        marginBottom: 20,
+        fontSize: "0.7rem",
+    },
+    tableHeader: {
+        fontSize: "7px",
     },
     btnStyle: {
         backgroundColor: '#fff',
@@ -96,11 +101,15 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '0',
         padding: '0.6rem 0'
     },
-    paginate: {
-        '& > *': {
-            marginTop: theme.spacing(2),
-        },
-    }
+    paginationBox: {
+        marginTop: 20,
+        display: "flex",
+        justifyContent: "center",
+    },
+    pagination: {
+        border: "1px solid #ddd",
+        backgroundColor: "#eee",
+    },
 }));
 
 
@@ -134,9 +143,11 @@ const Customers = () => {
                         <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
                             CREATE NEW
                         </Button>
-                        <TableContainer component={Paper}>
-                            <Table className={classes.table} aria-label="simple table">
-                                <TableHead>
+                        <TableContainer component={Paper} square elevation={0}>
+                            <Table className={classes.table} aria-label="simple table"
+                                size='small'
+                            >
+                                <TableHead className={classes.tableHeader}>
                                     <TableRow>
                                         <TableCell> # </TableCell>
                                         <TableCell align="center"> NAME </TableCell>
@@ -173,9 +184,14 @@ const Customers = () => {
                                         ))
                                     }
                                 </TableBody>
+                                
                             </Table>
+                            <div className={classes.paginationBox}>
+                                <Pagination count={10} className={classes.pagination} />
+                            </div>
                             
                         </TableContainer>
+                        
 
                         {/* update/delete modal */}
 
@@ -319,7 +335,7 @@ const Customers = () => {
 
 
                     </Grid>
-
+                    
                 </Container>
             </main>
         </div>

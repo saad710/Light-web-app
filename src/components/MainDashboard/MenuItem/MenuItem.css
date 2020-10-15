@@ -18,6 +18,3 @@ ul.MuiList-root.MuiList-padding {
 .MuiListItemIcon-root {
     color: #fff !important;
 }
-.MuiListItem-button:hover {
-    background-color: #2d2d2d !important;
-}
