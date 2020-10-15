@@ -116,7 +116,7 @@ const Team = () => {
                                         onChange={handleTeamInput}
                                     />
                                 </div>
-                                <div>
+                                {/* <div>
                                     <FormControl className={classes.margin}>
                                         <InputLabel htmlFor="demo-customized-select-native">Select Role</InputLabel>
                                         <NativeSelect
@@ -132,6 +132,14 @@ const Team = () => {
                                         </NativeSelect>
                                     </FormControl>
 
+                                </div> */}
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Select Role</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option> Client </option>
+                                        <option> Admin </option>
+                                    </select>
                                 </div>
                                 
                                 <Button
