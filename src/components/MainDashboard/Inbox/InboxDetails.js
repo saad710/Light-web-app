@@ -59,8 +59,25 @@ const InboxDetails = () => {
                             </Avatar>
                             <Typography variant="body5" style={{ margin: '0.5rem 0.5rem', color: '#2d2d2d' }}>
                                 <strong style={{ marginLeft: '1rem' }}> {message[0].name} </strong> <br />
-                                <strong style={{ marginLeft: '1rem' }}> {message[0].email} </strong>
+                                {/* <strong style={{ marginLeft: '1rem' }}> {message[0].email} </strong> */}
+                                <small style={{ marginLeft: '1rem' }}> 
+                                    From : marie@gmail.com
+                                </small>
                                 <br/>
+                                
+                                <small style={{ marginLeft: '1rem' }}>
+                                    To : alex@email.com
+                                </small>
+                                <br />
+                                <small style={{ marginLeft: '1rem' }}>
+                                    Cc : info@domain.com
+                                </small>
+                                <br />
+                                <small style={{ marginLeft: '1rem' }}>
+                                    Subject : lorem ipsum
+                                </small>
+                                <br />
+
                                 <Chip
                                 style={{
                                         marginLeft: '1rem',

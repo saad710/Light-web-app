@@ -64,7 +64,7 @@ const Sent = () => {
                                             <Typography variant="body5" style={{ margin: '0.5rem 0.5rem' }}>
                                                 <strong> Marie Winter </strong> <br />
                                                 <strong style={{ marginLeft: '0.5rem' }}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry standara level
-                                                    </Typography>
+                                            </Typography>
                                         </Link>
                                     </div>
                                     <Typography style={{ color: '#2d2d2d' }} variant="body6" align="right">

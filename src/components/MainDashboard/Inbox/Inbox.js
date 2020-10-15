@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Divider, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Chip, Divider, makeStyles, Typography } from '@material-ui/core';
 import inboxData from '../../../data/inboxData';
 import avatar from '../../../images/avatar.png'
 import {Link} from 'react-router-dom'
@@ -39,9 +39,24 @@ const Inbox = () => {
                                 </Avatar>
                                 <Link to={`details/${inbox.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
                                     <Typography variant="body5" style={{ margin: '0.5rem 0.5rem' }}>
-                                        <strong> Marie Winter </strong> <br />
+                                        <strong> Marie Winter </strong> 
+                                        <Chip
+                                            style={{
+                                                marginLeft: '1rem',
+                                                // marginTop: '0.5rem',
+                                                fontSize: '11px',
+                                                backgroundColor: '#203D79',
+                                                height: '1.5rem',
+                                                width: '5rem',
+                                                color: '#fff',
+                                            }}
+                                            label="quick reply"
+
+                                        />
+                                        <br />
                                         <strong style={{ marginLeft: '0.5rem' }}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry standara level
-                                </Typography>
+                                    </Typography>
+
                                 </Link>
                             </div>
                             <Typography style={{ color: '#2d2d2d' }} variant="body6" align="right">
