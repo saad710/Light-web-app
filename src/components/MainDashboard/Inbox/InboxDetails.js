@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import inboxData from '../../../data/inboxData';
 import { Avatar, Button, Chip, Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
+import {Link} from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -79,19 +80,32 @@ const InboxDetails = () => {
                                 <br />
 
                                 <Chip
-                                style={{
-                                        marginLeft: '1rem',
-                                        marginTop: '0.5rem',
-                                        fontSize: '11px',
-                                        backgroundColor: '#203D79',
-                                        height: '1.5rem',
-                                        width: '5rem',
-                                        color: '#fff',
-                                }}
-                                label={message[0].type} 
+                                    style={{
+                                            marginLeft: '1rem',
+                                            marginTop: '0.5rem',
+                                            fontSize: '11px',
+                                            backgroundColor: '#203D79',
+                                            height: '1.5rem',
+                                            width: '5rem',
+                                            color: '#fff',
+                                    }}
+                                    label={message[0].type} 
                                 
                                 />
                             </Typography>
+                            <Link to="/report">
+                                <button
+                                    style={{
+                                        background: '#4195D1',
+                                        marginLeft: '38rem',
+                                        padding: '5px 8px',
+                                        color: '#fff',
+                                        border: 'none',
+                                        borderRadius: '5px'
+                                    }}>
+                                    See Report
+                            </button>
+                            </Link>
                         </div>
                         <Typography variant="body6" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
                             {message[0].message}
