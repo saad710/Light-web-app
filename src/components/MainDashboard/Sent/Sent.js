@@ -8,6 +8,7 @@ import inboxData from '../../../data/inboxData';
 import { Avatar, Divider, Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
 import { Link } from 'react-router-dom'
+import ToolBar from '../ToolBar/ToolBar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,6 +51,7 @@ const Sent = () => {
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
+                <ToolBar />
                 <Container maxWidth="lg" className={classes.container}>
                     {
                         inboxData.map(sent => (

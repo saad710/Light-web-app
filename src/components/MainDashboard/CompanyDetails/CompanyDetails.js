@@ -20,6 +20,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import avatar from '../../../images/avatar.png'
 import { Pagination } from '@material-ui/lab';
+import ToolBar from '../ToolBar/ToolBar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -126,6 +127,7 @@ const CompanyDetails = () => {
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
+                <ToolBar />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <TableContainer component={Paper}>

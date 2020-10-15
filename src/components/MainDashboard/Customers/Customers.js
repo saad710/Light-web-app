@@ -20,6 +20,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import avatar from '../../../images/avatar.png'
 import { Pagination } from "@material-ui/lab";
+import ToolBar from '../ToolBar/ToolBar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
     },
     container: {
-        paddingTop: theme.spacing(4),
+        // paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
     },
     paper: {
@@ -138,6 +139,7 @@ const Customers = () => {
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
+                <ToolBar />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
