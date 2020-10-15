@@ -19,11 +19,12 @@ import Fade from '@material-ui/core/Fade';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import avatar from '../../../images/avatar.png'
+import { Pagination } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        backgroundColor: '#4195D1'
+        backgroundColor: '#fff'
     },
 
     appBarSpacer: theme.mixins.toolbar,
@@ -95,6 +96,15 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '0',
         padding: '0.6rem 0'
     },
+    paginationBox: {
+        marginTop: 20,
+        display: "flex",
+        justifyContent: "center",
+    },
+    pagination: {
+        border: "1px solid #ddd",
+        backgroundColor: "#eee",
+    },
 }));
 
 
@@ -119,7 +129,7 @@ const CompanyDetails = () => {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <TableContainer component={Paper}>
-                            <Table className={classes.table} aria-label="simple table">
+                            <Table className={classes.table} aria-label="simple table" size="small">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell> # </TableCell>
@@ -142,7 +152,7 @@ const CompanyDetails = () => {
                                                 <TableCell align="center">
                                                     <div>
                                                         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                                                            <Button onClick={handleOpen}>UPDATE</Button>
+                                                            <Button size="small" style={{fontSize: '10px'}} onClick={handleOpen}>UPDATE</Button>
                                                         </ButtonGroup>
                                                     </div>
                                                 </TableCell>
@@ -151,6 +161,9 @@ const CompanyDetails = () => {
                                     }
                                 </TableBody>
                             </Table>
+                            <div className={classes.paginationBox} style={{marginBottom: '20px'}}>
+                                <Pagination count={10} className={classes.pagination} />
+                            </div>
                         </TableContainer>
 
                         {/* update/delete modal */}

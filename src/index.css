@@ -48,7 +48,8 @@ code {
   text-transform: uppercase;
   font-weight: 700 !important;
   font-family: "Montserrat", sans-serif !important;
-  color: #aaa !important;
+  color: #fff !important;
+  background-color: #213F7E !important;
 }
 
 .MuiButton-containedSecondary {

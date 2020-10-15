@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
         margin: '0.5rem 0'
     },
     ticketCard: {
-        width: '100%',
+        width: '20rem',
+        height: '70vh',
         textAlign: 'center',
         color: '#fff',
         backgroundColor: 'none',
@@ -302,7 +303,7 @@ const MenuItem = () => {
                                             </div>
                                             <div className="mt-3">
                                                 <TextareaAutosize
-                                                    style={{ backgroundColor: '#fff', borderRadius: '0.2rem', height: '100px' }}
+                                                    style={{ backgroundColor: '#fff', borderRadius: '0.2rem', height: '130px' }}
                                                     variant="outlined"
                                                     margin="normal"
                                                     required
@@ -323,9 +324,10 @@ const MenuItem = () => {
                                                 variant="contained"
                                                 className={classes.ticketBtn}
                                                 onClick={handleSubmit}
+                                                style={{marginTop: '2rem'}}
                                             >
-                                                CREATE USER
-                                    </Button>
+                                                SEND
+                                                </Button>
                                         </form>
                                     </CardContent>
                                 </Card>

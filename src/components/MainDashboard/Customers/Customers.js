@@ -174,9 +174,16 @@ const Customers = () => {
                                                 <TableCell align="center">{customer.group}</TableCell>
                                                 <TableCell align="center">
                                                     <div>
-                                                        <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                                                            <Button onClick={handleOpen}>UPDATE</Button>
-                                                            <Button onClick={handleOpen} style={{ backgroundColor: '#4195D1' }}>DELETE</Button>
+                                                        <ButtonGroup
+                                                            variant="contained"
+                                                            color="primary"
+                                                            size="small"
+                                                            aria-label="contained primary button group"
+                                                        >
+                                                            <Button
+                                                                onClick={handleOpen} style={{fontSize: '10px'}} color="primary">UPDATE</Button>
+                                                            <Button
+                                                                onClick={handleOpen} style={{fontSize: '10px'}} color="secondary">DELETE</Button>
                                                         </ButtonGroup>
                                                     </div>
                                                 </TableCell>
