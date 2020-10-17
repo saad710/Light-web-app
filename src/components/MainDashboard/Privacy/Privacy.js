@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
 import {TextField, Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
-import { useStyles } from '../AppBarDrawerStyle';
+import { useStyles } from '../Privacy/PrivacyStyle';
 
 const Privacy = () => {
     const classes = useStyles();

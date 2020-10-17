@@ -49,7 +49,6 @@ const Sent = () => {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <SentFilter />
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />

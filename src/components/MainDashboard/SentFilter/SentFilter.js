@@ -47,7 +47,7 @@ const SentFilter = () => {
     };
     return (
         <div>
-            <FormControl className={classes.formControl}>
+            <FormControl className={classes.formControl} >
                 <InputLabel id="demo-mutiple-checkbox-label">Tag</InputLabel>
                 <Select
                     labelId="demo-mutiple-checkbox-label"
@@ -60,7 +60,7 @@ const SentFilter = () => {
                     MenuProps={MenuProps}
                 >
                     {names.map((name) => (
-                        <MenuItem key={name} value={name}>
+                        <MenuItem key={name} value={name} >
                             <Checkbox checked={tagName.indexOf(name) > -1} />
                             <ListItemText primary={name} />
                             <ListItemText primary="(10)" />

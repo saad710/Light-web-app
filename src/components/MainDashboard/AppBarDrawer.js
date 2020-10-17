@@ -14,11 +14,15 @@ import SearchIcon from '@material-ui/icons/Search';
 import avatar from '../../images/avatar.png'
 import MenuItem from '../../components/MainDashboard/MenuItem/MenuItem'
 import { useStyles } from './AppBarDrawerStyle';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import { useState } from 'react';
+import SentFilter from './SentFilter/SentFilter';
 
 
 const AppBarDrawer = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
+    const [openFilter, setOpenFilter] = useState(false)
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -52,7 +56,15 @@ const AppBarDrawer = () => {
                             style={{ color: '#2d2d2d' }}
                             inputProps={{ 'aria-label': 'search' }}
                         />
+
                     </div>
+                    <FilterListIcon
+                        onClick={() => setOpenFilter(!openFilter)}
+                        style={{marginRight: '1rem'}}
+                    />
+                    {
+                        openFilter && <SentFilter />
+                    }
                     <Divider className={classes.horizontalDivider} orientation="vertical" flexItem />
                     <Avatar aria-label="recipe" variant="circle" className={classes.avatar}>
                         <img width="100%" src={avatar} alt="" />
