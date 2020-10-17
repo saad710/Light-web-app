@@ -19,63 +19,22 @@ import BusinessIcon from '@material-ui/icons/Business';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import MarkunreadMailboxIcon from '@material-ui/icons/MarkunreadMailbox';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
+import DateRangeOutlinedIcon from '@material-ui/icons/DateRangeOutlined';
+import LabelOffOutlinedIcon from '@material-ui/icons/LabelOffOutlined';
+import GroupAddOutlinedIcon from '@material-ui/icons/GroupAddOutlined';
 import './MenuItem.css'
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-    nested: {
-        paddingLeft: theme.spacing(4),
-    },
-    form: {
-        textAlign: 'start',
-        marginTop: '-2rem',
-        marginBottom: '0',
-        marginLeft: 'auto',
-        marginRight: 'auto'
-    },
-    ticketBtn: {
-        background: 'none',
-        border: '1px solid gray',
-        color: '#2d2d2d',
-        margin: '0.5rem 0'
-    },
-    ticketCard: {
-        width: '20rem',
-        height: '70vh',
-        textAlign: 'center',
-        color: '#fff',
-        backgroundColor: 'none',
-        boxShadow: 'none',
-        margin: '5rem auto'
-    },
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    listItem: {
-        color: "#fff",
-        fontSize: "0.85em",
-        minHeight: 40,
-        "&:hover, &:focus": {
-            backgroundColor: "#2d2d2d",
-        },
-    },
-    
-}));
+import { useStyles } from '../MenuItem/MenuItemStyle';
+import { CalendarToday } from '@material-ui/icons';
 
 const componseStyle = {
     backgroundColor: '#4195D1',
     width: '65%',
     textAlign: 'center',
-    padding: '0.2rem 0rem',
+    padding: '0.5rem 0rem',
     margin: '1rem auto',
+    color: '#fff',
+    borderRadius: '1rem'
 }
 
 const MenuItem = () => {
@@ -114,7 +73,7 @@ const MenuItem = () => {
                 
                 <Link to="/compose">
                     <div style={{width: '60%', margin: '0 auto'}}>
-                        <ListItem button>
+                        <ListItem>
                             {/* <ListItemIcon>
                             <MarkunreadMailboxIcon />
                         </ListItemIcon> */}
@@ -125,7 +84,7 @@ const MenuItem = () => {
 
                 <Link to="/inbox">
                     <ListItem button className={classes.listItem}>
-                        <ListItemIcon>
+                        <ListItemIcon className={classes.iconStyle}>
                             <InboxIcon />
                         </ListItemIcon>
                         <ListItemText primary="Inbox" />
@@ -135,7 +94,7 @@ const MenuItem = () => {
 
                 <Link to="/customers">
                     <ListItem button className={classes.listItem}>
-                        <ListItemIcon>
+                        <ListItemIcon className={classes.iconStyle}>
                             <WcIcon />
                         </ListItemIcon>
                         <ListItemText primary="Customers" />
@@ -145,25 +104,15 @@ const MenuItem = () => {
 
                 <Link to="/sent">
                     <ListItem button className={classes.listItem}>
-                        <ListItemIcon>
+                        <ListItemIcon className={classes.iconStyle}>
                             <SendIcon />
                         </ListItemIcon>
                         <ListItemText primary="Sent" />
                     </ListItem>
                 </Link>
-
-
-                {/* <Link >
-                    <ListItem button>
-                        <ListItemIcon>
-                            <ReportIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Report" />
-                    </ListItem>
-                </Link> */}
-
+                
                 <ListItem button onClick={handleClick} className={classes.listItem}>
-                    <ListItemIcon>
+                    <ListItemIcon className={classes.iconStyle}>
                         <SettingsIcon />
                     </ListItemIcon>
                     <ListItemText primary="Setting" />
@@ -174,7 +123,7 @@ const MenuItem = () => {
                     <List component="div" disablePadding>
                         <Link to="/profile">
                             <ListItem button  className={classes.listItem}>
-                                <ListItemIcon>
+                                <ListItemIcon className={classes.iconStyle}>
                                     <PersonIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Profile" />
@@ -182,7 +131,7 @@ const MenuItem = () => {
                         </Link>
                         <Link to="/privacy">
                             <ListItem button className={classes.listItem}>
-                                <ListItemIcon>
+                                <ListItemIcon className={classes.iconStyle}>
                                     <HttpsIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Privacy" />
@@ -191,7 +140,7 @@ const MenuItem = () => {
 
                         <Link to="/team">
                             <ListItem button className={classes.listItem}>
-                                <ListItemIcon>
+                                <ListItemIcon className={classes.iconStyle}>
                                     <GroupWorkIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Team" />
@@ -200,7 +149,7 @@ const MenuItem = () => {
 
                         <Link to="/email-signature">
                             <ListItem button className={classes.listItem}>
-                                <ListItemIcon>
+                                <ListItemIcon className={classes.iconStyle}>
                                     <LabelImportantIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Email Signature" />
@@ -209,7 +158,7 @@ const MenuItem = () => {
 
                         <Link to="/companydetails">
                             <ListItem button className={classes.listItem}>
-                                <ListItemIcon>
+                                <ListItemIcon className={classes.iconStyle}>
                                     <BusinessIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Company Details" />
@@ -222,7 +171,7 @@ const MenuItem = () => {
 
                 <ListItem onClick={handleOpen}  button className={classes.listItem}>
                     <div className="d-flex">
-                            <ListItemIcon>
+                            <ListItemIcon className={classes.iconStyle}>
                                 <BugReportIcon />
                             </ListItemIcon>
                             <ListItemText primary="Ticket" />
@@ -230,7 +179,32 @@ const MenuItem = () => {
                 </ListItem>
                 
                 <ListItem button className={classes.listItem}>
-                    <ListItemIcon>
+                    <ListItemIcon className={classes.iconStyle}>
+                        <DateRangeOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Calender" />
+                </ListItem>
+
+                <Link to="/tag">
+                    <ListItem button className={classes.listItem}>
+                        <ListItemIcon className={classes.iconStyle}>
+                            <LabelOffOutlinedIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Tag" />
+                    </ListItem>
+                </Link>
+
+                <Link to="/group">
+                    <ListItem button className={classes.listItem}>
+                        <ListItemIcon className={classes.iconStyle}>
+                            <GroupAddOutlinedIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Group" />
+                    </ListItem>
+                </Link>
+
+                <ListItem button className={classes.listItem}>
+                    <ListItemIcon className={classes.iconStyle}>
                         <DashboardIcon />
                     </ListItemIcon>
                     <ListItemText primary="Dashboard" />
@@ -238,7 +212,7 @@ const MenuItem = () => {
 
                 <Link to="/">
                     <ListItem button className={classes.listItem}>
-                        <ListItemIcon>
+                        <ListItemIcon className={classes.iconStyle}>
                             <ExitToAppIcon />
                         </ListItemIcon>
                         <ListItemText primary="Log Out" />

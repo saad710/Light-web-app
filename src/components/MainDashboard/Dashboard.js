@@ -44,10 +44,8 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Inbox */}
             <Grid item xs={12}>
                 <Inbox />
-                {/* <InboxDetails /> */}
             </Grid>
           </Grid>
         </Container>

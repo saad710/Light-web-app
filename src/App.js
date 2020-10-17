@@ -21,6 +21,8 @@ import TrialPage from './components/TrialPage/TrialPage';
 import Payment from './components/MainDashboard/Payment/Payment';
 import Invoice from './components/MainDashboard/Invoice/Invoice';
 import ReportPage from './components/MainDashboard/ReportPage/ReportPage';
+import Tag from './components/MainDashboard/Tag/Tag';
+import Group from './components/MainDashboard/Group/Group'
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
           <Route path="/payment" component={Payment} />
           <Route path="/invoice" component={Invoice} />
           <Route path="/report" component={ReportPage} />
+          <Route path="/tag" component={Tag} />
+          <Route path="/group" component={Group} />
         </Switch>
       </Router>
     </div>
