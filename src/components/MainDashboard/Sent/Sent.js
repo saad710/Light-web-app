@@ -9,6 +9,7 @@ import { Avatar, Divider, Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
 import { Link } from 'react-router-dom'
 import ToolBar from '../ToolBar/ToolBar';
+import SentFilter from '../SentFilter/SentFilter';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,6 +49,7 @@ const Sent = () => {
     return (
         <div className={classes.root}>
             <CssBaseline />
+            <SentFilter />
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />

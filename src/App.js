@@ -23,6 +23,7 @@ import Invoice from './components/MainDashboard/Invoice/Invoice';
 import ReportPage from './components/MainDashboard/ReportPage/ReportPage';
 import Tag from './components/MainDashboard/Tag/Tag';
 import Group from './components/MainDashboard/Group/Group'
+import SentFilter from './components/MainDashboard/SentFilter/SentFilter';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           <Route path="/report" component={ReportPage} />
           <Route path="/tag" component={Tag} />
           <Route path="/group" component={Group} />
+          <Route path="/filter" component={SentFilter} />
         </Switch>
       </Router>
     </div>
