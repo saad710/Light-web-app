@@ -1,29 +1,10 @@
 import React from 'react';
-import { Avatar, Chip, Divider, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Chip, Divider, Typography } from '@material-ui/core';
 import inboxData from '../../../data/inboxData';
 import avatar from '../../../images/avatar.png'
 import {Link} from 'react-router-dom'
-import ToolBar from '../ToolBar/ToolBar';
+import { useStyles } from './InboxStyle';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        maxWidth: 'auto',
-    },
-    media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    }
-}));
 const Inbox = () => {
     const classes = useStyles()
     const inboxMsg = inboxData

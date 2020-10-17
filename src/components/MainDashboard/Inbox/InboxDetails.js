@@ -9,39 +9,8 @@ import inboxData from '../../../data/inboxData';
 import { Avatar, Button, Chip, Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
 import {Link} from 'react-router-dom'
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        backgroundColor: '#fff'
-    },
+import { useStyles } from './InboxDetailsStyle';
 
-    appBarSpacer: theme.mixins.toolbar,
-    content: {
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-
-    },
-    container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
-    },
-    paper: {
-        padding: theme.spacing(2),
-        display: 'flex',
-        overflow: 'auto',
-        flexDirection: 'column',
-    },
-    fixedHeight: {
-        height: 240,
-    },
-    btnStyle: {
-        backgroundColor: '#213F7E',
-        color: '#fff',
-        borderRadius: 0,
-        padding: '0.5rem 5rem',
-    }
-}));
 const InboxDetails = () => {
     const classes = useStyles();
     const { inboxId } = useParams()

@@ -7,33 +7,34 @@ import { Checkbox, Typography } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { useStyles } from './ToolStyle';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        backgroundColor: '#fff'
-    },
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         display: 'flex',
+//         backgroundColor: '#fff'
+//     },
 
-    appBarSpacer: theme.mixins.toolbar,
-    content: {
-        flexGrow: 1,
-        height: 'auto',
-        overflow: 'auto',
+//     appBarSpacer: theme.mixins.toolbar,
+//     content: {
+//         flexGrow: 1,
+//         height: 'auto',
+//         overflow: 'auto',
 
-    },
-    container: {
-        paddingTop: '0rem',
-    },
-    paper: {
-        padding: theme.spacing(2),
-        display: 'flex',
-        overflow: 'auto',
-        flexDirection: 'column',
-    },
-    fixedHeight: {
-        height: 'auto',
-    },
-}));
+//     },
+//     container: {
+//         paddingTop: '0rem',
+//     },
+//     paper: {
+//         padding: theme.spacing(2),
+//         display: 'flex',
+//         overflow: 'auto',
+//         flexDirection: 'column',
+//     },
+//     fixedHeight: {
+//         height: 'auto',
+//     },
+// }));
 
 
 const ToolBar = () => {
