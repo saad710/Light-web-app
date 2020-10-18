@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-    PieChart, Pie, Sector, Cell,
+    PieChart, Pie, Cell,
 } from 'recharts';
 
 const data = [
