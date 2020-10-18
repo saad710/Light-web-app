@@ -1,88 +1,67 @@
-import { Button, Container, CssBaseline, Grid, makeStyles, TextField, Typography } from '@material-ui/core';
-import React, { useState } from 'react';
-import AppBarDrawer from '../../MainDashboard/AppBarDrawer';
+import React from 'react';
+import {CardMedia, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import bar1 from '../../../images/bar1.svg'
+import bar2 from '../../../images/bar2.svg'
+import bar3 from '../../../images/bar3.svg'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
-        backgroundColor: '#fff'
-    },
-
-    appBarSpacer: theme.mixins.toolbar,
-    content: {
         flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-
-    },
-    container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
     },
     paper: {
         padding: theme.spacing(2),
-        display: 'flex',
-        overflow: 'auto',
-        flexDirection: 'column',
-        width: '100%',
-        color: '#2d2d2d'
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
     },
-    coutCard: {
+    cardRoot: {
         minWidth: 275,
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
+    media: {
+        height: '50px',
+        width: '140px'
     },
 }));
 
 const MailCount = () => {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-                <Container maxWidth="sm" className={classes.container}>
-                    <Grid container spacing={3}>
-                        <div className={classes.paper}>
-                           <Card>
-                                <CardContent>
-                                    <Typography>
-                                        Total Mills
-                                    </Typography>
-                                </CardContent>
-                            </Card> 
-                        </div>
-                    </Grid>
-
-                    <Grid container spacing={3}>
-                        <div className={classes.paper}>
-                            <Card>
-                                <CardContent>
-                                    <Typography>
-                                        Total Mills
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </Grid>
-
-                    <Grid container spacing={3}>
-                        <div className={classes.paper}>
-                            <Card>
-                                <CardContent>
-                                    <Typography>
-                                        Total Mills
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </Grid>
-                    
-
-                </Container>
-            </main>
-        </div>
+        <React.Fragment>
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                    <Paper>
+                        <Card className={classes.cardRoot}>
+                            <CardContent>
+                                <Typography align="left">
+                                    Total Mails
+                                </Typography>
+                                <Typography>
+                                    <strong> 246 </strong>
+                                </Typography>
+                            </CardContent>
+                            <CardMedia
+                                className= {classes.media}
+                                image = {bar1}
+                            >
+                                {/* <img src={bar1} alt=""/> */}
+                            </CardMedia>
+                        </Card>
+                    </Paper>
+                </Grid>
+            </Grid>
+        </React.Fragment>
     );
 };
 
