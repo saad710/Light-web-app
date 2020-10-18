@@ -203,12 +203,14 @@ const MenuItem = () => {
                     </ListItem>
                 </Link>
 
-                <ListItem button className={classes.listItem}>
-                    <ListItemIcon className={classes.iconStyle}>
-                        <DashboardIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Dashboard" />
-                </ListItem>
+                <Link to="/dashboard">
+                    <ListItem button className={classes.listItem}>
+                        <ListItemIcon className={classes.iconStyle}>
+                            <DashboardIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Dashboard" />
+                    </ListItem>
+                </Link>
 
                 <Link to="/">
                     <ListItem button className={classes.listItem}>
