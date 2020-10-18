@@ -1,7 +1,8 @@
 import React from 'react';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import {
-    BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+    BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+    PieChart, Pie, Sector, Cell,
 } from 'recharts';
 
 const data = [
@@ -28,13 +29,37 @@ const data = [
     },
 ];
 
+const piData = [
+    { name: 'Group A', value: 400 },
+    { name: 'Group B', value: 300 },
+    { name: 'Group C', value: 300 },
+    { name: 'Group D', value: 200 },
+];
+
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+    cx, cy, midAngle, innerRadius, outerRadius, percent, index,
+}) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+        <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+            {`${(percent * 100).toFixed(0)}%`}
+        </text>
+    );
+};
+
 const Chart = () => {
     return (
         <React.Fragment>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
                     <div>
-                    <Typography className="py-4"> Monthly Overview </Typography>
+                        <Typography className="py-4"> Monthly Overview </Typography>
                         <Paper>
                             <BarChart
                                 width={500}
@@ -56,9 +81,34 @@ const Chart = () => {
                     </div>
                 </Grid>
 
-                <Grid item xs={12} md={4}>
-                    <Paper>
-                        
+                <Grid item xs={12} md={6}>
+                            {/* <Typography className="py-4"> Monthly Overview </Typography> */}
+                    <Paper >
+                        <div style={{marginTop: '4.3rem'}}>
+                            <PieChart width={500}
+                                height={300} 
+                                margin={{
+                                    // top: -50, right: 30, left: 0, bottom: 5
+                                    top: -50, right: 30, left: 60, bottom: 5,
+                                }}
+                            >
+                                <Pie
+                                    data={piData}
+                                    cx={200}
+                                    cy={200}
+                                    labelLine={false}
+                                    label={renderCustomizedLabel}
+                                    outerRadius={100}
+                                    fill="#8884d8"
+                                    dataKey="value"
+                                    
+                                >
+                                    {
+                                        piData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                                    }
+                                </Pie>
+                            </PieChart>
+                        </div>
                     </Paper>
                 </Grid>
             </Grid>
