@@ -7,6 +7,7 @@ import AppBarDrawer from '../MainDashboard/AppBarDrawer';
 import MailCount from './MailCount/MailCount';
 import Chart from './Chart/Chart';
 import VerifiedCustomer from './VerifiedCustomer/VerifiedCustomer';
+import UnverifiedCustomer from './UnverifiedCustomer/UnverifiedCustomer';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -51,6 +52,7 @@ export default function NavDashboard() {
                             <MailCount />
                             <Chart />
                             <VerifiedCustomer />
+                            <UnverifiedCustomer />
                         </Grid>
                     </Grid>
                 </Container>

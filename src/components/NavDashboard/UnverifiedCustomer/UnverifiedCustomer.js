@@ -10,12 +10,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Button, ButtonGroup, Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 
 import { Pagination } from "@material-ui/lab";
-import { useStyles } from './VerifiedCustomerStyle';
+import { useStyles } from './UnverifiedCustomerStyle';
 
-const VerifiedCustomer = () => {
+const UnverifiedCustomer = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -56,8 +56,8 @@ const VerifiedCustomer = () => {
                                                 {/* <TableCell align="center">{customer.group}</TableCell> */}
                                                 <TableCell align="center">
                                                     <div>
-                                                        <Button style={{ fontSize: '10px', backgroundColor: '#213F7E', color: '#fff' }} >
-                                                                VERIFIED
+                                                        <Button style={{ fontSize: '10px', backgroundColor: '#E62525', color: '#fff' }} >
+                                                                UNVERIFIED
                                                         </Button>
                                                     </div>
                                                 </TableCell>
@@ -78,4 +78,4 @@ const VerifiedCustomer = () => {
     );
 };
 
-export default VerifiedCustomer;
+export default UnverifiedCustomer;
