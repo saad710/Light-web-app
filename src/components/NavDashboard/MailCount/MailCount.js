@@ -46,7 +46,7 @@ const MailCount = () => {
                     <Paper>
                         <Card className={classes.cardRoot}>
                             <CardContent>
-                                <div style={{ marginRight: '14rem' }}>
+                                <div style={{ marginRight: '13rem' }}>
                                     <Typography align="center">
                                         Total Mails
                                         </Typography>
