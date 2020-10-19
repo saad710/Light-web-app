@@ -33,5 +33,8 @@ export const useStyles = makeStyles((theme) => ({
         color: '#fff',
         borderRadius: 0,
         padding: '0.5rem 5rem',
-    }
+    },
+    form: {
+        fontSize: '14px',
+    },
 }));

@@ -4,12 +4,30 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import {TextField, Typography } from '@material-ui/core';
+import {MenuItem, TextField, Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
 import { useStyles } from '../Privacy/PrivacyStyle';
+import { useState } from 'react';
 
 const Privacy = () => {
     const classes = useStyles();
+    const value = [
+        {
+            value: 'public',
+            label: 'Public',
+        },
+        {
+            value: 'private',
+            label: 'Private',
+        },
+ 
+    ];
+    const [privacy, setPrivacy] = useState('public');
+    console.log(privacy);
+
+    const handleChange = (event) => {
+        setPrivacy(event.target.value);
+    };
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -27,7 +45,7 @@ const Privacy = () => {
                                 Who can see your contact information?
                             </Typography>
                             <form className={classes.form} noValidate>
-                                <div style={{ margin: '1rem 0' }}>
+                                {/* <div style={{ margin: '1rem 0' }}>
                                     <label htmlFor=""> Name </label>
                                     <TextField
                                         style={{ borderRadius: '4px' }}
@@ -42,23 +60,28 @@ const Privacy = () => {
                                         placeholder="Marie Winter"
                                     />
                                    
+                                </div> */}
+
+                                <label htmlFor="" style={{ margin: '1rem 0' }}> Name </label>
+                                <div className="input-group">
+                                    <input style={{ width: '65%' }} defaultValue="Marie Winter" type="text" class="form-control" aria-label="Text input with dropdown button" />
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option> Private </option>
+                                        <option> Public </option>
+                                    </select>
                                 </div>
-                                <div>
-                                    <label htmlFor=""> Email </label>
-                                    <TextField
-                                        style={{  borderRadius: '4px' }}
-                                        variant="outlined"
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        id="email"
-                                        name="email"
-                                        autoComplete="email"
-                                        autoFocus
-                                        placeholder="user@email.com"
-                                    />
+                                <br/>
+                                <label htmlFor=""> Email </label>
+                                <div className="input-group">
+                                    <input style={{ width: '65%' }} defaultValue="mariewinter@email.com" type="text" class="form-control" aria-label="Text input with dropdown button" />
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option> Private </option>
+                                        <option> Public </option>
+                                    </select>
                                 </div>
+                                
                             </form>
+                            
                         </div>
                     </Grid>
 
