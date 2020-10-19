@@ -52,9 +52,9 @@ export default function NavDashboard() {
                         <Grid item xs={12}>
                             <MailCount />
                             <Chart />
-                            <VerifiedCustomer />
+                            {/* <VerifiedCustomer />
                             <UnverifiedCustomer />
-                            <PendingCustomers />
+                            <PendingCustomers /> */}
                         </Grid>
                     </Grid>
                 </Container>
