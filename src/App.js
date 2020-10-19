@@ -25,6 +25,7 @@ import Tag from './components/MainDashboard/Tag/Tag';
 import Group from './components/MainDashboard/Group/Group'
 import SentFilter from './components/MainDashboard/SentFilter/SentFilter';
 import NavDashboard from './components/NavDashboard/NavDashboard';
+import AppBarDrawer from './components/MainDashboard/AppBarDrawer';
 
 function App() {
   return (

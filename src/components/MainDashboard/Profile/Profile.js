@@ -1,49 +1,22 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
 import {Button, TextField, Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
+import { useStyles } from './ProfileStyle';
+import { useState } from 'react';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        backgroundColor: '#fff'
-    },
-
-    appBarSpacer: theme.mixins.toolbar,
-    content: {
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-
-    },
-    container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
-    },
-    paper: {
-        padding: theme.spacing(2),
-        display: 'flex',
-        overflow: 'auto',
-        flexDirection: 'column',
-        width: '100%',
-        color: '#fff'
-    },
-    fixedHeight: {
-        height: 240,
-    },
-    btnStyle: {
-        backgroundColor: '#213F7E',
-        color: '#fff',
-        borderRadius: 0,
-        padding: '0.5rem 5rem',
-    }
-}));
 const Profile = () => {
     const classes = useStyles();
+    const [profileInfo, setProfileInfo] = useState({})
+    // console.log(profileInfo);
+    const handleBlur = (e) => {
+        const newProfile = { ...profileInfo }
+        newProfile[e.target.name] = e.target.value
+        setProfileInfo(newProfile)
+    }
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -71,6 +44,7 @@ const Profile = () => {
                                         autoComplete="name"
                                         autoFocus
                                         placeholder="Marie Winter"
+                                        onBlur={handleBlur}
                                     />
                                     
                                 </div>
@@ -87,6 +61,7 @@ const Profile = () => {
                                         autoComplete="email"
                                         autoFocus
                                         placeholder="user@email.com"
+                                        onBlur={handleBlur}
                                     />
                                 </div>
                                 <Typography className="mt-5" component="body6" variant="body6">
@@ -100,11 +75,12 @@ const Profile = () => {
                                         margin="normal"
                                         required
                                         fullWidth
-                                        name="password"
+                                        name="oldPass"
                                         type="password"
-                                        id="password"
+                                        id="oldPass"
                                         autoComplete="current-password"
                                         placeholder="***********"
+                                        onBlur={handleBlur}
                                     />
                                 </div>
 
@@ -116,11 +92,12 @@ const Profile = () => {
                                         margin="normal"
                                         required
                                         fullWidth
-                                        name="password"
+                                        name="newPass"
                                         type="password"
-                                        id="password"
+                                        id="newPass"
                                         autoComplete="current-password"
                                         placeholder="***********"
+                                        onBlur={handleBlur}
                                     />
                                 </div>
                                 <Button

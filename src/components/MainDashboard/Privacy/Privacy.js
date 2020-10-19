@@ -11,22 +11,15 @@ import { useState } from 'react';
 
 const Privacy = () => {
     const classes = useStyles();
-    const value = [
-        {
-            value: 'public',
-            label: 'Public',
-        },
-        {
-            value: 'private',
-            label: 'Private',
-        },
- 
-    ];
-    const [privacy, setPrivacy] = useState('public');
+
+    const [privacy, setPrivacy] = useState("");
     console.log(privacy);
 
-    const handleChange = (event) => {
-        setPrivacy(event.target.value);
+    const handleChange = (e) => {
+        const newPrivacy = {...privacy}
+        newPrivacy[e.target.name] = e.target.value
+        setPrivacy(newPrivacy)
+        
     };
     return (
         <div className={classes.root}>
@@ -65,7 +58,7 @@ const Privacy = () => {
                                 <label htmlFor="" style={{ margin: '1rem 0' }}> Name </label>
                                 <div className="input-group">
                                     <input style={{ width: '65%' }} defaultValue="Marie Winter" type="text" class="form-control" aria-label="Text input with dropdown button" />
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <select class="form-control" name="name" id="name" onChange={handleChange}>
                                         <option> Private </option>
                                         <option> Public </option>
                                     </select>
@@ -74,7 +67,7 @@ const Privacy = () => {
                                 <label htmlFor=""> Email </label>
                                 <div className="input-group">
                                     <input style={{ width: '65%' }} defaultValue="mariewinter@email.com" type="text" class="form-control" aria-label="Text input with dropdown button" />
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <select class="form-control" name="email" id="email" onChange={handleChange}>
                                         <option> Private </option>
                                         <option> Public </option>
                                     </select>
