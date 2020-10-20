@@ -46,11 +46,16 @@ export const useStyles = makeStyles((theme) => ({
         color: "#4195D1",
         fontSize: "0.85em",
         minHeight: 40,
+        iconStyle: {
+            background: '#fff !important'
+        },
+        
         "&:hover, &:focus": {
             backgroundColor: "#4195D1",
             color: "#fff",
-
+            
         },
     },
+    
 
 }));

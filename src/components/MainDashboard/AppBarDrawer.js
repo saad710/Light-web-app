@@ -82,12 +82,12 @@ const AppBarDrawer = () => {
             >
 
                 <div className="d-flex align-items-center">
-                    <Typography style={{ padding: '0 2rem'}}>
+                    <Typography style={{ padding: '1.2rem 2rem'}}>
                         Client Web App
                     </Typography>
-                    <IconButton onClick={handleDrawerClose} style={{ color: '#4195D1' }}>
+                    {/* <IconButton onClick={handleDrawerClose} style={{ color: '#4195D1' }}>
                         <ChevronLeftIcon />
-                    </IconButton>
+                    </IconButton> */}
                 </div>
                 <Divider />
                 {/* <List>{mainListItems}</List> */}

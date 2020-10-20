@@ -39,6 +39,7 @@ import GroupAddOutlinedIcon from "@material-ui/icons/GroupAddOutlined";
 import "./MenuItem.css";
 import { useStyles } from "../MenuItem/MenuItemStyle";
 import { CalendarToday } from "@material-ui/icons";
+import './MenuItem.css'
 
 const componseStyle = {
   backgroundColor: "#4195D1",
@@ -96,7 +97,7 @@ const MenuItem = () => {
         <Link to='/dashboard'>
           <ListItem button className={classes.listItem}>
             <ListItemIcon className={classes.iconStyle}>
-              <DashboardIcon />
+              <DashboardIcon/>
             </ListItemIcon>
             <ListItemText primary='Dashboard' />
           </ListItem>
