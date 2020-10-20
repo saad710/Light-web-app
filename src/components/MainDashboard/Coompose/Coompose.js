@@ -36,14 +36,6 @@ const Coompose = () => {
                         <div className={classes.paper}>
                             <Card style={{ margin: '0 auto', background: '#213F7E' }}>
                                 <CardHeader
-                                    action={
-                                        <IconButton aria-label="settings" style={{color: '#fff'}}>
-                                            <Link to="/inbox">
-                                                <CancelOutlinedIcon />
-                                            </Link>
-                                        </IconButton>
-
-                                    }
                                 />
                                 <CardContent>
                                     <form className={classes.form} noValidate>
@@ -152,7 +144,7 @@ const Coompose = () => {
                                             type="submit"
                                             fullWidth
                                             variant="contained"
-                                            color="primary"
+                                            color="secondary"
                                             className={classes.btnStyle}
                                         >
                                             Send
