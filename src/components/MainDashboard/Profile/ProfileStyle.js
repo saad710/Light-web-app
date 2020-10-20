@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
         flexDirection: 'column',
         width: '100%',
-        color: '#2d2d2d'
+        color: '#fff'
     },
     fixedHeight: {
         height: 240,
@@ -33,8 +33,5 @@ export const useStyles = makeStyles((theme) => ({
         color: '#fff',
         borderRadius: 0,
         padding: '0.5rem 5rem',
-    },
-    form: {
-        fontSize: '14px',
-    },
+    }
 }));

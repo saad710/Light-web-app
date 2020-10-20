@@ -17,11 +17,12 @@ import TrialPage from "./components/TrialPage/TrialPage";
 import Payment from "./components/MainDashboard/Payment/Payment";
 import Invoice from "./components/MainDashboard/Invoice/Invoice";
 import ReportPage from "./components/MainDashboard/ReportPage/ReportPage";
-import SchedulePage from "./components/MainDashboard/SchedulePage/SchedulePage";
 import Tag from "./components/MainDashboard/Tag/Tag";
 import Group from "./components/MainDashboard/Group/Group";
 import SentFilter from "./components/MainDashboard/SentFilter/SentFilter";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
+import AppBarDrawer from "./components/MainDashboard/AppBarDrawer";
+import SchedulePage from "./components/MainDashboard/SchedulePage/SchedulePage";
 
 function App() {
   return (

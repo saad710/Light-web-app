@@ -208,12 +208,12 @@ const MenuItem = () => {
           </ListItem>
         </Link>
 
-        <Link to='/group'>
+        <Link to='/dashboard'>
           <ListItem button className={classes.listItem}>
             <ListItemIcon className={classes.iconStyle}>
-              <GroupAddOutlinedIcon />
+              <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary='Group' />
+            <ListItemText primary='Dashboard' />
           </ListItem>
         </Link>
 

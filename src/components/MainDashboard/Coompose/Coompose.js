@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -10,11 +9,22 @@ import 'suneditor/dist/css/suneditor.min.css';
 import './Compose.css'
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import { useStyles } from './ComposeStyle';
+import {Link} from 'react-router-dom'
 
 const Coompose = () => {
     const classes = useStyles();
+    const [value, setValue] = useState({})
     const [ccOpen, setCcOpen] = useState(false)
     const [bccOpen, setBccOpen] = useState(false)
+    const [group, setGroup] = useState(false)
+    console.log(value);
+    const handleInput = (e) => {
+        e.preventDefault();
+        const newValue = {...value}
+        newValue[e.target.name] =  e.target.value
+        setValue(newValue)
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -28,7 +38,9 @@ const Coompose = () => {
                                 <CardHeader
                                     action={
                                         <IconButton aria-label="settings" style={{color: '#fff'}}>
-                                            <CancelOutlinedIcon />
+                                            <Link to="/inbox">
+                                                <CancelOutlinedIcon />
+                                            </Link>
                                         </IconButton>
 
                                     }
@@ -39,27 +51,33 @@ const Coompose = () => {
                                         <div>
                                             <FormControl>
                                                 <TextField
-
-                                                    id="filled-start-adornment"
+                                                    id="from"
+                                                    name="from"
+                                                    onBlur={handleInput}
                                                     InputProps={{
-                                                        startAdornment: <InputAdornment position="start">From</InputAdornment>,
+                                                        startAdornment: <InputAdornment  position="start">From</InputAdornment>,
                                                     }}
                                                     variant="outlined"
                                                 />
                                                 <TextField
-                                                    id="filled-start-adornment"
+                                                    id="to"
+                                                    name="to"
+                                                    onBlur={handleInput}
                                                     InputProps={{
                                                         startAdornment: <InputAdornment position="start">
                                                             <div className="d-flex">
                                                                 <div>
                                                                     To
                                                                 </div>
-                                                                <div className="d-flex">
+                                                                <div className="d-flex" style={{position: 'absolute', left: '80%'}}>
                                                                     <div className="px-2" onClick={() => setCcOpen(!ccOpen)}>
                                                                         Cc
                                                                     </div>
                                                                     <div className="px-2" onClick={() => setBccOpen(!bccOpen)}>
                                                                         Bcc
+                                                                    </div>
+                                                                    <div className="px-2" onClick={() => setGroup(!group)}>
+                                                                        Group
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -70,7 +88,9 @@ const Coompose = () => {
                                                 {
                                                     ccOpen && 
                                                     <TextField
-                                                        id="filled-start-adornment"
+                                                        id="cc"
+                                                        name="cc"
+                                                        onBlur={handleInput}
                                                         InputProps={{
                                                             startAdornment: <InputAdornment position="start">Cc</InputAdornment>,
                                                         }}
@@ -80,15 +100,31 @@ const Coompose = () => {
                                                 {
                                                     bccOpen && 
                                                     <TextField
-                                                        id="filled-start-adornment"
+                                                        id="bcc"
+                                                        name="bcc"
+                                                        onBlur={handleInput}
                                                         InputProps={{
                                                             startAdornment: <InputAdornment position="start">Bcc</InputAdornment>,
                                                         }}
                                                         variant="outlined"
                                                     />
                                                 }
+                                                {
+                                                    group &&
+                                                    <TextField
+                                                        id="group"
+                                                        name="group"
+                                                        onBlur={handleInput}
+                                                        InputProps={{
+                                                            startAdornment: <InputAdornment position="start">Group</InputAdornment>,
+                                                        }}
+                                                        variant="outlined"
+                                                    />
+                                                }
                                                 <TextField
-                                                    id="filled-start-adornment"
+                                                    id="subject"
+                                                    name="subject"
+                                                    onBlur={handleInput}
                                                     InputProps={{
                                                         startAdornment: <InputAdornment position="start">Subject</InputAdornment>,
                                                     }}

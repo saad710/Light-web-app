@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+const { makeStyles } = require("@material-ui/core");
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,8 +33,5 @@ export const useStyles = makeStyles((theme) => ({
         color: '#fff',
         borderRadius: 0,
         padding: '0.5rem 5rem',
-    },
-    form: {
-        fontSize: '14px',
-    },
+    }
 }));

@@ -5,6 +5,10 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../MainDashboard/AppBarDrawer';
 import MailCount from './MailCount/MailCount';
+import Chart from './Chart/Chart';
+import VerifiedCustomer from './CustomersType/VerifiedCustomer';
+import UnverifiedCustomer from './CustomersType/UnverifiedCustomer';
+import PendingCustomers from './CustomersType/PendingCustomers';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,6 +51,10 @@ export default function NavDashboard() {
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <MailCount />
+                            <Chart />
+                            {/* <VerifiedCustomer />
+                            <UnverifiedCustomer />
+                            <PendingCustomers /> */}
                         </Grid>
                     </Grid>
                 </Container>
