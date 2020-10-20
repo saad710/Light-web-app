@@ -51,7 +51,7 @@ const Invoice = () => {
                         <Grid item xs={12}>
                             <div>
                                 <Typography align="right">
-                                    <Link to="/inbox">
+                                    <Link to="/dashboard">
                                         <CancelIcon color="action" />
                                     </Link>
                                 </Typography>
@@ -66,7 +66,7 @@ const Invoice = () => {
                                     </div>
                                     <div>
                                         <Typography variant="h5" align="right"> Invoice </Typography>
-                                        <Link to="/inbox">
+                                        <Link to="/dashboard">
                                             <Button variant="contained" color="primary"
                                                 className="my-2"
                                                 style={{
@@ -164,7 +164,7 @@ const Invoice = () => {
                                         <b> USD 50.00 </b>
                                     </Typography>
                                     <Typography align="right">
-                                        <Link to="/inbox">
+                                        <Link to="/dashboard">
                                             <Button
                                                 variant="contained"
                                                 color="primary"

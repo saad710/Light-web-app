@@ -81,7 +81,7 @@ const MenuItem = () => {
   };
   return (
     <div>
-      <div style={{ height: "100ch" }}>
+      <div>
         <Link to='/compose'>
           <div style={{ width: "60%", margin: "0 auto" }}>
             <ListItem>
@@ -173,44 +173,57 @@ const MenuItem = () => {
           <List component='div' disablePadding>
             <Link to='/profile'>
               <ListItem button className={classes.listItem}>
-                <ListItemIcon className={classes.iconStyle}>
-                  <PersonIcon />
-                </ListItemIcon>
-                <ListItemText primary='Profile' />
+                <div className="d-flex" style={{ marginLeft: '1rem' }}>
+                  <ListItemIcon className={classes.iconStyle}>
+                    <PersonIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Profile' />
+                </div>
               </ListItem>
             </Link>
             <Link to='/privacy'>
               <ListItem button className={classes.listItem}>
-                <ListItemIcon className={classes.iconStyle}>
-                  <HttpsIcon />
-                </ListItemIcon>
-                <ListItemText primary='Privacy' />
+                <div className="d-flex" style={{ marginLeft: '1rem' }}>
+                  <ListItemIcon className={classes.iconStyle}>
+                    <HttpsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Privacy' />
+                </div>
               </ListItem>
             </Link>
 
             <Link to='/team'>
               <ListItem button className={classes.listItem}>
-                <ListItemIcon className={classes.iconStyle}>
-                  <GroupWorkIcon />
-                </ListItemIcon>
-                <ListItemText primary='Team' />
+                <div className="d-flex" style={{ marginLeft: '1rem' }}>
+                  <ListItemIcon className={classes.iconStyle}>
+                    <GroupWorkIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Team' />
+
+                </div>
               </ListItem>
             </Link>
 
             <Link to='/email-signature'>
               <ListItem button className={classes.listItem}>
+                <div className="d-flex" style={{ marginLeft: '1rem' }}>
                 <ListItemIcon className={classes.iconStyle}>
                   <LabelImportantIcon />
                 </ListItemIcon>
                 <ListItemText primary='Email Signature' />
+
+                </div>
               </ListItem>
             </Link>
 
             <Link to='/companydetails'>
               <ListItem button className={classes.listItem}>
+                <div className="d-flex" style={{ marginLeft: '1rem' }}>
                 <ListItemIcon className={classes.iconStyle}>
                   <BusinessIcon />
                 </ListItemIcon>
+
+                </div>
                 <ListItemText primary='Company Details' />
               </ListItem>
             </Link>

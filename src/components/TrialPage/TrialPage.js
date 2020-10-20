@@ -97,7 +97,7 @@ const TrialPage = () => {
                             <li className="py-2"> Limited Access </li>
                         </ul>
                     </Typography>
-                    <Link to="/inbox">
+                    <Link to="/dashboard">
                         <Button className={classes.ulBtn} variant="contained" color="primary" size="small"> Continue </Button>
                     </Link>
                 </div>
