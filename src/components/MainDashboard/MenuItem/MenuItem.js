@@ -93,12 +93,12 @@ const MenuItem = () => {
           </div>
         </Link>
 
-        <Link to='/inbox'>
+        <Link to='/dashboard'>
           <ListItem button className={classes.listItem}>
             <ListItemIcon className={classes.iconStyle}>
-              <InboxIcon />
+              <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary='Inbox' />
+            <ListItemText primary='Dashboard' />
           </ListItem>
         </Link>
 
@@ -111,12 +111,48 @@ const MenuItem = () => {
           </ListItem>
         </Link>
 
+        <Link to='/inbox'>
+          <ListItem button className={classes.listItem}>
+            <ListItemIcon className={classes.iconStyle}>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary='Inbox' />
+          </ListItem>
+        </Link>
+
         <Link to='/sent'>
           <ListItem button className={classes.listItem}>
             <ListItemIcon className={classes.iconStyle}>
               <SendIcon />
             </ListItemIcon>
             <ListItemText primary='Sent' />
+          </ListItem>
+        </Link>
+
+        <Link to="/group">
+          <ListItem button className={classes.listItem}>
+            <ListItemIcon className={classes.iconStyle}>
+              <GroupWorkIcon />
+            </ListItemIcon>
+            <ListItemText primary='Group' />
+          </ListItem>
+        </Link>
+
+        <Link to='/tag'>
+          <ListItem button className={classes.listItem}>
+            <ListItemIcon className={classes.iconStyle}>
+              <LabelOffOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary='Tag' />
+          </ListItem>
+        </Link>
+
+        <Link to='/calender'>
+          <ListItem button className={classes.listItem}>
+            <ListItemIcon className={classes.iconStyle}>
+              <DateRangeOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary='Calender' />
           </ListItem>
         </Link>
 
@@ -188,40 +224,6 @@ const MenuItem = () => {
             </ListItemIcon>
             <ListItemText primary='Ticket' />
           </div>
-        </ListItem>
-
-        <Link to='/calender'>
-          <ListItem button className={classes.listItem}>
-            <ListItemIcon className={classes.iconStyle}>
-              <DateRangeOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText primary='Calender' />
-          </ListItem>
-        </Link>
-
-        <Link to='/tag'>
-          <ListItem button className={classes.listItem}>
-            <ListItemIcon className={classes.iconStyle}>
-              <LabelOffOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText primary='Tag' />
-          </ListItem>
-        </Link>
-
-        <Link to='/dashboard'>
-          <ListItem button className={classes.listItem}>
-            <ListItemIcon className={classes.iconStyle}>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary='Dashboard' />
-          </ListItem>
-        </Link>
-
-        <ListItem button className={classes.listItem}>
-          <ListItemIcon className={classes.iconStyle}>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary='Dashboard' />
         </ListItem>
 
         <Link to='/'>
