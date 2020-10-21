@@ -80,6 +80,7 @@ const MenuItem = () => {
     console.log(finalValue);
     e.preventDefault();
   };
+  const [isShown3, setIsShow3] = useState(false);
   return (
     <div>
       <div>
@@ -104,12 +105,14 @@ const MenuItem = () => {
         </Link>
 
         <Link to='/customers'>
-          <ListItem button className={classes.listItem}>
-            <ListItemIcon className={classes.iconStyle}>
-              <WcIcon />
-            </ListItemIcon>
-            <ListItemText primary='Customers' />
-          </ListItem>
+          <div className={classes.iconC}>
+            <ListItem button className={classes.listItem}>
+              <ListItemIcon className={classes.iconStyle}>
+                <WcIcon />
+              </ListItemIcon>
+              <ListItemText primary='Customers' />
+            </ListItem>
+          </div>
         </Link>
 
         <Link to='/inbox'>

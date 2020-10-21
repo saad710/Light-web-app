@@ -3,13 +3,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import { Button, Card, CardContent, CardHeader, FormControl, IconButton, InputAdornment, TextField } from '@material-ui/core';
+import { Button, Card, CardContent, CardHeader, Checkbox, FormControl, FormControlLabel, FormGroup, InputAdornment, TextField } from '@material-ui/core';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import './Compose.css'
-import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import { useStyles } from './ComposeStyle';
-import {Link} from 'react-router-dom'
 
 const Coompose = () => {
     const classes = useStyles();
@@ -17,11 +15,22 @@ const Coompose = () => {
     const [ccOpen, setCcOpen] = useState(false)
     const [bccOpen, setBccOpen] = useState(false)
     const [group, setGroup] = useState(false)
+    const [tags, setTags] = useState(false)
+
+    const [checkBox, setCheckBox] = useState({
+        quickReply: false,
+        noReply: false,
+    });
+
+    const handleChange = (event) => {
+        setCheckBox({ ...checkBox, [event.target.name]: event.target.checked });
+    };
+
     console.log(value);
     const handleInput = (e) => {
         e.preventDefault();
-        const newValue = {...value}
-        newValue[e.target.name] =  e.target.value
+        const newValue = { ...value }
+        newValue[e.target.name] = e.target.value
         setValue(newValue)
     }
 
@@ -47,7 +56,7 @@ const Coompose = () => {
                                                     name="from"
                                                     onBlur={handleInput}
                                                     InputProps={{
-                                                        startAdornment: <InputAdornment  position="start">From</InputAdornment>,
+                                                        startAdornment: <InputAdornment position="start">From</InputAdornment>,
                                                     }}
                                                     variant="outlined"
                                                 />
@@ -61,7 +70,7 @@ const Coompose = () => {
                                                                 <div>
                                                                     To
                                                                 </div>
-                                                                <div className="d-flex" style={{position: 'absolute', left: '80%'}}>
+                                                                <div className="d-flex" style={{ position: 'absolute', left: '70%' }}>
                                                                     <div className="px-2" onClick={() => setCcOpen(!ccOpen)}>
                                                                         Cc
                                                                     </div>
@@ -71,14 +80,26 @@ const Coompose = () => {
                                                                     <div className="px-2" onClick={() => setGroup(!group)}>
                                                                         Group
                                                                     </div>
+                                                                    <div className="px-2" onClick={() => setTags(!tags)}>
+                                                                        Add Tag
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </InputAdornment>,
                                                     }}
                                                     variant="outlined"
-                                                    />
+                                                />
+                                                <TextField
+                                                    id="subject"
+                                                    name="subject"
+                                                    onBlur={handleInput}
+                                                    InputProps={{
+                                                        startAdornment: <InputAdornment position="start">Subject</InputAdornment>,
+                                                    }}
+                                                    variant="outlined"
+                                                />
                                                 {
-                                                    ccOpen && 
+                                                    ccOpen &&
                                                     <TextField
                                                         id="cc"
                                                         name="cc"
@@ -90,7 +111,7 @@ const Coompose = () => {
                                                     />
                                                 }
                                                 {
-                                                    bccOpen && 
+                                                    bccOpen &&
                                                     <TextField
                                                         id="bcc"
                                                         name="bcc"
@@ -101,6 +122,7 @@ const Coompose = () => {
                                                         variant="outlined"
                                                     />
                                                 }
+
                                                 {
                                                     group &&
                                                     <TextField
@@ -113,15 +135,19 @@ const Coompose = () => {
                                                         variant="outlined"
                                                     />
                                                 }
-                                                <TextField
-                                                    id="subject"
-                                                    name="subject"
-                                                    onBlur={handleInput}
-                                                    InputProps={{
-                                                        startAdornment: <InputAdornment position="start">Subject</InputAdornment>,
-                                                    }}
-                                                    variant="outlined"
-                                                />
+                                                {
+                                                    tags &&
+                                                    <TextField
+                                                        id="tag"
+                                                        name="tag"
+                                                        onBlur={handleInput}
+                                                        InputProps={{
+                                                            startAdornment: <InputAdornment position="start">Add Tag</InputAdornment>,
+                                                        }}
+                                                        variant="outlined"
+                                                    />
+                                                }
+
                                                 <SunEditor
                                                     width="100%"
                                                     placeholder="Details..."
@@ -139,7 +165,30 @@ const Coompose = () => {
 
                                             </FormControl>
                                         </div>
+                                        <FormGroup row>
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        checked={checkBox.quickReply}
+                                                        onChange={handleChange}
+                                                        name="quickReply"
+                                                    />}
+                                                label="Secondary"
+                                            />
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        checked={checkBox.noReply}
+                                                        onChange={handleChange}
+                                                        name="noReply"
+                                                        color="primary"
+                                                    />
+                                                }
+                                                label="Primary"
+                                            />
 
+
+                                        </FormGroup>
                                         <Button
                                             type="submit"
                                             fullWidth

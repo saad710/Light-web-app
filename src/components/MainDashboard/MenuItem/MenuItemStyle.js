@@ -36,24 +36,14 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    // iconStyle: {
-    //     color: '#4195D1',
-    //     "&:hover": {
-    //         color: '#fff'
-    //     }
-    // },
+    
     listItem: {
         color: "#4195D1",
         fontSize: "0.85em",
         minHeight: 40,
-        iconStyle: {
-            background: '#fff !important'
-        },
-        
         "&:hover, &:focus": {
             backgroundColor: "#4195D1",
             color: "#fff",
-            
         },
     },
     
