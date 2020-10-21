@@ -8,6 +8,9 @@ import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import './Compose.css'
 import { useStyles } from './ComposeStyle';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
 
 const Coompose = () => {
     const classes = useStyles();
@@ -16,11 +19,18 @@ const Coompose = () => {
     const [bccOpen, setBccOpen] = useState(false)
     const [group, setGroup] = useState(false)
     const [tags, setTags] = useState(false)
-
     const [checkBox, setCheckBox] = useState({
         quickReply: false,
         noReply: false,
+        setRemainder: false
     });
+    const date = new Date()
+    const [selectedDate, setSelectedDate] = useState(date.setDate(date.getDate() + 1))
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        console.log(date);
+    };
 
     const handleChange = (event) => {
         setCheckBox({ ...checkBox, [event.target.name]: event.target.checked });
@@ -165,15 +175,17 @@ const Coompose = () => {
 
                                             </FormControl>
                                         </div>
-                                        <FormGroup row>
+                                        <div>
+                                            <FormGroup row style={{ color: '#fff' }}>
                                             <FormControlLabel
                                                 control={
                                                     <Checkbox
                                                         checked={checkBox.quickReply}
                                                         onChange={handleChange}
                                                         name="quickReply"
+                                                        style={{ color: '#4195D1' }}
                                                     />}
-                                                label="Secondary"
+                                                label="Quick Reply"
                                             />
                                             <FormControlLabel
                                                 control={
@@ -181,14 +193,46 @@ const Coompose = () => {
                                                         checked={checkBox.noReply}
                                                         onChange={handleChange}
                                                         name="noReply"
-                                                        color="primary"
+                                                        style={{ color: '#4195D1' }}
                                                     />
                                                 }
-                                                label="Primary"
+                                                label="No Reply"
                                             />
-
-
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        checked={checkBox.setRemainder}
+                                                        onChange={handleChange}
+                                                        name="setRemainder"
+                                                        style={{ color: '#4195D1' }}
+                                                    />
+                                                }
+                                                label="Set Remainder"
+                                            />
                                         </FormGroup>
+                                        
+                                        {
+                                            checkBox.setRemainder && 
+                                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                    <Grid container justify="space-around">
+                                                        <KeyboardDatePicker
+                                                            margin="normal"
+                                                            id="date-picker-dialog"
+                                                            label="Select Remainder"
+                                                            format="MM/dd/yyyy"
+                                                            disablePast="true"
+                                                            value={selectedDate}
+                                                            onChange={handleDateChange}
+                                                            KeyboardButtonProps={{
+                                                                'aria-label': 'change date',
+                                                            }}
+                                                        />
+                                                    </Grid>
+                                                </MuiPickersUtilsProvider>
+                                        }
+                                        
+                                        </div>
+
                                         <Button
                                             type="submit"
                                             fullWidth
@@ -201,10 +245,8 @@ const Coompose = () => {
                                     </form>
                                 </CardContent>
                             </Card>
-
                         </div>
                     </Grid>
-
                 </Container>
             </main>
         </div>
