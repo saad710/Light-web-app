@@ -14,34 +14,53 @@ import DateFnsUtils from '@date-io/date-fns';
 
 const Coompose = () => {
     const classes = useStyles();
+    // input value state
     const [value, setValue] = useState({})
     const [ccOpen, setCcOpen] = useState(false)
     const [bccOpen, setBccOpen] = useState(false)
     const [group, setGroup] = useState(false)
     const [tags, setTags] = useState(false)
+
+    // check box state
     const [checkBox, setCheckBox] = useState({
         quickReply: false,
         noReply: false,
         setRemainder: false
     });
+
+    // remainder date
     const date = new Date()
     const [selectedDate, setSelectedDate] = useState(date.setDate(date.getDate() + 1))
-
+    console.log(selectedDate)
     const handleDateChange = (date) => {
-        setSelectedDate(date);
-        console.log(date);
+        setSelectedDate(date.toDateString());
     };
 
+    // checkbox handle
     const handleChange = (event) => {
         setCheckBox({ ...checkBox, [event.target.name]: event.target.checked });
     };
 
-    console.log(value);
+    // input handle
     const handleInput = (e) => {
         e.preventDefault();
         const newValue = { ...value }
         newValue[e.target.name] = e.target.value
         setValue(newValue)
+    }
+
+    // compose button handle
+    const handleCompose = (e) => {
+        e.preventDefault()
+        const finalValue = {...value}
+        finalValue.remainder = selectedDate
+        if(checkBox.quickReply) {
+            finalValue.quickReply = "quick reply"
+        }
+        if(checkBox.noReply) {
+            finalValue.noReply = "no reply"
+        }
+        console.log(finalValue);
     }
 
     return (
@@ -99,15 +118,6 @@ const Coompose = () => {
                                                     }}
                                                     variant="outlined"
                                                 />
-                                                <TextField
-                                                    id="subject"
-                                                    name="subject"
-                                                    onBlur={handleInput}
-                                                    InputProps={{
-                                                        startAdornment: <InputAdornment position="start">Subject</InputAdornment>,
-                                                    }}
-                                                    variant="outlined"
-                                                />
                                                 {
                                                     ccOpen &&
                                                     <TextField
@@ -157,6 +167,16 @@ const Coompose = () => {
                                                         variant="outlined"
                                                     />
                                                 }
+
+                                                <TextField
+                                                    id="subject"
+                                                    name="subject"
+                                                    onBlur={handleInput}
+                                                    InputProps={{
+                                                        startAdornment: <InputAdornment position="start">Subject</InputAdornment>,
+                                                    }}
+                                                    variant="outlined"
+                                                />
 
                                                 <SunEditor
                                                     width="100%"
@@ -239,6 +259,7 @@ const Coompose = () => {
                                             variant="contained"
                                             color="secondary"
                                             className={classes.btnStyle}
+                                            onClick={handleCompose}
                                         >
                                             Send
                                         </Button>
