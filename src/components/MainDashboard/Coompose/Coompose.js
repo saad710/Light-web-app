@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import { Button, Card, CardContent, CardHeader, Checkbox, FormControl, FormControlLabel, FormGroup, InputAdornment, TextField } from '@material-ui/core';
+import { Button, Card, CardContent, CardHeader, Checkbox, FormControl, FormControlLabel, FormGroup, InputAdornment, TextareaAutosize, TextField } from '@material-ui/core';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import './Compose.css'
@@ -14,6 +14,7 @@ import DateFnsUtils from '@date-io/date-fns';
 
 const Coompose = () => {
     const classes = useStyles();
+
     // input value state
     const [value, setValue] = useState({})
     const [ccOpen, setCcOpen] = useState(false)
@@ -24,16 +25,23 @@ const Coompose = () => {
     // check box state
     const [checkBox, setCheckBox] = useState({
         quickReply: false,
-        noReply: false,
-        setRemainder: false
+        // noReply: false,
+        setRemainder: false,
+        setDeadLine: false
     });
 
     // remainder date
     const date = new Date()
-    const [selectedDate, setSelectedDate] = useState(date.setDate(date.getDate() + 1))
-    console.log(selectedDate)
-    const handleDateChange = (date) => {
-        setSelectedDate(date.toDateString());
+    const [remainderDate, setRemainderDate] = useState(date.setDate(date.getDate() + 1))
+    console.log(remainderDate)
+    const handleRemainderDate = (date) => {
+        setRemainderDate(date.toDateString());
+    };
+    // deadline date
+    const [deadlineDate, setDeadlineDate] = useState(date.setDate(date.getDate() + 2))
+    console.log(deadlineDate)
+    const handleDeadlineDate = (date) => {
+        setDeadlineDate(date.toDateString());
     };
 
     // checkbox handle
@@ -52,14 +60,15 @@ const Coompose = () => {
     // compose button handle
     const handleCompose = (e) => {
         e.preventDefault()
-        const finalValue = {...value}
-        finalValue.remainder = selectedDate
-        if(checkBox.quickReply) {
+        const finalValue = { ...value }
+        finalValue.remainder = remainderDate
+        finalValue.deadline = deadlineDate
+        if (checkBox.quickReply) {
             finalValue.quickReply = "quick reply"
         }
-        if(checkBox.noReply) {
-            finalValue.noReply = "no reply"
-        }
+        // if(checkBox.noReply) {
+        //     finalValue.noReply = "no reply"
+        // }
         console.log(finalValue);
     }
 
@@ -177,10 +186,118 @@ const Coompose = () => {
                                                     }}
                                                     variant="outlined"
                                                 />
+                                                {/* check boxes start */}
+
+                                                <div>
+                                                    <FormGroup row style={{ color: '#fff' }}>
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={checkBox.quickReply}
+                                                                    onChange={handleChange}
+                                                                    name="quickReply"
+                                                                    style={{ color: '#4195D1' }}
+                                                                />}
+                                                            label="Quick Reply"
+                                                        />
+                                                        {/* <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={checkBox.noReply}
+                                                                    onChange={handleChange}
+                                                                    name="noReply"Z
+                                                                    style={{ color: '#4195D1' }}
+                                                                />
+                                                            }
+                                                            label="No Reply"
+                                                        /> */}
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={checkBox.setRemainder}
+                                                                    onChange={handleChange}
+                                                                    name="setRemainder"
+                                                                    style={{ color: '#4195D1' }}
+                                                                />
+                                                            }
+                                                            label="Set Remainder"
+                                                        />
+
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={checkBox.setDeadLine}
+                                                                    onChange={handleChange}
+                                                                    name="setDeadLine"
+                                                                    style={{ color: '#4195D1' }}
+                                                                />
+                                                            }
+                                                            label="Set Deadline"
+                                                        />
+                                                    </FormGroup>
+
+                                                </div>
+
+                                                {/* check boxes end */}
+
+                                                {/* fuctional check boxes show start */}
+
+                                                <div className="d-flex">
+                                                    {
+                                                        checkBox.quickReply &&
+                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rowsMax={3} placeholder="Quick Reply ..." />
+                                                    }
+                                                    {
+                                                        checkBox.setRemainder &&
+                                                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                            <Grid container justify="space-around">
+                                                                <KeyboardDatePicker
+                                                                    margin="normal"
+                                                                    id="date-picker-dialog"
+                                                                    label="Select Remainder"
+                                                                    format="MM/dd/yyyy"
+                                                                    disablePast="true"
+                                                                    value={remainderDate}
+                                                                    onChange={handleRemainderDate}
+                                                                    style={{backgroundColor: '#fff'}}
+                                                                    KeyboardButtonProps={{
+                                                                        'aria-label': 'change date',
+                                                                    }}
+                                                                />
+                                                            </Grid>
+                                                        </MuiPickersUtilsProvider>
+                                                    }
+
+                                                    {
+                                                        checkBox.setDeadLine &&
+                                                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                            <Grid container justify="space-around">
+                                                                <KeyboardDatePicker
+                                                                    margin="normal"
+                                                                    id="date-picker-dialog"
+                                                                    label="Select Remainder"
+                                                                    format="MM/dd/yyyy"
+                                                                    disablePast="true"
+                                                                    value={deadlineDate}
+                                                                    onChange={handleDeadlineDate}
+                                                                    style={{ backgroundColor: '#fff' }}
+                                                                    KeyboardButtonProps={{
+                                                                        'aria-label': 'change date',
+                                                                    }}
+                                                                />
+                                                            </Grid>
+                                                        </MuiPickersUtilsProvider>
+                                                    }
+
+                                                    
+                                                </div>
+
+                                                {/* fuctional check boxes show end */}
 
                                                 <SunEditor
                                                     width="100%"
                                                     placeholder="Details..."
+                                                    name="editor"
                                                     setOptions={{
                                                         height: 100,
                                                         buttonList: [
@@ -195,63 +312,7 @@ const Coompose = () => {
 
                                             </FormControl>
                                         </div>
-                                        <div>
-                                            <FormGroup row style={{ color: '#fff' }}>
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-                                                        checked={checkBox.quickReply}
-                                                        onChange={handleChange}
-                                                        name="quickReply"
-                                                        style={{ color: '#4195D1' }}
-                                                    />}
-                                                label="Quick Reply"
-                                            />
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-                                                        checked={checkBox.noReply}
-                                                        onChange={handleChange}
-                                                        name="noReply"
-                                                        style={{ color: '#4195D1' }}
-                                                    />
-                                                }
-                                                label="No Reply"
-                                            />
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-                                                        checked={checkBox.setRemainder}
-                                                        onChange={handleChange}
-                                                        name="setRemainder"
-                                                        style={{ color: '#4195D1' }}
-                                                    />
-                                                }
-                                                label="Set Remainder"
-                                            />
-                                        </FormGroup>
-                                        
-                                        {
-                                            checkBox.setRemainder && 
-                                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                                    <Grid container justify="space-around">
-                                                        <KeyboardDatePicker
-                                                            margin="normal"
-                                                            id="date-picker-dialog"
-                                                            label="Select Remainder"
-                                                            format="MM/dd/yyyy"
-                                                            disablePast="true"
-                                                            value={selectedDate}
-                                                            onChange={handleDateChange}
-                                                            KeyboardButtonProps={{
-                                                                'aria-label': 'change date',
-                                                            }}
-                                                        />
-                                                    </Grid>
-                                                </MuiPickersUtilsProvider>
-                                        }
-                                        
-                                        </div>
+
 
                                         <Button
                                             type="submit"
