@@ -245,7 +245,7 @@ const Coompose = () => {
                                                 <div className="d-flex">
                                                     {
                                                         checkBox.quickReply &&
-                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rowsMax={3} placeholder="Quick Reply ..." />
+                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rowsMax={4} placeholder="Quick Reply ..." />
                                                     }
                                                     {
                                                         checkBox.setRemainder &&

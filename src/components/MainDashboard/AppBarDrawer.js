@@ -56,15 +56,16 @@ const AppBarDrawer = () => {
                             style={{ color: '#2d2d2d' }}
                             inputProps={{ 'aria-label': 'search' }}
                         />
-
                     </div>
+                        {
+                            openFilter && <SentFilter />
+                        }
                     <FilterListIcon
                         onClick={() => setOpenFilter(!openFilter)}
-                        style={{marginRight: '1rem'}}
+                        style={{ marginRight: '1rem' }}
                     />
-                    {
-                        openFilter && <SentFilter />
-                    }
+                    
+                    
                     <Divider className={classes.horizontalDivider} orientation="vertical" flexItem />
                     <Avatar aria-label="recipe" variant="circle" className={classes.avatar}>
                         <img width="100%" src={avatar} alt="" />

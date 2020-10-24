@@ -70,6 +70,18 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         color: '#2d2d2d'
     },
+    searchIcon1: {
+        padding: theme.spacing(0, 2),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#2d2d2d',
+        left: '54%',
+        top: '10%'
+    },
     inputRoot: {
         color: 'inherit',
     },
