@@ -58,10 +58,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     cardRoot: {
         minWidth: 275,
-        textAlign: 'center',
-        color: '#fff',
-        backgroundColor: '#3A86BC',
-        boxShadow: 'none'
 
     },
     form: {
@@ -83,5 +79,11 @@ export const useStyles = makeStyles((theme) => ({
     pagination: {
         border: "1px solid #ddd",
         backgroundColor: "#eee",
+    },
+    media: {
+        // height: '50px',
+        // width: '140px'
+        marginLeft: '13rem',
+        marginBottom: '1rem'
     },
 }));

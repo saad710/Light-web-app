@@ -50,9 +50,9 @@ const Customers = () => {
                 <ToolBar />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        {/* <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
+                        <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
                             CREATE NEW
-                        </Button> */}
+                        </Button>
                         <TableContainer component={Paper} square elevation={0} className="mt-4">
                             <Table className={classes.table} aria-label="simple table"
                                 size='small'
@@ -62,10 +62,9 @@ const Customers = () => {
                                         <TableCell> # </TableCell>
                                         <TableCell align="center"> NAME </TableCell>
                                         <TableCell align="center"> EMAIL </TableCell>
-                                        <TableCell align="center"> DESCRIPTION </TableCell>
-                                        <TableCell align="center"> DATE OF PURCHASES </TableCell>
-                                        <TableCell align="center"> DATE OF RENEWAL </TableCell>
+                                        <TableCell align="center"> PHONE </TableCell>
                                         <TableCell align="center"> GROUP </TableCell>
+                                        <TableCell align="center"> PHYSICAL ADDRESS </TableCell>
                                         <TableCell align="center"> ACTION </TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -78,10 +77,9 @@ const Customers = () => {
                                                 </TableCell>
                                                 <TableCell align="center">{customer.name}</TableCell>
                                                 <TableCell align="center">{customer.email}</TableCell>
-                                                <TableCell align="center">{customer.description}</TableCell>
-                                                <TableCell align="center">{customer.dateOfPurchase}</TableCell>
-                                                <TableCell align="center">{customer.dateOfRenewwal}</TableCell>
+                                                <TableCell align="center"> +33 343 4545 23</TableCell>
                                                 <TableCell align="center">{customer.group}</TableCell>
+                                                <TableCell align="center"> 4670  Charles Street, FORT WAYNE </TableCell>
                                                 <TableCell align="center">
                                                     <div>
                                                         <ButtonGroup
@@ -91,9 +89,7 @@ const Customers = () => {
                                                             aria-label="contained primary button group"
                                                         >
                                                             <Button
-                                                                onClick={handleOpen} style={{fontSize: '10px'}} color="primary">UPDATE</Button>
-                                                            <Button
-                                                                onClick={handleOpen} style={{fontSize: '10px'}} color="secondary">DELETE</Button>
+                                                                style={{fontSize: '10px'}} color="secondary">DELETE</Button>
                                                         </ButtonGroup>
                                                     </div>
                                                 </TableCell>
@@ -200,6 +196,37 @@ const Customers = () => {
                                                             />
                                                         </div>
                                                         <div>
+                                                            <label htmlFor=""> Phone </label>
+                                                            <TextField
+                                                                style={{ backgroundColor: '#fff' }}
+                                                                variant="outlined"
+                                                                margin="normal"
+                                                                required
+                                                                fullWidth
+                                                                id="phone"
+                                                                name="phone"
+                                                                autoComplete="phone"
+                                                                autoFocus
+                                                                placeholder="+33 43 3434 44"
+                                                            />
+                                                        </div>
+
+                                                        <div>
+                                                            <label htmlFor=""> Group </label>
+                                                            <TextField
+                                                                style={{ backgroundColor: '#fff' }}
+                                                                variant="outlined"
+                                                                margin="normal"
+                                                                required
+                                                                fullWidth
+                                                                id="group"
+                                                                name="group"
+                                                                autoComplete="group"
+                                                                autoFocus
+                                                                placeholder="grooup name"
+                                                            />
+                                                        </div>
+                                                        <div>
                                                             <label htmlFor=""> Physical Address </label>
                                                             <br/>
                                                             <TextareaAutosize
@@ -211,7 +238,6 @@ const Customers = () => {
                                                                 id="address"
                                                                 name="address"
                                                                 autoComplete="address"
-                                                                autoFocus
                                                                 aria-label="minimum height"
                                                                 rowsMin={3}
                                                                 placeholder="Physical Address"

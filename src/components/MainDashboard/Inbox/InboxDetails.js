@@ -61,19 +61,6 @@ const InboxDetails = () => {
                                 
                                 />
                             </Typography>
-                            <Link to="/report">
-                                <button
-                                    style={{
-                                        background: '#4195D1',
-                                        marginLeft: '38rem',
-                                        padding: '5px 8px',
-                                        color: '#fff',
-                                        border: 'none',
-                                        borderRadius: '5px'
-                                    }}>
-                                    See Report
-                            </button>
-                            </Link>
                         </div>
                         <Typography variant="body6" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
                             {message[0].message}

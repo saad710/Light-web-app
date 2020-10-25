@@ -130,7 +130,7 @@ const MenuItem = () => {
             <ListItemIcon className={classes.iconStyle}>
               {icon2 ? <WcIcon style={{ color: '#fff' }} /> : <WcIcon />}
             </ListItemIcon>
-            <ListItemText primary='Customers' />
+            <ListItemText primary='Contacts' />
           </ListItem>
         </Link>
 
@@ -378,6 +378,22 @@ const MenuItem = () => {
                           onBlur={handleBlur}
                         />
                       </div>
+                      <br/>
+                      <div>
+                        <TextField
+                          style={{ backgroundColor: "#fff" }}
+                          variant='outlined'
+                          margin='normal'
+                          required
+                          fullWidth
+                          id='subject'
+                          name='subject'
+                          autoComplete='subject'
+                          autoFocus
+                          placeholder='Subject'
+                          onBlur={handleBlur}
+                        />
+                      </div>
                       <div className='mt-3'>
                         <TextareaAutosize
                           style={{
@@ -395,7 +411,7 @@ const MenuItem = () => {
                           autoFocus
                           aria-label='minimum height'
                           rowsMin={3}
-                          placeholder='Physical Address'
+                          placeholder='Details'
                           onBlur={handleBlur}
                         />
                       </div>
@@ -405,7 +421,7 @@ const MenuItem = () => {
                         variant='contained'
                         className={classes.ticketBtn}
                         onClick={handleSubmit}
-                        style={{ marginTop: "2rem" }}
+                        style={{ marginTop: "1rem" }}
                       >
                         SEND
                       </Button>

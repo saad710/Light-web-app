@@ -26,7 +26,6 @@ const Inbox = () => {
                                             <Chip
                                                 style={{
                                                     marginLeft: '1rem',
-                                                    // marginTop: '0.5rem',
                                                     fontSize: '11px',
                                                     backgroundColor: '#203D79',
                                                     height: '1.5rem',
@@ -34,14 +33,25 @@ const Inbox = () => {
                                                     color: '#fff',
                                                 }}
                                                 label="quick reply"
-
                                             />
                                             <br />
-                                            <strong style={{ marginLeft: '0.5rem' }}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry standara level
-                                    </Typography>
+                                            <strong style={{ marginLeft: '0.5rem' }}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry 
+                                        </Typography>
 
                                     </Link>
                                 </div>
+                                <Link to="/report">
+                                    <button
+                                        style={{
+                                            background: '#4195D1',
+                                            padding: '5px 8px',
+                                            color: '#fff',
+                                            border: 'none',
+                                            borderRadius: '5px'
+                                        }}>
+                                            Report
+                                        </button>
+                                </Link>
                                 <Typography style={{ color: '#2d2d2d' }} variant="body6" align="right">
                                     <small> just now </small>
                                 </Typography>
