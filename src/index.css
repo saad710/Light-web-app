@@ -85,3 +85,14 @@ h6,
 p {
   margin: 2px;
 }
+
+.dropdown-menu.show {
+      background-color: rgb(65, 149, 209);
+      padding: 0.5rem 1.4rem !important;
+      color: rgb(255, 255, 255);
+      position: absolute;
+      transform: translate3d(85px, -42px, 0px);
+      top: 0px;
+      left: -85px !important;
+      will-change: transform;
+}

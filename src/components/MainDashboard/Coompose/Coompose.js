@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import { Button, Card, CardContent, CardHeader, Checkbox, FormControl, FormControlLabel, FormGroup, InputAdornment, TextareaAutosize, TextField } from '@material-ui/core';
+import { Backdrop, Button, Card, CardContent, CardHeader, Checkbox, Fade, FormControl, FormControlLabel, FormGroup, InputAdornment, Modal, TextareaAutosize, TextField, Typography } from '@material-ui/core';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import './Compose.css'
@@ -33,15 +33,23 @@ const Coompose = () => {
     // remainder date
     const date = new Date()
     const [remainderDate, setRemainderDate] = useState(date.setDate(date.getDate() + 1))
-    console.log(remainderDate)
     const handleRemainderDate = (date) => {
         setRemainderDate(date.toDateString());
     };
+    
     // deadline date
+
     const [deadlineDate, setDeadlineDate] = useState(date.setDate(date.getDate() + 2))
     console.log(deadlineDate)
     const handleDeadlineDate = (date) => {
         setDeadlineDate(date.toDateString());
+    };
+
+    // schedule date
+    const [scheduleDate, setScheduleDate] = useState(date.setDate(date.getDate() + 1))
+    console.log("schedule date",scheduleDate);
+    const handleScheduleDate = (date) => {
+        setScheduleDate(date.toDateString());
     };
 
     // checkbox handle
@@ -71,6 +79,18 @@ const Coompose = () => {
         // }
         console.log(finalValue);
     }
+
+    // modal handle with state
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div className={classes.root}>
@@ -314,7 +334,7 @@ const Coompose = () => {
                                         </div>
 
 
-                                        <Button
+                                        {/* <Button
                                             type="submit"
                                             fullWidth
                                             variant="contained"
@@ -323,10 +343,61 @@ const Coompose = () => {
                                             onClick={handleCompose}
                                         >
                                             Send
-                                        </Button>
+                                        </Button> */}
+
+                                        <div class="btn-group" style={{marginLeft: '38rem', marginTop:'1rem'}}>
+                                            <button type="button" class="btn btn-primary"
+                                                style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem'}}
+                                                onClick={handleCompose}
+                                            >
+                                                Send
+                                            </button>
+                                            <button type="button" 
+                                                style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem'}}
+                                            class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            </button>
+                                            <div class="dropdown-menu" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff' }}>
+                                                <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
+                                            </div>
+                                        </div>
                                     </form>
                                 </CardContent>
                             </Card>
+                            <Modal
+                                aria-labelledby="transition-modal-title"
+                                aria-describedby="transition-modal-description"
+                                className={classes.modal}
+                                open={open}
+                                onClose={handleClose}
+                                closeAfterTransition
+                                BackdropComponent={Backdrop}
+                                BackdropProps={{
+                                    timeout: 500,
+                                }}
+                            >
+                                <Fade in={open}>
+                                    <div>
+                                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                            <Grid container justify="space-around">
+                                                <KeyboardDatePicker
+                                                    margin="normal"
+                                                    id="date-picker-dialog"
+                                                    variant="static"
+                                                    label="Select Remainder"
+                                                    format="MM/dd/yyyy"
+                                                    disablePast="true"
+                                                    value={scheduleDate}
+                                                    onChange={handleScheduleDate}
+                                                    style={{ backgroundColor: '#fff' }}
+                                                    KeyboardButtonProps={{
+                                                        'aria-label': 'change date',
+                                                    }}
+                                                />
+                                            </Grid>
+                                        </MuiPickersUtilsProvider>
+                                    </div>
+                                </Fade>
+                            </Modal>
                         </div>
                     </Grid>
                 </Container>

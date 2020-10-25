@@ -37,5 +37,10 @@ export const useStyles = makeStyles((theme) => ({
     },
     form: {
         margin: '0 auto'
-    }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 }));
