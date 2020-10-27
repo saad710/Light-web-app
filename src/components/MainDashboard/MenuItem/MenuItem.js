@@ -226,7 +226,7 @@ const MenuItem = () => {
                 </div>
               </ListItem>
             </Link>
-            <Link to='/privacy'>
+            {/* <Link to='/privacy'>
               <ListItem button className={classes.listItem}
                 onMouseEnter={() => setIcon10(true)}
                 onMouseLeave={() => setIcon10(false)}
@@ -234,12 +234,11 @@ const MenuItem = () => {
                 <div className="d-flex" style={{ marginLeft: '1rem' }}>
                   <ListItemIcon className={classes.iconStyle}>
                     {icon10 ? <HttpsIcon style={{ color: '#fff' }} /> : <HttpsIcon />}
-                    {/* <HttpsIcon /> */}
                   </ListItemIcon>
                   <ListItemText primary='Privacy' />
                 </div>
               </ListItem>
-            </Link>
+            </Link> */}
 
             <Link to='/team'>
               <ListItem button className={classes.listItem}

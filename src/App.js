@@ -36,7 +36,7 @@ function App() {
           <Route path='/sent' component={Sent} />
           <Route path='/sentDetails/:sentId' component={SentDetails} />
           <Route path='/profile' component={Profile} />
-          <Route path='/privacy' component={Privacy} />
+          {/* <Route path='/privacy' component={Privacy} /> */}
           <Route path='/team' component={Team} />
           <Route path='/companydetails' component={CompanyDetails} />
           <Route path='/compose' component={Compose} />

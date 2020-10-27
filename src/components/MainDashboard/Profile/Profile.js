@@ -7,6 +7,7 @@ import {Button, TextField, Typography } from '@material-ui/core';
 import avatar from '../../../images/avatar.png'
 import { useStyles } from './ProfileStyle';
 import { useState } from 'react';
+import EditIcon from '@material-ui/icons/Edit';
 
 const Profile = () => {
     const classes = useStyles();
@@ -48,7 +49,7 @@ const Profile = () => {
                                     />
                                     
                                 </div>
-                                <div>
+                                <div className="pb-2">
                                     <label htmlFor=""> Email </label>
                                     <TextField
                                         style={{borderRadius: '4px' }}
@@ -64,9 +65,10 @@ const Profile = () => {
                                         onBlur={handleBlur}
                                     />
                                 </div>
-                                <Typography className="mt-5" component="body6" variant="body6">
+                                <Typography component="body6" variant="body6">
                                     Change Password
                                 </Typography>
+                                <EditIcon fontSize="small" style={{marginLeft: '24.5rem'}} />
                                 <div className="mt-3">
                                     <label htmlFor=""> Enter your old password </label>
                                     <TextField

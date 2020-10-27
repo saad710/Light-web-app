@@ -48,10 +48,9 @@ const CompanyDetails = () => {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell> # </TableCell>
-                                        <TableCell align="center"> Company Name </TableCell>
-                                        <TableCell align="center"> Email </TableCell>
-                                        <TableCell align="center"> Details </TableCell>
-                                        <TableCell align="center"> Action </TableCell>
+                                        <TableCell align="center"> Organisation Name </TableCell>
+                                        <TableCell align="center"> Address </TableCell>
+                                        <TableCell align="center"> Website </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -62,15 +61,15 @@ const CompanyDetails = () => {
                                                     {i + 1}
                                                 </TableCell>
                                                 <TableCell align="center">{customer.name}</TableCell>
-                                                <TableCell align="center">{customer.email}</TableCell>
-                                                <TableCell align="center">{customer.description}</TableCell>
-                                                <TableCell align="center">
+                                                <TableCell align="center"> 38, Park Road, NY </TableCell>
+                                                <TableCell align="center"> websitedemo.com </TableCell>
+                                                {/* <TableCell align="center">
                                                     <div>
                                                         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
                                                             <Button size="small" style={{fontSize: '10px'}} onClick={handleOpen}>UPDATE</Button>
                                                         </ButtonGroup>
                                                     </div>
-                                                </TableCell>
+                                                </TableCell> */}
                                             </TableRow>
                                         ))
                                     }
