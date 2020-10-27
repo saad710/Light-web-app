@@ -49,7 +49,9 @@ const Coompose = () => {
     const [scheduleDate, setScheduleDate] = useState(date.setDate(date.getDate() + 1))
     console.log("schedule date",scheduleDate);
     const handleScheduleDate = (date) => {
-        setScheduleDate(date.toDateString());
+        const scheduleDate = { ...value }
+        scheduleDate.schedule = date.toDateString()
+        setScheduleDate(scheduleDate);
     };
 
     // checkbox handle
@@ -363,6 +365,9 @@ const Coompose = () => {
                                     </form>
                                 </CardContent>
                             </Card>
+                            
+                            {/* calender popup for schedule mail */}
+
                             <Modal
                                 aria-labelledby="transition-modal-title"
                                 aria-describedby="transition-modal-description"
