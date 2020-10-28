@@ -32,6 +32,23 @@ const Team = () => {
                             <form className={classes.form} noValidate>
                                 
                                 <div>
+                                    <label htmlFor=""> Name </label>
+                                    <TextField
+                                        style={{ borderRadius: '4px' }}
+                                        variant="outlined"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="name"
+                                        name="name"
+                                        autoComplete="name"
+                                        autoFocus
+                                        placeholder="Marie Winter"
+                                        onChange={handleTeamInput}
+                                    />
+                                </div>
+
+                                <div>
                                     <label htmlFor=""> Email </label>
                                     <TextField
                                         style={{ borderRadius: '4px' }}
@@ -44,6 +61,23 @@ const Team = () => {
                                         autoComplete="email"
                                         autoFocus
                                         placeholder="user@email.com"
+                                        onChange={handleTeamInput}
+                                    />
+                                </div>
+
+                                <div>
+                                    <label htmlFor=""> Password </label>
+                                    <TextField
+                                        style={{ borderRadius: '4px' }}
+                                        variant="outlined"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="password"
+                                        name="password"
+                                        autoComplete="password"
+                                        autoFocus
+                                        placeholder="*************"
                                         onChange={handleTeamInput}
                                     />
                                 </div>
