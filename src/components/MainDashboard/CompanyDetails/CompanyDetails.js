@@ -43,7 +43,10 @@ const CompanyDetails = () => {
                 <ToolBar />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <TableContainer component={Paper}>
+                        
+
+
+                        {/* <TableContainer component={Paper}>
                             <Table className={classes.table} aria-label="simple table" size="small">
                                 <TableHead>
                                     <TableRow>
@@ -69,7 +72,7 @@ const CompanyDetails = () => {
                                                             <Button size="small" style={{fontSize: '10px'}} onClick={handleOpen}>UPDATE</Button>
                                                         </ButtonGroup>
                                                     </div>
-                                                </TableCell> */}
+                                                </TableCell>
                                             </TableRow>
                                         ))
                                     }
@@ -78,7 +81,7 @@ const CompanyDetails = () => {
                             <div className={classes.paginationBox} style={{marginBottom: '20px'}}>
                                 <Pagination count={10} className={classes.pagination} />
                             </div>
-                        </TableContainer>
+                        </TableContainer> */}
 
                         {/* update/delete modal */}
 
