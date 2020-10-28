@@ -28,9 +28,10 @@ const Profile = () => {
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
                             <img className="pt-2" style={{margin: ' 0 auto '}} width="20%" src={avatar} alt="" />
-                            <Typography style={{color: '#2d2d2d'}} component="body6" variant="body6">
+                            <Typography style={{color: '#2d2d2d', marginTop:'1rem'}} component="body6" variant="body6">
                                 Personal Details
                             </Typography>
+                            <EditIcon fontSize="small" style={{ marginLeft: '32.5rem',marginTop:'-1.5rem', color: '#2d2d2d' }} />
                             <form className={classes.form} noValidate style={{color: '#2d2d2d'}}>
                                 <div style={{ margin: '1rem 0'}}>
                                     <label htmlFor=""> Name </label>
