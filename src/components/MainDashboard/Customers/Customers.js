@@ -51,7 +51,10 @@ const Customers = () => {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
-                            CREATE NEW
+                            CREATE CONTACT
+                        </Button>
+                        <Button onClick={handleOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
+                            CREATE GROUP
                         </Button>
                         <TableContainer component={Paper} square elevation={0} className="mt-4">
                             <Table className={classes.table} aria-label="simple table"
@@ -121,17 +124,45 @@ const Customers = () => {
                             }}
                         >
                             <Fade in={open}>
-                                <div className={classes.modalPaper}>
+                                <div className={classes.customerPaper}>
                                     <div className="mt-3">
                                         <Card className={classes.cardRoot}>
-                                            <img className="pt-2" width="50%" src={avatar} alt="" />
                                             <CardContent style={{ background: 'none !important' }}>
-                                                <Typography variant="body2">
-                                                    Marie Winter
-                                                                    </Typography>
-                                                <Typography variant="body6">
-                                                    mariewinter@mail.com
-                                                                    </Typography>
+
+                                                <div className={classes.paper}>
+                                                    <Typography component="body6" variant="body6">
+                                                        CREATE GROUP
+                                                    </Typography>
+                                                    <form className={classes.form} noValidate>
+
+
+                                                        <div>
+                                                            <label htmlFor=""> Group </label>
+                                                            <TextField
+                                                                style={{ backgroundColor: '#fff' }}
+                                                                variant="outlined"
+                                                                margin="normal"
+                                                                required
+                                                                fullWidth
+                                                                id="group"
+                                                                name="group"
+                                                                autoComplete="group"
+                                                                autoFocus
+                                                                placeholder="group name"
+                                                            />
+                                                        </div>
+
+                                                        <Button
+                                                            type="submit"
+                                                            fullWidth
+                                                            variant="contained"
+                                                            color="primary"
+                                                            className={classes.submit}
+                                                        >
+                                                            CREATE GROUP
+                                                        </Button>
+                                                    </form>
+                                                </div>
                                             </CardContent>
                                         </Card>
                                     </div>
@@ -162,7 +193,7 @@ const Customers = () => {
                                                 
                                                 <div className={classes.paper}>
                                                     <Typography component="body6" variant="body6">
-                                                        CREATE CUSTOMER ACCOUNT
+                                                        CREATE CONTACT
                                                     </Typography>
                                                     <form className={classes.form} noValidate>
                                                         <div style={{ margin: '1rem 0' }}>
@@ -212,21 +243,6 @@ const Customers = () => {
                                                         </div>
 
                                                         <div>
-                                                            <label htmlFor=""> Group </label>
-                                                            <TextField
-                                                                style={{ backgroundColor: '#fff' }}
-                                                                variant="outlined"
-                                                                margin="normal"
-                                                                required
-                                                                fullWidth
-                                                                id="group"
-                                                                name="group"
-                                                                autoComplete="group"
-                                                                autoFocus
-                                                                placeholder="grooup name"
-                                                            />
-                                                        </div>
-                                                        <div>
                                                             <label htmlFor=""> Physical Address </label>
                                                             <br/>
                                                             <TextareaAutosize
@@ -265,7 +281,7 @@ const Customers = () => {
                                                             color="primary"
                                                             className={classes.submit}
                                                         >
-                                                            CREATE USER
+                                                            CREATE CONTACT
                                                         </Button>
                                                     </form>
                                                 </div>
@@ -275,6 +291,69 @@ const Customers = () => {
                                 </div>
                             </Fade>
                         </Modal>
+
+                        {/* group modal  */}
+
+                        {/* create user modal  */}
+
+                        {/* <Modal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            className={classes.modal}
+                            open={open}
+                            onClose={handleClose}
+                            closeAfterTransition
+                            BackdropComponent={Backdrop}
+                            BackdropProps={{
+                                timeout: 500,
+                            }}
+                        >
+                            <Fade in={handleOpen}>
+                                <div className={classes.customerPaper}>
+                                    <div className="mt-3">
+                                        <Card className={classes.cardRoot}>
+                                            <CardContent style={{ background: 'none !important' }}>
+
+                                                <div className={classes.paper}>
+                                                    <Typography component="body6" variant="body6">
+                                                        CREATE GROUP
+                                                    </Typography>
+                                                    <form className={classes.form} noValidate>
+                                                        
+
+                                                        <div>
+                                                            <label htmlFor=""> Group </label>
+                                                            <TextField
+                                                                style={{ backgroundColor: '#fff' }}
+                                                                variant="outlined"
+                                                                margin="normal"
+                                                                required
+                                                                fullWidth
+                                                                id="group"
+                                                                name="group"
+                                                                autoComplete="group"
+                                                                autoFocus
+                                                                placeholder="grooup name"
+                                                            />
+                                                        </div>
+
+                                                        <Button
+                                                            type="submit"
+                                                            fullWidth
+                                                            variant="contained"
+                                                            color="primary"
+                                                            className={classes.submit}
+                                                        >
+                                                            CREATE GROUP
+                                                        </Button>
+                                                    </form>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                </div>
+                            </Fade>
+                        </Modal> */}
 
 
                     </Grid>

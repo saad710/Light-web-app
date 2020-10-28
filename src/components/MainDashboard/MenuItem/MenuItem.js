@@ -95,6 +95,7 @@ const MenuItem = () => {
   const [icon13, setIcon13] = useState(false);
   const [icon14, setIcon14] = useState(false);
   const [icon15, setIcon15] = useState(false);
+  const [icon16, setIcon16] = useState(false);
   // icon hover state end
   return (
     <div>
@@ -287,6 +288,23 @@ const MenuItem = () => {
                 <ListItemText primary='Company Details' />
               </ListItem>
             </Link>
+
+            <Link to='/trial'>
+              <ListItem button className={classes.listItem}
+                onMouseEnter={() => setIcon16(true)}
+                onMouseLeave={() => setIcon16(false)}
+              >
+                <div className="d-flex" style={{ marginLeft: '1rem' }}>
+                  <ListItemIcon className={classes.iconStyle}>
+                    {icon16 ? <BusinessIcon style={{ color: '#fff' }} /> : <BusinessIcon />}
+                    {/* <BusinessIcon /> */}
+                  </ListItemIcon>
+
+                </div>
+                <ListItemText primary='Trial' />
+              </ListItem>
+            </Link>
+
           </List>
         </Collapse>
 

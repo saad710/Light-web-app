@@ -68,8 +68,8 @@ const Team = () => {
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Select Role</label>
                                     <select class="form-control" id="role" name="role" onChange={handleTeamInput}>
-                                        <option> Client </option>
                                         <option> Admin </option>
+                                        <option> Super Admin </option>
                                     </select>
                                 </div>
                                 
