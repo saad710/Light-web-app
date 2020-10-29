@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import { Button } from '@material-ui/core';
+import { Button, Container } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
         margin: '0 1rem',
         padding: '1.5rem 0'
     },
-    ulBtn :{
-        padding:'0.5rem 1rem',
+    ulBtn: {
+        padding: '0.5rem 1rem',
         backgroundColor: '#2F2E41',
         color: '#fff',
         width: '45%',
@@ -65,9 +65,11 @@ const TrialPage = () => {
         setOpen(false);
     };
     return (
-        <Grid container component="main" className={classes.root}>
-            <CssBaseline />
-            <Grid item xs={false} sm={4} md={4} className={classes.paper} >
+        <React.Fragment>
+            <Container>
+                <Grid container component="main" className={classes.root}>
+                    <CssBaseline />
+                    {/* <Grid item xs={false} sm={4} md={4} className={classes.paper} >
                 <div style={{ width: '80%' }} className="container">
                     <Typography variant="h6" style={{fontSize: '32px'}}>
                         Start Your Free Trial
@@ -101,170 +103,176 @@ const TrialPage = () => {
                         <Button className={classes.ulBtn} variant="contained" color="primary" size="small"> Continue </Button>
                     </Link>
                 </div>
-            </Grid>
-            <Grid item xs={12} sm={8} md={8} elevation={6} square>
-                <div className={classes.paper}>
-                    <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#213F7E' }}>
-                        <CardContent>
-                            <Typography variant="body1"
-                                style={{
-                                    fontSize: '12px',
-                                    fontWeight: 'bold',
-                                }}
-                            >
-                                STARTER
-                            </Typography>
-                            <div style={{ padding: '2rem 0' }}>
-                                <Typography variant="h3"
-                                    style={{
-                                        fontSize: '60px',
-                                        fontWeight: 'regular',
-                                    }}
-                                >
-                                    $8
-                                </Typography>
-                                <Typography variant="body6"
-                                    style={{
-                                        color: '#fff',
-                                        opacity: 0.5
-                                    }}
-                                >
-                                    <small> per month </small>
-                                </Typography>
-                            </div>
-                            <Typography variant="body1"
-                                style={{
-                                    fontSize: '20px',
-                                    fontWeight: '400',
-                                    marginBottom: '1rem'
-                                }}
-                            >
-                                Starter features for your business to grow
-                            </Typography>
-                        </CardContent>
-                        <Link onClick={handleOpen}>
-                            <CardActions >
-                                <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
-                            </CardActions>
-                        </Link>
-                    </Card>
+            </Grid> */}
 
-                    <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#4195D1' }}>
-                        <CardContent>
-                            <Typography variant="body1"
-                                style={{
-                                    fontSize: '12px',
-                                    fontWeight: 'bold',
-                                }}
-                            >
-                                PROFESSIONAL
+                    <Grid item xs={12} sm={8} md={8} elevation={6} square style={{margin: '0 auto'}}>
+                        <Typography variant="body1" className="mb-3">
+                            Your are in Starter package valid till Jan, 2021. <Link to="/dashboard"> Go Back. </Link> To upgrade please select a package from bellow.
+                        </Typography>
+                        <div className={classes.paper}>
+                            <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#213F7E' }}>
+                                <CardContent>
+                                    <Typography variant="body1"
+                                        style={{
+                                            fontSize: '12px',
+                                            fontWeight: 'bold',
+                                        }}
+                                    >
+                                        STARTER
                             </Typography>
-                            <div style={{ padding: '2rem 0' }}>
-                                <Typography variant="h3"
-                                    style={{
-                                        fontSize: '60px',
-                                        fontWeight: 'regular',
-                                    }}
-                                >
-                                    $18
+                                    <div style={{ padding: '2rem 0' }}>
+                                        <Typography variant="h3"
+                                            style={{
+                                                fontSize: '60px',
+                                                fontWeight: 'regular',
+                                            }}
+                                        >
+                                            $8
                                 </Typography>
-                                <Typography variant="body6"
-                                    style={{
-                                        color: '#fff',
-                                        opacity: 0.5
-                                    }}
-                                >
-                                    <small> per month </small>
-                                </Typography>
-                            </div>
-                            <Typography variant="body1"
-                                style={{
-                                    fontSize: '20px',
-                                    fontWeight: '400',
-                                    marginBottom: '1rem'
-                                }}
-                            >
-                                Starter features for your business to grow
+                                        <Typography variant="body6"
+                                            style={{
+                                                color: '#fff',
+                                                opacity: 0.5
+                                            }}
+                                        >
+                                            <small> per month </small>
+                                        </Typography>
+                                    </div>
+                                    <Typography variant="body1"
+                                        style={{
+                                            fontSize: '20px',
+                                            fontWeight: '400',
+                                            marginBottom: '1rem'
+                                        }}
+                                    >
+                                        Starter features for your business to grow
                             </Typography>
-                        </CardContent>
-                        <Link onClick={handleOpen}>
-                            <CardActions >
-                                <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
-                            </CardActions>
-                        </Link>
-                    </Card>
+                                </CardContent>
+                                <Link onClick={handleOpen}>
+                                    <CardActions >
+                                        <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
+                                    </CardActions>
+                                </Link>
+                            </Card>
 
-                    <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#43425D' }}>
-                        <CardContent>
-                            <Typography variant="body1"
-                                style={{
-                                    fontSize: '12px',
-                                    fontWeight: 'bold',
-                                }}
-                            >
-                                ADVANCED
+                            <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#4195D1' }}>
+                                <CardContent>
+                                    <Typography variant="body1"
+                                        style={{
+                                            fontSize: '12px',
+                                            fontWeight: 'bold',
+                                        }}
+                                    >
+                                        PROFESSIONAL
                             </Typography>
-                            <div style={{ padding: '2rem 0' }}>
-                                <Typography variant="h3"
-                                    style={{
-                                        fontSize: '60px',
-                                        fontWeight: 'regular',
-                                    }}
-                                >
-                                    $48
+                                    <div style={{ padding: '2rem 0' }}>
+                                        <Typography variant="h3"
+                                            style={{
+                                                fontSize: '60px',
+                                                fontWeight: 'regular',
+                                            }}
+                                        >
+                                            $18
                                 </Typography>
-                                <Typography variant="body6"
-                                    style={{
-                                        color: '#fff',
-                                        opacity: 0.5
-                                    }}
-                                >
-                                    <small> per month </small>
-                                </Typography>
-                            </div>
-                            <Typography variant="body1"
-                                style={{
-                                    fontSize: '20px',
-                                    fontWeight: '400',
-                                    marginBottom: '1rem'
-                                }}
-                            >
-                                Starter features for your business to grow
+                                        <Typography variant="body6"
+                                            style={{
+                                                color: '#fff',
+                                                opacity: 0.5
+                                            }}
+                                        >
+                                            <small> per month </small>
+                                        </Typography>
+                                    </div>
+                                    <Typography variant="body1"
+                                        style={{
+                                            fontSize: '20px',
+                                            fontWeight: '400',
+                                            marginBottom: '1rem'
+                                        }}
+                                    >
+                                        Starter features for your business to grow
                             </Typography>
-                        </CardContent>
-                        <Link onClick={handleOpen}>
-                            <CardActions >
-                                <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
-                            </CardActions>
-                        </Link>
-                    </Card>
+                                </CardContent>
+                                <Link onClick={handleOpen}>
+                                    <CardActions >
+                                        <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
+                                    </CardActions>
+                                </Link>
+                            </Card>
 
-                </div>
-            </Grid>
-            <div>
-                <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    className={classes.modal}
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    BackdropComponent={Backdrop}
-                    BackdropProps={{
-                        timeout: 500,
-                    }}
-                >
-                    <Fade in={open}>
-                        <div className={classes.modalPaper}>
-                            <div className="mt-3">
-                                <Payment />
-                            </div>
+                            <Card className={classes.trialCard} variant="outlined" style={{ backgroundColor: '#43425D' }}>
+                                <CardContent>
+                                    <Typography variant="body1"
+                                        style={{
+                                            fontSize: '12px',
+                                            fontWeight: 'bold',
+                                        }}
+                                    >
+                                        ADVANCED
+                            </Typography>
+                                    <div style={{ padding: '2rem 0' }}>
+                                        <Typography variant="h3"
+                                            style={{
+                                                fontSize: '60px',
+                                                fontWeight: 'regular',
+                                            }}
+                                        >
+                                            $48
+                                </Typography>
+                                        <Typography variant="body6"
+                                            style={{
+                                                color: '#fff',
+                                                opacity: 0.5
+                                            }}
+                                        >
+                                            <small> per month </small>
+                                        </Typography>
+                                    </div>
+                                    <Typography variant="body1"
+                                        style={{
+                                            fontSize: '20px',
+                                            fontWeight: '400',
+                                            marginBottom: '1rem'
+                                        }}
+                                    >
+                                        Starter features for your business to grow
+                            </Typography>
+                                </CardContent>
+                                <Link onClick={handleOpen}>
+                                    <CardActions >
+                                        <Button className={classes.trialBtn} size="small" variant="contained" color="primary"> Continue </Button>
+                                    </CardActions>
+                                </Link>
+                            </Card>
+
                         </div>
-                    </Fade>
-                </Modal>
-            </div>
+                    </Grid>
+                    <div>
+                        <Modal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            className={classes.modal}
+                            open={open}
+                            onClose={handleClose}
+                            closeAfterTransition
+                            BackdropComponent={Backdrop}
+                            BackdropProps={{
+                                timeout: 500,
+                            }}
+                        >
+                            <Fade in={open}>
+                                <div className={classes.modalPaper}>
+                                    <div className="mt-3">
+                                        <Payment />
+                                    </div>
+                                </div>
+                            </Fade>
+                        </Modal>
+                    </div>
 
-        </Grid>
+                </Grid>
+            </Container>
+        </React.Fragment>
     );
 };
 
