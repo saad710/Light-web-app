@@ -24,7 +24,7 @@ const Group = () => {
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Container maxWidth="sm" className={classes.container}>
+                <Container maxWidth="md" className={classes.container}>
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
                             <Typography className="pt-2" style={{ margin: ' 0 auto ' }} component="body6" variant="body6">
