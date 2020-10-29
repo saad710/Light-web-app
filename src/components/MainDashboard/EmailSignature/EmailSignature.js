@@ -8,7 +8,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LanguageIcon from '@material-ui/icons/Language';
-import { Button } from '@material-ui/core';
+import { Button, TextareaAutosize, TextField } from '@material-ui/core';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import '../Coompose/Compose.css'
@@ -22,6 +22,7 @@ const EmailSignature = () => {
     const classes = useStyles();
     const [addEmailModal, setAddEmailModal] = useState(false);
     const [updateEmailModal, setUpdateEmailModal] = useState(false);
+    const [formValue, setFormValue] = useState({});
 
     const handleAddEmailModalOpen = () => {
         setAddEmailModal(true);
@@ -38,6 +39,18 @@ const EmailSignature = () => {
     const handleUpdateEmailModalClose = () => {
         setUpdateEmailModal (false);
     };
+
+    const handleBlur = (e) => {
+        const value = { ...formValue };
+        value[e.target.name] = e.target.value;
+        setFormValue(value);
+    };
+
+    const handleSubmit = (e) => {
+        const finalValue = { ...formValue };
+        console.log(finalValue);
+        e.preventDefault();
+    };
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -51,7 +64,7 @@ const EmailSignature = () => {
                                 <Button onClick={handleAddEmailModalOpen} variant="contained" className={classes.emailBtn}>
                                     Add New
                                 </Button>
-                                <Button onClick={handleUpdateEmailModalOpen} variant="contained" className={classes.emailBtn}>
+                                <Button  variant="contained" className={classes.emailBtn}>
                                     Update
                                 </Button>
                             </div>
@@ -120,21 +133,149 @@ const EmailSignature = () => {
                                 <Fade in={addEmailModal}>
                                     <div className={classes.emailModal}>
                                         <h6 className="text-center" style={{color: '#fff', padding: '0.5rem 0'}}> Add new Signature </h6>
-                                    <SunEditor
-                                            width="100  %"
-                                            placeholder=" Email Signature "
-                                            setOptions={{
-                                                height: 150,
-                                                buttonList: [
-                                                    ['font', 'fontSize', 'formatBlock'],
-                                                    ['bold', 'underline', 'italic',],
-                                                    ['align', 'horizontalRule', 'list', 'lineHeight'],
-                                                    ['link', 'image', 'video',],
-                                                    ['fullScreen', 'codeView'],
-                                                ]
-                                            }}
-                                        />
-                                        <Button className={classes.signatureBtn} variant="contained"> Add </Button>
+                                        <form className={classes.form} noValidate>
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='name'
+                                                    name='name'
+                                                    autoComplete='name'
+                                                    autoFocus
+                                                    placeholder='Name'
+                                                    onBlur={handleAddEmailModalOpen}
+                                                />
+                                            </div>
+
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='designation'
+                                                    name='designation'
+                                                    autoComplete='designation'
+                                                    autoFocus
+                                                    placeholder='Designation'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='phone'
+                                                    name='phone'
+                                                    autoComplete='phone'
+                                                    autoFocus
+                                                    placeholder='Phone'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+
+                                            <div className='mt-3'>
+                                                <TextareaAutosize
+                                                    style={{
+                                                        backgroundColor: "#fff",
+                                                        borderRadius: "0.2rem",
+                                                        height: "50px",
+                                                    }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    width='100%'
+                                                    id='address'
+                                                    name='address'
+                                                    autoComplete='address'
+                                                    autoFocus
+                                                    aria-label='minimum height'
+                                                    rowsMin={3}
+                                                    placeholder='Address..'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+
+                                            <br />
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='facebook'
+                                                    name='facebook'
+                                                    autoComplete='facebook'
+                                                    autoFocus
+                                                    placeholder='Facebook'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='twitter'
+                                                    name='twitter'
+                                                    autoComplete='twitter'
+                                                    autoFocus
+                                                    placeholder='Twitter'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='instagram'
+                                                    name='instagram'
+                                                    autoComplete='instagram'
+                                                    autoFocus
+                                                    placeholder='Instagram'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+                                            <div>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='website'
+                                                    name='website'
+                                                    autoComplete='website'
+                                                    autoFocus
+                                                    placeholder='Website'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+                                            <Button
+                                                type='submit'
+                                                fullWidth
+                                                variant='contained'
+                                                className={classes.ticketBtn}
+                                                onClick={handleSubmit}
+                                                style={{ marginTop: "1rem" }}
+                                            >
+                                                Add
+                                            </Button>
+                                        </form>
                                     </div>
                                 </Fade>
                             </Modal>
