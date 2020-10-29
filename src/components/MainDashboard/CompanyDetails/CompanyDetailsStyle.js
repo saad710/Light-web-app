@@ -19,6 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     paper: {
         padding: theme.spacing(2),
+        width: '40%',
         display: 'flex',
         overflow: 'auto',
         flexDirection: 'column',
@@ -47,7 +48,8 @@ export const useStyles = makeStyles((theme) => ({
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
-        backgroundColor: '#3A86BC'
+        backgroundColor: '#3A86BC',
+        width: '40%'
     },
     customerPaper: {
         width: '50%',

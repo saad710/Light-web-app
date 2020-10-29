@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -11,7 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Button, ButtonGroup, Typography } from '@material-ui/core';
+import { Button, ButtonGroup, TextareaAutosize, TextField, Typography } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -25,6 +25,7 @@ import { useStyles } from './CompanyDetailsStyle';
 const CompanyDetails = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [formValue, setFormValue] = useState({});
 
     const handleOpen = () => {
         setOpen(true);
@@ -33,6 +34,17 @@ const CompanyDetails = () => {
         setOpen(false);
     }; 
 
+    const handleBlur = (e) => {
+        const value = { ...formValue };
+        value[e.target.name] = e.target.value;
+        setFormValue(value);
+    };
+
+    const handleSubmit = (e) => {
+        const finalValue = { ...formValue };
+        console.log(finalValue);
+        e.preventDefault();
+    };
 
     return (
         <div className={classes.root}>
@@ -43,7 +55,10 @@ const CompanyDetails = () => {
                 <ToolBar />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        
+                        <div className="mx-auto">
+                            <Button onClick={handleOpen} variant="contained" color="primary" size="small" style={{ fontSize: '12px', margin: '0 1rem' }}> Add Info </Button>
+                            <Button variant="contained" color="secondary" size="small" style={{ fontSize: '12px', margin: '0 1rem' }}> Update </Button>
+                        </div>
 
 
                         {/* <TableContainer component={Paper}>
@@ -100,17 +115,72 @@ const CompanyDetails = () => {
                             <Fade in={open}>
                                 <div className={classes.modalPaper}>
                                     <div className="mt-3">
-                                        <Card className={classes.cardRoot}>
-                                            <img className="pt-2" width="50%" src={avatar} alt="" />
-                                            <CardContent style={{ background: 'none !important' }}>
-                                                <Typography variant="body2">
-                                                    Marie Winter
-                                                                    </Typography>
-                                                <Typography variant="body6">
-                                                    mariewinter@mail.com
-                                                                    </Typography>
-                                            </CardContent>
-                                        </Card>
+                                        <form className={classes.form} noValidate>
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='name'
+                                                    name='name'
+                                                    autoComplete='name'
+                                                    autoFocus
+                                                    placeholder='Company'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+                                            
+                                            <div className='mt-3'>
+                                                <TextareaAutosize
+                                                    style={{
+                                                        backgroundColor: "#fff",
+                                                        borderRadius: "0.2rem",
+                                                        height: "50px",
+                                                    }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    width='100%'
+                                                    id='address'
+                                                    name='address'
+                                                    autoComplete='address'
+                                                    autoFocus
+                                                    aria-label='minimum height'
+                                                    rowsMin={3}
+                                                    placeholder='Address..'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+
+                                            <br />
+                                            <div>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='website'
+                                                    name='website'
+                                                    autoComplete='website'
+                                                    autoFocus
+                                                    placeholder='Website'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+                                            <Button
+                                                type='submit'
+                                                fullWidth
+                                                variant='contained'
+                                                className={classes.ticketBtn}
+                                                onClick={handleSubmit}
+                                                style={{ marginTop: "1rem" }}
+                                            >
+                                                SEND
+                                            </Button>
+                                        </form>
                                     </div>
                                 </div>
                             </Fade>
