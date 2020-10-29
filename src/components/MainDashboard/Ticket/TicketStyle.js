@@ -64,7 +64,7 @@ export const useStyles = makeStyles((theme) => ({
         margin: '0.5rem 0'
     },
     ticketCard: {
-        width: '22rem',
+        width: '26rem',
         height: '75vh',
         textAlign: 'center',
         color: '#fff',

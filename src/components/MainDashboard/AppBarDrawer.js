@@ -62,7 +62,7 @@ const AppBarDrawer = () => {
                         }
                     <FilterListIcon
                         onClick={() => setOpenFilter(!openFilter)}
-                        style={{ marginRight: '1rem' }}
+                        style={{ marginRight: '1rem', color: '#2d2d2d' }}
                     />
                     
                     

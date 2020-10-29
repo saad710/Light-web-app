@@ -22,8 +22,8 @@ export const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        // backgroundColor: '#4195D1'
-        backgroundImage: "linear-gradient(90deg, #213F7E, #4195D1)",
+        backgroundColor: '#fff'
+        // backgroundImage: "linear-gradient(90deg, #213F7E, #4195D1)",
     },
     appBarShift: {
         marginLeft: drawerWidth,
@@ -45,10 +45,12 @@ export const useStyles = makeStyles((theme) => ({
     search: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
-        },
+        // backgroundColor: fade(theme.palette.common.white, 0.15),
+        border: '1px solid gray',
+        // backgroundColor: fade(theme.palette.common.white, 0.15),
+        // '&:hover': {
+        //     backgroundColor: fade(theme.palette.common.white, 0.25),
+        // },
         marginRight: theme.spacing(2),
         marginLeft: 0,
         width: '100%',

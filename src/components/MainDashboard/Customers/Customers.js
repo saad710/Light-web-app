@@ -51,7 +51,7 @@ const Customers = () => {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
-                            CREATE CONTACT
+                            ADD CONTACT
                         </Button>
                         <Button onClick={handleOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
                             CREATE GROUP
@@ -137,19 +137,29 @@ const Customers = () => {
 
 
                                                         <div>
-                                                            <label htmlFor=""> Group </label>
+                                                            <label htmlFor=""> Email </label>
                                                             <TextField
                                                                 style={{ backgroundColor: '#fff' }}
                                                                 variant="outlined"
                                                                 margin="normal"
                                                                 required
                                                                 fullWidth
-                                                                id="group"
-                                                                name="group"
-                                                                autoComplete="group"
+                                                                id="email"
+                                                                name="email"email
+                                                                autoComplete="email"
                                                                 autoFocus
-                                                                placeholder="group name"
+                                                                placeholder="email"
                                                             />
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlSelect1">Group</label>
+                                                            <select class="form-control" id="role" name="role">
+                                                                <option> Group-1 </option>
+                                                                <option> Group-2 </option>
+                                                                <option> Group-3 </option>
+                                                                <option> Group-4 </option>
+                                                            </select>
                                                         </div>
 
                                                         <Button
@@ -193,7 +203,7 @@ const Customers = () => {
                                                 
                                                 <div className={classes.paper}>
                                                     <Typography component="body6" variant="body6">
-                                                        CREATE CONTACT
+                                                        ADD CONTACT
                                                     </Typography>
                                                     <form className={classes.form} noValidate>
                                                         <div style={{ margin: '1rem 0' }}>
@@ -281,7 +291,7 @@ const Customers = () => {
                                                             color="primary"
                                                             className={classes.submit}
                                                         >
-                                                            CREATE CONTACT
+                                                            ADD CONTACT
                                                         </Button>
                                                     </form>
                                                 </div>
