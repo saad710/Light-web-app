@@ -157,7 +157,30 @@ const ReportPage = () => {
                             </Paper>
                         </Grid>
 
-                        
+                        <Grid item xs={12} md={4} style={{margin: ' 0 auto'}}>
+                            <Paper>
+                                <Card className={classes.cardRoot}>
+                                    <CardContent>
+                                        <div style={{marginTop: '1rem', marginLeft: '5rem'}}>
+                                                <FormControlLabel
+                                                    control={
+                                                        <Checkbox
+                                                            color="primary"
+                                                            onChange={handleChange}
+                                                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                                        />
+                                                    }
+                                                    label="Close this mail"
+                                                />
+                                                {
+                                                    checked &&
+                                                    <input type="text" placeholder="comment" />
+                                                }
+                                            </div>
+                                    </CardContent>
+                                </Card>
+                            </Paper>
+                        </Grid>
 
                         <TableContainer component={Paper}>
                             <Table className={classes.table} aria-label="simple table" size="small">
@@ -168,7 +191,6 @@ const ReportPage = () => {
                                         <TableCell align="center"> Group </TableCell>
                                         {/* <TableCell align="center"> Tag </TableCell> */}
                                         <TableCell align="center"> Status </TableCell>
-                                        <TableCell align="center"> Action </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -188,31 +210,6 @@ const ReportPage = () => {
                                                                 Responded
                                                             </Button>
                                                         </ButtonGroup>
-                                                    </div>
-                                                </TableCell>
-
-                                                <TableCell align="center"> 
-                                                    <div
-                                                        style={{
-                                                            display:'flex',
-                                                            flexDirection: 'column',
-                                                            alignItems: 'center'
-                                                        }}
-                                                    >
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    color="primary"
-                                                                    onChange={handleChange}
-                                                                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                                                                />
-                                                            }
-                                                            label="Close this mail"
-                                                        />
-                                                        {
-                                                            checked && 
-                                                            <input type="text" placeholder="comment" />
-                                                        }
                                                     </div>
                                                 </TableCell>
                                             </TableRow>
