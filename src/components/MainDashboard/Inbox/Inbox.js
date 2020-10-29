@@ -15,7 +15,7 @@ const Inbox = () => {
     return (
         <React.Fragment>
             <Container maxWidth="lg">
-                <Grid >
+                <Grid style={{marginTop: '-1.5rem'}}>
                     <div className="d-flex align-items-center">
                         <div className="d-flex align-items-center">
                             <Checkbox
