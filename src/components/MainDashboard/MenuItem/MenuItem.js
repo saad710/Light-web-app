@@ -8,6 +8,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import SendIcon from "@material-ui/icons/Send";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import DataUsageIcon from '@material-ui/icons/DataUsage';
 import {
   Backdrop,
   Button,
@@ -117,7 +118,7 @@ const MenuItem = () => {
             onMouseLeave={() => setIcon1(false)}
           >
             <ListItemIcon className={classes.iconStyle}>
-              {icon1 ? <DashboardIcon style={{ color: '#fff' }} /> : <DashboardIcon />}
+              {icon1 ? <DashboardIcon style={{ color: '#fff' }} /> : <DashboardIcon  style={{ color: '#4195D1' }} />}
             </ListItemIcon>
             <ListItemText primary='Dashboard' />
           </ListItem>
@@ -129,7 +130,7 @@ const MenuItem = () => {
             onMouseLeave={() => setIcon2(false)}
           >
             <ListItemIcon className={classes.iconStyle}>
-              {icon2 ? <WcIcon style={{ color: '#fff' }} /> : <WcIcon />}
+              {icon2 ? <WcIcon style={{ color: '#fff' }} /> : <WcIcon style={{ color: '#4195D1' }} />}
             </ListItemIcon>
             <ListItemText primary='Contacts' />
           </ListItem>
@@ -141,7 +142,7 @@ const MenuItem = () => {
             onMouseLeave={() => setIcon3(false)}
           >
             <ListItemIcon className={classes.iconStyle}>
-              {icon3 ? <InboxIcon style={{ color: '#fff' }} /> : <InboxIcon />}
+              {icon3 ? <InboxIcon style={{ color: '#fff' }} /> : <InboxIcon style={{ color: '#4195D1' }} />}
             </ListItemIcon>
             <ListItemText primary='Inbox' />
           </ListItem>
@@ -153,7 +154,7 @@ const MenuItem = () => {
             onMouseLeave={() => setIcon4(false)}
           >
             <ListItemIcon className={classes.iconStyle}>
-              {icon4 ? <SendIcon style={{ color: '#fff' }} /> : <SendIcon />}
+              {icon4 ? <SendIcon style={{ color: '#fff' }} /> : <SendIcon style={{ color: '#4195D1' }} />}
             </ListItemIcon>
             <ListItemText primary='Sent' />
           </ListItem>
@@ -165,7 +166,7 @@ const MenuItem = () => {
             onMouseLeave={() => setIcon5(false)}
           >
             <ListItemIcon className={classes.iconStyle}>
-              {icon5 ? <GroupWorkIcon style={{ color: '#fff' }} /> : <GroupWorkIcon />}
+              {icon5 ? <GroupWorkIcon style={{ color: '#fff' }} /> : <GroupWorkIcon style={{ color: '#4195D1' }} />}
             </ListItemIcon>
             <ListItemText primary='Group' />
           </ListItem>
@@ -177,7 +178,7 @@ const MenuItem = () => {
             onMouseLeave={() => setIcon6(false)}
           >
             <ListItemIcon className={classes.iconStyle}>
-              {icon6 ? <LabelOffOutlinedIcon style={{ color: '#fff' }} /> : <LabelOffOutlinedIcon />}
+              {icon6 ? <LabelOffOutlinedIcon style={{ color: '#fff' }} /> : <LabelOffOutlinedIcon style={{ color: '#4195D1' }} />}
             </ListItemIcon>
             <ListItemText primary='Tag' />
           </ListItem>
@@ -189,7 +190,7 @@ const MenuItem = () => {
             onMouseLeave={() => setIcon7(false)}
           >
             <ListItemIcon className={classes.iconStyle}>
-              {icon7 ? <DateRangeOutlinedIcon style={{ color: '#fff' }} /> : <DateRangeOutlinedIcon />}
+              {icon7 ? <DateRangeOutlinedIcon style={{ color: '#fff' }} /> : <DateRangeOutlinedIcon style={{ color: '#4195D1' }} />}
             </ListItemIcon>
             <ListItemText primary='Calender' />
           </ListItem>
@@ -200,7 +201,7 @@ const MenuItem = () => {
           onMouseLeave={() => setIcon8(false)}
         >
           <ListItemIcon className={classes.iconStyle}>
-            {icon8 ? <SettingsIcon style={{ color: '#fff' }} /> : <SettingsIcon />}
+            {icon8 ? <SettingsIcon style={{ color: '#fff' }} /> : <SettingsIcon style={{ color: '#4195D1' }} />}
           </ListItemIcon>
           <ListItemText primary='Setting' />
           {open ? <ExpandLess /> : <ExpandMore />}
@@ -220,7 +221,7 @@ const MenuItem = () => {
               >
                 <div className="d-flex" style={{ marginLeft: '1rem' }}>
                   <ListItemIcon className={classes.iconStyle}>
-                    {icon9 ? <PersonIcon style={{ color: '#fff' }} /> : <PersonIcon />}
+                    {icon9 ? <PersonIcon style={{ color: '#fff' }} /> : <PersonIcon style={{ color: '#4195D1' }} />}
                     {/* <PersonIcon /> */}
                   </ListItemIcon>
                   <ListItemText primary='Profile' />
@@ -248,7 +249,7 @@ const MenuItem = () => {
               >
                 <div className="d-flex" style={{ marginLeft: '1rem' }}>
                   <ListItemIcon className={classes.iconStyle}>
-                    {icon11 ? <SettingsIcon style={{ color: '#fff' }} /> : <SettingsIcon />}
+                    {icon11 ? <SettingsIcon style={{ color: '#fff' }} /> : <SettingsIcon style={{ color: '#4195D1' }} />}
                     {/* <GroupWorkIcon /> */}
                   </ListItemIcon>
                   <ListItemText primary='Team' />
@@ -264,7 +265,7 @@ const MenuItem = () => {
               >
                 <div className="d-flex" style={{ marginLeft: '1rem' }}>
                   <ListItemIcon className={classes.iconStyle}>
-                    {icon12 ? <LabelImportantIcon style={{ color: '#fff' }} /> : <LabelImportantIcon />}
+                    {icon12 ? <LabelImportantIcon style={{ color: '#fff' }} /> : <LabelImportantIcon style={{ color: '#4195D1' }} />}
                     {/* <LabelImportantIcon /> */}
                   </ListItemIcon>
                   <ListItemText primary='Email Signature' />
@@ -280,7 +281,7 @@ const MenuItem = () => {
               >
                 <div className="d-flex" style={{ marginLeft: '1rem' }}>
                   <ListItemIcon className={classes.iconStyle}>
-                    {icon13 ? <BusinessIcon style={{ color: '#fff' }} /> : <BusinessIcon />}
+                    {icon13 ? <BusinessIcon style={{ color: '#fff' }} /> : <BusinessIcon style={{ color: '#4195D1' }} />}
                     {/* <BusinessIcon /> */}
                   </ListItemIcon>
 
@@ -296,7 +297,8 @@ const MenuItem = () => {
               >
                 <div className="d-flex" style={{ marginLeft: '1rem' }}>
                   <ListItemIcon className={classes.iconStyle}>
-                    {icon16 ? <BusinessIcon style={{ color: '#fff' }} /> : <BusinessIcon />}
+                    {/* {icon16 ? <BusinessIcon style={{ color: '#fff' }} /> : <BusinessIcon style={{ color: '#4195D1' }} />} */}
+                    {icon16 ? <DataUsageIcon style={{ color: '#fff' }} /> : <DataUsageIcon style={{ color: '#4195D1' }} /> }
                     {/* <BusinessIcon /> */}
                   </ListItemIcon>
 
@@ -315,7 +317,7 @@ const MenuItem = () => {
           >
             <div className='d-flex'>
               <ListItemIcon className={classes.iconStyle}>
-                {icon14 ? <BugReportIcon style={{ color: '#fff' }} /> : <BugReportIcon />}
+                {icon14 ? <BugReportIcon style={{ color: '#fff' }} /> : <BugReportIcon style={{ color: '#4195D1' }} />}
                 {/* <BugReportIcon /> */}
               </ListItemIcon>
               <ListItemText primary='Ticket' />
@@ -329,7 +331,7 @@ const MenuItem = () => {
             onMouseLeave={() => setIcon15(false)}
           >
             <ListItemIcon className={classes.iconStyle}>
-              {icon15 ? <ExitToAppIcon style={{ color: '#fff' }} /> : <ExitToAppIcon />}
+              {icon15 ? <ExitToAppIcon style={{ color: '#fff' }} /> : <ExitToAppIcon style={{ color: '#4195D1' }} />}
               {/* <ExitToAppIcon /> */}
             </ListItemIcon>
             <ListItemText primary='Log Out' />

@@ -28,13 +28,13 @@ const Group = () => {
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
                             <Typography className="pt-2" style={{ margin: ' 0 auto ' }} component="body6" variant="body6">
-                                Add Groups
+                                Create Groups
                             </Typography>
                             <div>
                                 <form className={classes.form} noValidate>
 
                                     <div>
-                                        <label htmlFor=""> Group </label>
+                                        <label htmlFor=""> Group Name </label>
                                         <TextField
                                             style={{ borderRadius: '4px' }}
                                             variant="outlined"
@@ -59,7 +59,7 @@ const Group = () => {
                                         color="primary"
                                         className={classes.submit}
                                     >
-                                        ADD GROUP
+                                        Create GROUP
                                 </Button>
                                 </form>
                                 <TableContainer component={Paper} square elevation={0} className="mt-4">

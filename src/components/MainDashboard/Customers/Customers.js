@@ -54,7 +54,7 @@ const Customers = () => {
                             ADD CONTACT
                         </Button>
                         <Button onClick={handleOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
-                            CREATE GROUP
+                            ADD GROUP
                         </Button>
                         <TableContainer component={Paper} square elevation={0} className="mt-4">
                             <Table className={classes.table} aria-label="simple table"
@@ -169,7 +169,7 @@ const Customers = () => {
                                                             color="primary"
                                                             className={classes.submit}
                                                         >
-                                                            CREATE GROUP
+                                                            ADD GROUP
                                                         </Button>
                                                     </form>
                                                 </div>
