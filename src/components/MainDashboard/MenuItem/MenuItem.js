@@ -308,18 +308,20 @@ const MenuItem = () => {
           </List>
         </Collapse>
 
-        <ListItem onClick={handleOpen} button className={classes.listItem}
-          onMouseEnter={() => setIcon14(true)}
-          onMouseLeave={() => setIcon14(false)}
-        >
-          <div className='d-flex'>
-            <ListItemIcon className={classes.iconStyle}>
-              {icon14 ? <BugReportIcon style={{ color: '#fff' }} /> : <BugReportIcon />}
-              {/* <BugReportIcon /> */}
-            </ListItemIcon>
-            <ListItemText primary='Ticket' />
-          </div>
-        </ListItem>
+        <Link to="/ticket">
+          <ListItem button className={classes.listItem}
+            onMouseEnter={() => setIcon14(true)}
+            onMouseLeave={() => setIcon14(false)}
+          >
+            <div className='d-flex'>
+              <ListItemIcon className={classes.iconStyle}>
+                {icon14 ? <BugReportIcon style={{ color: '#fff' }} /> : <BugReportIcon />}
+                {/* <BugReportIcon /> */}
+              </ListItemIcon>
+              <ListItemText primary='Ticket' />
+            </div>
+          </ListItem>
+        </Link>
 
         <Link to='/'>
           <ListItem button className={classes.listItem}
