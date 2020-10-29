@@ -1,16 +1,40 @@
 import React from 'react';
-import { Avatar, Chip, Divider, Typography } from '@material-ui/core';
+import { Avatar, Checkbox, Chip, Container, Divider, Grid, Typography } from '@material-ui/core';
 import inboxData from '../../../data/inboxData';
 import avatar from '../../../images/avatar.png'
 import {Link} from 'react-router-dom'
 import { useStyles } from './InboxStyle';
+import ToolBar from '../ToolBar/ToolBar';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const Inbox = () => {
     const classes = useStyles()
     const inboxMsg = inboxData
     return (
         <React.Fragment>
-            <>
+            <Container maxWidth="lg">
+                <Grid >
+                    <div className="d-flex align-items-center">
+                        <div className="d-flex align-items-center">
+                            <Checkbox
+                                color="primary"
+                                inputProps={{ 'aria-label': 'secondary checkbox' }}
+                            />
+                            <RefreshIcon />
+                        </div>
+                        <div className="d-flex" style={{ marginLeft: '48rem' }}>
+                            <div style={{ padding: '0 2rem' }}>
+                                1 of 21
+                            </div>
+                            <div>
+                                <ArrowBackIosIcon fontSize="small" />
+                                <ArrowForwardIosIcon fontSize="small" />
+                            </div>
+                        </div>
+                    </div>
+                </Grid>
                 {
                     inboxMsg.map(inbox => (
                         <div>
@@ -35,7 +59,7 @@ const Inbox = () => {
                                                 label="quick reply"
                                             />
                                             <br />
-                                            <strong style={{ marginLeft: '0.5rem' }}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry 
+                                            <strong style={{ marginLeft: '0.5rem' }}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry
                                         </Typography>
 
                                     </Link>
@@ -49,7 +73,7 @@ const Inbox = () => {
                                             border: 'none',
                                             borderRadius: '5px'
                                         }}>
-                                            Report
+                                        Report
                                         </button>
                                 </Link>
                                 <Typography style={{ color: '#2d2d2d' }} variant="body6" align="right">
@@ -60,9 +84,7 @@ const Inbox = () => {
                         </div>
                     ))
                 }
-            </>
-            
-
+            </Container>
         </React.Fragment>
     );
 };
