@@ -21,6 +21,10 @@ import avatar from '../../../images/avatar.png'
 import { Pagination } from '@material-ui/lab';
 import ToolBar from '../ToolBar/ToolBar';
 import { useStyles } from './CompanyDetailsStyle';
+import BusinessIcon from '@material-ui/icons/Business';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import LanguageIcon from '@material-ui/icons/Language';
+import EditIcon from '@material-ui/icons/Edit';
 
 const CompanyDetails = () => {
     const classes = useStyles();
@@ -55,10 +59,33 @@ const CompanyDetails = () => {
                 <ToolBar />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <div className="mx-auto">
-                            <Button onClick={handleOpen} variant="contained" color="primary" size="small" style={{ fontSize: '12px', margin: '0 1rem' }}> Add Info </Button>
-                            <Button variant="contained" color="secondary" size="small" style={{ fontSize: '12px', margin: '0 1rem' }}> Update </Button>
-                        </div>
+                        <Grid item xs>
+                            <div style={{ marginLeft: '28rem'}}>
+                                <div className="mx-auto">
+                                    <Button onClick={handleOpen} variant="contained" color="primary" size="small" style={{ fontSize: '12px', margin: '0 3rem' }}> Add Info </Button>
+                                </div>
+                                <div style={{ marginTop: '2rem' }}>
+                                    <div className="d-flex align-items-center">
+                                        <div>
+                                            <Typography variant="h5"> Lebsack-Towne </Typography>
+                                            <Typography variant="caption"> Utilize Strategic Niches </Typography>
+                                        </div>
+                                        <EditIcon className="ml-3" />
+
+                                    </div>
+                                    <div className="mt-3">
+                                        <div className="d-flex align-items-center">
+                                            <LocationOnIcon fontSize="large" color="primary" />
+                                            <Typography className="ml-2" variant="body1"> 669 Park Street <br /> Pittsburg, CA <br /> California </Typography>
+                                        </div>
+                                        <div className="d-flex align-items-center">
+                                            <LanguageIcon fontSize="large" color="primary" />
+                                            <Typography className="ml-2" variant="body1"> niches@info.com </Typography>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Grid>
 
 
                         {/* <TableContainer component={Paper}>
@@ -128,6 +155,22 @@ const CompanyDetails = () => {
                                                     autoComplete='name'
                                                     autoFocus
                                                     placeholder='Company'
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='tagline'
+                                                    name='tagline'
+                                                    autoComplete='tagline'
+                                                    autoFocus
+                                                    placeholder='Tagline'
                                                     onBlur={handleBlur}
                                                 />
                                             </div>
