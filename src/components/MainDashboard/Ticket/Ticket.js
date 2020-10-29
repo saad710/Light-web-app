@@ -37,7 +37,7 @@ const Ticket = () => {
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Container maxWidth="md" className={classes.container}>
+                <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
                             <Button
