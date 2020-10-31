@@ -12,6 +12,7 @@ import EditIcon from '@material-ui/icons/Edit';
 const Profile = () => {
     const classes = useStyles();
     const [profileInfo, setProfileInfo] = useState({})
+    const [disable, setDisable] = useState(true)
     // console.log(profileInfo);
     const handleBlur = (e) => {
         const newProfile = { ...profileInfo }
@@ -31,11 +32,12 @@ const Profile = () => {
                             <Typography style={{color: '#2d2d2d', marginTop:'1rem'}} component="body6" variant="body6">
                                 Personal Details
                             </Typography>
-                            <EditIcon fontSize="small" style={{ marginLeft: '32.5rem',marginTop:'-1.5rem', color: '#2d2d2d' }} />
+                            <EditIcon onClick={() => setDisable(!disable)} fontSize="small" style={{ marginLeft: '32.5rem',marginTop:'-1.5rem', color: '#2d2d2d' }} />
                             <form className={classes.form} noValidate style={{color: '#2d2d2d'}}>
                                 <div style={{ margin: '1rem 0'}}>
                                     <label htmlFor=""> Name </label>
                                     <TextField
+                                        disabled={disable ? disable : '' }
                                         style={{ borderRadius:'4px' }}
                                         variant="outlined"
                                         margin="normal"
@@ -53,6 +55,7 @@ const Profile = () => {
                                 <div className="pb-2">
                                     <label htmlFor=""> Email </label>
                                     <TextField
+                                        disabled={disable ? disable : ''}
                                         style={{borderRadius: '4px' }}
                                         variant="outlined"
                                         margin="normal"
@@ -73,6 +76,7 @@ const Profile = () => {
                                 <div className="mt-3">
                                     <label htmlFor=""> Enter your old password </label>
                                     <TextField
+                                        disabled={disable ? disable : ''}
                                         style={{borderRadius: '4px' }}
                                         variant="outlined"
                                         margin="normal"
@@ -90,6 +94,7 @@ const Profile = () => {
                                 <div className="mt-3">
                                     <label htmlFor=""> Enter new password </label>
                                     <TextField
+                                        disabled={disable ? disable : ''}
                                         style={{borderRadius: '4px' }}
                                         variant="outlined"
                                         margin="normal"
@@ -107,6 +112,7 @@ const Profile = () => {
                                 <div className="mt-3">
                                     <label htmlFor=""> Confrim password </label>
                                     <TextField
+                                        disabled={disable ? disable : ''}
                                         style={{ borderRadius: '4px' }}
                                         variant="outlined"
                                         margin="normal"
