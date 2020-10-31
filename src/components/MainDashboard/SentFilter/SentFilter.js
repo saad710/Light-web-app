@@ -50,7 +50,7 @@ const SentFilter = () => {
             <FormControl className={classes.formControl} >
                 <InputLabel id="demo-mutiple-checkbox-label" style={{ color: '#fff' }}>Tag</InputLabel>
                 <Select
-                    style={{ color: '#fff' }}
+                    style={{ color: '#fff', width: '100%' }}
                     labelId="demo-mutiple-checkbox-label"
                     id="demo-mutiple-checkbox"
                     multiple

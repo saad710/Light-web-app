@@ -99,7 +99,7 @@ export const useStyles = makeStyles((theme) => ({
 
     },
     horizontalDivider: {
-        backgroundColor: '#fff',
+        backgroundColor: '#2d2d2d',
         marginRight: '1rem',
         height: '2rem',
         marginTop: '1rem',

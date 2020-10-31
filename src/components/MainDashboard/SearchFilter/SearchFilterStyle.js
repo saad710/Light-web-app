@@ -53,7 +53,7 @@ export const useStyles = makeStyles((theme) => ({
         //     backgroundColor: fade(theme.palette.common.white, 0.25),
         // },
         marginRight: theme.spacing(2),
-        marginLeft: 0,
+        marginLeft: '66px !important',
         width: '90% !important',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(3),

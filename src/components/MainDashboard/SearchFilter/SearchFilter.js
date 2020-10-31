@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, CssBaseline, Divider, Grid, InputBase } from '@material-ui/core';
+import { Checkbox, Container, CssBaseline, Divider, FormControlLabel, FormGroup, Grid, InputBase } from '@material-ui/core';
 import { useStyles } from './SearchFilterStyle';
 import './SearchFilter.css'
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -12,6 +12,7 @@ import {
     KeyboardTimePicker,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
+import './SearchFilter.css'
 
 const SearchFilter = () => {
     const [openFilter, setOpenFilter] = useState(false)
@@ -21,6 +22,24 @@ const SearchFilter = () => {
     const handleScheduleDate = (date) => {
         setScheduleDate(date.toDateString());
     };
+    // check box state
+    const [checkBox, setCheckBox] = useState({
+        quickReply: false,
+        // noReply: false,
+        setRemainder: false,
+        setDeadLine: false
+    });
+
+    // checkbox handle
+    const handleChange = (event) => {
+        setCheckBox({ ...checkBox, [event.target.name]: event.target.checked });
+    };
+
+    const handleDate = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+    }
+
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -35,8 +54,7 @@ const SearchFilter = () => {
                             /> */}
                             <div className={classes.search}>
                                 <div className={classes.searchIcon} >
-                                    <SearchIcon
-                                    />
+                                    <SearchIcon/>
                                 </div>
                                 <InputBase
                                     placeholder="Search…"
@@ -50,18 +68,56 @@ const SearchFilter = () => {
                             </div>
                             <div class="input-group-btn">
                                 <div class="btn-group" role="group">
-                                    <div class="dropdown dropdown-lg">
+                                    <div class="dropdown dropdown-lg" id="dropdown-icon">
                                         <FilterListIcon
                                             color="primary"
-                                            onClick={() => setOpenFilter(!openFilter)}
+                                            // onClick={() => setOpenFilter(!openFilter)}
                                             type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
                                         />
                                         {/* <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button> */}
                                         <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                            <form class="form-horizontal" role="form">
-                                                <SentFilter />
+                                            <form>
                                                 <div>
-                                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                    <label> Select Tag </label>
+                                                    <FormGroup row style={{ color: '#fff' }} className="d-flex flex-column">
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={checkBox.quickReply}
+                                                                    onChange={handleChange}
+                                                                    name="quickReply"
+                                                                    style={{ color: '#4195D1' }}
+                                                                />}
+                                                            label="Quick Reply (10)"
+                                                        />
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={checkBox.setRemainder}
+                                                                    onChange={handleChange}
+                                                                    name="setRemainder"
+                                                                    style={{ color: '#4195D1' }}
+                                                                />
+                                                            }
+                                                            label="No Reply (14)"
+                                                        />
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={checkBox.setDeadLine}
+                                                                    onChange={handleChange}
+                                                                    name="setDeadLine"
+                                                                    style={{ color: '#4195D1' }}
+                                                                />
+                                                            }
+                                                            label="Schedule Date (22)"
+                                                        />
+                                                    </FormGroup>
+                                                    
+                                                </div>
+                                                <br/>
+                                                <div>
+                                                    {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                                         <Grid container justify="space-around">
                                                             <KeyboardDatePicker
                                                                 margin="normal"
@@ -78,7 +134,12 @@ const SearchFilter = () => {
                                                                 }}
                                                             />
                                                         </Grid>
-                                                    </MuiPickersUtilsProvider>
+                                                    </MuiPickersUtilsProvider> */}
+                                                    <div className="pb-2">
+                                                        <label> Select Date </label>
+                                                        <br />
+                                                        <input onBlur={handleDate} name="date" type="date" className="dateInput" />
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

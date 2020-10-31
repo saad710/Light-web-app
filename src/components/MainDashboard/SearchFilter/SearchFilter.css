@@ -1,4 +1,16 @@
-
+.dateInput {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    width: 100%;
+}
+.dropdown-menu.dropdown-menu-right.show {
+    background-color: #213F7E;
+}
+#dropdown-icon {
+    margin-left: -4rem;
+}
 .dropdown.dropdown-lg .dropdown-menu {
     margin-top: -1px;
     padding: 6px 20px;
