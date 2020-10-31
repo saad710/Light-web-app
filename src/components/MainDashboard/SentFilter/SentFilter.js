@@ -48,8 +48,9 @@ const SentFilter = () => {
     return (
         <div>
             <FormControl className={classes.formControl} >
-                <InputLabel id="demo-mutiple-checkbox-label">Tag</InputLabel>
+                <InputLabel id="demo-mutiple-checkbox-label" style={{ color: '#fff' }}>Tag</InputLabel>
                 <Select
+                    style={{ color: '#fff' }}
                     labelId="demo-mutiple-checkbox-label"
                     id="demo-mutiple-checkbox"
                     multiple

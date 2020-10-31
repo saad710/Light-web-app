@@ -17,6 +17,7 @@ import { useStyles } from './AppBarDrawerStyle';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useState } from 'react';
 import SentFilter from './SentFilter/SentFilter';
+import SearchFilter from './SearchFilter/SearchFilter';
 
 
 const AppBarDrawer = () => {
@@ -42,7 +43,7 @@ const AppBarDrawer = () => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <div className={classes.search}>
+                    {/* <div className={classes.search}>
                         <div className={classes.searchIcon} >
                             <SearchIcon
                             />
@@ -63,7 +64,8 @@ const AppBarDrawer = () => {
                     <FilterListIcon
                         onClick={() => setOpenFilter(!openFilter)}
                         style={{ marginRight: '1rem', color: '#2d2d2d' }}
-                    />
+                    /> */}
+                    <SearchFilter />
                     
                     
                     <Divider className={classes.horizontalDivider} orientation="vertical" flexItem />
