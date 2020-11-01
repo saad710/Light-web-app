@@ -14,7 +14,9 @@ const axios = require('axios');
 const Tag = () => {
     const classes = useStyles();
     const [addTag, setAddTag] = useState({});
-    console.log(addTag);
+    const [allTag, setAllTag] = useState(null);
+
+    console.log("all",allTag);
 
     const handleTagInput = (e) => {
         const newTag = { ...addTag }
@@ -34,6 +36,16 @@ const Tag = () => {
                 console.log(err);
             })
     }
+    useEffect(() => {
+        axios(`${key}tag-all`)
+            .then(res => {
+                const tags = res.data
+                setAllTag(tags)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }, [])
 
     return (
         <div className={classes.root}>
@@ -91,13 +103,13 @@ const Tag = () => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {
-                                            customerData.map((customer, i) => (
-                                                <TableRow key={customer.id}>
+                                        {   allTag !== null &&
+                                            allTag.map((tag, i) => (
+                                                <TableRow key={tag.id}>
                                                     <TableCell component="th" scope="row">
                                                         {i + 1}
                                                     </TableCell>
-                                                    <TableCell align="center">tag names</TableCell>
+                                                    <TableCell align="center"> {tag.tag_name} </TableCell>
                                                     <TableCell align="right">
                                                         <div>
                                                             <ButtonGroup
