@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -7,6 +7,8 @@ import { Button, ButtonGroup, Paper, Table, TableBody, TableCell, TableContainer
 import { useStyles } from './TagStyle';
 import customerData from '../../../data/customerData';
 import { Pagination } from '@material-ui/lab';
+import { key } from '../../../apiKey';
+const axios = require('axios');
 
 
 const Tag = () => {
@@ -14,11 +16,25 @@ const Tag = () => {
     const [addTag, setAddTag] = useState({});
     console.log(addTag);
 
-    const handleTeamInput = (e) => {
+    const handleTagInput = (e) => {
         const newTag = { ...addTag }
         newTag[e.target.name] = e.target.value
         setAddTag(newTag)
     }
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const tag_name = {...addTag}
+        console.log(tag_name);
+        axios.post(`${key}create-tag`, tag_name)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -42,11 +58,11 @@ const Tag = () => {
                                         required
                                         fullWidth
                                         id="tag"
-                                        name="tag"
+                                        name="tag_name"
                                         autoComplete="tag"
                                         autoFocus
                                         placeholder="quick-reply, schedule"
-                                        onChange={handleTeamInput}
+                                        onChange={handleTagInput}
                                     />
                                 </div>
 
@@ -58,6 +74,7 @@ const Tag = () => {
                                     variant="contained"
                                     color="primary"
                                     className={classes.submit}
+                                    onClick={handleSubmit}
                                 >
                                     ADD TAG
                                 </Button>

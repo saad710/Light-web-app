@@ -11,6 +11,8 @@ import { useStyles } from './ComposeStyle';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const Coompose = () => {
     const classes = useStyles();
@@ -22,6 +24,7 @@ const Coompose = () => {
     const [group, setGroup] = useState(false)
     const [tags, setTags] = useState(false)
 
+    console.log('final value', value)
     // check box state
     const [checkBox, setCheckBox] = useState({
         quickReply: false,
@@ -93,6 +96,17 @@ const Coompose = () => {
     const handleClose = () => {
         setOpen(false);
     };
+    const handleBlur = (event) => {
+        console.log({ editorValue: event });
+    }
+    const handleImageUpload = (targetImgElement, index, state, imageInfo, remainingFilesCount) => {
+        console.log(targetImgElement, index, state, imageInfo, remainingFilesCount)
+    }
+
+    const handleImageUploadBefore = (files, info, uploadHandler) => {
+        // uploadHandler is a function
+        console.log(files, info)
+    }
 
     return (
         <div className={classes.root}>
@@ -330,6 +344,8 @@ const Coompose = () => {
                                                             ['fullScreen', 'codeView'],
                                                         ]
                                                     }}
+                                                    onChange={handleBlur}
+                                                    onImageUpload={handleImageUpload} 
                                                 />
 
                                             </FormControl>
