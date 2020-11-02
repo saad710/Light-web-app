@@ -26,12 +26,13 @@ const Tag = () => {
     }
     
     const handleSubmit = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         const tag_name = {...addTag}
         console.log(tag_name);
         axios.post(`${key}create-tag`, tag_name)
             .then(res => {
-                console.log(res);
+                console.log(res.data);
+                
             })
             .catch(err => {
                 console.log(err);
