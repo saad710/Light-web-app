@@ -59,7 +59,7 @@ const Inbox = () => {
                                                 label="quick reply"
                                             />
                                             <br />
-                                            <strong style={{ marginLeft: '0.5rem' }}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been the industry
+                                            <strong style={{ marginLeft: '0.5rem' }}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been
                                         </Typography>
 
                                     </Link>

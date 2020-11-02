@@ -144,11 +144,11 @@ const MenuItem = () => {
             <ListItemIcon className={classes.iconStyle}>
               {icon3 ? <InboxIcon style={{ color: '#fff' }} /> : <InboxIcon style={{ color: '#4195D1' }} />}
             </ListItemIcon>
-            <ListItemText primary='Inbox' />
+            <ListItemText primary='Mailbox' />
           </ListItem>
         </Link>
 
-        <Link to='/sent'>
+        {/* <Link to='/sent'>
           <ListItem button className={classes.listItem}
             onMouseEnter={() => setIcon4(true)}
             onMouseLeave={() => setIcon4(false)}
@@ -158,7 +158,7 @@ const MenuItem = () => {
             </ListItemIcon>
             <ListItemText primary='Sent' />
           </ListItem>
-        </Link>
+        </Link> */}
 
         <Link to="/group">
           <ListItem button className={classes.listItem}

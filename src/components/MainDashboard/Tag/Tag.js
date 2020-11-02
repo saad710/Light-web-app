@@ -26,7 +26,7 @@ const Tag = () => {
     }
     
     const handleSubmit = (e) => {
-        // e.preventDefault();
+        
         const tag_name = {...addTag}
         console.log(tag_name);
         axios.post(`${key}create-tag`, tag_name)
@@ -37,6 +37,7 @@ const Tag = () => {
             .catch(err => {
                 console.log(err);
             })
+            // e.preventDefault();
     }
     useEffect(() => {
         axios(`${key}tag-all`)

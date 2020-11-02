@@ -53,9 +53,9 @@ const Customers = () => {
                         <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
                             ADD CONTACT
                         </Button>
-                        <Button onClick={handleOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
+                        {/* <Button onClick={handleOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
                             ADD GROUP
-                        </Button>
+                        </Button> */}
                         <TableContainer component={Paper} square elevation={0} className="mt-4">
                             <Table className={classes.table} aria-label="simple table"
                                 size='small'
@@ -67,7 +67,9 @@ const Customers = () => {
                                         <TableCell align="center"> EMAIL </TableCell>
                                         <TableCell align="center"> PHONE </TableCell>
                                         <TableCell align="center"> GROUP </TableCell>
+                                        <TableCell align="center"> TAG </TableCell>
                                         <TableCell align="center"> PHYSICAL ADDRESS </TableCell>
+                                        <TableCell align="center"> STATUS </TableCell>
                                         <TableCell align="center"> ACTION </TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -82,7 +84,17 @@ const Customers = () => {
                                                 <TableCell align="center">{customer.email}</TableCell>
                                                 <TableCell align="center"> +33 343 4545 23</TableCell>
                                                 <TableCell align="center">{customer.group}</TableCell>
+                                                <TableCell align="center"> Tag-1 </TableCell>
                                                 <TableCell align="center"> 4670  Charles Street, FORT WAYNE </TableCell>
+                                                <TableCell align="center">
+                                                    <Button
+                                                        variant="contained"
+                                                        color="primary"
+                                                        size="small"
+                                                        style={{ fontSize: '12px' }}>
+                                                            verified
+                                                    </Button>
+                                                </TableCell>
                                                 <TableCell align="center">
                                                     <div>
                                                         <ButtonGroup
@@ -92,7 +104,7 @@ const Customers = () => {
                                                             aria-label="contained primary button group"
                                                         >
                                                             <Button
-                                                                style={{fontSize: '10px'}} color="secondary">DELETE</Button>
+                                                                style={{fontSize: '10px'}} color="secondary">REMOVE</Button>
                                                         </ButtonGroup>
                                                     </div>
                                                 </TableCell>
