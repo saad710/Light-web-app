@@ -129,7 +129,7 @@ const TrialPage = () => {
                                         >
                                             $8
                                 </Typography>
-                                        <Typography variant="body6"
+                                        <Typography variant="body1"
                                             style={{
                                                 color: '#fff',
                                                 opacity: 0.5
@@ -174,7 +174,7 @@ const TrialPage = () => {
                                         >
                                             $18
                                 </Typography>
-                                        <Typography variant="body6"
+                                        <Typography variant="body1"
                                             style={{
                                                 color: '#fff',
                                                 opacity: 0.5
@@ -219,7 +219,7 @@ const TrialPage = () => {
                                         >
                                             $48
                                 </Typography>
-                                        <Typography variant="body6"
+                                        <Typography variant="body1"
                                             style={{
                                                 color: '#fff',
                                                 opacity: 0.5

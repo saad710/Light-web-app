@@ -29,7 +29,7 @@ const Profile = () => {
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
                             <img className="pt-2" style={{margin: ' 0 auto '}} width="20%" src={avatar} alt="" />
-                            <Typography style={{color: '#2d2d2d', marginTop:'1rem'}} component="body6" variant="body6">
+                            <Typography style={{color: '#2d2d2d', marginTop:'1rem'}} component="body2" variant="body2">
                                 Personal Details
                             </Typography>
                             <EditIcon onClick={() => setDisable(!disable)} fontSize="small" style={{ marginLeft: '32.5rem',marginTop:'-1.5rem', color: '#2d2d2d' }} />
@@ -69,7 +69,7 @@ const Profile = () => {
                                         onBlur={handleBlur}
                                     />
                                 </div>
-                                <Typography component="body6" variant="body6">
+                                <Typography component="body2" variant="body2">
                                     Change Password
                                 </Typography>
                                 <EditIcon fontSize="small" style={{marginLeft: '24.5rem'}} />

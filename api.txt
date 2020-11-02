@@ -1,0 +1,113 @@
+<?php
+
+use App\Http\Controllers\AppProvider\AdminController;
+use App\Http\Controllers\AppProvider\ClientController;
+use App\Http\Controllers\AppProvider\LoginController;
+use App\Http\Controllers\AppProvider\TicketController;
+use App\Http\Controllers\ClientApp\PaymentController;
+use App\Http\Controllers\CustomerApp\CustomerController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\CompanyController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+//Admin API.....................................................................................
+Route::post('/admin-login',[LoginController::class,'adminLogin']);
+Route::post('/admin-logout',[LoginController::class,'adminLogout']);
+Route::post('/admin-create',[AdminController::class,'createAdmin']);
+Route::get('/admin-list',[AdminController::class,'getAllAdmins']);
+Route::get('/admin-view/{id}',[AdminController::class,'getAdmin']);
+Route::delete('/admin-remove/{id}',[AdminController::class,'removeAdmin']);
+
+//Customer API.................................................................................
+//Route::post('/customer-login',[LoginController::class, 'customerLogin']);
+//Route::post('/customer-logout',[LoginController::class, 'customerLogout']);
+//Route::post('/create-customer', [CustomerController::class, 'createCustomer']);
+Route::get('/customer/{id}',[CustomerController::class,'customerDetailsById']);
+Route::get('/all-customers',[CustomerController::class,'customerDetails']);
+Route::put('/change-status/{id}',[CustomerController::class,'changeStatus']);
+Route::delete('/customer-delete/{id}',[CustomerController::class,'removeCustomer']);
+Route::put('/update-customer/{id}',[CustomerController::class,'updateCustomerDetails']);
+Route::put('change-password/{id}',[CustomerController::class,'passwordChange']);
+Route::get('/get-token',[CustomerController::class,'getToken']);
+Route::put('/create-new-password/{email}', [LoginController::class,'createNewPassword']);
+
+//Client API...................................................................................
+Route::post('/client-login',[LoginController::class, 'clientLogin']);
+Route::post('/client-logout',[LoginController::class, 'clientLogout']);
+Route::get('/client',[ClientController::class,'getAllClients']);
+Route::Post('/client-create', [ClientController::class, 'createClient']);
+Route::Put('/client-update/{id}',[ClientController::class,'updateClient']);
+Route::get('/client/{id}',[ClientController::class,'getClient']);
+Route::delete('/client-delete/{id}',[ClientController::class,'removeClient']);
+Route::post('/client-generate-bill',[ClientController::class, 'generateBill']);
+Route::get('/client-billing/{id}',[ClientController::class, 'getBillingData']);
+Route::get('/client-shipping/{id}',[ClientController::class, 'getShippingData']);
+//Ticket
+Route::get('/get-ticket',[TicketController::class,'getTicket']);
+Route::post('/create-ticket',[TicketController::class,'createTicket']);
+Route::put('/change-ticket-status',[TicketController::class,'changeTicketStatus']);
+//payment
+Route::post('/store-payment',[PaymentController::class,'storePayment']);
+Route::get('/get-payment/{id}',[PaymentController::class,'getPaymentById']);
+Route::get('/get-payment-package',[PaymentController::class,'getPaymentPackages']);
+Route::get('/get-payment-package/{name}',[PaymentController::class,'getPaymentPackageByName']);
+
+//invoice
+Route::get('/invoice-table/{id}',[ClientController::class,'invoiceTableData']);
+Route::get('/invoice-view/{id}',[ClientController::class,'invoiceViewData']);
+// Route::get('/all-invoice',[ClientController::class,'allInvoice']);
+Route::get('/invoice-all',[ClientController::class,'invoiceAllData']); //invoice all data get
+
+//mail routes
+Route::post('/send-mail-customer',[MailController::class,'sendMailToCustomer']);
+Route::post('/reply-mail-to-client/{id}',[MailController::class,'replyMailToClient']);
+Route::post('/reply-mail-to-customer/{id}',[MailController::class,'replyMailToCustomer']);
+Route::get('/get-customer-mail',[MailController::class,'getCustomerMail']);
+Route::get('/get-specific-customer-mail/{id}',[MailController::class,'getSpecificCustomerMail']);
+Route::get('/get-specific-client-mail/{id}',[MailController::class,'getSpecificClientMail']);
+
+//group
+Route::post('/create-group',[GroupController::class,'createGroup']);
+Route::get('/group-all',[GroupController::class,'getAllGroups']);
+Route::Put('/group-update/{id}',[GroupController::class,'updateGroup']);
+Route::delete('/group-delete/{id}',[GroupController::class,'removeGroup']);
+Route::get('/group/{id}',[GroupController::class,'getGroup']);
+
+//Tag
+Route::post('/create-tag',[TagController::class,'addTag']);
+Route::get('/tag-all',[TagController::class,'tagList']);
+Route::Put('/tag-update/{tagname}',[TagController::class,'tagUpdate']);
+Route::delete('/tag-delete/{tagname}',[TagController::class,'tagDelete']);
+Route::get('/tag-edit/{tagname}',[TagController::class,'tagEdit']);
+
+//Signature
+Route::post('/create-signature',[\App\Http\Controllers\SignatureController::class,'addSignature']);
+Route::get('/all-signature',[\App\Http\Controllers\SignatureController::class,'signatureList']);
+Route::get('/edit-signature/{signature}',[\App\Http\Controllers\SignatureController::class,'signatureEdit']);
+Route::Put('/update-signature/{signature}',[\App\Http\Controllers\SignatureController::class,'signatureUpdate']);
+Route::delete('/delete-signature/{signature}',[\App\Http\Controllers\SignatureController::class,'signatureDelete']);
+
+//company
+Route::post('/create-company',[\App\Http\Controllers\CompanyController::class,'createCompany']);
+Route::get('/all-company',[\App\Http\Controllers\CompanyController::class,'getAllCompany']);
+
+//Schedule mail update
+Route::post('/update-schedule/{id}',[MailController::class,'scheduleUpdate']);
+

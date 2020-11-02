@@ -37,7 +37,7 @@ const Inbox = () => {
                 </Grid>
                 {
                     inboxMsg.map(inbox => (
-                        <div>
+                        <div key={inbox.id}>
                             <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center my-3" style={{ color: '#fff' }}>
@@ -45,7 +45,7 @@ const Inbox = () => {
                                         <img width="100%" src={avatar} alt="" />
                                     </Avatar>
                                     <Link to={`details/${inbox.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
-                                        <Typography variant="body5" style={{ margin: '0.5rem 0.5rem' }}>
+                                        <Typography variant="body1" style={{ margin: '0.5rem 0.5rem' }}>
                                             <strong> Marie Winter </strong>
                                             <Chip
                                                 style={{
@@ -76,7 +76,7 @@ const Inbox = () => {
                                         Report
                                         </button>
                                 </Link>
-                                <Typography style={{ color: '#2d2d2d' }} variant="body6" align="right">
+                                <Typography style={{ color: '#2d2d2d' }} variant="body1" align="right">
                                     <small> just now </small>
                                 </Typography>
                             </div>

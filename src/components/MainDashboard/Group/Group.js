@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -11,13 +11,12 @@ import { Pagination } from '@material-ui/lab';
 const Group = () => {
     const classes = useStyles();
     const [addGroup, setAddGroup] = useState({});
-    console.log(addGroup);
-
     const handleTeamInput = (e) => {
         const newGroup = { ...addGroup }
         newGroup[e.target.name] = e.target.value
         setAddGroup(newGroup)
     }
+    
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -27,7 +26,7 @@ const Group = () => {
                 <Container maxWidth="sm" className={classes.container}>
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
-                            <Typography className="pt-2" style={{ margin: ' 0 auto ' }} component="body6" variant="body6">
+                            <Typography className="pt-2" style={{ margin: ' 0 auto ' }} component="body1" variant="body1">
                                 Create Groups
                             </Typography>
                             <div>

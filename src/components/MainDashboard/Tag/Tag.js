@@ -56,7 +56,7 @@ const Tag = () => {
                 <Container maxWidth="sm" className={classes.container}>
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
-                            <Typography className="pt-2" style={{ margin: ' 0 auto ' }} component="body6" variant="body6">
+                            <Typography className="pt-2" style={{ margin: ' 0 auto ' }} component="body2" variant="body2">
                                 Add Tags
                             </Typography>
                             <form className={classes.form} noValidate>

@@ -130,7 +130,7 @@ const Customers = () => {
                                             <CardContent style={{ background: 'none !important' }}>
 
                                                 <div className={classes.paper}>
-                                                    <Typography component="body6" variant="body6">
+                                                    <Typography component="body1" variant="body1">
                                                         CREATE GROUP
                                                     </Typography>
                                                     <form className={classes.form} noValidate>
@@ -202,7 +202,7 @@ const Customers = () => {
                                             <CardContent style={{ background: 'none !important' }}>
                                                 
                                                 <div className={classes.paper}>
-                                                    <Typography component="body6" variant="body6">
+                                                    <Typography component="body1" variant="body1">
                                                         ADD CONTACT
                                                     </Typography>
                                                     <form className={classes.form} noValidate>
@@ -325,7 +325,7 @@ const Customers = () => {
                                             <CardContent style={{ background: 'none !important' }}>
 
                                                 <div className={classes.paper}>
-                                                    <Typography component="body6" variant="body6">
+                                                    <Typography component="body1" variant="body1">
                                                         CREATE GROUP
                                                     </Typography>
                                                     <form className={classes.form} noValidate>

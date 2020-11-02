@@ -31,10 +31,10 @@ const Privacy = () => {
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
                             <img className="pt-2" style={{ margin: ' 0 auto ' }} width="20%" src={avatar} alt="" />
-                            <Typography component="body6" variant="body5">
+                            <Typography component="body1" variant="body1">
                                 Privacy
                             </Typography>
-                            <Typography component="body6" variant="body5">
+                            <Typography component="body1" variant="body1">
                                 Who can see your contact information?
                             </Typography>
                             <form className={classes.form} noValidate>

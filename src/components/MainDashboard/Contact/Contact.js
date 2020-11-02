@@ -47,7 +47,7 @@ const Contact = () => {
                                                 <Typography variant="body2">
                                                     {inbox.name}
                                                 </Typography>
-                                                <Typography variant="body6">
+                                                <Typography variant="body1">
                                                     {inbox.email}
                                                 </Typography>
                                             </div>
@@ -74,7 +74,7 @@ const Contact = () => {
                                                                     <Typography variant="body2">
                                                                         Marie Winter
                                                                     </Typography>
-                                                                    <Typography variant="body6">
+                                                                    <Typography variant="body1">
                                                                         mariewinter@mail.com
                                                                     </Typography>
                                                                 </CardContent>

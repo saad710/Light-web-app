@@ -58,7 +58,7 @@ const SentDetails = () => {
                             <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
                                 <img width="100%" src={avatar} alt="" />
                             </Avatar>
-                            <Typography variant="body5" style={{ margin: '0.5rem 0.5rem', color: '#2d2d2d' }}>
+                            <Typography variant="body1" style={{ margin: '0.5rem 0.5rem', color: '#2d2d2d' }}>
                                 <strong style={{ marginLeft: '1rem' }}> {message[0].name} </strong> <br />
                                 <strong style={{ marginLeft: '1rem' }}> {message[0].email} </strong>
                                 <br />
@@ -77,7 +77,7 @@ const SentDetails = () => {
                                 />
                             </Typography>
                         </div>
-                        <Typography variant="body6" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
+                        <Typography variant="body1" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
                             {message[0].message}
                         </Typography>
                         <div style={{

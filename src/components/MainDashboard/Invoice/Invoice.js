@@ -58,7 +58,7 @@ const Invoice = () => {
                                 <div className="d-flex justify-content-between py-4">
                                     <div>
                                         <Typography variant="h5" className="my-2"> Company </Typography>
-                                        <Typography variant="body6"> 
+                                        <Typography variant="body1"> 
                                             4098 Water Street, USA
                                             <br/>
                                             P: +33 434 545 5453

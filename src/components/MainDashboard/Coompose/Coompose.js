@@ -11,11 +11,9 @@ import { useStyles } from './ComposeStyle';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const Coompose = () => {
-    const classes = useStyles();
+    const classNamees = useStyles();
 
     // input value state
     const [value, setValue] = useState({})
@@ -109,19 +107,19 @@ const Coompose = () => {
     }
 
     return (
-        <div className={classes.root}>
+        <div className={classNamees.root}>
             <CssBaseline />
             <AppBarDrawer />
-            <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-                <Container maxWidth="md" className={classes.container}>
+            <main className={classNamees.content}>
+                <div className={classNamees.appBarSpacer} />
+                <Container maxWidth="md" className={classNamees.container}>
                     <Grid container spacing={3}>
-                        <div className={classes.paper}>
+                        <div className={classNamees.paper}>
                             <Card style={{ margin: '0 auto', background: '#213F7E' }}>
                                 <CardHeader
                                 />
                                 <CardContent>
-                                    <form className={classes.form} noValidate>
+                                    <form className={classNamees.form} noValidate>
 
                                         <div>
                                             <FormControl>
@@ -357,14 +355,14 @@ const Coompose = () => {
                                             fullWidth
                                             variant="contained"
                                             color="secondary"
-                                            className={classes.btnStyle}
+                                            className={classNamees.btnStyle}
                                             onClick={handleCompose}
                                         >
                                             Send
                                         </Button> */}
 
-                                        <div class="btn-group" style={{marginLeft: '38rem', marginTop:'1rem'}}>
-                                            <button type="button" class="btn btn-primary"
+                                        <div className="btn-group" style={{marginLeft: '38rem', marginTop:'1rem'}}>
+                                            <button type="button" className="btn btn-primary"
                                                 style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem'}}
                                                 onClick={handleCompose}
                                             >
@@ -372,9 +370,9 @@ const Coompose = () => {
                                             </button>
                                             <button type="button" 
                                                 style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem'}}
-                                            class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
-                                            <div class="dropdown-menu" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
+                                            <div className="dropdown-menu" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
                                                 <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
                                             </div>
                                         </div>
@@ -387,7 +385,7 @@ const Coompose = () => {
                             <Modal
                                 aria-labelledby="transition-modal-title"
                                 aria-describedby="transition-modal-description"
-                                className={classes.modal}
+                                className={classNamees.modal}
                                 open={open}
                                 onClose={handleClose}
                                 closeAfterTransition

@@ -26,13 +26,13 @@ const Team = () => {
                 <Container maxWidth="sm" className={classes.container}>
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
-                            <Typography className="pt-2" style={{ margin: ' 0 auto ' }} component="body6" variant="body6">
+                            <Typography className="pt-2" style={{ margin: ' 0 auto ' }} component="body2" variant="body2">
                                 Add User
                             </Typography>
                             <form className={classes.form} noValidate>
                                 
                                 <div>
-                                    <label htmlFor=""> Name </label>
+                                    <label> Name </label>
                                     <TextField
                                         style={{ borderRadius: '4px' }}
                                         variant="outlined"
@@ -49,7 +49,7 @@ const Team = () => {
                                 </div>
 
                                 <div>
-                                    <label htmlFor=""> Email </label>
+                                    <label> Email </label>
                                     <TextField
                                         style={{ borderRadius: '4px' }}
                                         variant="outlined"
@@ -66,7 +66,7 @@ const Team = () => {
                                 </div>
 
                                 <div>
-                                    <label htmlFor=""> Password </label>
+                                    <label> Password </label>
                                     <TextField
                                         style={{ borderRadius: '4px' }}
                                         variant="outlined"
