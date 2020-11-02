@@ -8,6 +8,7 @@ import { useStyles } from './TagStyle';
 import customerData from '../../../data/customerData';
 import { Pagination } from '@material-ui/lab';
 import { key } from '../../../apiKey';
+import { identity } from '@fullcalendar/core';
 const axios = require('axios');
 
 
@@ -46,6 +47,18 @@ const Tag = () => {
                 console.log(err);
             })
     }, [])
+
+    const handleTagDelete = (name) => {
+        axios.delete(`${key}tag-delete/${name}`)
+            .then(res => {
+                console.log(res.data);
+                const fil = allTag.filter(newTag => newTag.id !== res.data.id)
+                setAllTag(fil)
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+    }
 
     return (
         <div className={classes.root}>
@@ -119,9 +132,16 @@ const Tag = () => {
                                                                 aria-label="contained primary button group"
                                                             >
                                                                 <Button
-                                                                    style={{ fontSize: '10px' }} color="primary">UPDATE</Button>
+                                                                    style={{ fontSize: '10px' }} color="primary"
+                                                                >
+                                                                        UPDATE
+                                                                </Button>
                                                                 <Button
-                                                                    style={{ fontSize: '10px' }} color="secondary">DELETE</Button>
+                                                                    style={{ fontSize: '10px' }} color="secondary"
+                                                                    onClick={() => handleTagDelete(tag.tag_name)}
+                                                                >
+                                                                        DELETE
+                                                                </Button>
                                                             </ButtonGroup>
                                                         </div>
                                                     </TableCell>
