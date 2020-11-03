@@ -21,6 +21,7 @@ import avatar from '../../../images/avatar.png'
 import { Pagination } from "@material-ui/lab";
 import ToolBar from '../ToolBar/ToolBar';
 import { useStyles } from './CustomersStyle';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 const Customers = () => {
     const classes = useStyles();
@@ -218,84 +219,19 @@ const Customers = () => {
                                                         ADD CONTACT
                                                     </Typography>
                                                     <form className={classes.form} noValidate>
-                                                        <div style={{ margin: '1rem 0' }}>
-                                                            <label htmlFor=""> Name </label>
-                                                            <TextField
-                                                                style={{ backgroundColor: '#fff' }}
-                                                                variant="outlined"
-                                                                margin="normal"
-                                                                required
-                                                                fullWidth
-                                                                id="name"
-                                                                name="name"
-                                                                autoComplete="name"
-                                                                autoFocus
-                                                                placeholder="Marie Winter"
-                                                            />
-                                                        </div>
-                                                        <div>
-                                                            <label htmlFor=""> Email </label>
-                                                            <TextField
-                                                                style={{ backgroundColor: '#fff' }}
-                                                                variant="outlined"
-                                                                margin="normal"
-                                                                required
-                                                                fullWidth
-                                                                id="email"
-                                                                name="email"
-                                                                autoComplete="email"
-                                                                autoFocus
-                                                                placeholder="user@email.com"
-                                                            />
-                                                        </div>
-                                                        <div>
-                                                            <label htmlFor=""> Phone </label>
-                                                            <TextField
-                                                                style={{ backgroundColor: '#fff' }}
-                                                                variant="outlined"
-                                                                margin="normal"
-                                                                required
-                                                                fullWidth
-                                                                id="phone"
-                                                                name="phone"
-                                                                autoComplete="phone"
-                                                                autoFocus
-                                                                placeholder="+33 43 3434 44"
-                                                            />
-                                                        </div>
-
-                                                        <div>
-                                                            <label htmlFor=""> Physical Address </label>
-                                                            <br/>
-                                                            <TextareaAutosize
-                                                                style={{ backgroundColor: '#fff' }}
-                                                                variant="outlined"
-                                                                margin="normal"
-                                                                required
-                                                                width="100%"
-                                                                id="address"
-                                                                name="address"
-                                                                autoComplete="address"
-                                                                aria-label="minimum height"
-                                                                rowsMin={3}
-                                                                placeholder="Physical Address"
-                                                            />
-                                                        </div>
-                                                        <div className="mt-3">
-                                                            <label htmlFor=""> Password </label>
-                                                            <TextField
-                                                                style={{ backgroundColor: '#fff' }}
-                                                                variant="outlined"
-                                                                margin="normal"
-                                                                required
-                                                                fullWidth
-                                                                name="password"
-                                                                type="password"
-                                                                id="password"
-                                                                autoComplete="current-password"
-                                                                placeholder="***********"
-                                                            />
-                                                        </div>
+                                                        <input
+                                                            accept="file/*"
+                                                            className={classes.input}
+                                                            id="contained-button-file"
+                                                            multiple
+                                                            type="file"
+                                                            style={{    
+                                                                border: '1px solid #fff',
+                                                                width: '100%',
+                                                                padding: '0.5rem',
+                                                                borderRadius: '0.4rem'
+                                                            }}
+                                                        />
                                                         <Button
                                                             type="submit"
                                                             fullWidth
