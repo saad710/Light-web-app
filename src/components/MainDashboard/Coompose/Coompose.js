@@ -11,6 +11,8 @@ import { useStyles } from './ComposeStyle';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
+import IndeterminateCheckBoxRoundedIcon from '@material-ui/icons/IndeterminateCheckBoxRounded';
 
 const Coompose = () => {
     const classNamees = useStyles();
@@ -37,6 +39,10 @@ const Coompose = () => {
     const handleRemainderDate = (date) => {
         setRemainderDate(date.toDateString());
     };
+
+    // 2nd remainder
+    const [remainder2, setRemainder2] = useState(false)
+    const [remainder3, setRemainder3] = useState(false)
     
     // deadline date
 
@@ -281,26 +287,87 @@ const Coompose = () => {
                                                         checkBox.quickReply &&
                                                         <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rowsMax={4} placeholder="Quick Reply ..." />
                                                     }
-                                                    {
-                                                        checkBox.setRemainder &&
-                                                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                                            <Grid container justify="space-around">
-                                                                <KeyboardDatePicker
-                                                                    margin="normal"
-                                                                    id="date-picker-dialog"
-                                                                    label="Select Remainder"
-                                                                    format="MM/dd/yyyy"
-                                                                    disablePast="true"
-                                                                    value={remainderDate}
-                                                                    onChange={handleRemainderDate}
-                                                                    style={{backgroundColor: '#fff'}}
-                                                                    KeyboardButtonProps={{
-                                                                        'aria-label': 'change date',
-                                                                    }}
-                                                                />
-                                                            </Grid>
-                                                        </MuiPickersUtilsProvider>
-                                                    }
+                                                    <div>
+                                                        {
+                                                            checkBox.setRemainder &&
+                                                            <div className="d-flex align-items-center">
+                                                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                                    <Grid container justify="space-around">
+                                                                        <KeyboardDatePicker
+                                                                            margin="normal"
+                                                                            id="date-picker-dialog"
+                                                                            // label="Select Remainder"
+                                                                            format="MM/dd/yyyy"
+                                                                            disablePast="true"
+                                                                            value={remainderDate}
+                                                                            onChange={handleRemainderDate}
+                                                                            style={{ backgroundColor: '#fff' }}
+                                                                            KeyboardButtonProps={{
+                                                                                'aria-label': 'change date',
+                                                                            }}
+                                                                        />
+                                                                    </Grid>
+                                                                </MuiPickersUtilsProvider>
+                                                                {
+                                                                    remainder2 !== true ?
+                                                                        <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setRemainder2(!remainder2)} />
+                                                                        :
+                                                                        <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setRemainder2(!remainder2)} />
+                                                                } 
+                                                            </div>
+                                                        }
+                                                        {
+                                                            remainder2 &&
+                                                            <div className="d-flex align-items-center">
+                                                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                                    <Grid container justify="space-around">
+                                                                        <KeyboardDatePicker
+                                                                            margin="normal"
+                                                                            id="date-picker-dialog"
+                                                                            // label="Select Remainder"
+                                                                            format="MM/dd/yyyy"
+                                                                            disablePast="true"
+                                                                            value={remainderDate}
+                                                                            onChange={handleRemainderDate}
+                                                                            style={{ backgroundColor: '#fff' }}
+                                                                            KeyboardButtonProps={{
+                                                                                'aria-label': 'change date',
+                                                                            }}
+                                                                        />
+                                                                    </Grid>
+                                                                </MuiPickersUtilsProvider>
+                                                                {
+                                                                    remainder3 !== true ? 
+                                                                        <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setRemainder3(!remainder3)} />
+                                                                    :
+                                                                        <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setRemainder3(!remainder3)} /> 
+                                                                } 
+                                                            </div>
+                                                        }
+                                                        {
+                                                            remainder3 &&
+                                                            <div className="d-flex align-items-center">
+                                                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                                    <Grid container justify="space-around">
+                                                                        <KeyboardDatePicker
+                                                                            margin="normal"
+                                                                            id="date-picker-dialog"
+                                                                            // label="Select Remainder"
+                                                                            format="MM/dd/yyyy"
+                                                                            disablePast="true"
+                                                                            value={remainderDate}
+                                                                            onChange={handleRemainderDate}
+                                                                            style={{ backgroundColor: '#fff' }}
+                                                                            KeyboardButtonProps={{
+                                                                                'aria-label': 'change date',
+                                                                            }}
+                                                                        />
+                                                                    </Grid>
+                                                                </MuiPickersUtilsProvider>
+                                                                {/* <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" /> */}
+                                                            </div>
+                                                        }
+                                                    </div>
 
                                                     {
                                                         checkBox.setDeadLine &&

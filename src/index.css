@@ -120,3 +120,7 @@ p {
   left: 8%;
   transform-origin: 0px 101px;
 } */
+
+input#date-picker-dialog {
+  padding: 0.6rem;
+}
