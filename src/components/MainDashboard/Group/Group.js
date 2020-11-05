@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import { Button , ButtonGroup, FormControl, Input, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
+import { Backdrop, Button , ButtonGroup, Card, CardContent, Fade, FormControl, Input, InputLabel, MenuItem, Modal, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
 import { useStyles } from './GroupStyle';
 import customerData from '../../../data/customerData';
 import { Pagination } from '@material-ui/lab';
@@ -46,6 +46,16 @@ const Group = () => {
         'Virginia Andrews',
         'Kelly Snyder',
     ];
+
+    const [open, setOpen] = React.useState(false);
+    const [userModelOpen, setUserModelOpen] = useState(false)
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     
     return (
         <div className={classes.root}>
@@ -155,7 +165,8 @@ const Group = () => {
                                                                     aria-label="contained primary button group"
                                                                 >
                                                                     <Button
-                                                                         style={{ fontSize: '10px' }} color="primary">UPDATE</Button>
+                                                                        onClick={handleOpen}
+                                                                        style={{ fontSize: '10px' }} color="primary">UPDATE</Button>
                                                                     <Button
                                                                         style={{ fontSize: '10px' }} color="secondary">DELETE</Button>
                                                                 </ButtonGroup>
@@ -174,6 +185,53 @@ const Group = () => {
                                 </TableContainer>
                             </div>
                         </div>
+
+                        <Modal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            className={classes.modal}
+                            open={open}
+                            onClose={handleClose}
+                            closeAfterTransition
+                            BackdropComponent={Backdrop}
+                            BackdropProps={{
+                                timeout: 500,
+                            }}
+                        >
+                            <Fade in={open}>
+                                <div className={classes.customerPaper}>
+                                    <div className="mt-3">
+                                        <Card className={classes.cardRoot}>
+                                            <CardContent style={{ background: 'none !important' }}>
+                                                <div className={classes.paper}>
+                                                    <div>
+                                                        <FormControl className={classes.formControl} style={{ margin: '0' }}>
+                                                            <InputLabel id="demo-mutiple-name-label">Add Contact</InputLabel>
+                                                            <Select
+                                                                labelId="demo-mutiple-name-label"
+                                                                id="demo-mutiple-name"
+                                                                multiple
+                                                                value={personName}
+                                                                onChange={handleChange}
+                                                                input={<Input />}
+                                                                MenuProps={MenuProps}
+                                                            >
+                                                                {names.map((name) => (
+                                                                    <MenuItem key={name} value={name}>
+                                                                        {name}
+                                                                    </MenuItem>
+                                                                ))}
+                                                            </Select>
+                                                        </FormControl>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                </div>
+                            </Fade>
+                        </Modal>
+
                     </Grid>
                     
 
