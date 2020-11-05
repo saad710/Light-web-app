@@ -66,7 +66,7 @@ const Group = () => {
                                         <label htmlFor=""> Group Name </label>
                                         <TextField
                                             style={{ borderRadius: '4px' }}
-                                            variant="outlined"
+                                            variant="standard"
                                             margin="normal"
                                             required
                                             fullWidth
@@ -90,8 +90,8 @@ const Group = () => {
                                     </div> */}
 
                                     <div>
-                                        <FormControl className={classes.formControl}>
-                                            <InputLabel id="demo-mutiple-name-label">Name</InputLabel>
+                                        <FormControl className={classes.formControl} style={{margin: '0'}}>
+                                            <InputLabel id="demo-mutiple-name-label">Add Contact</InputLabel>
                                             <Select
                                                 labelId="demo-mutiple-name-label"
                                                 id="demo-mutiple-name"
@@ -99,7 +99,6 @@ const Group = () => {
                                                 value={personName}
                                                 onChange={handleChange}
                                                 input={<Input />}
-                                                variant="filled"
                                                 MenuProps={MenuProps}
                                             >
                                                 {names.map((name) => (
@@ -113,10 +112,15 @@ const Group = () => {
 
 
                                     <Button
-                                        style={{ padding: '0.5rem 0', margin: '1rem 0', fontSize: '12px' }}
+                                        style={{
+                                                padding: '0.5rem 0',
+                                                margin: '1rem 0',
+                                                fontSize: '12px',
+                                                border: '1px solid gray'
+                                            }}
                                         type="submit"
                                         fullWidth
-                                        variant="contained"
+                                        variant="text"
                                         color="primary"
                                         className={classes.submit}
                                     >
