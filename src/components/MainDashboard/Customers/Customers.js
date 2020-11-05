@@ -219,19 +219,44 @@ const Customers = () => {
                                                         ADD CONTACT
                                                     </Typography>
                                                     <form className={classes.form} noValidate>
-                                                        <input
-                                                            accept="file/*"
-                                                            className={classes.input}
-                                                            id="contained-button-file"
-                                                            multiple
-                                                            type="file"
-                                                            style={{    
-                                                                border: '1px solid #fff',
-                                                                width: '100%',
-                                                                padding: '0.5rem',
-                                                                borderRadius: '0.4rem'
-                                                            }}
-                                                        />
+                                                        <div class="btn-group" style={{width: '100%', height: '2.5rem'}}>
+                                                            <input
+                                                                id="search"
+                                                                style={{
+                                                                    width: '100%',
+                                                                    padding: '1rem 1rem',
+                                                                    borderRadius: '0.4rem'
+                                                                }}
+                                                                // onChange={handleChange}
+                                                                placeholder="Choose the Category..."
+                                                                className="dropdown-toggle"
+                                                                data-toggle="dropdown"
+                                                                aria-haspopup="true"
+                                                                // aria-expanded="false"
+                                                                autoComplete="off"
+                                                                // value={currentItem}
+                                                            />
+                                                            <div class="dropdown-menu">
+                                                                {/* {
+                                                                    products.map(item => (
+                                                                        <a class="dropdown-item" onClick={() => handleSubmit(item)}>  {item.name} </a>
+                                                                        <li class="dropdown-item" onClick={() => handleSubmit(item)}>  {item.name} </li>
+                                                                    ))
+                                                                } */}
+                                                                <div className="d-flex py-1">
+                                                                    <li class="dropdown-item">  mariewinter@gmail.com </li>
+                                                                    <Button variant="outlined" color="primary" size="small"> invite </Button>
+                                                                </div>
+                                                                <div className="d-flex py-1">
+                                                                    <li class="dropdown-item">  mariewinter@gmail.com </li>
+                                                                    <Button variant="outlined" color="primary" size="small"> invite </Button>
+                                                                </div>
+                                                                <div className="d-flex py-1">
+                                                                    <li class="dropdown-item">  mariewinter@gmail.com </li>
+                                                                    <Button variant="outlined" color="primary" size="small"> invite </Button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <Button
                                                             type="submit"
                                                             fullWidth
