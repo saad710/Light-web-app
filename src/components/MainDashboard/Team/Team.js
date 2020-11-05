@@ -27,7 +27,7 @@ const Team = () => {
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
                             <Typography className="pt-2" style={{ margin: ' 0 auto ' }} component="body2" variant="body2">
-                                Add User
+                                Add Admin
                             </Typography>
                             <form className={classes.form} noValidate>
                                 
@@ -115,7 +115,7 @@ const Team = () => {
                                     color="primary"
                                     className={classes.submit}
                                 >
-                                    ADD USER
+                                    ADD ADMIN
                                 </Button>
                             </form>
                         </div>

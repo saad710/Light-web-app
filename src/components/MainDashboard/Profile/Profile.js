@@ -69,63 +69,7 @@ const Profile = () => {
                                         onBlur={handleBlur}
                                     />
                                 </div>
-                                <Typography component="body2" variant="body2">
-                                    Change Password
-                                </Typography>
-                                <EditIcon fontSize="small" style={{marginLeft: '24.5rem'}} />
-                                <div className="mt-3">
-                                    <label htmlFor=""> Enter your old password </label>
-                                    <TextField
-                                        disabled={disable ? disable : ''}
-                                        style={{borderRadius: '4px' }}
-                                        variant="outlined"
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        name="oldPass"
-                                        type="password"
-                                        id="oldPass"
-                                        autoComplete="current-password"
-                                        placeholder="***********"
-                                        onBlur={handleBlur}
-                                    />
-                                </div>
-
-                                <div className="mt-3">
-                                    <label htmlFor=""> Enter new password </label>
-                                    <TextField
-                                        disabled={disable ? disable : ''}
-                                        style={{borderRadius: '4px' }}
-                                        variant="outlined"
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        name="newPass"
-                                        type="password"
-                                        id="newPass"
-                                        autoComplete="current-password"
-                                        placeholder="***********"
-                                        onBlur={handleBlur}
-                                    />
-                                </div>
-
-                                <div className="mt-3">
-                                    <label htmlFor=""> Confrim password </label>
-                                    <TextField
-                                        disabled={disable ? disable : ''}
-                                        style={{ borderRadius: '4px' }}
-                                        variant="outlined"
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        name="newPass"
-                                        type="password"
-                                        id="newPass"
-                                        autoComplete="current-password"
-                                        placeholder="***********"
-                                        onBlur={handleBlur}
-                                    />
-                                </div>
+                                
                                 <Button
                                     style={{padding: '0.6rem 0', margin: '1rem 0'}}
                                     type="submit"
@@ -136,7 +80,77 @@ const Profile = () => {
                                 >
                                     SAVE
                                 </Button>
+                                <Button
+                                    style={{ padding: '0.6rem 0', margin: '1rem 0' }}
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
+                                >
+                                    REQUEST FOR CHANGE PASSWORD
+                                </Button>
+
                             </form>
+
+
+                            {/* <Typography component="body2" variant="body2">
+                                Change Password
+                                </Typography>
+                            <EditIcon fontSize="small" style={{ marginLeft: '24.5rem' }} />
+                            <div className="mt-3">
+                                <label htmlFor=""> Enter your old password </label>
+                                <TextField
+                                    disabled={disable ? disable : ''}
+                                    style={{ borderRadius: '4px' }}
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="oldPass"
+                                    type="password"
+                                    id="oldPass"
+                                    autoComplete="current-password"
+                                    placeholder="***********"
+                                    onBlur={handleBlur}
+                                />
+                            </div>
+
+                            <div className="mt-3">
+                                <label htmlFor=""> Enter new password </label>
+                                <TextField
+                                    disabled={disable ? disable : ''}
+                                    style={{ borderRadius: '4px' }}
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="newPass"
+                                    type="password"
+                                    id="newPass"
+                                    autoComplete="current-password"
+                                    placeholder="***********"
+                                    onBlur={handleBlur}
+                                />
+                            </div>
+
+                            <div className="mt-3">
+                                <label htmlFor=""> Confrim password </label>
+                                <TextField
+                                    disabled={disable ? disable : ''}
+                                    style={{ borderRadius: '4px' }}
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="newPass"
+                                    type="password"
+                                    id="newPass"
+                                    autoComplete="current-password"
+                                    placeholder="***********"
+                                    onBlur={handleBlur}
+                                />
+                            </div> */}
                         </div>
                     </Grid>
 
