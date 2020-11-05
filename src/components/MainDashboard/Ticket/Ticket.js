@@ -12,6 +12,7 @@ import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 const Ticket = () => {
     const classes = useStyles();
     const [ticketModal, setTicketModal] = React.useState(false);
+    const [ticketDetails, setTicketDetails] = React.useState(false);
     const [ticketValue, setTicketValue] = useState({});
 
     const handleOpen = () => {
@@ -20,6 +21,14 @@ const Ticket = () => {
     const handleClose = () => {
         setTicketModal(false);
     };
+
+    const handleDetailsOpen = () => {
+        setTicketDetails(true);
+    };
+    const handleDetailsClose = () => {
+        setTicketDetails(false);
+    };
+
     const handleBlur = (e) => {
         const value = { ...ticketValue };
         value[e.target.name] = e.target.value;
@@ -55,21 +64,25 @@ const Ticket = () => {
                                     >
                                         <TableHead className={classes.tableHeader}>
                                             <TableRow>
-                                                <TableCell> ID </TableCell>
+                                                <TableCell align="center"> # </TableCell>
+                                                <TableCell align="center"> Ticket Num </TableCell>
                                                 <TableCell align="center"> SUBJECT </TableCell>
-                                                <TableCell align="center"> DETAILS </TableCell>
+                                                <TableCell align="center"> STATUS </TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
                                             {
                                                 customerData.map((customer, i) => (
-                                                    <TableRow key={customer.id}>
+                                                    <TableRow key={customer.id} onClick={handleDetailsOpen} style={{cursor: 'pointer'}}>
                                                         <TableCell component="th" scope="row">
                                                             {i + 1}
                                                         </TableCell>
+                                                        <TableCell component="th" scope="row">
+                                                            {i + 231}
+                                                        </TableCell>
                                                         <TableCell align="center"> Lorem ipsum dolor. </TableCell>
-                                                        <TableCell align="right">
-                                                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        <TableCell align="center">
+                                                            <Typography variant="body2" color="textPrimary"> closed </Typography>
                                                         </TableCell>
                                                     </TableRow>
                                                 ))
@@ -125,7 +138,7 @@ const Ticket = () => {
                                                                     name='name'
                                                                     autoComplete='name'
                                                                     autoFocus
-                                                                    placeholder='Marie Winter'
+                                                                    value="marie winter"
                                                                     onBlur={handleBlur}
                                                                 />
                                                             </div>
@@ -140,7 +153,23 @@ const Ticket = () => {
                                                                     name='email'
                                                                     autoComplete='email'
                                                                     autoFocus
-                                                                    placeholder='user@email.com'
+                                                                    value="mariewinter@email.com"
+                                                                    onBlur={handleBlur}
+                                                                />
+                                                            </div>
+                                                            <br />
+                                                            <div>
+                                                                <TextField
+                                                                    style={{ backgroundColor: "#fff" }}
+                                                                    variant='outlined'
+                                                                    margin='normal'
+                                                                    required
+                                                                    fullWidth
+                                                                    id='cc'
+                                                                    name='cc'
+                                                                    autoComplete='cc'
+                                                                    autoFocus
+                                                                    placeholder="cc"
                                                                     onBlur={handleBlur}
                                                                 />
                                                             </div>
@@ -192,6 +221,52 @@ const Ticket = () => {
                                                                 SEND
                                                             </Button>
                                                         </form>
+                                                    </CardContent>
+                                                </Card>
+                                            </div>
+                                        </div>
+                                    </Fade>
+                                </Modal>
+                            </div>
+
+
+                            <div>
+                                <Modal
+                                    aria-labelledby='transition-modal-title'
+                                    aria-describedby='transition-modal-description'
+                                    className={classes.modal}
+                                    open={ticketDetails}
+                                    onClose={handleDetailsClose}
+                                    closeAfterTransition
+                                    BackdropComponent={Backdrop}
+                                    BackdropProps={{
+                                        timeout: 500,
+                                    }}
+                                >
+                                    <Fade in={ticketDetails}>
+                                        <div className={classes.modalPaper}>
+                                            <div className='mt-3'>
+                                                <Card className={classes.ticketCard}>
+                                                    <CardHeader
+                                                        action={
+                                                            <IconButton
+                                                                onClick={handleDetailsClose}
+                                                                aria-label='settings'
+                                                                style={{ color: "#2d2d2d" }}
+                                                            >
+                                                                <CancelOutlinedIcon />
+                                                            </IconButton>
+                                                        }
+                                                    />
+                                                    <CardContent>
+                                                        <div style={{color: '#2d2d2d'}}>
+                                                            <Typography variant="body1" align="left">
+                                                                <strong>Subject : </strong> Lorem ipsum dolor.
+                                                            </Typography>
+                                                            <Typography variant="subtitle2" align="left">
+                                                                <strong>Details : </strong> <small> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). </small>
+                                                            </Typography>
+                                                        </div>
                                                     </CardContent>
                                                 </Card>
                                             </div>

@@ -65,7 +65,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     ticketCard: {
         width: '26rem',
-        height: '75vh',
+        height: '85vh',
         textAlign: 'center',
         color: '#fff',
         backgroundColor: 'none',
