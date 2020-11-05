@@ -124,3 +124,6 @@ p {
 input#date-picker-dialog {
   padding: 0.6rem;
 }
+label#date-picker-dialog-label {
+  margin: 0.2rem 0.6rem;
+}

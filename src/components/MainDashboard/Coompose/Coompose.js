@@ -300,7 +300,7 @@ const Coompose = () => {
                                                                         <KeyboardDatePicker
                                                                             margin="normal"
                                                                             id="date-picker-dialog"
-                                                                            // label="Select Remainder"
+                                                                            label="Remainder"
                                                                             format="MM/dd/yyyy"
                                                                             disablePast="true"
                                                                             value={remainderDate}
@@ -328,7 +328,7 @@ const Coompose = () => {
                                                                         <KeyboardDatePicker
                                                                             margin="normal"
                                                                             id="date-picker-dialog"
-                                                                            // label="Select Remainder"
+                                                                            label="Remainder"
                                                                             format="MM/dd/yyyy"
                                                                             disablePast="true"
                                                                             value={remainderDate}
@@ -356,7 +356,7 @@ const Coompose = () => {
                                                                         <KeyboardDatePicker
                                                                             margin="normal"
                                                                             id="date-picker-dialog"
-                                                                            // label="Select Remainder"
+                                                                            label="Remainder"
                                                                             format="MM/dd/yyyy"
                                                                             disablePast="true"
                                                                             value={remainderDate}
@@ -382,7 +382,7 @@ const Coompose = () => {
                                                                         <KeyboardDatePicker
                                                                             margin="normal"
                                                                             id="date-picker-dialog"
-                                                                            // label="Select deadline"
+                                                                            label="deadline"
                                                                             format="MM/dd/yyyy"
                                                                             disablePast="true"
                                                                             value={deadlineDate}
@@ -409,7 +409,7 @@ const Coompose = () => {
                                                                             <KeyboardDatePicker
                                                                                 margin="normal"
                                                                                 id="date-picker-dialog"
-                                                                                // label="Select deadline"
+                                                                                label="deadline"
                                                                                 format="MM/dd/yyyy"
                                                                                 disablePast="true"
                                                                                 value={deadlineDate}
@@ -438,7 +438,7 @@ const Coompose = () => {
                                                                             <KeyboardDatePicker
                                                                                 margin="normal"
                                                                                 id="date-picker-dialog"
-                                                                                // label="Select deadline"
+                                                                                label="deadline"
                                                                                 format="MM/dd/yyyy"
                                                                                 disablePast="true"
                                                                                 value={deadlineDate}
