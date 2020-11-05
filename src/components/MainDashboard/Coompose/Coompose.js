@@ -40,7 +40,7 @@ const Coompose = () => {
         setRemainderDate(date.toDateString());
     };
 
-    // 2nd remainder
+    // 2nd 3rd remainder
     const [remainder2, setRemainder2] = useState(false)
     const [remainder3, setRemainder3] = useState(false)
     
@@ -51,6 +51,10 @@ const Coompose = () => {
     const handleDeadlineDate = (date) => {
         setDeadlineDate(date.toDateString());
     };
+
+    // 2nd 3rd deadline
+    const [deadline2, setDeadline2] = useState(false)
+    const [deadline3, setDeadline3] = useState(false)
 
     // schedule date
     const [scheduleDate, setScheduleDate] = useState(date.setDate(date.getDate() + 1))
@@ -364,30 +368,92 @@ const Coompose = () => {
                                                                         />
                                                                     </Grid>
                                                                 </MuiPickersUtilsProvider>
-                                                                {/* <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" /> */}
+                                                                <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" />
                                                             </div>
                                                         }
                                                     </div>
 
                                                     {
                                                         checkBox.setDeadLine &&
-                                                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                                            <Grid container justify="space-around">
-                                                                <KeyboardDatePicker
-                                                                    margin="normal"
-                                                                    id="date-picker-dialog"
-                                                                    label="Select Remainder"
-                                                                    format="MM/dd/yyyy"
-                                                                    disablePast="true"
-                                                                    value={deadlineDate}
-                                                                    onChange={handleDeadlineDate}
-                                                                    style={{ backgroundColor: '#fff' }}
-                                                                    KeyboardButtonProps={{
-                                                                        'aria-label': 'change date',
-                                                                    }}
-                                                                />
-                                                            </Grid>
-                                                        </MuiPickersUtilsProvider>
+                                                        <div>
+                                                            <div className="d-flex align-items-center">
+                                                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                                    <Grid container justify="space-around">
+                                                                        <KeyboardDatePicker
+                                                                            margin="normal"
+                                                                            id="date-picker-dialog"
+                                                                            // label="Select deadline"
+                                                                            format="MM/dd/yyyy"
+                                                                            disablePast="true"
+                                                                            value={deadlineDate}
+                                                                            onChange={handleDeadlineDate}
+                                                                            style={{ backgroundColor: '#fff' }}
+                                                                            KeyboardButtonProps={{
+                                                                                'aria-label': 'change date',
+                                                                            }}
+                                                                        />
+                                                                    </Grid>
+                                                                </MuiPickersUtilsProvider>
+                                                                {
+                                                                    deadline2 !== true ?
+                                                                        <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setDeadline2(!deadline2)} />
+                                                                        :
+                                                                        <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setDeadline2(!deadline2)} />
+                                                                }
+                                                            </div>
+                                                            {
+                                                                deadline2 && 
+                                                                <div className="d-flex align-items-center">
+                                                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                                        <Grid container justify="space-around">
+                                                                            <KeyboardDatePicker
+                                                                                margin="normal"
+                                                                                id="date-picker-dialog"
+                                                                                // label="Select deadline"
+                                                                                format="MM/dd/yyyy"
+                                                                                disablePast="true"
+                                                                                value={deadlineDate}
+                                                                                onChange={handleDeadlineDate}
+                                                                                style={{ backgroundColor: '#fff' }}
+                                                                                KeyboardButtonProps={{
+                                                                                    'aria-label': 'change date',
+                                                                                }}
+                                                                            />
+                                                                        </Grid>
+                                                                    </MuiPickersUtilsProvider>
+                                                                    {
+                                                                        deadline3 !== true ?
+                                                                            <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setDeadline3(!deadline3)} />
+                                                                            :
+                                                                            <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setDeadline3(!deadline3)} />
+                                                                    }
+                                                                </div>
+                                                            }
+
+                                                            {
+                                                                deadline3 &&
+                                                                <div className="d-flex align-items-center">
+                                                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                                        <Grid container justify="space-around">
+                                                                            <KeyboardDatePicker
+                                                                                margin="normal"
+                                                                                id="date-picker-dialog"
+                                                                                // label="Select deadline"
+                                                                                format="MM/dd/yyyy"
+                                                                                disablePast="true"
+                                                                                value={deadlineDate}
+                                                                                onChange={handleDeadlineDate}
+                                                                                style={{ backgroundColor: '#fff' }}
+                                                                                KeyboardButtonProps={{
+                                                                                    'aria-label': 'change date',
+                                                                                }}
+                                                                            />
+                                                                        </Grid>
+                                                                    </MuiPickersUtilsProvider>
+                                                                    <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setDeadline3(!deadline3)} />
+                                                                </div>
+                                                            }
+                                                        </div>
                                                     }
 
                                                     
