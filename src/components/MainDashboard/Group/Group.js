@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import { Button , ButtonGroup, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
+import { Button , ButtonGroup, FormControl, Input, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
 import { useStyles } from './GroupStyle';
 import customerData from '../../../data/customerData';
 import { Pagination } from '@material-ui/lab';
@@ -16,6 +16,36 @@ const Group = () => {
         newGroup[e.target.name] = e.target.value
         setAddGroup(newGroup)
     }
+
+    const [personName, setPersonName] = React.useState([]);
+
+    const handleChange = (event) => {
+        setPersonName(event.target.value);
+    };
+
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
+            },
+        },
+    };
+
+    const names = [
+        'Oliver Hansen',
+        'Van Henry',
+        'April Tucker',
+        'Ralph Hubbard',
+        'Omar Alexander',
+        'Carlos Abbott',
+        'Miriam Wagner',
+        'Bradley Wilkerson',
+        'Virginia Andrews',
+        'Kelly Snyder',
+    ];
     
     return (
         <div className={classes.root}>
@@ -47,6 +77,38 @@ const Group = () => {
                                             placeholder="group-1, group-2"
                                             onChange={handleTeamInput}
                                         />
+                                    </div>
+
+                                    {/* <div class="form-group">
+                                        <select class="form-control" id="role" name="role" onChange={handleTeamInput}>
+                                            <option> mariewinter@gmail.com	 </option>
+                                            <option> mariewinter@gmail.com	 </option>
+                                            <option> mariewinter@gmail.com	 </option>
+                                            <option> mariewinter@gmail.com	 </option>
+                                            <option> mariewinter@gmail.com	 </option>
+                                        </select>
+                                    </div> */}
+
+                                    <div>
+                                        <FormControl className={classes.formControl}>
+                                            <InputLabel id="demo-mutiple-name-label">Name</InputLabel>
+                                            <Select
+                                                labelId="demo-mutiple-name-label"
+                                                id="demo-mutiple-name"
+                                                multiple
+                                                value={personName}
+                                                onChange={handleChange}
+                                                input={<Input />}
+                                                variant="filled"
+                                                MenuProps={MenuProps}
+                                            >
+                                                {names.map((name) => (
+                                                    <MenuItem key={name} value={name}>
+                                                        {name}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
                                     </div>
 
 

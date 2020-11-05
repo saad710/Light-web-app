@@ -57,4 +57,19 @@ export const useStyles = makeStyles((theme) => ({
         border: "1px solid #ddd",
         backgroundColor: "#eee",
     },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: '100%',
+        maxWidth: '100%',
+    },
+    chips: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    chip: {
+        margin: 2,
+    },
+    noLabel: {
+        marginTop: theme.spacing(3),
+    },
 }));
