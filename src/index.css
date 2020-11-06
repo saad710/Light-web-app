@@ -10,17 +10,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 .App {
   text-align: center;
 }
+
 .MuiTypography-root {
   font-family: "Montserrat",
     sans-serif !important;
 }
+
 .MuiTypography-body1 {
   font-family: "Montserrat",
-  sans-serif !important;
+    sans-serif !important;
 }
+
 .MuiOutlinedInput-input {
   padding: 10px !important;
   font-family: "Montserrat", sans-serif !important;
@@ -65,6 +69,7 @@ code {
 .MuiDialog-paper {
   border-radius: 10px !important;
 }
+
 .MuiTypography-body1 {
   font-size: 15px !important;
   font-weight: 400;
@@ -86,19 +91,33 @@ p {
   margin: 2px;
 }
 
-.dropdown-menu.show {
-      background-color: rgb(65, 149, 209);
-      padding: 0.5rem 1.4rem !important;
-      color: rgb(255, 255, 255);
-      position: absolute;
-      /* transform: translate3d(85px, -42px, 0px); */
-      top: 0px;
-      left: -85px !important;
-      will-change: transform;
+#contact-dropdown {
+  padding: 0.5rem 1.4rem !important;
+  color: rgb(255, 255, 255);
+  position: absolute;
+  transform: translate3d(279px, 35px, 0px) !important;
+  top: 0px;
+  left: -85px !important;
+  will-change: transform;
+  height: auto;
 }
+
+#schedule-sent-droupdown {
+  /* background-color: rgb(65, 149, 209); */
+  padding: 0.5rem 1.4rem !important;
+  color: rgb(255, 255, 255);
+  position: absolute;
+  transform: translate3d(57px, -40px, 0px);
+  top: 0px;
+  left: -85px !important;
+  will-change: transform;
+  height: auto;
+}
+
 .MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
   /* margin-left: 26rem; */
 }
+
 /* .dropdown-menu.show {
       position: absolute;
       top: 0px;
@@ -124,6 +143,7 @@ p {
 input#date-picker-dialog {
   padding: 0.6rem;
 }
+
 label#date-picker-dialog-label {
   margin: 0.2rem 0.6rem;
 }

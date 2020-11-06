@@ -89,7 +89,7 @@ const Customers = () => {
                                                 <TableCell align="center"> 4670  Charles Street, FORT WAYNE </TableCell>
                                                 <TableCell align="center">
                                                     <Button
-                                                        variant="contained"
+                                                        variant="text"
                                                         color="primary"
                                                         size="small"
                                                         style={{ fontSize: '12px' }}>
@@ -236,7 +236,7 @@ const Customers = () => {
                                                                 autoComplete="off"
                                                                 // value={currentItem}
                                                             />
-                                                            <div class="dropdown-menu">
+                                                            <div class="dropdown-menu" id="contact-dropdown">
                                                                 {/* {
                                                                     products.map(item => (
                                                                         <a class="dropdown-item" onClick={() => handleSubmit(item)}>  {item.name} </a>

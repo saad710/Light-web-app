@@ -505,7 +505,7 @@ const Coompose = () => {
                                                 style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem'}}
                                             className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
-                                            <div className="dropdown-menu" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
+                                            <div className="dropdown-menu" id="schedule-sent-droupdown" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
                                                 <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
                                             </div>
                                         </div>
