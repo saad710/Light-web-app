@@ -228,7 +228,7 @@ const Customers = () => {
                                                                     borderRadius: '0.4rem'
                                                                 }}
                                                                 // onChange={handleChange}
-                                                                placeholder="Choose the Category..."
+                                                                placeholder="Add Contacts..."
                                                                 className="dropdown-toggle"
                                                                 data-toggle="dropdown"
                                                                 aria-haspopup="true"

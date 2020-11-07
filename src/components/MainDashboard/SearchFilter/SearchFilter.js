@@ -47,7 +47,7 @@ const SearchFilter = () => {
             <main className={classes.content}>
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <div className="input-group" style={{ width: '57rem' }}>
+                        <div className="input-group" style={{ width: '53rem' }}>
                             {/* <SearchIcon color="primary" /> */}
                             {/* <input type="text" className="form-control" placeholder="Search..."
                                 style={{ borderRadius: '1rem' }}

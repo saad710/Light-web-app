@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, Checkbox, Chip, Container, Divider, Grid, Typography } from '@material-ui/core';
 import inboxData from '../../../data/inboxData';
 import avatar from '../../../images/avatar.png'
@@ -11,6 +11,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const Inbox = () => {
     const classes = useStyles()
+    const [openPanel, setOpenPanel] = useState(false);
     const inboxMsg = inboxData
     return (
         <React.Fragment>

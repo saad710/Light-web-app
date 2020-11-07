@@ -18,6 +18,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import { useState } from 'react';
 import SentFilter from './SentFilter/SentFilter';
 import SearchFilter from './SearchFilter/SearchFilter';
+import LeftDrawer from './LeftDrawer';
 
 
 const AppBarDrawer = () => {
@@ -30,6 +31,7 @@ const AppBarDrawer = () => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    const [openPanel, setOpenPanel] = useState(false);
     return (
         <div>
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -66,6 +68,7 @@ const AppBarDrawer = () => {
                         style={{ marginRight: '1rem', color: '#2d2d2d' }}
                     /> */}
                     <SearchFilter />
+                    <LeftDrawer />
                     
                     
                     <Divider className={classes.horizontalDivider} orientation="vertical" flexItem />

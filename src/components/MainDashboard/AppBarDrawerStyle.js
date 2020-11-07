@@ -101,6 +101,7 @@ export const useStyles = makeStyles((theme) => ({
     horizontalDivider: {
         backgroundColor: '#2d2d2d',
         marginRight: '1rem',
+        marginLeft: '1rem',
         height: '2rem',
         marginTop: '1rem',
     },
