@@ -53,8 +53,8 @@ export const useStyles = makeStyles((theme) => ({
         //     backgroundColor: fade(theme.palette.common.white, 0.25),
         // },
         marginRight: theme.spacing(2),
-        // marginLeft: '66px !important',
-        width: '20% !important',
+        marginLeft: '66px !important',
+        width: '90% !important',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(3),
             width: '100%',
@@ -89,14 +89,13 @@ export const useStyles = makeStyles((theme) => ({
         color: 'inherit',
     },
     inputInput: {
-        // padding: theme.spacing(1, 1, 1, 0),
-        padding: '14px 8px 8px 0px',
+        padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
-            width: '12ch',
+            width: '75ch',
         },
 
     },

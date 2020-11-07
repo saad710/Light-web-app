@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Checkbox, Container, CssBaseline, Divider, FormControlLabel, FormGroup, Grid, InputBase } from '@material-ui/core';
+import { Checkbox, Container, CssBaseline, Divider, FormControlLabel, FormGroup, Grid, InputBase, ListItemIcon } from '@material-ui/core';
 import { useStyles } from './SearchFilterStyle';
 import './SearchFilter.css'
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -47,14 +47,14 @@ const SearchFilter = () => {
             <main className={classes.content}>
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <div className="input-group" style={{ width: '53rem' }}>
+                        <div className="input-group" style={{ width: '56rem' }}>
                             {/* <SearchIcon color="primary" /> */}
                             {/* <input type="text" className="form-control" placeholder="Search..."
                                 style={{ borderRadius: '1rem' }}
-                            /> */}
+                                /> */}
                             <div className={classes.search}>
                                 <div className={classes.searchIcon} >
-                                    <SearchIcon/>
+                                    <SearchIcon />
                                 </div>
                                 <InputBase
                                     placeholder="Search…"
@@ -66,86 +66,55 @@ const SearchFilter = () => {
                                     inputProps={{ 'aria-label': 'search' }}
                                 />
                             </div>
-                            <div class="input-group-btn">
-                                <div class="btn-group" role="group">
-                                    <div class="dropdown dropdown-lg" id="dropdown-icon">
-                                        <FilterListIcon
-                                            color="primary"
-                                            // onClick={() => setOpenFilter(!openFilter)}
-                                            type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
+                            <FormGroup row style={{ color: '#2d2d2d' }} className="d-flex flex-row">
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={checkBox.quickReply}
+                                            onChange={handleChange}
+                                            size="small"
+                                            name="quickReply"
+                                            style={{ color: '#4195D1' }}
+                                        />}
+                                    label="Quick Reply (10)"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={checkBox.setRemainder}
+                                            onChange={handleChange}
+                                            name="setRemainder"
+                                            style={{ color: '#4195D1' }}
                                         />
-                                        {/* <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button> */}
-                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                            <form>
-                                                <div>
-                                                    <label> Select Tag </label>
-                                                    <FormGroup row style={{ color: '#fff' }} className="d-flex flex-column">
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    checked={checkBox.quickReply}
-                                                                    onChange={handleChange}
-                                                                    name="quickReply"
-                                                                    style={{ color: '#4195D1' }}
-                                                                />}
-                                                            label="Quick Reply (10)"
-                                                        />
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    checked={checkBox.setRemainder}
-                                                                    onChange={handleChange}
-                                                                    name="setRemainder"
-                                                                    style={{ color: '#4195D1' }}
-                                                                />
-                                                            }
-                                                            label="No Reply (14)"
-                                                        />
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    checked={checkBox.setDeadLine}
-                                                                    onChange={handleChange}
-                                                                    name="setDeadLine"
-                                                                    style={{ color: '#4195D1' }}
-                                                                />
-                                                            }
-                                                            label="Schedule Date (22)"
-                                                        />
-                                                    </FormGroup>
-                                                    
-                                                </div>
-                                                <br/>
-                                                <div>
-                                                    {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                                        <Grid container justify="space-around">
-                                                            <KeyboardDatePicker
-                                                                margin="normal"
-                                                                id="date-picker-dialog"
-                                                                variant="inline"
-                                                                label="Select Remainder"
-                                                                format="MM/dd/yyyy"
-                                                                disablePast="true"
-                                                                value={scheduleDate}
-                                                                onChange={handleScheduleDate}
-                                                                style={{ backgroundColor: '#fff' }}
-                                                                KeyboardButtonProps={{
-                                                                    'aria-label': 'change date',
-                                                                }}
-                                                            />
-                                                        </Grid>
-                                                    </MuiPickersUtilsProvider> */}
-                                                    <div className="pb-2">
-                                                        <label> Select Date </label>
-                                                        <br />
-                                                        <input onBlur={handleDate} name="date" type="date" className="dateInput" />
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+                                    }
+                                    label="No Reply (14)"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={checkBox.setDeadLine}
+                                            onChange={handleChange}
+                                            name="setDeadLine"
+                                            style={{ color: '#4195D1' }}
+                                        />
+                                    }
+                                    label="Schedule Date (22)"
+                                />
+
+                                <div className="pb-2" style={{color: '#2d2d2d'}}>
+                                    <input onBlur={handleDate} name="date" type="date" className="dateInput"
+                                        style={{ 
+                                            color: '#2d2d2d',
+                                            marginTop: '0.2rem',
+                                            border: '1px solid gray',
+                                            padding: '5px 6px',
+                                            borderRadius: '0.5rem'
+                                        }}
+                                    />
                                 </div>
-                            </div>
+
+                                
+                            </FormGroup>
                         </div>
                     </Grid>
                 </Container>
