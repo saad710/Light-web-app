@@ -37,10 +37,10 @@ import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
 import LabelOffOutlinedIcon from "@material-ui/icons/LabelOffOutlined";
 import GroupAddOutlinedIcon from "@material-ui/icons/GroupAddOutlined";
-import "./MenuItem.css";
 import { useStyles } from "../MenuItem/MenuItemStyle";
 import { CalendarToday } from "@material-ui/icons";
 import './MenuItem.css'
+import AddToPhotosSharpIcon from '@material-ui/icons/AddToPhotosSharp';
 
 const componseStyle = {
   backgroundColor: "#4195D1",
@@ -52,12 +52,11 @@ const componseStyle = {
   borderRadius: "1rem",
 };
 
-const MenuItem = () => {
+const MenuItem = ({ toogleOpen }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [ticketModal, setTicketModal] = React.useState(false);
   const [ticketValue, setTicketValue] = useState({});
-
   const handleClick = () => {
     setOpen(!open);
   };
@@ -102,14 +101,21 @@ const MenuItem = () => {
     <div>
       <div>
         <Link to='/compose'>
-          <div style={{ width: "60%", margin: "0 auto" }}>
             <ListItem>
               {/* <ListItemIcon>
                             <MarkunreadMailboxIcon />
                         </ListItemIcon> */}
-              <ListItemText style={componseStyle} primary='Compose' />
+              {
+                toogleOpen === false ?
+                <ListItemIcon>
+                  <AddToPhotosSharpIcon style={{ color: '#4195D1' }} />
+                </ListItemIcon>
+                :
+                <div style={{ width: "90%", margin: "0 auto" }}>
+                    <ListItemText style={componseStyle} primary='Compose' />
+                </div>
+              }
             </ListItem>
-          </div>
         </Link>
 
         <Link to='/dashboard'>

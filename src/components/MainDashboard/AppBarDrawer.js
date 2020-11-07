@@ -43,7 +43,7 @@ const AppBarDrawer = () => {
                         onClick={handleDrawerOpen}
                         className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
                     >
-                        <MenuIcon />
+                        <MenuIcon style={{color: '#2d2d2d'}} />
                     </IconButton>
                     {/* <div className={classes.search}>
                         <div className={classes.searchIcon} >
@@ -91,13 +91,13 @@ const AppBarDrawer = () => {
                     <Typography style={{ padding: '1.2rem 2rem'}}>
                         Client Web App
                     </Typography>
-                    {/* <IconButton onClick={handleDrawerClose} style={{ color: '#4195D1' }}>
+                    <IconButton onClick={handleDrawerClose} style={{ color: '#4195D1' }}>
                         <ChevronLeftIcon />
-                    </IconButton> */}
+                    </IconButton>
                 </div>
                 <Divider />
                 {/* <List>{mainListItems}</List> */}
-                <MenuItem />
+                <MenuItem toogleOpen={open} />
 
             </Drawer>
         </div>
