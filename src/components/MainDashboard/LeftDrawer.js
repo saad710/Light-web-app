@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import SettingsIcon from "@material-ui/icons/Settings";
+import { Collapse } from '@material-ui/core';
+import {Link} from 'react-router-dom'
+import PersonIcon from "@material-ui/icons/Person";
+import LabelImportantIcon from "@material-ui/icons/LabelImportant";
+import BusinessIcon from "@material-ui/icons/Business";
+
+import DataUsageIcon from '@material-ui/icons/DataUsage';
+
 
 const drawerWidth = 240;
 
@@ -39,6 +42,16 @@ const useStyles = makeStyles((theme) => ({
         ...theme.mixins.toolbar,
         justifyContent: 'flex-start',
     },
+    listItem: {
+        color: "#4195D1",
+        fontSize: "0.85em",
+        minHeight: 40,
+        "&:hover, &:focus": {
+            backgroundColor: "#4195D1",
+            color: "#fff",
+        },
+    },
+    
 
 }));
 
@@ -54,6 +67,12 @@ const LeftDrawer = () => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const [icon9, setIcon9] = useState(false);
+    const [icon11, setIcon11] = useState(false);
+    const [icon12, setIcon12] = useState(false);
+    const [icon13, setIcon13] = useState(false);
+    const [icon16, setIcon16] = useState(false);
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -64,7 +83,7 @@ const LeftDrawer = () => {
                 onClick={handleDrawerOpen}
                 className={clsx(open && classes.hide)}
             >
-                <MenuIcon style={{color: '#2d2d2d'}} />
+                <SettingsIcon style={{ color: '#2d2d2d' }} />
             </IconButton>
 
             <Drawer
@@ -83,21 +102,98 @@ const LeftDrawer = () => {
                 </div>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+        
+
+                    <Collapse
+                        in={open}
+                        timeout='auto'
+                        unmountOnExit
+                        className={classes.collapse}
+                    >
+                        <List component='div' disablePadding>
+                            <Link to='/profile'>
+                                <ListItem button className={classes.listItem}
+                                    onMouseEnter={() => setIcon9(true)}
+                                    onMouseLeave={() => setIcon9(false)}
+                                >
+                                    <div className="d-flex" style={{ marginLeft: '1rem' }}>
+                                        <ListItemIcon className={classes.iconStyle}>
+                                            {icon9 ? <PersonIcon style={{ color: '#fff' }} /> : <PersonIcon style={{ color: '#4195D1' }} />}
+                                            {/* <PersonIcon /> */}
+                                        </ListItemIcon>
+                                        <ListItemText primary='Profile' />
+                                    </div>
+                                </ListItem>
+                            </Link>
+                           
+
+                            <Link to='/team'>
+                                <ListItem button className={classes.listItem}
+                                    onMouseEnter={() => setIcon11(true)}
+                                    onMouseLeave={() => setIcon11(false)}
+                                >
+                                    <div className="d-flex" style={{ marginLeft: '1rem' }}>
+                                        <ListItemIcon className={classes.iconStyle}>
+                                            {icon11 ? <SettingsIcon style={{ color: '#fff' }} /> : <SettingsIcon style={{ color: '#4195D1' }} />}
+                                            {/* <GroupWorkIcon /> */}
+                                        </ListItemIcon>
+                                        <ListItemText primary='Team' />
+
+                                    </div>
+                                </ListItem>
+                            </Link>
+
+                            <Link to='/email-signature'>
+                                <ListItem button className={classes.listItem}
+                                    onMouseEnter={() => setIcon12(true)}
+                                    onMouseLeave={() => setIcon12(false)}
+                                >
+                                    <div className="d-flex" style={{ marginLeft: '1rem' }}>
+                                        <ListItemIcon className={classes.iconStyle}>
+                                            {icon12 ? <LabelImportantIcon style={{ color: '#fff' }} /> : <LabelImportantIcon style={{ color: '#4195D1' }} />}
+                                            {/* <LabelImportantIcon /> */}
+                                        </ListItemIcon>
+                                        <ListItemText primary='Email Signature' />
+
+                                    </div>
+                                </ListItem>
+                            </Link>
+
+                            <Link to='/companydetails'>
+                                <ListItem button className={classes.listItem}
+                                    onMouseEnter={() => setIcon13(true)}
+                                    onMouseLeave={() => setIcon13(false)}
+                                >
+                                    <div className="d-flex" style={{ marginLeft: '1rem' }}>
+                                        <ListItemIcon className={classes.iconStyle}>
+                                            {icon13 ? <BusinessIcon style={{ color: '#fff' }} /> : <BusinessIcon style={{ color: '#4195D1' }} />}
+                                            {/* <BusinessIcon /> */}
+                                        </ListItemIcon>
+
+                                    </div>
+                                    <ListItemText primary='Company Details' />
+                                </ListItem>
+                            </Link>
+
+                            <Link to='/trial'>
+                                <ListItem button className={classes.listItem}
+                                    onMouseEnter={() => setIcon16(true)}
+                                    onMouseLeave={() => setIcon16(false)}
+                                >
+                                    <div className="d-flex" style={{ marginLeft: '1rem' }}>
+                                        <ListItemIcon className={classes.iconStyle}>
+                                            {/* {icon16 ? <BusinessIcon style={{ color: '#fff' }} /> : <BusinessIcon style={{ color: '#4195D1' }} />} */}
+                                            {icon16 ? <DataUsageIcon style={{ color: '#fff' }} /> : <DataUsageIcon style={{ color: '#4195D1' }} />}
+                                            {/* <BusinessIcon /> */}
+                                        </ListItemIcon>
+
+                                    </div>
+                                    <ListItemText primary='Trial' />
+                                </ListItem>
+                            </Link>
+
+                        </List>
+                    </Collapse>
                 </List>
             </Drawer>
         </div>

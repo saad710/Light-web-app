@@ -196,7 +196,7 @@ const MenuItem = () => {
           </ListItem>
         </Link>
 
-        <ListItem button onClick={handleClick} className={classes.listItem}
+        {/* <ListItem button onClick={handleClick} className={classes.listItem}
           onMouseEnter={() => setIcon8(true)}
           onMouseLeave={() => setIcon8(false)}
         >
@@ -205,7 +205,7 @@ const MenuItem = () => {
           </ListItemIcon>
           <ListItemText primary='Setting' />
           {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
+        </ListItem> */}
 
         <Collapse
           in={open}
