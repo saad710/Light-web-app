@@ -544,7 +544,7 @@ const Coompose = () => {
                                                             <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
                                                             <div>
                                                                 {
-                                                                    quickReply1 !== false ?
+                                                                    quickReply2 !== true ?
                                                                         <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />
                                                                         :
                                                                         <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />

@@ -66,7 +66,7 @@ const SearchFilter = () => {
                                     inputProps={{ 'aria-label': 'search' }}
                                 />
                             </div>
-                            <FormGroup row style={{ color: '#2d2d2d' }} className="d-flex flex-row">
+                            <FormGroup row style={{ color: '#2d2d2d', marginLeft:'4rem' }} className="d-flex flex-row">
                                 <FormControlLabel
                                     control={
                                         <Checkbox
