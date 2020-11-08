@@ -237,51 +237,58 @@ const Coompose = () => {
                                                 {/* check boxes start */}
 
                                                 <div>
-                                                    <FormGroup row style={{ color: '#fff' }}>
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    checked={checkBox.quickReply}
-                                                                    onChange={handleChange}
-                                                                    name="quickReply"
-                                                                    style={{ color: '#4195D1' }}
-                                                                />}
-                                                            label="Quick Reply"
-                                                        />
-                                                        {/* <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    checked={checkBox.noReply}
-                                                                    onChange={handleChange}
-                                                                    name="noReply"Z
-                                                                    style={{ color: '#4195D1' }}
-                                                                />
-                                                            }
-                                                            label="No Reply"
-                                                        /> */}
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    checked={checkBox.setRemainder}
-                                                                    onChange={handleChange}
-                                                                    name="setRemainder"
-                                                                    style={{ color: '#4195D1' }}
-                                                                />
-                                                            }
-                                                            label="Set Remainder"
-                                                        />
+                                                    <FormGroup row style={{ color: '#fff' }} className="d-flex justify-content-between">
+                                                        
+                                                        <div className="d-flex flex-column">
+                                                            <FormControlLabel
+                                                                control={
+                                                                    <Checkbox
+                                                                        // checked={checkBox.setRemainder}
+                                                                        // onChange={handleChange}
+                                                                        name="setRemainder"
+                                                                        style={{ color: '#4195D1' }}
+                                                                    />
+                                                                }
+                                                                label="Reply Needed"
+                                                            />
 
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    checked={checkBox.setDeadLine}
-                                                                    onChange={handleChange}
-                                                                    name="setDeadLine"
-                                                                    style={{ color: '#4195D1' }}
-                                                                />
-                                                            }
-                                                            label="Set Deadline"
-                                                        />
+                                                            <FormControlLabel
+                                                                control={
+                                                                    <Checkbox
+                                                                        checked={checkBox.setRemainder}
+                                                                        onChange={handleChange}
+                                                                        name="setRemainder"
+                                                                        style={{ color: '#4195D1' }}
+                                                                    />
+                                                                }
+                                                                label="Set Remainder"
+                                                            />
+                                                        </div>
+                                                        
+                                                        <div className="d-flex flex-column">
+                                                            <FormControlLabel
+                                                                control={
+                                                                    <Checkbox
+                                                                        // checked={checkBox.setRemainder}
+                                                                        // onChange={handleChange}
+                                                                        name="setRemainder"
+                                                                        style={{ color: '#4195D1' }}
+                                                                    />
+                                                                }
+                                                                label="Hide Contact Info"
+                                                            />
+                                                            <FormControlLabel
+                                                                control={
+                                                                    <Checkbox
+                                                                        checked={checkBox.setDeadLine}
+                                                                        onChange={handleChange}
+                                                                        name="setDeadLine"
+                                                                        style={{ color: '#4195D1' }}
+                                                                    />
+                                                                }
+                                                                label="Set Deadline"
+                                                            />
+                                                        </div>
                                                     </FormGroup>
 
                                                 </div>
@@ -290,11 +297,7 @@ const Coompose = () => {
 
                                                 {/* fuctional check boxes show start */}
 
-                                                <div className="d-flex">
-                                                    {
-                                                        checkBox.quickReply &&
-                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rowsMax={4} placeholder="Quick Reply ..." />
-                                                    }
+                                                <div className="d-flex justify-content-between">
                                                     <div>
                                                         {
                                                             checkBox.setRemainder &&
@@ -398,14 +401,14 @@ const Coompose = () => {
                                                                         />
                                                                     </Grid>
                                                                 </MuiPickersUtilsProvider>
-                                                                {
+                                                                {/* {
                                                                     deadline2 !== true ?
                                                                         <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setDeadline2(!deadline2)} />
                                                                         :
                                                                         <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setDeadline2(!deadline2)} />
-                                                                }
+                                                                } */}
                                                             </div>
-                                                            {
+                                                            {/* {
                                                                 deadline2 &&
                                                                 <div className="d-flex align-items-center">
                                                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -456,7 +459,7 @@ const Coompose = () => {
                                                                     </MuiPickersUtilsProvider>
                                                                     <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setDeadline3(!deadline3)} />
                                                                 </div>
-                                                            }
+                                                            } */}
                                                         </div>
                                                     }
 
@@ -497,20 +500,42 @@ const Coompose = () => {
                                         >
                                             Send
                                         </Button> */}
-
-                                        <div className="btn-group" style={{ marginLeft: '38rem', marginTop: '1rem' }}>
-                                            <button type="button" className="btn btn-primary"
-                                                style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem' }}
-                                                onClick={handleCompose}
-                                            >
-                                                Send
-                                            </button>
-                                            <button type="button"
-                                                style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem' }}
-                                                className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            </button>
-                                            <div className="dropdown-menu" id="schedule-sent-droupdown" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
-                                                <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
+                                        <div className="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <div>
+                                                    <FormControlLabel
+                                                        style={{color: '#fff'}}
+                                                        control={
+                                                            <Checkbox
+                                                                checked={checkBox.quickReply}
+                                                                onChange={handleChange}
+                                                                name="quickReply"
+                                                                style={{ color: '#4195D1' }}
+                                                            />}
+                                                        label="Quick Reply"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    {
+                                                        checkBox.quickReply &&
+                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div className="btn-group">
+                                                <button type="button" className="btn btn-primary"
+                                                    style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem' }}
+                                                    onClick={handleCompose}
+                                                >
+                                                    Send
+                                                </button>
+                                                <button type="button"
+                                                    style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem' }}
+                                                    className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                </button>
+                                                <div className="dropdown-menu" id="schedule-sent-droupdown" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
+                                                    <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
