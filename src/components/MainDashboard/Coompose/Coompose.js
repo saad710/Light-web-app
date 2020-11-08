@@ -484,7 +484,7 @@ const Coompose = () => {
                                                             ['font', 'fontSize', 'formatBlock'],
                                                             ['bold', 'underline', 'italic',],
                                                             ['align', 'horizontalRule', 'list', 'lineHeight'],
-                                                            ['link', 'image', 'video',],
+                                                            ['link','image'],
                                                             ['fullScreen', 'codeView'],
                                                         ]
                                                     }}
