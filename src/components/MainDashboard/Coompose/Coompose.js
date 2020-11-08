@@ -8,11 +8,12 @@ import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import './Compose.css'
 import { useStyles } from './ComposeStyle';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { DateTimePicker, KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
 import IndeterminateCheckBoxRoundedIcon from '@material-ui/icons/IndeterminateCheckBoxRounded';
+
 
 const Coompose = () => {
     const classNamees = useStyles();
@@ -43,7 +44,7 @@ const Coompose = () => {
     // 2nd 3rd remainder
     const [remainder2, setRemainder2] = useState(false)
     const [remainder3, setRemainder3] = useState(false)
-    
+
     // deadline date
 
     const [deadlineDate, setDeadlineDate] = useState(date.setDate(date.getDate() + 2))
@@ -58,7 +59,7 @@ const Coompose = () => {
 
     // schedule date
     const [scheduleDate, setScheduleDate] = useState(date.setDate(date.getDate() + 1))
-    console.log("schedule date",scheduleDate);
+    console.log("schedule date", scheduleDate);
     const handleScheduleDate = (date) => {
         const scheduleDate = { ...value }
         scheduleDate.schedule = date.toDateString()
@@ -92,6 +93,9 @@ const Coompose = () => {
         // }
         console.log(finalValue);
     }
+
+
+    const [dateValue, onChange] = useState(new Date());
 
     // modal handle with state
 
@@ -317,7 +321,7 @@ const Coompose = () => {
                                                                         <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setRemainder2(!remainder2)} />
                                                                         :
                                                                         <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setRemainder2(!remainder2)} />
-                                                                } 
+                                                                }
                                                             </div>
                                                         }
                                                         {
@@ -341,11 +345,11 @@ const Coompose = () => {
                                                                     </Grid>
                                                                 </MuiPickersUtilsProvider>
                                                                 {
-                                                                    remainder3 !== true ? 
+                                                                    remainder3 !== true ?
                                                                         <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setRemainder3(!remainder3)} />
-                                                                    :
-                                                                        <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setRemainder3(!remainder3)} /> 
-                                                                } 
+                                                                        :
+                                                                        <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setRemainder3(!remainder3)} />
+                                                                }
                                                             </div>
                                                         }
                                                         {
@@ -402,7 +406,7 @@ const Coompose = () => {
                                                                 }
                                                             </div>
                                                             {
-                                                                deadline2 && 
+                                                                deadline2 &&
                                                                 <div className="d-flex align-items-center">
                                                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                                                         <Grid container justify="space-around">
@@ -456,7 +460,7 @@ const Coompose = () => {
                                                         </div>
                                                     }
 
-                                                    
+
                                                 </div>
 
                                                 {/* fuctional check boxes show end */}
@@ -476,7 +480,7 @@ const Coompose = () => {
                                                         ]
                                                     }}
                                                     onChange={handleBlur}
-                                                    onImageUpload={handleImageUpload} 
+                                                    onImageUpload={handleImageUpload}
                                                 />
 
                                             </FormControl>
@@ -494,16 +498,16 @@ const Coompose = () => {
                                             Send
                                         </Button> */}
 
-                                        <div className="btn-group" style={{marginLeft: '38rem', marginTop:'1rem'}}>
+                                        <div className="btn-group" style={{ marginLeft: '38rem', marginTop: '1rem' }}>
                                             <button type="button" className="btn btn-primary"
-                                                style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem'}}
+                                                style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem' }}
                                                 onClick={handleCompose}
                                             >
                                                 Send
                                             </button>
-                                            <button type="button" 
-                                                style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem'}}
-                                            className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button"
+                                                style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem' }}
+                                                className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
                                             <div className="dropdown-menu" id="schedule-sent-droupdown" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
                                                 <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
@@ -512,7 +516,7 @@ const Coompose = () => {
                                     </form>
                                 </CardContent>
                             </Card>
-                            
+
                             {/* calender popup for schedule mail */}
 
                             <Modal
@@ -530,24 +534,43 @@ const Coompose = () => {
                                 <Fade in={open}>
                                     <div>
                                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                            <Grid container justify="space-around">
-                                                <KeyboardDatePicker
-                                                    margin="normal"
-                                                    id="date-picker-dialog"
-                                                    variant="static"
-                                                    label="Select Remainder"
-                                                    format="MM/dd/yyyy"
-                                                    disablePast="true"
-                                                    value={scheduleDate}
-                                                    onChange={handleScheduleDate}
-                                                    style={{ backgroundColor: '#fff' }}
-                                                    KeyboardButtonProps={{
-                                                        'aria-label': 'change date',
-                                                    }}
-                                                />
-                                            </Grid>
+                                            <div className="">
+                                                <Grid container justify="space-around">
+                                                    <KeyboardDatePicker
+                                                        margin="normal"
+                                                        id="date-picker-dialog"
+                                                        variant="static"
+                                                        label="Select Remainder"
+                                                        format="MM/dd/yyyy"
+                                                        disablePast="true"
+                                                        value={scheduleDate}
+                                                        onChange={handleScheduleDate}
+                                                        style={{ backgroundColor: '#fff' }}
+                                                        KeyboardButtonProps={{
+                                                            'aria-label': 'change date',
+                                                        }}
+                                                    />
+                                                </Grid>
+                                                <Grid container justify="space-around">
+                                                    <TextField
+                                                        style={{ color: '#fff', backgroundColor: '#fff', width: "100%", border: '1px solid gray' }}
+                                                        id="time"
+                                                        label="Select Time"
+                                                        type="time"
+                                                        defaultValue="07:30"
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                        inputProps={{
+                                                            step: 300, // 5 min
+                                                        }}
+                                                    />
+                                                </Grid>
+                                            </div>
+
                                         </MuiPickersUtilsProvider>
                                     </div>
+
                                 </Fade>
                             </Modal>
                         </div>
