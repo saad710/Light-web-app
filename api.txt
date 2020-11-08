@@ -90,7 +90,7 @@ Route::Put('/group-update/{id}',[GroupController::class,'updateGroup']);
 Route::delete('/group-delete/{id}',[GroupController::class,'removeGroup']);
 Route::get('/group/{id}',[GroupController::class,'getGroup']);
 
-//Tag
+//Tags
 Route::post('/create-tag',[TagController::class,'addTag']);
 Route::get('/tag-all',[TagController::class,'tagList']);
 Route::Put('/tag-update/{tagname}',[TagController::class,'tagUpdate']);
