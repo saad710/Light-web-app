@@ -57,6 +57,12 @@ const Coompose = () => {
     const [deadline2, setDeadline2] = useState(false)
     const [deadline3, setDeadline3] = useState(false)
 
+    // 2nd 3rd quick reply
+
+    const [quickReply1, setQuickReply1] = useState(false)
+    const [quickReply2, setQuickReply2] = useState(false)
+
+
     // schedule date
     const [scheduleDate, setScheduleDate] = useState(date.setDate(date.getDate() + 1))
     console.log("schedule date", scheduleDate);
@@ -238,7 +244,7 @@ const Coompose = () => {
 
                                                 <div>
                                                     <FormGroup row style={{ color: '#fff' }} className="d-flex justify-content-between">
-                                                        
+
                                                         <div className="d-flex flex-column">
                                                             <FormControlLabel
                                                                 control={
@@ -264,7 +270,7 @@ const Coompose = () => {
                                                                 label="Set Remainder"
                                                             />
                                                         </div>
-                                                        
+
                                                         <div className="d-flex flex-column">
                                                             <FormControlLabel
                                                                 control={
@@ -504,7 +510,7 @@ const Coompose = () => {
                                             <div>
                                                 <div>
                                                     <FormControlLabel
-                                                        style={{color: '#fff'}}
+                                                        style={{ color: '#fff' }}
                                                         control={
                                                             <Checkbox
                                                                 checked={checkBox.quickReply}
@@ -518,9 +524,51 @@ const Coompose = () => {
                                                 <div>
                                                     {
                                                         checkBox.quickReply &&
-                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                        <div className="d-flex align-items-center">
+                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                            <div>
+                                                                {
+                                                                    quickReply1 !== true ?
+                                                                        <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply1(!quickReply1)} />
+                                                                        :
+                                                                        <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply1(!quickReply1)} />
+                                                                }
+                                                            </div>
+                                                        </div>
                                                     }
                                                 </div>
+                                                <div >
+                                                    {
+                                                        quickReply1 &&
+                                                        <div className="d-flex align-items-center">
+                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                            <div>
+                                                                {
+                                                                    quickReply1 !== false ?
+                                                                        <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />
+                                                                        :
+                                                                        <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />
+                                                                }
+                                                            </div>
+                                                        </div>
+
+                                                    }
+                                                </div>
+
+                                                {
+                                                    quickReply2 &&
+                                                    <div className="d-flex align-items-center">
+                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                        <div>
+                                                            {
+
+                                                                <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />
+                                                            }
+                                                        </div>
+                                                    </div>
+
+                                                }
+
                                             </div>
                                             <div className="btn-group">
                                                 <button type="button" className="btn btn-primary"
