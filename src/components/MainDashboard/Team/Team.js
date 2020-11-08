@@ -3,8 +3,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import {Button, TextField, Typography} from '@material-ui/core';
+import {Button, ButtonGroup, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography} from '@material-ui/core';
 import { useStyles } from './TeamStyle';
+import customerData from '../../../data/customerData';
+import { Pagination } from '@material-ui/lab';
 
 
 const Team = () => {
@@ -99,13 +101,13 @@ const Team = () => {
 
                                 </div> */}
 
-                                <div class="form-group">
+                                {/* <div class="form-group">
                                     <label for="exampleFormControlSelect1">Select Role</label>
                                     <select class="form-control" id="role" name="role" onChange={handleTeamInput}>
                                         <option> Admin </option>
                                         <option> Super Admin </option>
                                     </select>
-                                </div>
+                                </div> */}
                                 
                                 <Button
                                     style={{ padding: '0.6rem 0', margin: '1rem 0' }}
@@ -118,6 +120,52 @@ const Team = () => {
                                     ADD ADMIN
                                 </Button>
                             </form>
+
+                            <TableContainer component={Paper} square elevation={0} className="mt-4">
+                                <Table className={classes.table} aria-label="simple table"
+                                    size='small'
+                                >
+                                    <TableHead className={classes.tableHeader}>
+                                        <TableRow>
+                                            <TableCell> # </TableCell>
+                                            <TableCell align="center"> NAME </TableCell>
+                                            <TableCell align="center"> EMAIL </TableCell>
+                                            <TableCell align="center"> ACTION </TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {
+                                            customerData.map((customer, i) => (
+                                                <TableRow key={customer.id}>
+                                                    <TableCell component="th" scope="row">
+                                                        {i + 1}
+                                                    </TableCell>
+                                                    <TableCell align="center"> Marie Winter </TableCell>
+                                                    <TableCell align="center"> mariewinter@email.com </TableCell>
+                                                    <TableCell align="right">
+                                                        <div>
+                                                            <ButtonGroup
+                                                                variant="contained"
+                                                                color="primary"
+                                                                size="small"
+                                                                aria-label="contained primary button group"
+                                                            >
+                                                                <Button
+                                                                    style={{ fontSize: '10px' }} color="secondary">DELETE</Button>
+                                                            </ButtonGroup>
+                                                        </div>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))
+                                        }
+                                    </TableBody>
+
+                                </Table>
+                                <div className={classes.paginationBox}>
+                                    <Pagination count={10} className={classes.pagination} />
+                                </div>
+
+                            </TableContainer>
                         </div>
                     </Grid>
 

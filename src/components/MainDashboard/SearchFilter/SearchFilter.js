@@ -76,7 +76,7 @@ const SearchFilter = () => {
                                             name="quickReply"
                                             style={{ color: '#4195D1' }}
                                         />}
-                                    label="Quick Reply (10)"
+                                    label="Quick Reply"
                                 />
                                 <FormControlLabel
                                     control={
@@ -87,7 +87,7 @@ const SearchFilter = () => {
                                             style={{ color: '#4195D1' }}
                                         />
                                     }
-                                    label="No Reply (14)"
+                                    label="No Reply"
                                 />
                                 <FormControlLabel
                                     control={
@@ -98,7 +98,7 @@ const SearchFilter = () => {
                                             style={{ color: '#4195D1' }}
                                         />
                                     }
-                                    label="Schedule Date (22)"
+                                    label="Schedule Date"
                                 />
 
                                 <div className="pb-2" style={{color: '#2d2d2d'}}>

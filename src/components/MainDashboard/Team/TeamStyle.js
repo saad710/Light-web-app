@@ -33,5 +33,14 @@ export const useStyles = makeStyles((theme) => ({
         color: '#fff',
         borderRadius: 0,
         padding: '0.5rem 5rem',
-    }
+    },
+    paginationBox: {
+        marginTop: 20,
+        display: "flex",
+        justifyContent: "center",
+    },
+    pagination: {
+        border: "1px solid #ddd",
+        backgroundColor: "#eee",
+    },
 }));
