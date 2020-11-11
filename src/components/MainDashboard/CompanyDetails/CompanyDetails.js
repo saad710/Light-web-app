@@ -3,28 +3,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import AppBarDrawer from '../AppBarDrawer';
-import customerData from '../../../data/customerData'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { Button, ButtonGroup, TextareaAutosize, TextField, Typography } from '@material-ui/core';
+import { Button, TextareaAutosize, TextField, Typography } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import avatar from '../../../images/avatar.png'
-import { Pagination } from '@material-ui/lab';
 import ToolBar from '../ToolBar/ToolBar';
 import { useStyles } from './CompanyDetailsStyle';
-import BusinessIcon from '@material-ui/icons/Business';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import LanguageIcon from '@material-ui/icons/Language';
 import EditIcon from '@material-ui/icons/Edit';
+import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
+import IndeterminateCheckBoxRoundedIcon from '@material-ui/icons/IndeterminateCheckBoxRounded';
 
 const CompanyDetails = () => {
     const classes = useStyles();

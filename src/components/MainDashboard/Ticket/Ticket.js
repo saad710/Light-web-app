@@ -8,6 +8,8 @@ import { useStyles } from './TicketStyle';
 import customerData from '../../../data/customerData';
 import { Pagination } from '@material-ui/lab';
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
+import Axios from 'axios';
+import { key } from '../../../apiKey';
 
 const Ticket = () => {
     const classes = useStyles();
@@ -36,8 +38,16 @@ const Ticket = () => {
     };
 
     const handleSubmit = (e) => {
-        const finalValue = { ...ticketValue };
-        console.log(finalValue);
+        const tickets = { ...ticketValue };
+        
+        Axios.post(`${key}create-ticket`, tickets)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
         e.preventDefault();
     };
     return (

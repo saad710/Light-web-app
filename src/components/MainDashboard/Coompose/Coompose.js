@@ -162,7 +162,7 @@ const Coompose = () => {
                                                                 <div>
                                                                     To
                                                                 </div>
-                                                                <div className="d-flex" style={{ position: 'absolute', left: '70%' }}>
+                                                                <div className="d-flex" style={{ position: 'absolute', left: '68%' }}>
                                                                     <div className="px-2" onClick={() => setCcOpen(!ccOpen)}>
                                                                         Cc
                                                                     </div>

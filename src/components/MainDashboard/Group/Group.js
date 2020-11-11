@@ -84,7 +84,7 @@ const Group = () => {
                                             name="group"
                                             autoComplete="group"
                                             autoFocus
-                                            placeholder="group-1, group-2"
+                                            placeholder="group-1"
                                             onChange={handleTeamInput}
                                         />
                                     </div>
