@@ -12,7 +12,6 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\CompanyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::get('mail-data',[\App\Http\Controllers\HomeController::class,'testClient']);
 //Admin API.....................................................................................
 Route::post('/admin-login',[LoginController::class,'adminLogin']);
 Route::post('/admin-logout',[LoginController::class,'adminLogout']);
@@ -34,19 +33,26 @@ Route::post('/admin-create',[AdminController::class,'createAdmin']);
 Route::get('/admin-list',[AdminController::class,'getAllAdmins']);
 Route::get('/admin-view/{id}',[AdminController::class,'getAdmin']);
 Route::delete('/admin-remove/{id}',[AdminController::class,'removeAdmin']);
+Route::put('/customer-password-approval/{id}',[\App\Http\Controllers\PasswordChangeController::class,'adminApprovalYes']);
+Route::put('/customer-password-decline/{id}',[\App\Http\Controllers\PasswordChangeController::class,'adminApprovalNo']);
 
 //Customer API.................................................................................
-//Route::post('/customer-login',[LoginController::class, 'customerLogin']);
-//Route::post('/customer-logout',[LoginController::class, 'customerLogout']);
-//Route::post('/create-customer', [CustomerController::class, 'createCustomer']);
+Route::post('/customer-login',[LoginController::class, 'customerLoginApi']);
+Route::post('/customer-logout',[LoginController::class, 'customerLogoutApi']);
+Route::post('/create-customer', [CustomerController::class, 'createCustomerApi']);
 Route::get('/customer/{id}',[CustomerController::class,'customerDetailsById']);
 Route::get('/all-customers',[CustomerController::class,'customerDetails']);
 Route::put('/change-status/{id}',[CustomerController::class,'changeStatus']);
 Route::delete('/customer-delete/{id}',[CustomerController::class,'removeCustomer']);
-Route::put('/update-customer/{id}',[CustomerController::class,'updateCustomerDetails']);
+Route::put('/update-customer/{id}',[CustomerController::class,'updateCustomerDetailsApi']);
 Route::put('change-password/{id}',[CustomerController::class,'passwordChange']);
 Route::get('/get-token',[CustomerController::class,'getToken']);
 Route::put('/create-new-password/{email}', [LoginController::class,'createNewPassword']);
+Route::post('/reply-mail-to-client/{id}',[MailController::class,'replyMailToClient']);
+Route::get('/get-customer-mail',[MailController::class,'getCustomerMail']);
+Route::get('/get-specific-customer-mail/{id}',[MailController::class,'getSpecificCustomerMail']);
+Route::post('/password-change-request/',[\App\Http\Controllers\PasswordChangeController::class,'changePasswordApi']);
+Route::put('/change-password/',[\App\Http\Controllers\PasswordChangeController::class,'passwordUpdateApi']);
 
 //Client API...................................................................................
 Route::post('/client-login',[LoginController::class, 'clientLogin']);
@@ -59,6 +65,13 @@ Route::delete('/client-delete/{id}',[ClientController::class,'removeClient']);
 Route::post('/client-generate-bill',[ClientController::class, 'generateBill']);
 Route::get('/client-billing/{id}',[ClientController::class, 'getBillingData']);
 Route::get('/client-shipping/{id}',[ClientController::class, 'getShippingData']);
+Route::post('/send-mail-customer',[MailController::class,'sendMailToCustomer']);
+Route::post('/reply-mail-to-customer/{id}',[MailController::class,'replyMailToCustomer']);
+Route::get('/get-specific-client-mail/{id}',[MailController::class,'getSpecificClientMail']);
+Route::get('/count-direct-mail/',[MailController::class,'countDirectMail']);
+
+Route::get('/count-direct-mail/{clientId}',[MailController::class,'countMailWithId']);
+
 //Ticket
 Route::get('/get-ticket',[TicketController::class,'getTicket']);
 Route::post('/create-ticket',[TicketController::class,'createTicket']);
@@ -75,14 +88,6 @@ Route::get('/invoice-view/{id}',[ClientController::class,'invoiceViewData']);
 // Route::get('/all-invoice',[ClientController::class,'allInvoice']);
 Route::get('/invoice-all',[ClientController::class,'invoiceAllData']); //invoice all data get
 
-//mail routes
-Route::post('/send-mail-customer',[MailController::class,'sendMailToCustomer']);
-Route::post('/reply-mail-to-client/{id}',[MailController::class,'replyMailToClient']);
-Route::post('/reply-mail-to-customer/{id}',[MailController::class,'replyMailToCustomer']);
-Route::get('/get-customer-mail',[MailController::class,'getCustomerMail']);
-Route::get('/get-specific-customer-mail/{id}',[MailController::class,'getSpecificCustomerMail']);
-Route::get('/get-specific-client-mail/{id}',[MailController::class,'getSpecificClientMail']);
-
 //group
 Route::post('/create-group',[GroupController::class,'createGroup']);
 Route::get('/group-all',[GroupController::class,'getAllGroups']);
@@ -90,7 +95,7 @@ Route::Put('/group-update/{id}',[GroupController::class,'updateGroup']);
 Route::delete('/group-delete/{id}',[GroupController::class,'removeGroup']);
 Route::get('/group/{id}',[GroupController::class,'getGroup']);
 
-//Tags
+//Tag
 Route::post('/create-tag',[TagController::class,'addTag']);
 Route::get('/tag-all',[TagController::class,'tagList']);
 Route::Put('/tag-update/{tagname}',[TagController::class,'tagUpdate']);
@@ -111,3 +116,22 @@ Route::get('/all-company',[\App\Http\Controllers\CompanyController::class,'getAl
 //Schedule mail update
 Route::post('/update-schedule/{id}',[MailController::class,'scheduleUpdate']);
 
+
+
+
+
+
+
+
+
+//testclient
+Route::get('mail-data',[\App\Http\Controllers\HomeController::class,'testClient']);
+
+
+//getreplyremainder
+Route::get('/reply-remainder/{id}',[\App\Http\Controllers\HomeController::class,'getRemainderReply']);
+
+
+
+//search by name
+Route::get('/search/{name}',[\App\Http\Controllers\HomeController::class,'search']);

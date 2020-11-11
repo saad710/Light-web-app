@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -22,11 +22,25 @@ import { Pagination } from "@material-ui/lab";
 import ToolBar from '../ToolBar/ToolBar';
 import { useStyles } from './CustomersStyle';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import Axios from 'axios';
+import { key } from '../../../apiKey';
 
 const Customers = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [userModelOpen, setUserModelOpen] = useState(false)
+    const [customers, setCustomers] = useState(null)
+    console.log(customers);
+    useEffect(() => {
+        Axios(`${key}all-customers`)
+            .then(res => {
+                const data = res.data
+                setCustomers(data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
 
     const handleOpen = () => {
         setOpen(true);
@@ -75,25 +89,25 @@ const Customers = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {
-                                        customerData.map((customer, i) => (
+                                    { customers !== null &&
+                                        customers.map((customer, i) => (
                                             <TableRow key={customer.id}>
                                                 <TableCell component="th" scope="row">
                                                     {i + 1}
                                                 </TableCell>
-                                                <TableCell align="center">{customer.name}</TableCell>
-                                                <TableCell align="center">{customer.email}</TableCell>
-                                                <TableCell align="center"> +33 343 4545 23</TableCell>
-                                                <TableCell align="center">{customer.group}</TableCell>
+                                                <TableCell align="center">{ `${customer.first_name} ${customer.last_name}` }</TableCell>
+                                                <TableCell align="center">{customer.email === null ? 'N/A' : customer.email}</TableCell>
+                                                <TableCell align="center"> {customer.phone === null ? 'N/A' : customer.phone} </TableCell>
+                                                <TableCell align="center">{customer.group === null ? 'N/A': customer.group}</TableCell>
                                                 <TableCell align="center"> Tag-1 </TableCell>
-                                                <TableCell align="center"> 4670  Charles Street, FORT WAYNE </TableCell>
+                                                <TableCell align="center"> {customer.address === null ? 'N/A' : customer.address} </TableCell>
                                                 <TableCell align="center">
                                                     <Button
                                                         variant="text"
                                                         color="primary"
                                                         size="small"
                                                         style={{ fontSize: '12px' }}>
-                                                            verified
+                                                            { customer.status }
                                                     </Button>
                                                 </TableCell>
                                                 <TableCell align="center">
