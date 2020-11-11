@@ -7,8 +7,11 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import {NavLink} from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import './SignIn.css'
+import { useState } from 'react';
+import Axios from 'axios';
+import { key } from '../../apiKey';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         color: '#fff',
         marginTop: '130px'
-        
+
     },
     avatar: {
         margin: theme.spacing(1),
@@ -48,40 +51,69 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
     const classes = useStyles();
+    const history = useHistory();
+    const [loggedIn, setLoggedIn] = useState({
+        email: '',
+        password: ''
+    })
+    console.log(loggedIn)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (loggedIn.email && loggedIn.password) {
+            console.log(loggedIn.password);
+            const loginData = {
+                email: loggedIn.email,
+                password: loggedIn.password
+            }
+            Axios.post(`${key}client-login`, loginData)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data.login_status === "success") {
+                        history.push("/dashboard");
+                    }
+                    else {
+                        //show error info
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    }
 
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
             <Grid item xs={false} sm={4} md={6} className={classes.signInRight} >
-                <div style={{margin: '8.5rem 0'}}>
+                <div style={{ margin: '8.5rem 0' }}>
                     <Typography variant="h6" style={{ textAlign: 'center', color: '#fff', fontSize: '52px' }}>
                         Welcome to <br /> Client Web App
                 </Typography>
-                <Typography
-                    style={{ 
+                    <Typography
+                        style={{
                             width: '60%',
                             color: '#fff',
                             fontSize: "14px",
                             textAlign: 'center',
                             margin: '2rem auto',
                             fontWeight: 'normal'
-                            }}>
+                        }}>
                         There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
                 </Typography>
                 </div>
             </Grid>
             <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square
-                style={{ backgroundColor: '#fff'}}
+                style={{ backgroundColor: '#fff' }}
             >
                 <div className={classes.paper}>
-                    <Typography component="h1" variant="body1" style={{color: '#2d2d2d'}}>
+                    <Typography component="h1" variant="body1" style={{ color: '#2d2d2d' }}>
                         SIGN IN
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} autoComplete="off" noValidate onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor=""> Email </label>
                             <TextField
-                                style={{ backgroundColor: '#fff'}}
+                                style={{ backgroundColor: '#fff' }}
                                 variant="outlined"
                                 margin="normal"
                                 required
@@ -91,6 +123,7 @@ export default function SignInSide() {
                                 autoComplete="email"
                                 autoFocus
                                 placeholder="user@email.com"
+                                onChange={(e) => setLoggedIn({ ...loggedIn, email: e.target.value })}
                             />
                         </div>
                         <div className="mt-3">
@@ -106,9 +139,9 @@ export default function SignInSide() {
                                 id="password"
                                 autoComplete="current-password"
                                 placeholder="***********"
+                                onChange={(e) => setLoggedIn({ ...loggedIn, password: e.target.value })}
                             />
                         </div>
-                        <NavLink to="/dashboard">
                         <Button
                             type="submit"
                             fullWidth
@@ -116,14 +149,11 @@ export default function SignInSide() {
                             color="primary"
                             className={classes.submit}
                         >
-                           
-                                Sign In
-                            
+                            Sign In
                         </Button>
-                        </NavLink>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2" style={{color: '#2d2d2d', display:'block', textAlign:'center'}}>
+                                <Link href="#" variant="body2" style={{ color: '#2d2d2d', display: 'block', textAlign: 'center' }}>
                                     Forgot password?
                                 </Link>
                             </Grid>
