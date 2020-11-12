@@ -117,7 +117,10 @@ const Coompose = () => {
             finalValue.deadline = deadlineDate
         }
         if (checkBox.quickReply) {
-            finalValue.quickReply = "quick reply"
+            finalValue.quickReply = true
+        }
+        if (!checkBox.quickReply) {
+            finalValue.quickReply = false
         }
         if (checkBox.replyNeeded) {
             finalValue.replyNeeded = true
@@ -564,7 +567,7 @@ const Coompose = () => {
                                                     {
                                                         checkBox.quickReply &&
                                                         <div className="d-flex align-items-center">
-                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment1" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
                                                             <div>
                                                                 {
                                                                     quickReply1 !== true ?
@@ -580,7 +583,7 @@ const Coompose = () => {
                                                     {
                                                         quickReply1 &&
                                                         <div className="d-flex align-items-center">
-                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment2" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
                                                             <div>
                                                                 {
                                                                     quickReply2 !== true ?
@@ -597,7 +600,7 @@ const Coompose = () => {
                                                 {
                                                     quickReply2 &&
                                                     <div className="d-flex align-items-center">
-                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment3" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
                                                         <div>
                                                             {
 
