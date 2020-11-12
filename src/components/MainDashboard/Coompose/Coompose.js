@@ -30,7 +30,9 @@ const Coompose = () => {
     // check box state
     const [checkBox, setCheckBox] = useState({
         quickReply: false,
+        hideContactInfo: false,
         // noReply: false,
+        replyNeeded: false,
         setRemainder: false,
         setDeadLine: false
     });
@@ -102,12 +104,31 @@ const Coompose = () => {
     const handleCompose = (e) => {
         e.preventDefault()
         const finalValue = { ...value,}
-        finalValue.remainder1 = remainderDate1
-        finalValue.remainder2 = remainderDate2
-        finalValue.remainder3 = remainderDate3
-        finalValue.deadline = deadlineDate
+        if(checkBox.setRemainder) 
+            finalValue.remainder1 = remainderDate1
+        if(remainder2) {
+            finalValue.remainder2 = remainderDate2
+        }
+        if(remainder3) {
+            finalValue.remainder3 = remainderDate3
+        }
+        if (checkBox.setDeadLine) {
+            finalValue.deadline = deadlineDate
+        }
         if (checkBox.quickReply) {
             finalValue.quickReply = "quick reply"
+        }
+        if (checkBox.replyNeeded) {
+            finalValue.replyNeeded = true
+        }
+        if (!checkBox.replyNeeded) {
+            finalValue.replyNeeded = false
+        }
+        if(checkBox.hideContactInfo) {
+            finalValue.hideContactInfo = true
+        }
+        if(!checkBox.hideContactInfo) {
+            finalValue.hideContactInfo = false
         }
         // if(checkBox.noReply) {
         //     finalValue.noReply = "no reply"
@@ -264,9 +285,9 @@ const Coompose = () => {
                                                             <FormControlLabel
                                                                 control={
                                                                     <Checkbox
-                                                                        // checked={checkBox.setRemainder}
-                                                                        // onChange={handleChange}
-                                                                        name="setRemainder"
+                                                                        checked={checkBox.replyNeeded}
+                                                                        onChange={handleChange}
+                                                                        name="replyNeeded"
                                                                         style={{ color: '#4195D1' }}
                                                                     />
                                                                 }
@@ -290,9 +311,9 @@ const Coompose = () => {
                                                             <FormControlLabel
                                                                 control={
                                                                     <Checkbox
-                                                                        // checked={checkBox.setRemainder}
-                                                                        // onChange={handleChange}
-                                                                        name="setRemainder"
+                                                                        checked={checkBox.hideContactInfo}
+                                                                        onChange={handleChange}
+                                                                        name="hideContactInfo"
                                                                         style={{ color: '#4195D1' }}
                                                                     />
                                                                 }
