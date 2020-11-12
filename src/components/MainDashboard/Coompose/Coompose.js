@@ -20,6 +20,7 @@ const Coompose = () => {
 
     // input value state
     const [value, setValue] = useState({})
+
     const [ccOpen, setCcOpen] = useState(false)
     const [bccOpen, setBccOpen] = useState(false)
     const [group, setGroup] = useState(false)
@@ -34,16 +35,32 @@ const Coompose = () => {
         setDeadLine: false
     });
 
-    // remainder date
+    // *** remainder all functionality start *** //
     const date = new Date()
-    const [remainderDate, setRemainderDate] = useState(date.setDate(date.getDate() + 1))
+    const [remainderDate1, setRemainderDate1] = useState(date.setDate(date.getDate() + 1))
+    console.log("remainder1", remainderDate1);
     const handleRemainderDate = (date) => {
-        setRemainderDate(date.toDateString());
+        setRemainderDate1(date.toDateString());
     };
 
-    // 2nd 3rd remainder
+    const [remainderDate2, setRemainderDate2] = useState(date.setDate(date.getDate() + 2))
+    console.log("remainder2", remainderDate2);
+    const handleRemainderDate2 = (date) => {
+        setRemainderDate2(date.toDateString());
+    };
+
+    const [remainderDate3, setRemainderDate3] = useState(date.setDate(date.getDate() + 3))
+    console.log("remainder3", remainderDate3);
+    const handleRemainderDate3 = (date) => {
+        setRemainderDate3(date.toDateString());
+    };
+
+    // 2nd 3rd remainder/multiple remainder opener
     const [remainder2, setRemainder2] = useState(false)
     const [remainder3, setRemainder3] = useState(false)
+
+
+    // *** remainder all functionality close *** //
 
     // deadline date
 
@@ -52,10 +69,6 @@ const Coompose = () => {
     const handleDeadlineDate = (date) => {
         setDeadlineDate(date.toDateString());
     };
-
-    // 2nd 3rd deadline
-    const [deadline2, setDeadline2] = useState(false)
-    const [deadline3, setDeadline3] = useState(false)
 
     // 2nd 3rd quick reply
 
@@ -80,7 +93,7 @@ const Coompose = () => {
     // input handle
     const handleInput = (e) => {
         e.preventDefault();
-        const newValue = { ...value }
+        const newValue = { ...value}
         newValue[e.target.name] = e.target.value
         setValue(newValue)
     }
@@ -88,8 +101,10 @@ const Coompose = () => {
     // compose button handle
     const handleCompose = (e) => {
         e.preventDefault()
-        const finalValue = { ...value }
-        finalValue.remainder = remainderDate
+        const finalValue = { ...value,}
+        finalValue.remainder1 = remainderDate1
+        finalValue.remainder2 = remainderDate2
+        finalValue.remainder3 = remainderDate3
         finalValue.deadline = deadlineDate
         if (checkBox.quickReply) {
             finalValue.quickReply = "quick reply"
@@ -316,7 +331,7 @@ const Coompose = () => {
                                                                             label="Remainder"
                                                                             format="MM/dd/yyyy"
                                                                             disablePast="true"
-                                                                            value={remainderDate}
+                                                                            value={remainderDate1}
                                                                             onChange={handleRemainderDate}
                                                                             style={{ backgroundColor: '#fff' }}
                                                                             KeyboardButtonProps={{
@@ -344,8 +359,8 @@ const Coompose = () => {
                                                                             label="Remainder"
                                                                             format="MM/dd/yyyy"
                                                                             disablePast="true"
-                                                                            value={remainderDate}
-                                                                            onChange={handleRemainderDate}
+                                                                            value={remainderDate2}
+                                                                            onChange={handleRemainderDate2}
                                                                             style={{ backgroundColor: '#fff' }}
                                                                             KeyboardButtonProps={{
                                                                                 'aria-label': 'change date',
@@ -372,8 +387,8 @@ const Coompose = () => {
                                                                             label="Remainder"
                                                                             format="MM/dd/yyyy"
                                                                             disablePast="true"
-                                                                            value={remainderDate}
-                                                                            onChange={handleRemainderDate}
+                                                                            value={remainderDate3}
+                                                                            onChange={handleRemainderDate3}
                                                                             style={{ backgroundColor: '#fff' }}
                                                                             KeyboardButtonProps={{
                                                                                 'aria-label': 'change date',
