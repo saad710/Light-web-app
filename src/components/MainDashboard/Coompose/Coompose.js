@@ -20,6 +20,7 @@ const Coompose = () => {
 
     // input value state
     const [value, setValue] = useState({})
+    const [mailBody, setMailBody] = useState({})
 
     const [ccOpen, setCcOpen] = useState(false)
     const [bccOpen, setBccOpen] = useState(false)
@@ -103,7 +104,7 @@ const Coompose = () => {
     // compose button handle
     const handleCompose = (e) => {
         e.preventDefault()
-        const finalValue = { ...value,}
+        const finalValue = { ...value, ...mailBody}
         if(checkBox.setRemainder) 
             finalValue.remainder1 = remainderDate1
         if(remainder2) {
@@ -151,7 +152,9 @@ const Coompose = () => {
         setOpen(false);
     };
     const handleBlur = (event) => {
-        console.log({ editorValue: event });
+        // console.log({ editorValue: event });
+        const mail_body = {mail_body: event}
+        setMailBody(mail_body)
     }
     const handleImageUpload = (targetImgElement, index, state, imageInfo, remainingFilesCount) => {
         console.log(targetImgElement, index, state, imageInfo, remainingFilesCount)
