@@ -22,6 +22,8 @@ const Coompose = () => {
     const [value, setValue] = useState({})
     const [mailBody, setMailBody] = useState({})
 
+    const [schduleTime, setSchduleTime] = useState("")
+
     const [ccOpen, setCcOpen] = useState(false)
     const [bccOpen, setBccOpen] = useState(false)
     const [group, setGroup] = useState(false)
@@ -79,14 +81,15 @@ const Coompose = () => {
     const [quickReply2, setQuickReply2] = useState(false)
 
 
-    // schedule date
-    const [scheduleDate, setScheduleDate] = useState(date.setDate(date.getDate() + 1))
-    console.log("schedule date", scheduleDate);
-    const handleScheduleDate = (date) => {
-        const scheduleDate = { ...value }
-        scheduleDate.schedule = date.toDateString()
-        setScheduleDate(scheduleDate);
+    // schedule date start
+
+    const [scheduleDate, setScheduleDate] = React.useState(new Date());
+
+    const handleDateChange = (date) => {
+        setScheduleDate(date);
     };
+
+    // schedule date end
 
     // checkbox handle
     const handleChange = (event) => {
@@ -100,6 +103,14 @@ const Coompose = () => {
         newValue[e.target.name] = e.target.value
         setValue(newValue)
     }
+
+    // schdule time handle
+    const handleSetSchduleTime = (e) => {
+        e.preventDefault()
+        const newTime = { ...schduleTime }
+        newTime[e.target.name] = e.target.value
+        setSchduleTime(newTime)
+    } 
 
     // compose button handle
     const handleCompose = (e) => {
@@ -140,20 +151,61 @@ const Coompose = () => {
         console.log(finalValue);
     }
 
+    // handle set schdule start
+
+    const handleSetSchdule = (e) => {
+        e.preventDefault()
+
+        const schduleValue = { ...value, ...mailBody, ...schduleTime }
+        if (checkBox.setRemainder)
+            schduleValue.remainder1 = remainderDate1
+        if (remainder2) {
+            schduleValue.remainder2 = remainderDate2
+        }
+        if (remainder3) {
+            schduleValue.remainder3 = remainderDate3
+        }
+        if (checkBox.setDeadLine) {
+            schduleValue.deadline = deadlineDate
+        }
+        if (checkBox.quickReply) {
+            schduleValue.quickReply = true
+        }
+        if (!checkBox.quickReply) {
+            schduleValue.quickReply = false
+        }
+        if (checkBox.replyNeeded) {
+            schduleValue.replyNeeded = true
+        }
+        if (!checkBox.replyNeeded) {
+            schduleValue.replyNeeded = false
+        }
+        if (checkBox.hideContactInfo) {
+            schduleValue.hideContactInfo = true
+        }
+        if (!checkBox.hideContactInfo) {
+            schduleValue.hideContactInfo = false
+        }
+        schduleValue.schduleDate = scheduleDate.toLocaleDateString()
+        // schduleValue.schduleTime = schduleTime
+
+        console.log('clicked hyse', schduleValue);
+    }
+
+    // handle set schdule end
 
     const [dateValue, onChange] = useState(new Date());
 
-    // modal handle with state
-
+    // modal handle with state start
     const [open, setOpen] = React.useState(false);
-
     const handleOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
     };
+    // // modal handle with state end
+
     const handleBlur = (event) => {
         // console.log({ editorValue: event });
         const mail_body = {mail_body: event}
@@ -163,10 +215,6 @@ const Coompose = () => {
         console.log(targetImgElement, index, state, imageInfo, remainingFilesCount)
     }
 
-    const handleImageUploadBefore = (files, info, uploadHandler) => {
-        // uploadHandler is a function
-        console.log(files, info)
-    }
 
     return (
         <div className={classNamees.root}>
@@ -651,7 +699,7 @@ const Coompose = () => {
                                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                             <div className="">
                                                 <Grid container justify="space-around">
-                                                    <KeyboardDatePicker
+                                                    {/* <KeyboardDatePicker
                                                         margin="normal"
                                                         id="date-picker-dialog"
                                                         variant="static"
@@ -659,11 +707,24 @@ const Coompose = () => {
                                                         format="MM/dd/yyyy"
                                                         disablePast="true"
                                                         value={scheduleDate}
-                                                        onChange={handleScheduleDate}
+                                                        onChange={scheduleDate}
                                                         style={{ backgroundColor: '#fff' }}
                                                         KeyboardButtonProps={{
                                                             'aria-label': 'change date',
                                                         }}
+                                                    /> */}
+
+                                                    <KeyboardDatePicker
+                                                        margin="normal"
+                                                        id="date-picker-dialog"
+                                                        label="Date picker dialog"
+                                                        format="MM/dd/yyyy"
+                                                        value={scheduleDate}
+                                                        onChange={handleDateChange}
+                                                        KeyboardButtonProps={{
+                                                            'aria-label': 'change date',
+                                                        }}
+                                                        variant="static"
                                                     />
                                                 </Grid>
                                                 <Grid container justify="space-around">
@@ -672,6 +733,8 @@ const Coompose = () => {
                                                         id="time"
                                                         label="Select Time"
                                                         type="time"
+                                                        name="schduleTime"
+                                                        onBlur={handleSetSchduleTime}
                                                         defaultValue="07:30"
                                                         InputLabelProps={{
                                                             shrink: true,
@@ -681,6 +744,7 @@ const Coompose = () => {
                                                         }}
                                                     />
                                                 </Grid>
+                                                <Button onClick={handleSetSchdule} variant="contained" color="primary" fullWidth> SET SCHEDULE </Button>
                                             </div>
 
                                         </MuiPickersUtilsProvider>
