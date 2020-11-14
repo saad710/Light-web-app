@@ -1,16 +1,20 @@
-import React, { useContext, useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Backdrop, Button, ButtonGroup, Card, CardContent, Fade, FormControl, Input, InputLabel, MenuItem, Modal, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
-import { Backdrop, Button , ButtonGroup, Card, CardContent, Fade, FormControl, Input, InputLabel, MenuItem, Modal, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
-import { useStyles } from './GroupStyle';
-import customerData from '../../../data/customerData';
 import { Pagination } from '@material-ui/lab';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { key } from '../../../apiKey';
+import AppBarDrawer from '../AppBarDrawer';
+import { useStyles } from './GroupStyle';
 
 const Group = () => {
     const classes = useStyles();
     const [addGroup, setAddGroup] = useState({});
+    const [groups, setGroups] = useState(null)
+    const [updateValue, setUpdateValue] = useState({})
+    const [showOldValue, setShowOldValue] = useState({})
     const handleTeamInput = (e) => {
         const newGroup = { ...addGroup }
         newGroup[e.target.name] = e.target.value
@@ -22,6 +26,75 @@ const Group = () => {
     const handleChange = (event) => {
         setPersonName(event.target.value);
     };
+    // create group
+    const handleGroup = (e) => {
+        e.preventDefault();
+        const group_name = { ...addGroup }
+        Axios.post(`${key}create-group`, group_name)
+            .then(res => {
+                reFetch()
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    // delete feature
+    const handleGroupDelete = (id) => {
+        Axios.delete(`${key}group-delete/${id}`)
+            .then(res => {
+                const finalGroup = groups.filter(newTag => newTag.id !== res.data.id)
+                setGroups(finalGroup)
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+    }
+    // handle group hupdate
+    const handleOldValue = (id) => {
+        console.log(id);
+        setShowOldValue(id)
+    }
+    const handleUpdateTagInput = (e) => {
+        const updateGroup = { ...updateValue }
+        updateGroup[e.target.name] = e.target.value
+        setUpdateValue(updateGroup)
+    }
+
+    const handleUpdateSubmit = (e) => {
+        const newGroup = { ...updateValue }
+
+        Axios.put(`${key}group-update/${showOldValue}`, newGroup)
+            .then((res) => {
+                console.log(res.data);
+                reFetch()
+            })
+            .catch((error) => console.log(error));
+        e.preventDefault();
+    }
+
+    //get all
+    useEffect(() => {
+        Axios(`${key}group-all`)
+            .then(res => {
+                const groups = res.data
+                setGroups(groups)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }, [])
+
+    const reFetch = () => {
+        Axios(`${key}group-all`)
+            .then(res => {
+                const groups = res.data
+                setGroups(groups)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -80,8 +153,8 @@ const Group = () => {
                                             margin="normal"
                                             required
                                             fullWidth
-                                            id="group"
-                                            name="group"
+                                            id="group_name"
+                                            name="group_name"
                                             autoComplete="group"
                                             autoFocus
                                             placeholder="group-1"
@@ -133,6 +206,7 @@ const Group = () => {
                                         variant="text"
                                         color="primary"
                                         className={classes.submit}
+                                        onClick={ handleGroup }
                                     >
                                         Create GROUP
                                 </Button>
@@ -149,13 +223,13 @@ const Group = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {
-                                                customerData.map((customer, i) => (
-                                                    <TableRow key={customer.id}>
+                                            {   groups !== null &&
+                                                groups.map((group, i) => (
+                                                    <TableRow key={group.id}>
                                                         <TableCell component="th" scope="row">
                                                             {i + 1}
                                                         </TableCell>
-                                                        <TableCell align="center">{customer.group}</TableCell>
+                                                        <TableCell align="center">{group.group_name}</TableCell>
                                                         <TableCell align="right">
                                                             <div>
                                                                 <ButtonGroup
@@ -165,10 +239,10 @@ const Group = () => {
                                                                     aria-label="contained primary button group"
                                                                 >
                                                                     <Button
-                                                                        onClick={handleOpen}
-                                                                        style={{ fontSize: '10px' }} color="primary">UPDATE</Button>
+                                                                        onClick={() => { handleOpen(); handleOldValue(group.id) }}
+                                                                        style={{ fontSize: '10px' }} color="primary" >UPDATE</Button>
                                                                     <Button
-                                                                        style={{ fontSize: '10px' }} color="secondary">DELETE</Button>
+                                                                        style={{ fontSize: '10px' }} color="secondary" onClick={() => handleGroupDelete(group.id)}>DELETE</Button>
                                                                 </ButtonGroup>
                                                             </div>
                                                         </TableCell>
@@ -206,7 +280,23 @@ const Group = () => {
                                                 <div className={classes.paper}>
                                                     <div>
                                                         <FormControl className={classes.formControl} style={{ margin: '0' }}>
-                                                            <InputLabel id="demo-mutiple-name-label">Add Contact</InputLabel>
+                                                            <div>
+                                                                <label htmlFor=""> Group Name </label>
+                                                                <TextField
+                                                                    style={{ borderRadius: '4px' }}
+                                                                    variant="standard"
+                                                                    margin="normal"
+                                                                    required
+                                                                    fullWidth
+                                                                    id="group_name"
+                                                                    name="group_name"
+                                                                    autoComplete="group"
+                                                                    autoFocus
+                                                                    placeholder="group-1"
+                                                                    onChange={handleUpdateTagInput}
+                                                                />
+                                                            </div>
+                                                            {/* <InputLabel id="demo-mutiple-name-label">Add Contact</InputLabel> */}
                                                             <Select
                                                                 labelId="demo-mutiple-name-label"
                                                                 id="demo-mutiple-name"
@@ -222,6 +312,22 @@ const Group = () => {
                                                                     </MenuItem>
                                                                 ))}
                                                             </Select>
+                                                            <Button
+                                                                    style={{
+                                                                            padding: '0.5rem 0',
+                                                                            margin: '1rem 0',
+                                                                            fontSize: '12px',
+                                                                            border: '1px solid gray'
+                                                                        }}
+                                                                    type="submit"
+                                                                    fullWidth
+                                                                    variant="text"
+                                                                    color="primary"
+                                                                    className={classes.submit}
+                                                                    onClick={handleUpdateSubmit}
+                                                                >
+                                                                    UPDATE GROUP
+                                                            </Button>
                                                         </FormControl>
                                                     </div>
                                                 </div>

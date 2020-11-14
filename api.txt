@@ -36,7 +36,7 @@ Route::delete('/admin-remove/{id}',[AdminController::class,'removeAdmin']);
 Route::put('/customer-password-approval/{id}',[\App\Http\Controllers\PasswordChangeController::class,'adminApprovalYes']);
 Route::put('/customer-password-decline/{id}',[\App\Http\Controllers\PasswordChangeController::class,'adminApprovalNo']);
 
-//Customer API.................................................................................
+//CustomerAuth API.................................................................................
 Route::post('/customer-login',[LoginController::class, 'customerLoginApi']);
 Route::post('/customer-logout',[LoginController::class, 'customerLogoutApi']);
 Route::post('/create-customer', [CustomerController::class, 'createCustomerApi']);
@@ -53,7 +53,7 @@ Route::get('/get-customer-mail',[MailController::class,'getCustomerMail']);
 Route::get('/get-specific-customer-mail/{id}',[MailController::class,'getSpecificCustomerMail']);
 Route::post('/password-change-request/',[\App\Http\Controllers\PasswordChangeController::class,'changePasswordApi']);
 Route::put('/change-password/',[\App\Http\Controllers\PasswordChangeController::class,'passwordUpdateApi']);
-
+Route::delete('/customer-trash/{customer}',[CustomerController::class,'trashCustomer']);
 //Client API...................................................................................
 Route::post('/client-login',[LoginController::class, 'clientLogin']);
 Route::post('/client-logout',[LoginController::class, 'clientLogout']);
@@ -69,7 +69,6 @@ Route::post('/send-mail-customer',[MailController::class,'sendMailToCustomer']);
 Route::post('/reply-mail-to-customer/{id}',[MailController::class,'replyMailToCustomer']);
 Route::get('/get-specific-client-mail/{id}',[MailController::class,'getSpecificClientMail']);
 Route::get('/count-direct-mail/',[MailController::class,'countDirectMail']);
-
 Route::get('/count-direct-mail/{clientId}',[MailController::class,'countMailWithId']);
 
 //Ticket
