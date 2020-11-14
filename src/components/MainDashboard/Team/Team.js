@@ -1,23 +1,37 @@
-import React, { useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Button, ButtonGroup, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
-import {Button, ButtonGroup, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography} from '@material-ui/core';
-import { useStyles } from './TeamStyle';
-import customerData from '../../../data/customerData';
 import { Pagination } from '@material-ui/lab';
+import Axios from 'axios';
+import React, { useState } from 'react';
+import { key } from '../../../apiKey';
+import customerData from '../../../data/customerData';
+import AppBarDrawer from '../AppBarDrawer';
+import { useStyles } from './TeamStyle';
 
 
 const Team = () => {
     const classes = useStyles();
-    const [teamRole, setTeamRole] = useState({});
-    console.log(teamRole);
+    const [admin, setAdmin] = useState({});
+    console.log(admin);
     
     const handleTeamInput = (e) => {
-        const newRole = {...teamRole}
-        newRole[e.target.name] = e.target.value 
-        setTeamRole(newRole)
+        const newAdmin = {...admin}
+        newAdmin[e.target.name] = e.target.value 
+        setAdmin(newAdmin)
+    }
+    const handleAdmin = (e) => {
+        e.preventDefault();
+        const adminData = { ...admin }
+        console.log(adminData);
+        Axios.post(`${key}admin-create`, adminData)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
     return (
         <div className={classes.root}>
@@ -64,6 +78,21 @@ const Team = () => {
                                         autoFocus
                                         placeholder="user@email.com"
                                         onChange={handleTeamInput}
+                                    />
+                                </div>
+                                <div>
+                                    <label> Role </label>
+                                    <TextField
+                                        style={{ borderRadius: '4px' }}
+                                        variant="outlined"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="role"
+                                        name="role"
+                                        autoFocus
+                                        defaultValue="role"
+                                        onChange={() => handleTeamInput()}
                                     />
                                 </div>
 
@@ -115,6 +144,7 @@ const Team = () => {
                                     fullWidth
                                     variant="contained"
                                     color="primary"
+                                    onClick={handleAdmin}
                                     className={classes.submit}
                                 >
                                     ADD ADMIN

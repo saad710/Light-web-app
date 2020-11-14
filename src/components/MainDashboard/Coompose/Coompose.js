@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
-import { Backdrop, Button, Card, CardContent, CardHeader, Checkbox, Fade, FormControl, FormControlLabel, FormGroup, InputAdornment, Modal, TextareaAutosize, TextField, Typography } from '@material-ui/core';
-import SunEditor from 'suneditor-react';
-import 'suneditor/dist/css/suneditor.min.css';
-import './Compose.css'
-import { useStyles } from './ComposeStyle';
-import { DateTimePicker, KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import { Backdrop, Button, Card, CardContent, CardHeader, Checkbox, Fade, FormControl, FormControlLabel, FormGroup, InputAdornment, Modal, TextareaAutosize, TextField, Typography } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
 import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
 import IndeterminateCheckBoxRoundedIcon from '@material-ui/icons/IndeterminateCheckBoxRounded';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import Axios from 'axios';
+import 'date-fns';
+import React, { useState } from 'react';
+import SunEditor from 'suneditor-react';
+import 'suneditor/dist/css/suneditor.min.css';
+import { key } from '../../../apiKey';
+import AppBarDrawer from '../AppBarDrawer';
+import './Compose.css';
+import { useStyles } from './ComposeStyle';
 
 
 const Coompose = () => {
@@ -149,6 +151,14 @@ const Coompose = () => {
         //     finalValue.noReply = "no reply"
         // }
         console.log(finalValue);
+        Axios.post(`${key}send-mail-customer`, finalValue)
+            .then(res => {
+                console.log(res);
+                
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     // handle set schdule start
@@ -235,7 +245,7 @@ const Coompose = () => {
                                             <FormControl>
                                                 <TextField
                                                     id="from"
-                                                    name="from"
+                                                    name="sender"
                                                     onBlur={handleInput}
                                                     InputProps={{
                                                         startAdornment: <InputAdornment position="start">From</InputAdornment>,
@@ -244,7 +254,7 @@ const Coompose = () => {
                                                 />
                                                 <TextField
                                                     id="to"
-                                                    name="to"
+                                                    name="receiver"
                                                     onBlur={handleInput}
                                                     InputProps={{
                                                         startAdornment: <InputAdornment position="start">
