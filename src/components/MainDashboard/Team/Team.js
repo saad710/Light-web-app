@@ -38,8 +38,8 @@ const Team = () => {
     const reFetch = () => {
         Axios(`${key}tag-all`)
             .then(res => {
-                const admin = res.data
-                setAllAdmin(admin)
+                const admins = res.data
+                setAllAdmin(admins)
             })
             .then(err => {
                 console.log(err);

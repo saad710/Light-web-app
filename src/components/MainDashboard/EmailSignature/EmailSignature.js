@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Button, TextareaAutosize, TextField } from '@material-ui/core';
+import Backdrop from '@material-ui/core/Backdrop';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
-import avatar from '../../../images/avatar.png'
+import Modal from '@material-ui/core/Modal';
 import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LanguageIcon from '@material-ui/icons/Language';
-import { Button, TextareaAutosize, TextField } from '@material-ui/core';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
-import '../Coompose/Compose.css'
-import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
+import { key } from '../../../apiKey';
+import avatar from '../../../images/avatar.png';
+import AppBarDrawer from '../AppBarDrawer';
+import '../Coompose/Compose.css';
 import { useStyles } from './EmailSignatureStyle';
 
 const EmailSignature = () => {
@@ -23,6 +24,7 @@ const EmailSignature = () => {
     const [addEmailModal, setAddEmailModal] = useState(false);
     const [updateEmailModal, setUpdateEmailModal] = useState(false);
     const [formValue, setFormValue] = useState({});
+    const [allSignatures, setAllSignatures] = useState(null)
 
     const handleAddEmailModalOpen = () => {
         setAddEmailModal(true);
@@ -46,9 +48,38 @@ const EmailSignature = () => {
         setFormValue(value);
     };
 
+    //get all
+    const getSignature = () => {
+        Axios(`${key}all-signature`)
+            .then(res => {
+                const signatures = res.data
+                setAllSignatures(signatures)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }
+    useEffect(() => {
+        getSignature()
+    }, [])
+
+    const reFetch = () => {
+        getSignature()
+    }
+    // create signature data
     const handleSubmit = (e) => {
         const finalValue = { ...formValue };
+        finalValue.signature = "signature"
+        finalValue.client_id = "1"
         console.log(finalValue);
+        Axios.post(`${key}create-signature`, finalValue)
+            .then(res => {
+                console.log(res);
+                reFetch()
+            })
+            .catch(err => {
+                console.log(err);
+            })
         e.preventDefault();
     };
     return (
@@ -68,51 +99,43 @@ const EmailSignature = () => {
                                     Update
                                 </Button>
                             </div>
-                            <div className={classes.signatureBox}>
-                                <div className="d-flex" style={{ marginLeft: '0.5rem' }}>
-                                    <div>
-                                        <img className="pt-2" width="50%" src={avatar} alt="" />
-                                    </div>
-                                    <div style={{ color: '#2d2d2d', marginLeft: '-1.5rem' }}>
-                                        <h6> Marie Winter </h6>
-                                        <p> <strong> Designation </strong> </p>
-                                        <p>
-                                            <span> Phone : +45 343 3434 21 </span>
-                                            <span style={{ padding: '0 1rem' }}> Address : 1547 East Farm  Road </span>
-                                        </p>
-                                        <hr style={{ backgroundColor: '#4195D1', padding: '0.5px 0' }} />
-                                        <div style={{ margin: '0 4.5rem' }}>
-                                            <FacebookIcon style={{ margin: '0 1rem' }} />
-                                            <TwitterIcon style={{ margin: '0 1rem' }} />
-                                            <InstagramIcon style={{ margin: '0 1rem' }} />
-                                            <LanguageIcon style={{ margin: '0 1rem' }} />
+                            {
+                                allSignatures !== null && 
+                                allSignatures.map((singnature) => (
+                                    <div className={classes.signatureBox}>
+                                        <div className="d-flex" style={{ marginLeft: '0.5rem' }}>
+                                            <div>
+                                                <img className="pt-2" width="50%" src={avatar} alt="" />
+                                            </div>
+                                            <div style={{ color: '#2d2d2d', marginLeft: '-1.5rem' }}>
+                                                <h6> { singnature.name } </h6>
+                                                <p> <strong> {singnature.designation} </strong> </p>
+                                                <p>
+                                                    <span> Phone : {singnature.phone} </span>
+                                                    <span style={{ padding: '0 1rem' }}> Address : { singnature.address } </span>
+                                                </p>
+                                                <hr style={{ backgroundColor: '#4195D1', padding: '0.5px 0' }} />
+                                                <div style={{ margin: '0 4.5rem' }}>
+                                                    <a href={ singnature.facebook } target="_blank" style={{color: "#2d2d2d"}}>
+                                                        <FacebookIcon style={{ margin: '0 1rem' }} />
+                                                    </a>
+                                                    <a href={ singnature.facebook } target="_blank" style={{color: "#2d2d2d"}}>
+                                                        <TwitterIcon style={{ margin: '0 1rem' }} />
+                                                    </a>
+                                                    <a href={ singnature.facebook } target="_blank" style={{color: "#2d2d2d"}}>
+                                                        <InstagramIcon style={{ margin: '0 1rem' }} />
+                                                    </a>
+                                                    <a href={ singnature.facebook } target="_blank" style={{color: "#2d2d2d"}}>
+                                                       <LanguageIcon style={{ margin: '0 1rem' }} />
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                ))
+                            }
 
-                            <div className={classes.signatureBox}>
-                                <div className="d-flex" style={{ marginLeft: '0.5rem' }}>
-                                    <div>
-                                        <img className="pt-2" width="50%" src={avatar} alt="" />
-                                    </div>
-                                    <div style={{ color: '#2d2d2d', marginLeft: '-1.5rem' }}>
-                                        <h6> Marie Winter </h6>
-                                        <p> <strong> Designation </strong> </p>
-                                        <p>
-                                            <span> Phone : +45 343 3434 21 </span>
-                                            <span style={{ padding: '0 1rem' }}> Address : 1547 East Farm  Road </span>
-                                        </p>
-                                        <hr style={{ backgroundColor: '#4195D1', padding: '0.5px 0' }} />
-                                        <div style={{ margin: '0 4.5rem' }}>
-                                            <FacebookIcon style={{ margin: '0 1rem' }} />
-                                            <TwitterIcon style={{ margin: '0 1rem' }} />
-                                            <InstagramIcon style={{ margin: '0 1rem' }} />
-                                            <LanguageIcon style={{ margin: '0 1rem' }} />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                         </div>
 
@@ -146,7 +169,7 @@ const EmailSignature = () => {
                                                     autoComplete='name'
                                                     autoFocus
                                                     placeholder='Name'
-                                                    onBlur={handleAddEmailModalOpen}
+                                                    onBlur={handleBlur}
                                                 />
                                             </div>
 
@@ -216,7 +239,7 @@ const EmailSignature = () => {
                                                     name='facebook'
                                                     autoComplete='facebook'
                                                     autoFocus
-                                                    placeholder='Facebook'
+                                                    placeholder='Facebook Profile link'
                                                     onBlur={handleBlur}
                                                 />
                                             </div>
@@ -231,7 +254,7 @@ const EmailSignature = () => {
                                                     name='twitter'
                                                     autoComplete='twitter'
                                                     autoFocus
-                                                    placeholder='Twitter'
+                                                    placeholder='Twitter Profile link'
                                                     onBlur={handleBlur}
                                                 />
                                             </div>
@@ -246,7 +269,7 @@ const EmailSignature = () => {
                                                     name='instagram'
                                                     autoComplete='instagram'
                                                     autoFocus
-                                                    placeholder='Instagram'
+                                                    placeholder='Instagram Profile link' 
                                                     onBlur={handleBlur}
                                                 />
                                             </div>
@@ -261,7 +284,7 @@ const EmailSignature = () => {
                                                     name='website'
                                                     autoComplete='website'
                                                     autoFocus
-                                                    placeholder='Website'
+                                                    placeholder='Website Address'
                                                     onBlur={handleBlur}
                                                 />
                                             </div>
