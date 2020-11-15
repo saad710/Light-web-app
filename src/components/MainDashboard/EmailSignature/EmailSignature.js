@@ -90,40 +90,40 @@ const EmailSignature = () => {
     // delete signature
 
     // delete feature
-    // const handleSignatureDelete = (client_id) => {
-    //     Axios.delete(`${key}delete-signature/${client_id}`)
-    //         .then(res => {
-    //             console.log(res.data);
-    //             const sign = allSignatures.filter(newSign => newSign.id !== res.data.id)
-    //             allSignatures(sign)
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         })
-    // }
+    const handleSignatureDelete = (client_id) => {
+        Axios.delete(`${key}delete-signature/${client_id}`)
+            .then(res => {
+                console.log(res.data);
+                const sign = allSignatures.filter(newSign => newSign.id !== res.data.id)
+                setAllSignatures(sign)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
     
     // update feature
-    const handleOldValue = (id) => {
-        console.log(id);
-        setShowOldValue(id)
-    }
+    // const handleOldValue = (id) => {
+    //     console.log(id);
+    //     setShowOldValue(id)
+    // }
     const handleUpdateSignInput = (e) => {
         const updateTag = { ...updateValue }
         updateTag[e.target.name] = e.target.value
         setUpdateValue(updateTag)
     }
 
-    const handleUpdateSubmit = (e) => {
-        const newSign = { ...updateValue }
-
-        Axios.put(`${key}update-signature/${showOldValue}`, newSign)
-            .then((res) => {
-                console.log(res.data);
-                reFetch()
-            })
-            .catch((error) => console.log(error));
-        e.preventDefault();
-    }
+    // const handleUpdateSubmit = (e) => {
+    //     const newSign = { ...updateValue }
+    //     const client_id = showOldValue
+    //     Axios.put(`${key}update-signature/${client_id}`, newSign)
+    //         .then((res) => {
+    //             console.log(res.data);
+    //             reFetch()
+    //         })
+    //         .catch((error) => console.log(error));
+    //     e.preventDefault();
+    // }
 
     return (
         <div className={classes.root}>
@@ -153,8 +153,8 @@ const EmailSignature = () => {
                                                 <img className="pt-2" width="50%" src={avatar} alt="" />
                                             </div>
                                             <div style={{ color: '#2d2d2d', marginLeft: '-1.5rem' }}>
-                                                 <Typography variant="body2" align="right" style={{marginLeft: '27rem'}}
-                                                    onClick={() => { handleUpdateEmailModalOpen(); handleOldValue(singnature.id) }}
+                                                 <Typography variant="body2" align="right" style={{marginLeft: '27rem', marginTop: '-1rem'}}
+                                                    onClick={() => handleSignatureDelete(singnature.client_id) }
                                                  >
                                                      <UpdateIcon />
                                                  </Typography>
@@ -509,7 +509,7 @@ const EmailSignature = () => {
                                                 fullWidth
                                                 variant='contained'
                                                 className={classes.ticketBtn}
-                                                onClick={handleUpdateSubmit}
+                                                // onClick={handleUpdateSubmit}
                                                 style={{ marginTop: "1rem" }}
                                             >
                                                 Update

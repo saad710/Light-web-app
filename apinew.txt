@@ -31,6 +31,14 @@ Get All Client's Signature: /all-signature
 Delete Client's Signature: /delete-signature/{client_id}
 Soft Delete Customer: /customer-trash/{customer}
 Restore deleted Customer: /restore-customer/{customer_id}
+Get All Group List: /all-group
+Create New Group: /create-group
+Get Specific Group: /group/{group_id}
+Update Specific Group Info: /group-update/{group_id}
+Get All Group for Specific Client: client-all-group/{client_id}
+Delete Specific Group: /group-delete/{group_id}
+Delete All Mail for Specific Client: /remove-all-client-mail/{client_id}
+
 ---------------------
 Customer App:
 ---------------------
@@ -42,7 +50,6 @@ Create New Customer: /create-customer
 Update Customer's Info: /update-customer/{customer_id}
 Change Customer Status: /change-status/{customer_id}
 Delete Specific Customer: /customer-delete/{customer_id}
-
 Get Token for Reset Password: /reset-password
 Matching Given Token: /token-check
 Creating New password: /create-new-password/{email}
@@ -52,7 +59,9 @@ Specific Mail info with Reply mail: /get-specific-customer-mail/{direct_mail_id}
 Total Mail for Specific Customer: /count-total-customer-mail/{customer_id}
 Password Change Request to Admin: /password-change-request/{customer_id}
 Password Update: /change-password/{customer_id}
-
+Delete Specific Reply: /remove-customer-reply/{reply_mail_id}
+Delete Specific Direct Mail: remove-customer-mail/{direct_mail_id}
+Delete All Mail for Specific Customer: /remove-all-customer-mail/{customer_id}
 
 ------------------
 Admin App:
