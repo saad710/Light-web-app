@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Button, ButtonGroup, TextField, Typography } from '@material-ui/core';
+import Backdrop from '@material-ui/core/Backdrop';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
-import customerData from '../../../data/customerData'
+import Modal from '@material-ui/core/Modal';
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { Button, ButtonGroup, TextareaAutosize, TextField, Typography } from '@material-ui/core';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import avatar from '../../../images/avatar.png'
 import { Pagination } from "@material-ui/lab";
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { key } from '../../../apiKey';
+import AppBarDrawer from '../AppBarDrawer';
 import ToolBar from '../ToolBar/ToolBar';
 import { useStyles } from './CustomersStyle';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import Axios from 'axios';
-import { key } from '../../../apiKey';
 
 const Customers = () => {
     const classes = useStyles();
@@ -32,7 +29,7 @@ const Customers = () => {
     const [customers, setCustomers] = useState(null)
     console.log(customers);
     useEffect(() => {
-        Axios(`${key}all-customers`)
+        Axios(`${key}customers`)
             .then(res => {
                 const data = res.data
                 setCustomers(data)

@@ -1,4 +1,4 @@
-import { Button, TextareaAutosize, TextField } from '@material-ui/core';
+import { Button, TextareaAutosize, TextField, Typography } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,9 +9,9 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LanguageIcon from '@material-ui/icons/Language';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import UpdateIcon from '@material-ui/icons/Update';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
@@ -25,6 +25,11 @@ const EmailSignature = () => {
     const [updateEmailModal, setUpdateEmailModal] = useState(false);
     const [formValue, setFormValue] = useState({});
     const [allSignatures, setAllSignatures] = useState(null)
+    const [updateValue, setUpdateValue] = useState({})
+    const [showOldValue, setShowOldValue] = useState({})
+    
+    console.log(updateValue);
+    console.log(showOldValue);
 
     const handleAddEmailModalOpen = () => {
         setAddEmailModal(true);
@@ -82,6 +87,44 @@ const EmailSignature = () => {
             })
         e.preventDefault();
     };
+    // delete signature
+
+    // delete feature
+    // const handleSignatureDelete = (client_id) => {
+    //     Axios.delete(`${key}delete-signature/${client_id}`)
+    //         .then(res => {
+    //             console.log(res.data);
+    //             const sign = allSignatures.filter(newSign => newSign.id !== res.data.id)
+    //             allSignatures(sign)
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         })
+    // }
+    
+    // update feature
+    const handleOldValue = (id) => {
+        console.log(id);
+        setShowOldValue(id)
+    }
+    const handleUpdateSignInput = (e) => {
+        const updateTag = { ...updateValue }
+        updateTag[e.target.name] = e.target.value
+        setUpdateValue(updateTag)
+    }
+
+    const handleUpdateSubmit = (e) => {
+        const newSign = { ...updateValue }
+
+        Axios.put(`${key}update-signature/${showOldValue}`, newSign)
+            .then((res) => {
+                console.log(res.data);
+                reFetch()
+            })
+            .catch((error) => console.log(error));
+        e.preventDefault();
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -95,9 +138,11 @@ const EmailSignature = () => {
                                 <Button onClick={handleAddEmailModalOpen} variant="contained" className={classes.emailBtn}>
                                     Add New
                                 </Button>
-                                <Button  variant="contained" className={classes.emailBtn}>
+                                {/* <Button  variant="contained" className={classes.emailBtn}
+                                    
+                                >
                                     Update
-                                </Button>
+                                </Button> */}
                             </div>
                             {
                                 allSignatures !== null && 
@@ -108,24 +153,30 @@ const EmailSignature = () => {
                                                 <img className="pt-2" width="50%" src={avatar} alt="" />
                                             </div>
                                             <div style={{ color: '#2d2d2d', marginLeft: '-1.5rem' }}>
+                                                 <Typography variant="body2" align="right" style={{marginLeft: '27rem'}}
+                                                    onClick={() => { handleUpdateEmailModalOpen(); handleOldValue(singnature.id) }}
+                                                 >
+                                                     <UpdateIcon />
+                                                 </Typography>
                                                 <h6> { singnature.name } </h6>
                                                 <p> <strong> {singnature.designation} </strong> </p>
                                                 <p>
                                                     <span> Phone : {singnature.phone} </span>
                                                     <span style={{ padding: '0 1rem' }}> Address : { singnature.address } </span>
                                                 </p>
+                                               
                                                 <hr style={{ backgroundColor: '#4195D1', padding: '0.5px 0' }} />
                                                 <div style={{ margin: '0 4.5rem' }}>
                                                     <a href={ singnature.facebook } target="_blank" style={{color: "#2d2d2d"}}>
                                                         <FacebookIcon style={{ margin: '0 1rem' }} />
                                                     </a>
-                                                    <a href={ singnature.facebook } target="_blank" style={{color: "#2d2d2d"}}>
+                                                    <a href={ singnature.twitter } target="_blank" style={{color: "#2d2d2d"}}>
                                                         <TwitterIcon style={{ margin: '0 1rem' }} />
                                                     </a>
-                                                    <a href={ singnature.facebook } target="_blank" style={{color: "#2d2d2d"}}>
+                                                    <a href={ singnature.instagram } target="_blank" style={{color: "#2d2d2d"}}>
                                                         <InstagramIcon style={{ margin: '0 1rem' }} />
                                                     </a>
-                                                    <a href={ singnature.facebook } target="_blank" style={{color: "#2d2d2d"}}>
+                                                    <a href={ singnature.website } target="_blank" style={{color: "#2d2d2d"}}>
                                                        <LanguageIcon style={{ margin: '0 1rem' }} />
                                                     </a>
                                                 </div>
@@ -320,22 +371,150 @@ const EmailSignature = () => {
                             >
                                 <Fade in={updateEmailModal}>
                                     <div className={classes.emailModal}>
-                                        <h6 className="text-center" style={{ color: '#fff', padding: '0.5rem 0' }}> Update Signature </h6>
-                                        <SunEditor
-                                            width="100  %"
-                                            placeholder=" Email Signature "
-                                            setOptions={{
-                                                height: 150,
-                                                buttonList: [
-                                                    ['font', 'fontSize', 'formatBlock'],
-                                                    ['bold', 'underline', 'italic',],
-                                                    ['align', 'horizontalRule', 'list', 'lineHeight'],
-                                                    ['link', 'image', 'video',],
-                                                    ['fullScreen', 'codeView'],
-                                                ]
-                                            }}
-                                        />
-                                        <Button className={classes.signatureBtn} variant="contained"> Update </Button>
+                                        <h6 className="text-center" style={{color: '#fff', padding: '0.5rem 0'}}> Add new Signature </h6>
+                                        <form className={classes.form} noValidate>
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='name'
+                                                    name='name'
+                                                    autoComplete='name'
+                                                    autoFocus
+                                                    placeholder='Name'
+                                                    onBlur={handleUpdateSignInput}
+                                                />
+                                            </div>
+
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='designation'
+                                                    name='designation'
+                                                    autoComplete='designation'
+                                                    autoFocus
+                                                    placeholder='Designation'
+                                                    onBlur={handleUpdateSignInput}
+                                                />
+                                            </div>
+
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='phone'
+                                                    name='phone'
+                                                    autoComplete='phone'
+                                                    autoFocus
+                                                    placeholder='Phone'
+                                                    onBlur={handleUpdateSignInput}
+                                                />
+                                            </div>
+
+                                            <div className='mt-3'>
+                                                <TextareaAutosize
+                                                    style={{
+                                                        backgroundColor: "#fff",
+                                                        borderRadius: "0.2rem",
+                                                        height: "50px",
+                                                    }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    width='100%'
+                                                    id='address'
+                                                    name='address'
+                                                    autoComplete='address'
+                                                    autoFocus
+                                                    aria-label='minimum height'
+                                                    rowsMin={3}
+                                                    placeholder='Address..'
+                                                    onBlur={handleUpdateSignInput}
+                                                />
+                                            </div>
+
+                                            <br />
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='facebook'
+                                                    name='facebook'
+                                                    autoComplete='facebook'
+                                                    autoFocus
+                                                    placeholder='Facebook Profile link'
+                                                    onBlur={handleUpdateSignInput}
+                                                />
+                                            </div>
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='twitter'
+                                                    name='twitter'
+                                                    autoComplete='twitter'
+                                                    autoFocus
+                                                    placeholder='Twitter Profile link'
+                                                    onBlur={handleUpdateSignInput}
+                                                />
+                                            </div>
+                                            <div style={{ margin: "1rem 0" }}>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='instagram'
+                                                    name='instagram'
+                                                    autoComplete='instagram'
+                                                    autoFocus
+                                                    placeholder='Instagram Profile link' 
+                                                    onBlur={handleUpdateSignInput}
+                                                />
+                                            </div>
+                                            <div>
+                                                <TextField
+                                                    style={{ backgroundColor: "#fff" }}
+                                                    variant='outlined'
+                                                    margin='normal'
+                                                    required
+                                                    fullWidth
+                                                    id='website'
+                                                    name='website'
+                                                    autoComplete='website'
+                                                    autoFocus
+                                                    placeholder='Website Address'
+                                                    onBlur={handleUpdateSignInput}
+                                                />
+                                            </div>
+                                            <Button
+                                                type='submit'
+                                                fullWidth
+                                                variant='contained'
+                                                className={classes.ticketBtn}
+                                                onClick={handleUpdateSubmit}
+                                                style={{ marginTop: "1rem" }}
+                                            >
+                                                Update
+                                            </Button>
+                                        </form>
                                     </div>
                                 </Fade>
                             </Modal>

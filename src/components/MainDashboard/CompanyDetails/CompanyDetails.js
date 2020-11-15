@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
 import { Button, TextareaAutosize, TextField, Typography } from '@material-ui/core';
-import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Fade from '@material-ui/core/Fade';
+import Grid from '@material-ui/core/Grid';
+import Modal from '@material-ui/core/Modal';
+import EditIcon from '@material-ui/icons/Edit';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { key } from '../../../apiKey';
+import AppBarDrawer from '../AppBarDrawer';
 import ToolBar from '../ToolBar/ToolBar';
 import { useStyles } from './CompanyDetailsStyle';
-import EditIcon from '@material-ui/icons/Edit';
-import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
-import IndeterminateCheckBoxRoundedIcon from '@material-ui/icons/IndeterminateCheckBoxRounded';
 
 const CompanyDetails = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [formValue, setFormValue] = useState({});
+    const [companies, setCompanies] = useState(null)
 
     const handleOpen = () => {
         setOpen(true);
@@ -30,12 +31,42 @@ const CompanyDetails = () => {
         value[e.target.name] = e.target.value;
         setFormValue(value);
     };
-
+    // create company details
     const handleSubmit = (e) => {
         const finalValue = { ...formValue };
+        finalValue.client_id = 1
         console.log(finalValue);
+        Axios.post(`${key}create-company`, finalValue)
+            .then(res => {
+                console.log(res);
+                // reFetch()
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
         e.preventDefault();
     };
+
+    //get all
+    const getComapnyDetails = () => {
+        Axios(`${key}all-company`)
+            .then(res => {
+                const allCompany = res.data
+                console.log(res.data);
+                setCompanies(allCompany)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }
+    useEffect(() => {
+        getComapnyDetails()
+    }, [])
+
+    const reFetch = () => {
+        getComapnyDetails()
+    }
 
     return (
         <div className={classes.root}>
@@ -60,13 +91,15 @@ const CompanyDetails = () => {
                                         Add Info
                                     </Button>
                                 </div>
-                                <div style={{ marginTop: '2rem' }}>
+                                { companies !== null &&
+                                    companies.map(company => (
+                                        <div style={{ marginTop: '2rem' }}>
                                     <div className="d-flex align-items-center"
                                         style={{marginLeft: '6rem', marginBottom:'2rem'}}
                                     >
                                         <div>
-                                            <Typography variant="h5"> Lebsack-Towne </Typography>
-                                            <Typography variant="caption"> Utilize Strategic Niches </Typography>
+                                            <Typography variant="h5"> { company.org_name } </Typography>
+                                            <Typography variant="caption"> { company.tag_line } </Typography>
                                         </div>
                                         <EditIcon style={{ color: '#4195D1'}} className="ml-3" />
 
@@ -84,7 +117,7 @@ const CompanyDetails = () => {
                                                 >
 
                                                 </div>
-                                                <Typography variant="body2"> 669 Park Street Pittsburg, CA <br /> California </Typography>
+                                                <Typography variant="body2"> { company.address } </Typography>
                                             </div>
 
                                             <div className="mt-3">
@@ -98,8 +131,7 @@ const CompanyDetails = () => {
                                                 >
 
                                                 </div>
-                                                <Typography variant="body2"> +22 344 5455 6534 </Typography>
-                                                <Typography variant="body2"> +22 344 5455 6534 </Typography>
+                                                <Typography variant="body2"> { company.phone } </Typography>
                                             </div>
                                         </div>
 
@@ -115,8 +147,7 @@ const CompanyDetails = () => {
                                                 >
 
                                                 </div>
-                                                <Typography variant="body2"> info@towne.com </Typography>
-                                                <Typography variant="body2"> carrer@towne.com </Typography>
+                                                <Typography variant="body2"> { company.email } </Typography>
                                             </div>
 
                                             <div className="mt-3">
@@ -130,11 +161,14 @@ const CompanyDetails = () => {
                                                 >
 
                                                 </div>
-                                                <Typography variant="body2"> niches@info.com </Typography>
+                                                <Typography variant="body2"> { company.website } </Typography>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                    ))
+
+                                }
                             </div>
                         </Grid>
 
@@ -202,7 +236,7 @@ const CompanyDetails = () => {
                                                     required
                                                     fullWidth
                                                     id='name'
-                                                    name='name'
+                                                    name='org_name'
                                                     autoComplete='name'
                                                     autoFocus
                                                     placeholder='Company'
@@ -218,7 +252,7 @@ const CompanyDetails = () => {
                                                     required
                                                     fullWidth
                                                     id='tagline'
-                                                    name='tagline'
+                                                    name='tag_line'
                                                     autoComplete='tagline'
                                                     autoFocus
                                                     placeholder='Tagline'
