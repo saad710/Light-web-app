@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Backdrop, Button, Card, CardContent, CardHeader, Fade, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextareaAutosize, TextField, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
-import { Backdrop, Button, ButtonGroup, Card, CardContent, CardHeader, Fade, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextareaAutosize, TextField, Typography } from '@material-ui/core';
-import { useStyles } from './TicketStyle';
-import customerData from '../../../data/customerData';
-import { Pagination } from '@material-ui/lab';
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
+import { Pagination } from '@material-ui/lab';
 import Axios from 'axios';
+import React, { useState } from 'react';
 import { key } from '../../../apiKey';
+import customerData from '../../../data/customerData';
+import AppBarDrawer from '../AppBarDrawer';
+import { useStyles } from './TicketStyle';
 
 const Ticket = () => {
     const classes = useStyles();
@@ -33,13 +33,19 @@ const Ticket = () => {
 
     const handleBlur = (e) => {
         const value = { ...ticketValue };
+        console.log(value);
         value[e.target.name] = e.target.value;
         setTicketValue(value);
     };
 
     const handleSubmit = (e) => {
         const tickets = { ...ticketValue };
-        
+        tickets.client_id = 1
+        tickets.date = '11/11/21'
+        tickets.status = 'pending'
+        tickets.type = 'idk'
+        tickets.ticket_id = 2
+        console.log(tickets);
         Axios.post(`${key}create-ticket`, tickets)
             .then(res => {
                 console.log(res);
@@ -145,10 +151,9 @@ const Ticket = () => {
                                                                     required
                                                                     fullWidth
                                                                     id='name'
-                                                                    name='name'
+                                                                    name='title'
                                                                     autoComplete='name'
                                                                     autoFocus
-                                                                    value="marie winter"
                                                                     onBlur={handleBlur}
                                                                 />
                                                             </div>
@@ -163,7 +168,6 @@ const Ticket = () => {
                                                                     name='email'
                                                                     autoComplete='email'
                                                                     autoFocus
-                                                                    value="mariewinter@email.com"
                                                                     onBlur={handleBlur}
                                                                 />
                                                             </div>
@@ -210,9 +214,9 @@ const Ticket = () => {
                                                                     margin='normal'
                                                                     required
                                                                     width='100%'
-                                                                    id='address'
-                                                                    name='address'
-                                                                    autoComplete='address'
+                                                                    id='description'
+                                                                    name='description'
+                                                                    autoComplete='description'
                                                                     autoFocus
                                                                     aria-label='minimum height'
                                                                     rowsMin={3}

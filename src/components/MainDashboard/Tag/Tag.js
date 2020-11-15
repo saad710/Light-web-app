@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Backdrop, Button, ButtonGroup, Card, CardContent, Fade, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
-import { Backdrop, Button, ButtonGroup, Card, CardContent, Fade, FormControl, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
-import { useStyles } from './TagStyle';
-import customerData from '../../../data/customerData';
 import { Pagination } from '@material-ui/lab';
+import React, { useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
-import { identity } from '@fullcalendar/core';
+import AppBarDrawer from '../AppBarDrawer';
+import { useStyles } from './TagStyle';
 const axios = require('axios');
 
 
