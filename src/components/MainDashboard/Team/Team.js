@@ -4,9 +4,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { Pagination } from '@material-ui/lab';
 import Axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
-import customerData from '../../../data/customerData';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './TeamStyle';
 
@@ -15,24 +14,66 @@ const Team = () => {
     const classes = useStyles();
     const [admin, setAdmin] = useState({});
     console.log(admin);
+    const [allAdmin, setAllAdmin] = useState(null)
     
     const handleTeamInput = (e) => {
         const newAdmin = {...admin}
         newAdmin[e.target.name] = e.target.value 
+        newAdmin.role = 'Admin'
         setAdmin(newAdmin)
     }
+
+    //get all admin
+    useEffect(() => {
+        Axios(`${key}all-admin`)
+            .then(res => {
+                const admin = res.data
+                setAllAdmin(admin)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }, [])
+
+    const reFetch = () => {
+        Axios(`${key}tag-all`)
+            .then(res => {
+                const admin = res.data
+                setAllAdmin(admin)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }
+
+    const handleAdminDelete = (id) => {
+        Axios.delete(`${key}admin-remove/${id}`)
+            .then(res => {
+                console.log(res.data);
+                // const adminData = allAdmin.filter(admin => admin.id !== res.data.id)
+                // setAllAdmin(adminData)
+                reFetch()
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+    }
+
+    
     const handleAdmin = (e) => {
         e.preventDefault();
         const adminData = { ...admin }
         console.log(adminData);
         Axios.post(`${key}admin-create`, adminData)
             .then(res => {
-                console.log(res);
+                reFetch()
             })
             .catch(err => {
                 console.log(err);
             })
     }
+
+    
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -80,7 +121,7 @@ const Team = () => {
                                         onChange={handleTeamInput}
                                     />
                                 </div>
-                                <div>
+                                {/* <div>
                                     <label> Role </label>
                                     <TextField
                                         style={{ borderRadius: '4px' }}
@@ -94,7 +135,7 @@ const Team = () => {
                                         defaultValue="role"
                                         onChange={() => handleTeamInput()}
                                     />
-                                </div>
+                                </div> */}
 
                                 <div>
                                     <label> Password </label>
@@ -164,14 +205,14 @@ const Team = () => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {
-                                            customerData.map((customer, i) => (
-                                                <TableRow key={customer.id}>
+                                        {   allAdmin !== null &&
+                                            allAdmin.map((admin, i) => (
+                                                <TableRow key={admin.id}>
                                                     <TableCell component="th" scope="row">
                                                         {i + 1}
                                                     </TableCell>
-                                                    <TableCell align="center"> Marie Winter </TableCell>
-                                                    <TableCell align="center"> mariewinter@email.com </TableCell>
+                                                    <TableCell align="center"> { admin.name } </TableCell>
+                                                    <TableCell align="center"> { admin.email } </TableCell>
                                                     <TableCell align="right">
                                                         <div>
                                                             <ButtonGroup
@@ -179,6 +220,7 @@ const Team = () => {
                                                                 color="primary"
                                                                 size="small"
                                                                 aria-label="contained primary button group"
+                                                                onClick={() => handleAdminDelete(admin.id) }
                                                             >
                                                                 <Button
                                                                     style={{ fontSize: '10px' }} color="secondary">DELETE</Button>
