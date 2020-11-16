@@ -1,11 +1,13 @@
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import FullCalendar from "@fullcalendar/react";
+import timeGridPlugin from "@fullcalendar/timegrid";
 import { Container, makeStyles } from "@material-ui/core";
-import moment from 'moment';
 import React from "react";
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+// import "@fullcalendar/core/main.css";
+// import "@fullcalendar/daygrid/main.css";
+// import "@fullcalendar/timegrid/main.css";
 import AppBarDrawer from "../AppBarDrawer";
-
-const localizer = momentLocalizer(moment)
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -91,6 +93,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const options = {
+  plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+  header: {
+    left: "prev,next",
+    center: "title",
+    right: "dayGridMonth,timeGridWeek,timeGridDay",
+  },
+  // defaultView: "timeGridWeek",
+  // header: {
+  //   left: "prev,next",
+  //   center: "title",
+  //   right: "dayGridMonth,timeGridWeek,timeGridDay",
+  // },
+  // editable: true,
+};
+
 const events = [
   {
     title: "Event1",
@@ -135,38 +153,29 @@ const events = [
     color: "#213f7e",
     display: "block",
   },
-  {
-    title: "Event7",
-    start: "Thu Nov 19 2020",
-    end: "Sat Nov 21 2020",
-    backgroundColor: "#378006",
-    color: "#213f7e",
-    display: "block",
-  },
-  {
-    title: "Event7",
-    start: "Thu Nov 26 2020",
-    end: "Sat Nov 28 2020",
-    backgroundColor: "#378006",
-    color: "#213f7e",
-    display: "block",
-  },
 ];
 
 const SchedulePage = () => {
   const classes = useStyles();
-  console.log(events);
+
   return (
     <div className={classes.root}>
       <AppBarDrawer />
       <Container className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Calendar
-          localizer={localizer}
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          initialView='dayGridMonth'
+          editable={true}
+          selectable={true}
+          selectMirror={true}
+          dayMaxEvents={true}
           events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 500 }}
         />
       </Container>
     </div>
