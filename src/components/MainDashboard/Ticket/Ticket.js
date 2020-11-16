@@ -39,14 +39,14 @@ const Ticket = () => {
     };
 
     const handleSubmit = (e) => {
-        const tickets = { ...ticketValue };
-        tickets.client_id = 1
-        tickets.date = '11/11/21'
-        tickets.status = 'pending'
-        tickets.type = 'idk'
-        tickets.ticket_id = 2
-        console.log(tickets);
-        Axios.post(`${key}create-ticket`, tickets)
+        const createTicket = { ...ticketValue };
+        createTicket.client_id = 1
+        createTicket.date = '11/11/21'
+        createTicket.status = 'pending'
+        createTicket.type = 'idk'
+        createTicket.ticket_id = 2
+        console.log(createTicket);
+        Axios.post(`${key}create-ticket`, createTicket)
             .then(res => {
                 console.log(res);
             })
@@ -150,9 +150,9 @@ const Ticket = () => {
                                                                     margin='normal'
                                                                     required
                                                                     fullWidth
-                                                                    id='name'
+                                                                    id='title'
                                                                     name='title'
-                                                                    autoComplete='name'
+                                                                    autoComplete='title'
                                                                     autoFocus
                                                                     onBlur={handleBlur}
                                                                 />
@@ -209,6 +209,7 @@ const Ticket = () => {
                                                                         backgroundColor: "#fff",
                                                                         borderRadius: "0.2rem",
                                                                         height: "130px",
+                                                                        width: '100%'
                                                                     }}
                                                                     variant='outlined'
                                                                     margin='normal'
@@ -219,7 +220,7 @@ const Ticket = () => {
                                                                     autoComplete='description'
                                                                     autoFocus
                                                                     aria-label='minimum height'
-                                                                    rowsMin={3}
+                                                                    // rowsMin={3}
                                                                     placeholder='Details'
                                                                     onBlur={handleBlur}
                                                                 />

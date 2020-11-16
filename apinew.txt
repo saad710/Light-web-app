@@ -38,7 +38,7 @@ Update Specific Group Info: /group-update/{group_id}
 Get All Group for Specific Client: client-all-group/{client_id}
 Delete Specific Group: /group-delete/{group_id}
 Delete All Mail for Specific Client: /remove-all-client-mail/{client_id}
-
+Get All Mail from Mailbox: /client-all-mail/{client_id}
 ---------------------
 Customer App:
 ---------------------
@@ -62,6 +62,7 @@ Password Update: /change-password/{customer_id}
 Delete Specific Reply: /remove-customer-reply/{reply_mail_id}
 Delete Specific Direct Mail: remove-customer-mail/{direct_mail_id}
 Delete All Mail for Specific Customer: /remove-all-customer-mail/{customer_id}
+Get All mail for mailbox: /client-all-mail/{client_id}
 
 ------------------
 Admin App:

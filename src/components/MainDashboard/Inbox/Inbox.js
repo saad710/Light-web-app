@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
 import { Avatar, Checkbox, Chip, Container, Divider, Grid, Typography } from '@material-ui/core';
-import inboxData from '../../../data/inboxData';
-import avatar from '../../../images/avatar.png'
-import {Link} from 'react-router-dom'
-import { useStyles } from './InboxStyle';
-import ToolBar from '../ToolBar/ToolBar';
-import RefreshIcon from '@material-ui/icons/Refresh';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { key } from '../../../apiKey';
+import avatar from '../../../images/avatar.png';
+import { useStyles } from './InboxStyle';
 
 const Inbox = () => {
     const classes = useStyles()
     const [openPanel, setOpenPanel] = useState(false);
-    const inboxMsg = inboxData
+    const [allMail, setAllMail] = useState(null)
+    
+    useEffect(() => {
+        const client_id = 1
+        Axios(`${key}client-all-mail/${client_id}`)
+            .then(res => {
+                const mails = res.data.all_mail
+                setAllMail(mails)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }, [])
     return (
         <React.Fragment>
             <Container maxWidth="lg">
@@ -25,7 +37,7 @@ const Inbox = () => {
                             />
                             <RefreshIcon />
                         </div>
-                        <div className="d-flex" style={{ marginLeft: '48rem' }}>
+                        <di v className="d-flex" style={{ marginLeft: '48rem' }}>
                             <div style={{ padding: '0 2rem' }}>
                                 1 of 21
                             </div>
@@ -33,11 +45,11 @@ const Inbox = () => {
                                 <ArrowBackIosIcon fontSize="small" />
                                 <ArrowForwardIosIcon fontSize="small" />
                             </div>
-                        </div>
+                        </di>
                     </div>
                 </Grid>
-                {
-                    inboxMsg.map(inbox => (
+                { allMail !== null &&
+                    allMail.map(inbox => (
                         <div key={inbox.id}>
                             <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
                             <div className="d-flex justify-content-between align-items-center">
@@ -47,7 +59,7 @@ const Inbox = () => {
                                     </Avatar>
                                     <Link to={`details/${inbox.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
                                         <Typography variant="body1" style={{ margin: '0.5rem 0.5rem' }}>
-                                            <strong> Marie Winter </strong>
+                                            <strong> {`${inbox.first_name} ${inbox.last_name}`} </strong>
                                             <Chip
                                                 style={{
                                                     marginLeft: '1rem',
