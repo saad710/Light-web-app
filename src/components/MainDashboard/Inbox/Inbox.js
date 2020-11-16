@@ -1,4 +1,5 @@
-import { Avatar, Checkbox, Chip, Container, Divider, Grid, Typography } from '@material-ui/core';
+import { Avatar, Checkbox, Container, Divider, Grid, Typography } from '@material-ui/core';
+import AccessAlarmSharpIcon from '@material-ui/icons/AccessAlarmSharp';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import RefreshIcon from '@material-ui/icons/Refresh';
@@ -13,7 +14,7 @@ const Inbox = () => {
     const classes = useStyles()
     const [openPanel, setOpenPanel] = useState(false);
     const [allMail, setAllMail] = useState(null)
-    
+    console.log(allMail);
     useEffect(() => {
         const client_id = 1
         Axios(`${key}client-all-mail/${client_id}`)
@@ -60,7 +61,7 @@ const Inbox = () => {
                                     <Link to={`details/${inbox.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
                                         <Typography variant="body1" style={{ margin: '0.5rem 0.5rem' }}>
                                             <strong> {`${inbox.first_name} ${inbox.last_name}`} </strong>
-                                            <Chip
+                                            {/* <Chip
                                                 style={{
                                                     marginLeft: '1rem',
                                                     fontSize: '11px',
@@ -70,9 +71,12 @@ const Inbox = () => {
                                                     color: '#fff',
                                                 }}
                                                 label="quick reply"
-                                            />
+                                                >
+                                                    
+                                                </Chip> */}
+                                            <AccessAlarmSharpIcon style={{color: '#2d2d2d'}} />
                                             <br />
-                                            <strong style={{ marginLeft: '0.5rem' }}> Lorem Ipsum is simply </strong> dummy text of the  printing and typesetting industry. Lorem Ipsum has been
+                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject } </strong> { inbox.mail_body}
                                         </Typography>
 
                                     </Link>
