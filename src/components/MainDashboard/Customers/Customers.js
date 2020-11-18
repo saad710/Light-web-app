@@ -38,7 +38,29 @@ const Customers = () => {
                 console.log(err);
             })
     }, [])
-
+    const refetch = () => {
+        Axios(`${key}customers`)
+            .then(res => {
+                const data = res.data
+                setCustomers(data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const handleRemoveCustomer = (id) => {
+        console.log(id);
+        Axios.delete(`${key}customer-trash/${id}`)
+            .then(res => {
+                console.log(res);
+                refetch()
+                // const newCustomers = customers.filter(customer => customer.id !== res.data.id)
+                // setCustomers(newCustomers)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
     const handleOpen = () => {
         setOpen(true);
     };
@@ -116,6 +138,7 @@ const Customers = () => {
                                                             aria-label="contained primary button group"
                                                         >
                                                             <Button
+                                                                onClick={() => handleRemoveCustomer(customer.id)}
                                                                 style={{fontSize: '10px'}} color="secondary">REMOVE</Button>
                                                         </ButtonGroup>
                                                     </div>
