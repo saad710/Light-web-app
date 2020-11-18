@@ -5,10 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import Axios from 'axios';
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { key } from '../../apiKey';
+import { useHistory } from 'react-router-dom';
 import './SignIn.css';
 
 
@@ -47,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignInSide() {
+export default function ForgetPassword() {
     const classes = useStyles();
     const history = useHistory();
     const [loggedIn, setLoggedIn] = useState({
@@ -57,26 +55,26 @@ export default function SignInSide() {
     console.log(loggedIn)
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (loggedIn.email && loggedIn.password) {
-            console.log(loggedIn.password);
-            const loginData = {
-                email: loggedIn.email,
-                password: loggedIn.password
-            }
-            Axios.post(`${key}client-login`, loginData)
-                .then(res => {
-                    console.log(res.data);
-                    if (res.data.login_status === "success") {
-                        history.push("/dashboard");
-                    }
-                    else {
-                        //show error info
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        }
+        // if (loggedIn.email && loggedIn.password) {
+        //     console.log(loggedIn.password);
+        //     const loginData = {
+        //         email: loggedIn.email,
+        //         password: loggedIn.password
+        //     }
+        //     Axios.post(`${key}client-login`, loginData)
+        //         .then(res => {
+        //             console.log(res.data);
+        //             if (res.data.login_status === "success") {
+        //                 history.push("/dashboard");
+        //             }
+        //             else {
+        //                 //show error info
+        //             }
+        //         })
+        //         .catch(err => {
+        //             console.log(err);
+        //         })
+        // }
     }
 
     return (
@@ -105,7 +103,7 @@ export default function SignInSide() {
             >
                 <div className={classes.paper}>
                     <Typography component="h1" variant="body1" style={{ color: '#2d2d2d' }}>
-                        SIGN IN
+                        Type your email
                     </Typography>
                     <form className={classes.form} autoComplete="off" noValidate onSubmit={handleSubmit}>
                         <div>
@@ -124,22 +122,6 @@ export default function SignInSide() {
                                 onChange={(e) => setLoggedIn({ ...loggedIn, email: e.target.value })}
                             />
                         </div>
-                        <div className="mt-3">
-                            <label htmlFor=""> Password </label>
-                            <TextField
-                                style={{ backgroundColor: '#fff' }}
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                placeholder="***********"
-                                onChange={(e) => setLoggedIn({ ...loggedIn, password: e.target.value })}
-                            />
-                        </div>
                         <Button
                             type="submit"
                             fullWidth
@@ -147,15 +129,8 @@ export default function SignInSide() {
                             color="primary"
                             className={classes.submit}
                         >
-                            Sign In
+                            GET RESET TOKEN
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link to="/passwordReset" variant="body2" style={{ color: '#2d2d2d', display: 'block', textAlign: 'center' }}>
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                        </Grid>
                     </form>
                 </div>
             </Grid>

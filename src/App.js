@@ -1,28 +1,27 @@
-import React, { createContext } from "react";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CompanyDetails from "./components/MainDashboard/CompanyDetails/CompanyDetails";
+import Compose from "./components/MainDashboard/Coompose/Coompose";
+import Customers from "./components/MainDashboard/Customers/Customers";
 import Dashboard from "./components/MainDashboard/Dashboard";
-import SignInSide from "./components/SignIn/SignIn";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import EmailSignature from "./components/MainDashboard/EmailSignature/EmailSignature";
+import Group from "./components/MainDashboard/Group/Group";
 import InboxDetails from "./components/MainDashboard/Inbox/InboxDetails";
+import Invoice from "./components/MainDashboard/Invoice/Invoice";
+import Payment from "./components/MainDashboard/Payment/Payment";
+import Profile from "./components/MainDashboard/Profile/Profile";
+import ReportPage from "./components/MainDashboard/ReportPage/ReportPage";
+import SchedulePage from "./components/MainDashboard/SchedulePage/SchedulePage";
 import Sent from "./components/MainDashboard/Sent/Sent";
 import SentDetails from "./components/MainDashboard/Sent/SentDetails";
-import Customers from "./components/MainDashboard/Customers/Customers";
-import Compose from "./components/MainDashboard/Coompose/Coompose";
-import Profile from "./components/MainDashboard/Profile/Profile";
-import Privacy from "./components/MainDashboard/Privacy/Privacy";
-import Team from "./components/MainDashboard/Team/Team";
-import CompanyDetails from "./components/MainDashboard/CompanyDetails/CompanyDetails";
-import Ticket from "./components/MainDashboard/Ticket/Ticket";
-import EmailSignature from "./components/MainDashboard/EmailSignature/EmailSignature";
-import TrialPage from "./components/TrialPage/TrialPage";
-import Payment from "./components/MainDashboard/Payment/Payment";
-import Invoice from "./components/MainDashboard/Invoice/Invoice";
-import ReportPage from "./components/MainDashboard/ReportPage/ReportPage";
-import Tag from "./components/MainDashboard/Tag/Tag";
-import Group from "./components/MainDashboard/Group/Group";
 import SentFilter from "./components/MainDashboard/SentFilter/SentFilter";
+import Tag from "./components/MainDashboard/Tag/Tag";
+import Team from "./components/MainDashboard/Team/Team";
+import Ticket from "./components/MainDashboard/Ticket/Ticket";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
-import AppBarDrawer from "./components/MainDashboard/AppBarDrawer";
-import SchedulePage from "./components/MainDashboard/SchedulePage/SchedulePage";
+import ForgetPassword from "./components/SignIn/ForgetPassword";
+import SignInSide from "./components/SignIn/SignIn";
+import TrialPage from "./components/TrialPage/TrialPage";
 
 function App() {
   return (
@@ -51,6 +50,7 @@ function App() {
           <Route path='/group' component={Group} />
           <Route path='/filter' component={SentFilter} />
           <Route path='/dashboard' component={NavDashboard} />
+          <Route patho='/passwordReset' component={ForgetPassword} />
         </Switch>
       </Router>
     </div>
