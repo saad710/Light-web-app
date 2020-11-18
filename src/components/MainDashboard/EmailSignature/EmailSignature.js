@@ -5,11 +5,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
+import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LanguageIcon from '@material-ui/icons/Language';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import UpdateIcon from '@material-ui/icons/Update';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import 'suneditor/dist/css/suneditor.min.css';
@@ -156,7 +156,8 @@ const EmailSignature = () => {
                                                  <Typography variant="body2" align="right" style={{marginLeft: '27rem', marginTop: '-1rem'}}
                                                     onClick={() => handleSignatureDelete(singnature.client_id) }
                                                  >
-                                                     <UpdateIcon />
+                                                     {/* <UpdateIcon /> */}
+                                                     <DeleteForeverSharpIcon />
                                                  </Typography>
                                                 <h6> { singnature.name } </h6>
                                                 <p> <strong> {singnature.designation} </strong> </p>

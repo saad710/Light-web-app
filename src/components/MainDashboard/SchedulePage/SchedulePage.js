@@ -95,16 +95,16 @@ const events = [
   {
     title: "Event1",
     backgroundColor: "#213f7e",
-    start: "2020-10-12T10:30:00",
+    start: "2020-11-12T10:30:00",
     display: "block",
-    end: "2020-10-12T11:30:00",
+    end: "2020-11-12T11:30:00",
   },
   {
     display: "block",
     title: "Event2",
     backgroundColor: "#4195d1",
-    start: "2020-10-12T11:30:00",
-    end: "2020-10-12T12:30:00",
+    start: "2020-12-12T11:30:00",
+    end: "2020-12-12T12:30:00",
   },
   {
     title: "Event3",
