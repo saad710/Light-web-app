@@ -95,10 +95,10 @@ const CompanyDetails = () => {
                                     companies.map(company => (
                                         <div style={{ marginTop: '2rem' }}>
                                     <div className="d-flex align-items-center"
-                                        style={{marginLeft: '6rem', marginBottom:'2rem'}}
+                                        style={{marginBottom:'2rem'}}
                                     >
                                         <div>
-                                            <Typography variant="h5"> { company.org_name } </Typography>
+                                            <Typography variant="h5" align="center"> { company.org_name } </Typography>
                                             <Typography variant="caption"> { company.tag_line } </Typography>
                                         </div>
                                         <EditIcon style={{ color: '#4195D1'}} className="ml-3" />
