@@ -76,7 +76,7 @@ const Inbox = () => {
                                                 </Chip> */}
                                             <AccessAlarmSharpIcon style={{color: '#2d2d2d'}} />
                                             <br />
-                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject } </strong> { inbox.mail_body}
+                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject } </strong> { `${inbox.mail_body.split(" ").splice(0,13).join(" ")}......`}
                                         </Typography>
 
                                     </Link>
