@@ -5,9 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import { Pagination } from '@material-ui/lab';
 import Axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
-import customerData from '../../../data/customerData';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './TicketStyle';
 
@@ -16,6 +15,7 @@ const Ticket = () => {
     const [ticketModal, setTicketModal] = React.useState(false);
     const [ticketDetails, setTicketDetails] = React.useState(false);
     const [ticketValue, setTicketValue] = useState({});
+    const [tickets, setTickets] = useState(null)
 
     const handleOpen = () => {
         setTicketModal(true);
@@ -42,13 +42,14 @@ const Ticket = () => {
         const createTicket = { ...ticketValue };
         createTicket.client_id = 1
         createTicket.date = '11/11/21'
-        createTicket.status = 'pending'
-        createTicket.type = 'idk'
-        createTicket.ticket_id = 2
+        // createTicket.status = 'pending'
+        // createTicket.type = 'idk'
+        // createTicket.ticket_id = 2
         console.log(createTicket);
         Axios.post(`${key}create-ticket`, createTicket)
             .then(res => {
                 console.log(res);
+                reFetch()
             })
             .catch(err => {
                 console.log(err);
@@ -56,6 +57,26 @@ const Ticket = () => {
 
         e.preventDefault();
     };
+    useEffect(() => {
+        Axios(`${key}all-ticket`)
+            .then(res => {
+                const tickets = res.data
+                setTickets(tickets)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }, [])
+    const reFetch = () => {
+        Axios(`${key}all-ticket`)
+            .then(res => {
+                const tickets = res.data
+                setTickets(tickets)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -87,18 +108,18 @@ const Ticket = () => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {
-                                                customerData.map((customer, i) => (
-                                                    <TableRow key={customer.id} onClick={handleDetailsOpen} style={{cursor: 'pointer'}}>
+                                            {   tickets !== null &&
+                                                tickets.map((ticket, i) => (
+                                                    <TableRow key={ticket.id} onClick={handleDetailsOpen} style={{cursor: 'pointer'}}>
                                                         <TableCell component="th" scope="row">
                                                             {i + 1}
                                                         </TableCell>
                                                         <TableCell component="th" scope="row">
-                                                            {i + 231}
+                                                            { ticket.ticket_id }
                                                         </TableCell>
-                                                        <TableCell align="center"> Lorem ipsum dolor. </TableCell>
+                                                        <TableCell align="center"> {ticket.subject} </TableCell>
                                                         <TableCell align="center">
-                                                            <Typography variant="body2" color="textPrimary"> closed </Typography>
+                                                            <Typography variant="body2" color="textPrimary"> {ticket.status} </Typography>
                                                         </TableCell>
                                                     </TableRow>
                                                 ))
