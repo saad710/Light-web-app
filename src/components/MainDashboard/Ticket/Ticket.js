@@ -16,7 +16,7 @@ const Ticket = () => {
     const [ticketDetails, setTicketDetails] = React.useState(false);
     const [ticketValue, setTicketValue] = useState({});
     const [tickets, setTickets] = useState(null)
-
+    const [singleDetails, setSingleDetails] = useState({})
     const handleOpen = () => {
         setTicketModal(true);
     };
@@ -24,7 +24,8 @@ const Ticket = () => {
         setTicketModal(false);
     };
 
-    const handleDetailsOpen = () => {
+    const handleDetailsOpen = (ticket) => {
+        setSingleDetails(ticket)
         setTicketDetails(true);
     };
     const handleDetailsClose = () => {
@@ -110,7 +111,7 @@ const Ticket = () => {
                                         <TableBody>
                                             {   tickets !== null &&
                                                 tickets.map((ticket, i) => (
-                                                    <TableRow key={ticket.id} onClick={handleDetailsOpen} style={{cursor: 'pointer'}}>
+                                                    <TableRow key={ticket.id} onClick={() => handleDetailsOpen(ticket)} style={{cursor: 'pointer'}}>
                                                         <TableCell component="th" scope="row">
                                                             {i + 1}
                                                         </TableCell>
@@ -297,10 +298,10 @@ const Ticket = () => {
                                                     <CardContent>
                                                         <div style={{color: '#2d2d2d'}}>
                                                             <Typography variant="body1" align="left">
-                                                                <strong>Subject : </strong> Lorem ipsum dolor.
+                                                                <strong>Subject : </strong> {singleDetails.subject}
                                                             </Typography>
                                                             <Typography variant="subtitle2" align="left">
-                                                                <strong>Details : </strong> <small> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). </small>
+                                                                <strong>Details : </strong> <small> {singleDetails.description} </small>
                                                             </Typography>
                                                         </div>
                                                     </CardContent>
