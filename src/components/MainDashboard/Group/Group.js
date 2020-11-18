@@ -15,23 +15,42 @@ const Group = () => {
     const [groups, setGroups] = useState(null)
     const [updateValue, setUpdateValue] = useState({})
     const [showOldValue, setShowOldValue] = useState({})
+    const [customers, setCustomers] = useState(null)
+
     const handleTeamInput = (e) => {
         const newGroup = { ...addGroup }
         newGroup[e.target.name] = e.target.value
         setAddGroup(newGroup)
     }
 
-    const [personName, setPersonName] = React.useState([]);
+    const [customerEmail, setCustomerEmail] = React.useState([]);
+    console.log('person', customerEmail);
 
     const handleChange = (event) => {
-        setPersonName(event.target.value);
+        setCustomerEmail(event.target.value);
     };
+    // load all customers
+    useEffect(() => {
+        Axios(`${key}customers`)
+            .then(res => {
+                const data = res.data
+                setCustomers(data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
     // create group
     const handleGroup = (e) => {
         e.preventDefault();
-        const group_name = { ...addGroup }
+        const group_name = { ...addGroup}
+        group_name.client_id = 1
+        // group_name.customer_email = customerEmail.toString()
+        group_name.customer_email = customerEmail
+        console.log(group_name);
         Axios.post(`${key}create-group`, group_name)
             .then(res => {
+                console.log(res);
                 reFetch()
             })
             .catch(err => {
@@ -45,6 +64,7 @@ const Group = () => {
             .then(res => {
                 const finalGroup = groups.filter(newTag => newTag.id !== res.data.id)
                 setGroups(finalGroup)
+                reFetch()
             })
             .catch(err => {
                 console.log(err.message);
@@ -75,7 +95,7 @@ const Group = () => {
 
     //get all
     useEffect(() => {
-        Axios(`${key}group-all`)
+        Axios(`${key}all-group`)
             .then(res => {
                 const groups = res.data
                 setGroups(groups)
@@ -86,7 +106,7 @@ const Group = () => {
     }, [])
 
     const reFetch = () => {
-        Axios(`${key}group-all`)
+        Axios(`${key}all-group`)
             .then(res => {
                 const groups = res.data
                 setGroups(groups)
@@ -179,14 +199,14 @@ const Group = () => {
                                                 labelId="demo-mutiple-name-label"
                                                 id="demo-mutiple-name"
                                                 multiple
-                                                value={personName}
+                                                value={customerEmail}
                                                 onChange={handleChange}
                                                 input={<Input />}
                                                 MenuProps={MenuProps}
                                             >
-                                                {names.map((name) => (
-                                                    <MenuItem key={name} value={name}>
-                                                        {name}
+                                                {customers !== null && customers.map((customer) => (
+                                                    <MenuItem key={customer.id} value={`${customer.email}`}>
+                                                        {customer.email}
                                                     </MenuItem>
                                                 ))}
                                             </Select>
@@ -301,7 +321,7 @@ const Group = () => {
                                                                 labelId="demo-mutiple-name-label"
                                                                 id="demo-mutiple-name"
                                                                 multiple
-                                                                value={personName}
+                                                                value={customerEmail}
                                                                 onChange={handleChange}
                                                                 input={<Input />}
                                                                 MenuProps={MenuProps}
