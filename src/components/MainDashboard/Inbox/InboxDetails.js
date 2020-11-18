@@ -1,24 +1,42 @@
-import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
-import { useParams } from 'react-router-dom';
-import inboxData from '../../../data/inboxData';
 import { Avatar, Button, Chip, Typography } from '@material-ui/core';
-import avatar from '../../../images/avatar.png'
-import {Link} from 'react-router-dom'
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { key } from '../../../apiKey';
+import avatar from '../../../images/avatar.png';
+import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './InboxDetailsStyle';
 
 const InboxDetails = () => {
     const classes = useStyles();
+    const [singleInbox, setSingleInbox] = useState(null)
+    useEffect(() => {
+        const client_id = 1
+        Axios(`${key}client-all-mail/${client_id}`)
+            .then(res => {
+                console.log(res);
+                const mails = res.data.all_mail
+                setSingleInbox(mails)
+            })
+            .then(err => {
+                console.log(err);
+            })
+    }, [])
     const { inboxId } = useParams()
-    const message = inboxData.filter(singleMsg => singleMsg.id == inboxId)
+    console.log(inboxId);
+    const message = singleInbox !== null && singleInbox.filter(singleMsg => singleMsg.id == inboxId)
+    console.log(message[0]);
+    const info = message[0]
     return (
         <div className={classes.root}>
             <CssBaseline />
             <AppBarDrawer />
-            <main className={classes.content}>
+            {
+                info !== undefined &&
+                <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="md" className={classes.container}>
                     <Grid container spacing={3}>
@@ -27,23 +45,22 @@ const InboxDetails = () => {
                                 <img width="100%" src={avatar} alt="" />
                             </Avatar>
                             <Typography variant="body1" style={{ margin: '0.5rem 0.5rem', color: '#2d2d2d' }}>
-                                <strong style={{ marginLeft: '1rem' }}> {message[0].name} </strong> <br />
-                                {/* <strong style={{ marginLeft: '1rem' }}> {message[0].email} </strong> */}
+                                <strong style={{ marginLeft: '1rem' }}> { `${info.first_name} ${info.last_name}` } </strong> <br />
                                 <small style={{ marginLeft: '1rem' }}> 
-                                    From : marie@gmail.com
+                                    From : {info.sender}
                                 </small>
                                 <br/>
                                 
                                 <small style={{ marginLeft: '1rem' }}>
-                                    To : alex@email.com
+                                    To : {info.receiver}
                                 </small>
                                 <br />
                                 <small style={{ marginLeft: '1rem' }}>
-                                    Cc : info@domain.com
+                                    Cc : { info.cc }
                                 </small>
                                 <br />
                                 <small style={{ marginLeft: '1rem' }}>
-                                    Subject : lorem ipsum
+                                    Subject : { info.subject }
                                 </small>
                                 <br />
 
@@ -57,25 +74,18 @@ const InboxDetails = () => {
                                             width: '5rem',
                                             color: '#fff',
                                     }}
-                                    label={message[0].type} 
+                                    label={info.type}
                                 
                                 />
+
                             </Typography>
                         </div>
                         <Typography variant="body1" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
-                            {message[0].message}
+                            {info.mail_body}
                         </Typography>
-                        <div style={{
-                            width: '40%',
-                            height: '10rem',
-                            backgroundColor: '#8797B9',
-                            margin: '3rem 4rem'
-                        }}>
-
-                        </div>
 
                     </Grid>
-                    <div style={{marginLeft:'3rem'}}>
+                    <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
                         <Button variant="contained" className={classes.btnStyle} color="primary">
                             REPLY
                         </Button>
@@ -86,6 +96,7 @@ const InboxDetails = () => {
                     </div>
                 </Container>
             </main>
+            }
         </div>
     );
 };
