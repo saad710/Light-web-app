@@ -4,6 +4,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import Axios from 'axios';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { key } from '../../../apiKey';
@@ -19,6 +20,7 @@ const Inbox = () => {
         const client_id = 1
         Axios(`${key}client-all-mail/${client_id}`)
             .then(res => {
+                console.log(res);
                 const mails = res.data.all_mail
                 setAllMail(mails)
             })
@@ -74,9 +76,11 @@ const Inbox = () => {
                                                 >
                                                     
                                                 </Chip> */}
-                                            <AccessAlarmSharpIcon style={{color: '#2d2d2d'}} />
+                                            {
+                                                inbox.remainer !== null && <AccessAlarmSharpIcon fontSize="small" style={{color: '#A61414'}} />
+                                            }
                                             <br />
-                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject } </strong> { `${inbox.mail_body.split(" ").splice(0,13).join(" ")}......`}
+                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject } </strong> { `${inbox.mail_body.split(" ").splice(0,14).join(" ")}......`}
                                         </Typography>
 
                                     </Link>
@@ -94,7 +98,7 @@ const Inbox = () => {
                                         </button>
                                 </Link>
                                 <Typography style={{ color: '#2d2d2d' }} variant="body1" align="right">
-                                    <small> just now </small>
+                                    <small> { moment(inbox.created_at).fromNow() } </small>
                                 </Typography>
                             </div>
                             <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
