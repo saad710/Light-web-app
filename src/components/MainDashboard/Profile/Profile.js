@@ -1,13 +1,12 @@
-import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Button, TextField, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
-import {Button, TextField, Typography } from '@material-ui/core';
-import avatar from '../../../images/avatar.png'
-import { useStyles } from './ProfileStyle';
-import { useState } from 'react';
 import EditIcon from '@material-ui/icons/Edit';
+import React, { useState } from 'react';
+import avatar from '../../../images/avatar.png';
+import AppBarDrawer from '../AppBarDrawer';
+import { useStyles } from './ProfileStyle';
 
 const Profile = () => {
     const classes = useStyles();
@@ -55,7 +54,8 @@ const Profile = () => {
                                 <div className="pb-2">
                                     <label htmlFor=""> Email </label>
                                     <TextField
-                                        disabled={disable ? disable : ''}
+                                        // disabled={disable ? disable : ''}
+                                        disabled
                                         style={{borderRadius: '4px' }}
                                         variant="outlined"
                                         margin="normal"
@@ -80,6 +80,24 @@ const Profile = () => {
                                 >
                                     SAVE
                                 </Button>
+                                <div className="pb-2">
+                                    <label htmlFor=""> Old Password </label>
+                                    <TextField
+                                        // disabled={disable ? disable : ''}
+                                        style={{borderRadius: '4px' }}
+                                        variant="outlined"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="old_password"
+                                        name="old_password"
+                                        autoComplete="old_password"
+                                        autoFocus
+                                        placeholder="***********"
+                                        onBlur={handleBlur}
+                                        type="password"
+                                    />
+                                </div>
                                 <Button
                                     style={{ padding: '0.6rem 0', margin: '1rem 0' }}
                                     type="submit"
