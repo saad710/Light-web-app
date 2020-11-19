@@ -27,7 +27,6 @@ Create Client's Signature: /create-signature
 Get Client's Signature: /clientSignature/{client_id}
 Update Client's Signature: /update-signature/{client_id}
 Get All Client's Signature: /all-signature
-
 Delete Client's Signature: /delete-signature/{client_id}
 Soft Delete Customer: /customer-trash/{customer}
 Restore deleted Customer: /restore-customer/{customer_id}
@@ -48,6 +47,7 @@ Customer App:
 ---------------------
 All Customer: /customers
 Specific Customer: /specific-customer/{customer_id}
+
 Customer Login: /customer-login
 Customer Logout: /customer-logout
 Create New Customer: /create-customer

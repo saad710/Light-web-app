@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 import React, { useState } from 'react';
 import avatar from '../../../images/avatar.png';
+import editIcon from '../../../images/editIcon.png';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './ProfileStyle';
 
@@ -27,7 +28,10 @@ const Profile = () => {
                 <Container maxWidth="sm" className={classes.container}>
                     <Grid container spacing={3}>
                         <div className={classes.paper}>
-                            <img className="pt-2" style={{margin: ' 0 auto '}} width="20%" src={avatar} alt="" />
+                            <div style={{margin: ' 0 auto'}}>
+                                <img className="pt-2" style={{position:'relative'}} width="60%" src={avatar} alt="" />
+                                <img style={{ position: 'absolute', top: '28.5%', left: '57.5%' }} src={editIcon} alt=""/>
+                            </div>
                             <Typography style={{color: '#2d2d2d', marginTop:'1rem'}} component="body2" variant="body2">
                                 Personal Details
                             </Typography>
