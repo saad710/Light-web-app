@@ -6,10 +6,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Axios from 'axios';
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { key } from '../../apiKey';
+import { UserContext } from '../../Providers/UserProvider';
 import './SignIn.css';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +52,12 @@ const useStyles = makeStyles((theme) => ({
 export default function SignInSide() {
     const classes = useStyles();
     const history = useHistory();
+    const [loginError, setLoginError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const { user, setUser } = useContext(UserContext)
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+
     const [loggedIn, setLoggedIn] = useState({
         email: '',
         password: ''
@@ -67,18 +75,24 @@ export default function SignInSide() {
                 .then(res => {
                     console.log(res.data);
                     if (res.data.login_status === "success") {
+                        localStorage.setItem("client", res.data);
                         history.push("/dashboard");
+                        setUser(res.data);
                     }
                     else {
-                        //show error info
+                         setLoginError(res.data);
                     }
                 })
                 .catch(err => {
                     console.log(err);
                 })
         }
+        else {
+        !e.target.email.value && setEmailError(true);
+        !e.target.password.value && setPasswordError(true);
     }
-
+    }
+    if (localStorage.getItem("client")) return <Redirect to={"/dashboard"} />;
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -124,6 +138,11 @@ export default function SignInSide() {
                                 onChange={(e) => setLoggedIn({ ...loggedIn, email: e.target.value })}
                             />
                         </div>
+                        {emailError && (
+                            <div className={classes.error}>
+                            <span>Please insert email</span>
+                            </div>
+                        )}
                         <div className="mt-3">
                             <label htmlFor=""> Password </label>
                             <TextField
@@ -140,6 +159,18 @@ export default function SignInSide() {
                                 onChange={(e) => setLoggedIn({ ...loggedIn, password: e.target.value })}
                             />
                         </div>
+                        {passwordError && (
+                            <div className={classes.error}>
+                            <span>Please insert password</span>
+                            </div>
+                        )}
+
+                        {loginError && (
+                            <div className={classes.error}>
+                            <span>{loginError[1]}</span>
+                            </div>
+                        )}
+                        
                         <Button
                             type="submit"
                             fullWidth

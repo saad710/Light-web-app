@@ -1,14 +1,3 @@
-import React, { useState } from "react";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { Link } from "react-router-dom";
-import Collapse from "@material-ui/core/Collapse";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import SendIcon from "@material-ui/icons/Send";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import DataUsageIcon from '@material-ui/icons/DataUsage';
 import {
   Backdrop,
   Button,
@@ -18,29 +7,34 @@ import {
   Fade,
   IconButton,
   List,
-  makeStyles,
+
   Modal,
   TextareaAutosize,
-  TextField,
+  TextField
 } from "@material-ui/core";
-import WcIcon from "@material-ui/icons/Wc";
-import SettingsIcon from "@material-ui/icons/Settings";
-import PersonIcon from "@material-ui/icons/Person";
-import HttpsIcon from "@material-ui/icons/Https";
+import Collapse from "@material-ui/core/Collapse";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import AddToPhotosSharpIcon from '@material-ui/icons/AddToPhotosSharp';
+import BugReportIcon from "@material-ui/icons/BugReport";
+import BusinessIcon from "@material-ui/icons/Business";
+import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import DataUsageIcon from '@material-ui/icons/DataUsage';
+import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import GroupWorkIcon from "@material-ui/icons/GroupWork";
 import LabelImportantIcon from "@material-ui/icons/LabelImportant";
-import BusinessIcon from "@material-ui/icons/Business";
-import BugReportIcon from "@material-ui/icons/BugReport";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
-import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
 import LabelOffOutlinedIcon from "@material-ui/icons/LabelOffOutlined";
-import GroupAddOutlinedIcon from "@material-ui/icons/GroupAddOutlined";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import PersonIcon from "@material-ui/icons/Person";
+import SettingsIcon from "@material-ui/icons/Settings";
+import WcIcon from "@material-ui/icons/Wc";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useStyles } from "../MenuItem/MenuItemStyle";
-import { CalendarToday } from "@material-ui/icons";
-import './MenuItem.css'
-import AddToPhotosSharpIcon from '@material-ui/icons/AddToPhotosSharp';
+import './MenuItem.css';
 
 const componseStyle = {
   backgroundColor: "#4195D1",
@@ -340,7 +334,7 @@ const MenuItem = ({ toogleOpen }) => {
               {icon15 ? <ExitToAppIcon style={{ color: '#fff' }} /> : <ExitToAppIcon style={{ color: '#4195D1' }} />}
               {/* <ExitToAppIcon /> */}
             </ListItemIcon>
-            <ListItemText primary='Log Out' />
+            <ListItemText onClick={ () => localStorage.clear() } primary='Log Out' />
           </ListItem>
         </Link>
       </div>
