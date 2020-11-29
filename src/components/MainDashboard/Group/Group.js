@@ -16,13 +16,23 @@ const Group = () => {
     const [updateValue, setUpdateValue] = useState({})
     const [showOldValue, setShowOldValue] = useState({})
     const [customers, setCustomers] = useState(null)
-
+    const [singleClient, setSingleClinet] = useState({})
+    console.log(localStorage.client);
     const handleTeamInput = (e) => {
         const newGroup = { ...addGroup }
         newGroup[e.target.name] = e.target.value
         setAddGroup(newGroup)
     }
-
+    // const singleClients = clients !== 'loading' && clients.filter(cleint => cleint.email === localStorage.client)
+    useEffect(() => {
+        Axios.get(`${key}clients`)
+        .then(res => {
+            const data = res.data
+            const client = data.filter(clients => clients.email === localStorage.client)
+            // console.log(client);
+            setSingleClinet(client[0])
+        })
+    }, [])
     const [customerEmail, setCustomerEmail] = React.useState([]);
     console.log('person', customerEmail);
 
@@ -44,7 +54,7 @@ const Group = () => {
     const handleGroup = (e) => {
         e.preventDefault();
         const group_name = { ...addGroup}
-        group_name.client_id = 1
+        group_name.client_id = singleClient.id
         // group_name.customer_email = customerEmail.toString()
         group_name.customer_email = customerEmail
         console.log(group_name);

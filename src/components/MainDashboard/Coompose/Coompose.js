@@ -32,6 +32,8 @@ const Coompose = () => {
     const [group, setGroup] = useState(false)
     const [tags, setTags] = useState(false)
 
+    const [image, setImage] = useState('')
+
     console.log('final value', value)
     // check box state
     const [checkBox, setCheckBox] = useState({
@@ -151,6 +153,7 @@ const Coompose = () => {
             finalValue.hideContactInfo = false
         }
         finalValue.client_id = 1
+        finalValue.mail_file = image
         
         // if(checkBox.noReply) {
         //     finalValue.noReply = "no reply"
@@ -227,7 +230,9 @@ const Coompose = () => {
         setMailBody(mail_body)
     }
     const handleImageUpload = (targetImgElement, index, state, imageInfo, remainingFilesCount) => {
-        console.log(targetImgElement, index, state, imageInfo, remainingFilesCount)
+        // console.log(targetImgElement, index, state, imageInfo, remainingFilesCount)
+        console.log(imageInfo.name)
+        setImage(imageInfo.name)
     }
 
 

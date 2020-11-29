@@ -74,7 +74,9 @@ export default function SignInSide() {
             Axios.post(`${key}client-login`, loginData)
                 .then(res => {
                     console.log(res.data.client_email);
-                    
+                    // localStorage.setItem("client", res.data.client_email);
+                    //     history.push("/dashboard");
+                    //     setUser(res.data);
                     if (res.data.login_status === "success") {
                         localStorage.setItem("client", res.data.client_email);
                         history.push("/dashboard");

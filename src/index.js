@@ -3,13 +3,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
+import ClientProvider from './Providers/ClientProvider';
 import UserProvider from './Providers/UserProvider';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
+      <ClientProvider>
       <App />
+      </ClientProvider>
     </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')

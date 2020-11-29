@@ -19,7 +19,6 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
-import ToolBar from '../ToolBar/ToolBar';
 import { useStyles } from './CustomersStyle';
 
 const Customers = () => {
@@ -81,10 +80,10 @@ const Customers = () => {
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <ToolBar />
+                {/* <ToolBar /> */}
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <Button onClick={handelUserModelOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
+                        <Button onClick={handelUserModelOpen} style={{ margin: '1.2rem auto' }} variant="contained" className={classes.btnStyle} >
                             ADD CONTACT
                         </Button>
                         {/* <Button onClick={handleOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
