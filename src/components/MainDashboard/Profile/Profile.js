@@ -13,12 +13,20 @@ const Profile = () => {
     const classes = useStyles();
     const [profileInfo, setProfileInfo] = useState({})
     const [disable, setDisable] = useState(true)
-    // console.log(profileInfo);
+    const [newPass, setNewPass] = useState({})
+    console.log(newPass);
     const handleBlur = (e) => {
         const newProfile = { ...profileInfo }
         newProfile[e.target.name] = e.target.value
         setProfileInfo(newProfile)
     }
+    const handlePassBlur = (e) => {
+        const newPassword = { ...newPass }
+        newPassword[e.target.name] = e.target.value
+        setNewPass(newPassword)
+        console.log(newPassword);
+    }
+    console.log(localStorage.client);
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -84,6 +92,9 @@ const Profile = () => {
                                 >
                                     SAVE
                                 </Button>
+                            </form>
+
+                            <form className={classes.form} noValidate style={{color: '#2d2d2d'}}>
                                 <div className="pb-2">
                                     <label htmlFor=""> Old Password </label>
                                     <TextField
@@ -93,12 +104,12 @@ const Profile = () => {
                                         margin="normal"
                                         required
                                         fullWidth
-                                        id="old_password"
-                                        name="old_password"
-                                        autoComplete="old_password"
+                                        id="password"
+                                        name="password"
+                                        autoComplete="password"
                                         autoFocus
                                         placeholder="***********"
-                                        onBlur={handleBlur}
+                                        onBlur={handlePassBlur}
                                         type="password"
                                     />
                                 </div>
@@ -110,10 +121,11 @@ const Profile = () => {
                                     color="primary"
                                     className={classes.submit}
                                 >
-                                    REQUEST FOR CHANGE PASSWORD
+                                    CHANGE PASSWORD
                                 </Button>
-
                             </form>
+
+                            
 
 
                             {/* <Typography component="body2" variant="body2">

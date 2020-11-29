@@ -22,6 +22,7 @@ const Coompose = () => {
 
     // input value state
     const [value, setValue] = useState({})
+    const [quickReply, setQuickReply] = useState([])
     const [mailBody, setMailBody] = useState({})
 
     const [schduleTime, setSchduleTime] = useState("")
@@ -44,22 +45,29 @@ const Coompose = () => {
 
     // *** remainder all functionality start *** //
     const date = new Date()
+    const [allRemainder, setAllRemainder] = useState([])
+    console.log("all remainder", allRemainder);
     const [remainderDate1, setRemainderDate1] = useState(date.setDate(date.getDate() + 1))
     console.log("remainder1", remainderDate1);
     const handleRemainderDate = (date) => {
-        setRemainderDate1(date.toDateString());
+        // setRemainderDate1(date.toDateString());
+        setAllRemainder([...allRemainder, date.toDateString()]);
     };
 
     const [remainderDate2, setRemainderDate2] = useState(date.setDate(date.getDate() + 2))
     console.log("remainder2", remainderDate2);
     const handleRemainderDate2 = (date) => {
-        setRemainderDate2(date.toDateString());
+        // setRemainderDate2(date.toDateString());
+        // const newDate = [...allRemainder,  date.toDateString() ]
+        // newDate = date.toDateString()
+        setAllRemainder([...allRemainder, date.toDateString()])
     };
 
     const [remainderDate3, setRemainderDate3] = useState(date.setDate(date.getDate() + 3))
     console.log("remainder3", remainderDate3);
     const handleRemainderDate3 = (date) => {
-        setRemainderDate3(date.toDateString());
+        // setRemainderDate3(date.toDateString());
+        setAllRemainder([...allRemainder, date.toDateString()])
     };
 
     // 2nd 3rd remainder/multiple remainder opener
@@ -78,7 +86,6 @@ const Coompose = () => {
     };
 
     // 2nd 3rd quick reply
-
     const [quickReply1, setQuickReply1] = useState(false)
     const [quickReply2, setQuickReply2] = useState(false)
 
@@ -101,9 +108,10 @@ const Coompose = () => {
     // input handle
     const handleInput = (e) => {
         e.preventDefault();
-        const newValue = { ...value}
+        const newValue = ({...value})
         newValue[e.target.name] = e.target.value
         setValue(newValue)
+        console.log(newValue)
     }
 
     // schdule time handle
@@ -117,24 +125,19 @@ const Coompose = () => {
     // compose button handle
     const handleCompose = (e) => {
         e.preventDefault()
-        const finalValue = { ...value, ...mailBody}
-        if(checkBox.setRemainder) 
-            finalValue.remainder1 = remainderDate1
-        if(remainder2) {
-            finalValue.remainder2 = remainderDate2
-        }
-        if(remainder3) {
-            finalValue.remainder3 = remainderDate3
+        const finalValue = { ...value, ...mailBody, quick_reply: quickReply}
+        if(checkBox.setRemainder) {
+            finalValue.remainder = allRemainder
         }
         if (checkBox.setDeadLine) {
             finalValue.deadline = deadlineDate
         }
-        if (checkBox.quickReply) {
-            finalValue.quickReply = true
-        }
-        if (!checkBox.quickReply) {
-            finalValue.quickReply = false
-        }
+        // if (checkBox.quickReply) {
+        //     finalValue.quickReply = true
+        // }
+        // if (!checkBox.quickReply) {
+        //     finalValue.quickReply = false
+        // }
         if (checkBox.replyNeeded) {
             finalValue.replyNeeded = true
         }
@@ -148,6 +151,7 @@ const Coompose = () => {
             finalValue.hideContactInfo = false
         }
         finalValue.client_id = 1
+        
         // if(checkBox.noReply) {
         //     finalValue.noReply = "no reply"
         // }
@@ -626,7 +630,7 @@ const Coompose = () => {
                                                     {
                                                         checkBox.quickReply &&
                                                         <div className="d-flex align-items-center">
-                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment1" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment1" onBlur={(e) => setQuickReply([...quickReply, e.target.value ]) } rows={2} placeholder="Quick Reply ..." />
                                                             <div>
                                                                 {
                                                                     quickReply1 !== true ?
@@ -642,7 +646,7 @@ const Coompose = () => {
                                                     {
                                                         quickReply1 &&
                                                         <div className="d-flex align-items-center">
-                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment2" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment2" onBlur={(e) => setQuickReply([...quickReply, e.target.value ]) } rows={2} placeholder="Quick Reply ..." />
                                                             <div>
                                                                 {
                                                                     quickReply2 !== true ?
@@ -659,7 +663,7 @@ const Coompose = () => {
                                                 {
                                                     quickReply2 &&
                                                     <div className="d-flex align-items-center">
-                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment3" onBlur={handleInput} rows={2} placeholder="Quick Reply ..." />
+                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment3" onBlur={(e) => setQuickReply([...quickReply, e.target.value ]) } rows={2} placeholder="Quick Reply ..." />
                                                         <div>
                                                             {
 

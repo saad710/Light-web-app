@@ -18,7 +18,7 @@ const Inbox = () => {
     console.log(allMail);
     useEffect(() => {
         const client_id = 1
-        Axios(`${key}client-all-mail/${client_id}`)
+        Axios.get(`${key}client-all-mail/${client_id}`)
             .then(res => {
                 console.log(res);
                 const mails = res.data.all_mail
@@ -53,7 +53,7 @@ const Inbox = () => {
                 </Grid>
                 { allMail !== null &&
                     allMail.map(inbox => (
-                        <div key={inbox.id}>
+                        <div key={inbox.client_id}>
                             <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center my-3" style={{ color: '#fff' }}>

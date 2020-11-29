@@ -62,7 +62,7 @@ export default function SignInSide() {
         email: '',
         password: ''
     })
-    console.log(loggedIn)
+    // console.log(loggedIn)
     const handleSubmit = (e) => {
         e.preventDefault();
         if (loggedIn.email && loggedIn.password) {
@@ -73,11 +73,15 @@ export default function SignInSide() {
             }
             Axios.post(`${key}client-login`, loginData)
                 .then(res => {
-                    console.log(res.data);
+                    console.log(res.data.client_email);
+                    
                     if (res.data.login_status === "success") {
-                        localStorage.setItem("client", res.data);
+                        localStorage.setItem("client", res.data.client_email);
                         history.push("/dashboard");
                         setUser(res.data);
+                    }
+                    if (res.data.login_status === "deactivated") {
+                        console.log(res.data)
                     }
                     else {
                          setLoginError(res.data);
