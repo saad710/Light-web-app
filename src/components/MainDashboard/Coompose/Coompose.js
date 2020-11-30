@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import IndeterminateCheckBoxRoundedIcon from '@material-ui/icons/IndeterminateCheckBoxRounded';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Axios from 'axios';
@@ -11,6 +12,7 @@ import 'date-fns';
 import React, { useState } from 'react';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
+import { useFileUpload } from "use-file-upload";
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import './Compose.css';
@@ -19,6 +21,8 @@ import { useStyles } from './ComposeStyle';
 
 const Coompose = () => {
     const classNamees = useStyles();
+    // file upload state 
+    const [files, selectFiles] = useFileUpload();
 
     // input value state
     const [value, setValue] = useState({})
@@ -153,7 +157,7 @@ const Coompose = () => {
             finalValue.hideContactInfo = false
         }
         finalValue.client_id = 1
-        finalValue.mail_file = image
+        finalValue.mail_file = files?.name
         
         // if(checkBox.noReply) {
         //     finalValue.noReply = "no reply"
@@ -594,15 +598,31 @@ const Coompose = () => {
                                                             ['font', 'fontSize', 'formatBlock'],
                                                             ['bold', 'underline', 'italic',],
                                                             ['align', 'horizontalRule', 'list', 'lineHeight'],
-                                                            ['link','image'],
+                                                            // ['link','image'],
                                                             ['fullScreen', 'codeView'],
                                                         ]
                                                     }}
                                                     onChange={handleBlur}
                                                     onImageUpload={handleImageUpload}
                                                 />
-
                                             </FormControl>
+                                        </div>
+                                        <div>
+                                            {/* <img style={{width:'20%', padding: '1rem'}} src={files?.source || 'no selected file'} alt="preview" /> */}
+                                            <span style={{color:'#fff'}}>{files?.name} </span>
+                                            <Button
+                                            variant="contained"
+                                            color="default"
+                                            // className={classes.button}
+                                            startIcon={<CloudUploadIcon />}
+                                            onClick={() =>
+                                                selectFiles({ }, ({ name, size, source, file }) => {
+                                                    console.log("Files Selected", { name, size, source, file });
+                                            })
+                                            }
+                                        >
+                                            Upload
+                                        </Button>
                                         </div>
 
 

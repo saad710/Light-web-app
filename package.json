@@ -34,7 +34,8 @@
     "react-scripts": "^3.4.4",
     "react-sliding-side-panel": "^2.0.3",
     "recharts": "^1.8.5",
-    "suneditor-react": "^2.14.2"
+    "suneditor-react": "^2.14.2",
+    "use-file-upload": "^1.0.9"
   },
   "scripts": {
     "start": "react-scripts start",
