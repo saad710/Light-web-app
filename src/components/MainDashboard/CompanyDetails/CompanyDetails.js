@@ -10,7 +10,6 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
-import ToolBar from '../ToolBar/ToolBar';
 import { useStyles } from './CompanyDetailsStyle';
 
 const CompanyDetails = () => {
@@ -74,7 +73,7 @@ const CompanyDetails = () => {
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <ToolBar />
+                {/* <ToolBar /> */}
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid item xs>

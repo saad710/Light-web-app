@@ -57,6 +57,7 @@ export default function SignInSide() {
     const { user, setUser } = useContext(UserContext)
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [deactiveStatus, setDeactiveStatus] = useState(false)
 
     const [loggedIn, setLoggedIn] = useState({
         email: '',
@@ -73,7 +74,7 @@ export default function SignInSide() {
             }
             Axios.post(`${key}client-login`, loginData)
                 .then(res => {
-                    console.log(res.data.client_email);
+                    console.log(res);
                     // localStorage.setItem("client", res.data.client_email);
                     //     history.push("/dashboard");
                     //     setUser(res.data);
@@ -83,7 +84,7 @@ export default function SignInSide() {
                         setUser(res.data);
                     }
                     if (res.data.login_status === "deactivated") {
-                        console.log(res.data)
+                        setDeactiveStatus(true)
                     }
                     else {
                          setLoginError(res.data);
@@ -127,6 +128,12 @@ export default function SignInSide() {
                     <Typography component="h1" variant="body1" style={{ color: '#2d2d2d' }}>
                         SIGN IN
                     </Typography>
+                    {
+                        deactiveStatus && 
+                        <Typography component="h1" variant="body1" color="error">
+                            Your account is Deactivated. Please contact with Admin.
+                        </Typography>
+                    }
                     <form className={classes.form} autoComplete="off" noValidate onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor=""> Email </label>

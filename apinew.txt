@@ -6,7 +6,7 @@ Specific Client: /specific-client/{client_id}
 Client Login: /client-login
 Client Logout: /client-logout
 Create New Client: /client-create
-Update Client's Profile: /client-update/{client_id}
+Update Client's Info: /client-update/{client_id}
 Delete Specific Client: /client-delete/{client_id}
 Create Ticket: /create-ticket
 Update Ticket Status: /change-ticket-status/{ticket_id}
@@ -20,8 +20,9 @@ Get All Company: /all-company
 Send Mail to Customer: /send-mail-customer
 Schedule Mail Send: /update-schedule/{schedule_mail_id}
 Reply Mail to Client: /reply-mail-to-customer/
-Specific Mail info with Reply mail: /get-specific-client-mail/{client_mail_id}
-Total Reply mail with specific client mail: /count-total-client-reply/{client_mail_id}
+Specific Mail info with Reply mail: /get-specific-client-mail/{direct_mail_id}
+Total Direct mail: /count-direct-mail/
+Total Reply mail with specific direct mail: /count-total-reply/{direct_mail_id}
 Total Mail for Specific Client: /count-total-client-mail/{client_id}
 Create Client's Signature: /create-signature
 Get Client's Signature: /clientSignature/{client_id}
@@ -36,18 +37,20 @@ Get Specific Group: /group/{group_id}
 Update Specific Group Info: /group-update/{group_id}
 Get All Group for Specific Client: client-all-group/{client_id}
 Delete Specific Group: /group-delete/{group_id}
-Delete All Mail for Specific Client: /remove-all-client-mail/{client_id}
-Delete Specific Client Mail: /remove-client-mail/{client_mail_id}
-Delete Specific Reply for Client: /remove-client-mail/{reply_mail_id}
-Get All Mail from Mailbox: /client-all-mail/{client_id}
-Password Change Request to Admin: /client-password-change-request/{client_id}
-Password Update:/client-change-password/{client_id}
+Delete All Mail for Specific Client: /remove-all-mail/{client_id}
+get all group mail by client :/client-all-group-mail/{client_id}
+specific group mail :/specific-group-mail/{group_mail_id}
+password change api for client: /client-pass-change/{client_id}
+Search with checkbox quick reply: /search-quick-reply/
+Search with checkbox no reply: /search-no-reply/
+Search with checkbox reminder: /search-reminder/
+
+
 ---------------------
 Customer App:
 ---------------------
 All Customer: /customers
 Specific Customer: /specific-customer/{customer_id}
-
 Customer Login: /customer-login
 Customer Logout: /customer-logout
 Create New Customer: /create-customer
@@ -65,9 +68,9 @@ Password Change Request to Admin: /password-change-request/{customer_id}
 Password Update: /change-password/{customer_id}
 Delete Specific Reply: /remove-customer-reply/{reply_mail_id}
 Delete Specific Direct Mail: /remove-customer-mail/{direct_mail_id}
-Delete All Mail for Specific Customer: /remove-all-customer-mail/{customer_id}
-Get All mail for mailbox: /client-all-mail/{client_id}
-Total Reply mail with specific direct mail: /count-total-reply/{direct_mail_id}
+Delete All Mail for Specific Customer: /remove-all-mail/{customer_id}
+password change api for customer: /customer-pass-change/{customer_id}
+
 ------------------
 Admin App:
 ------------------
@@ -81,8 +84,8 @@ Specific Invoice View: /invoice-view/{payment_id}
 All Invoice: /invoice-all
 Invoice Table: /invoice-table/{client_id}
 All Ticket: /all-ticket
-Total Direct mail: /count-direct-mail/
 Customer Password Change Request Approve: /customer-password-approval/{customer_id}
 Customer Password Change Request Decline: /customer-password-decline/{customer_id}
-Client Password Change Request Approve: /client-password-approval/{client_id}
-Client Password Change Request Decline:/client-password-decline/{client_id}
+Top customer : /top-customer
+count info : /count-mail-data/
+count info for specific Client: /count-client-mail-data/{client_id}
