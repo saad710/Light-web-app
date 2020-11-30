@@ -1,14 +1,13 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { key } from '../../apiKey';
 import AppBarDrawer from '../MainDashboard/AppBarDrawer';
-import MailCount from './MailCount/MailCount';
 import Chart from './Chart/Chart';
-import VerifiedCustomer from './CustomersType/VerifiedCustomer';
-import UnverifiedCustomer from './CustomersType/UnverifiedCustomer';
-import PendingCustomers from './CustomersType/PendingCustomers';
+import MailCount from './MailCount/MailCount';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +40,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavDashboard() {
     const classes = useStyles();
+    const [loggedInClient, setLoggedInClient] = useState({})
+    const [countMailInfo, setCountMailInfo] = useState(null)
+    console.log(countMailInfo);
+    useEffect(() => {
+        Axios.get(`${key}clients`)
+        .then(res => {
+            const data = res.data
+            const clients = data.filter(client => client.email === localStorage.client)
+            setLoggedInClient(clients[0])
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        Axios.get(`${key}count-client-mail-data/${loggedInClient.id}`)
+            .then(res => {
+                setCountMailInfo(res.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [loggedInClient.id])
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -50,8 +70,8 @@ export default function NavDashboard() {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <MailCount />
-                            <Chart />
+                            <MailCount countMailInfo={countMailInfo} />
+                            <Chart countMailInfo={countMailInfo} />
                             {/* <VerifiedCustomer />
                             <UnverifiedCustomer />
                             <PendingCustomers /> */}

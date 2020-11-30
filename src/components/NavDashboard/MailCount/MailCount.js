@@ -1,10 +1,10 @@
-import React from 'react';
 import { CardMedia, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import bar1 from '../../../images/bar1.svg'
-import bar2 from '../../../images/bar2.svg'
-import bar3 from '../../../images/bar3.svg'
+import React from 'react';
+import bar1 from '../../../images/bar1.svg';
+import bar2 from '../../../images/bar2.svg';
+import bar3 from '../../../images/bar3.svg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const MailCount = () => {
+const MailCount = ({ countMailInfo }) => {
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -52,7 +52,7 @@ const MailCount = () => {
                                         Total Mails
                                         </Typography>
                                     <Typography align="center">
-                                        <strong > 246 </strong>
+                                        <strong > {countMailInfo !== null && countMailInfo.total_mail_count} </strong>
                                     </Typography>
                                 </div>
                             </CardContent>
@@ -92,7 +92,7 @@ const MailCount = () => {
                                         Total Deadline Over
                                         </Typography>
                                     <Typography align="center">
-                                        <strong > 210 </strong>
+                                        <strong > {countMailInfo !== null && countMailInfo.deadline_over} </strong>
                                     </Typography>
                                 </div>
                             </CardContent>
