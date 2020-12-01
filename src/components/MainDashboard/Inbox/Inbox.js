@@ -14,10 +14,13 @@ import { useStyles } from './InboxStyle';
 const Inbox = () => {
     const classes = useStyles()
     const [openPanel, setOpenPanel] = useState(false);
+
+    const [singleClient, setSingleClient] = useState({})
+    
     const [allMail, setAllMail] = useState(null)
     console.log(allMail);
     useEffect(() => {
-        const client_id = 1
+        const client_id = singleClient.id
         Axios.get(`${key}client-all-mail/${client_id}`)
             .then(res => {
                 console.log(res);
@@ -27,7 +30,13 @@ const Inbox = () => {
             .then(err => {
                 console.log(err);
             })
-    }, [])
+        Axios.get(`${key}clients`)
+            .then(res => {
+                const data = res.data
+                const client = data.filter(client => client.email === localStorage.client)
+                setSingleClient(client[0])
+            })
+    }, [singleClient.id])
     return (
         <React.Fragment>
             <Container maxWidth="lg">

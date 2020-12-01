@@ -23,7 +23,8 @@ const Coompose = () => {
     const classNamees = useStyles();
     // file upload state 
     const [files, selectFiles] = useFileUpload();
-
+    // logged in client
+    const [loggedInClient, setLoggedInCLient] = useState(localStorage.client)
     // input value state
     const [value, setValue] = useState({})
     const [quickReply, setQuickReply] = useState([])
@@ -251,6 +252,7 @@ const Coompose = () => {
                                                 <TextField
                                                     id="from"
                                                     name="sender"
+                                                    // defaultValue={loggedInClient}
                                                     onBlur={handleInput}
                                                     InputProps={{
                                                         startAdornment: <InputAdornment position="start">From</InputAdornment>,
@@ -583,7 +585,8 @@ const Coompose = () => {
                                                                             margin="normal"
                                                                             id="date-picker-dialog"
                                                                             label="deadline"
-                                                                            format="M/d/y"
+                                                                            // format="M/d/y"
+                                                                            format="MM/dd/yyyy"
                                                                             disablePast="true"
                                                                             value={deadlineDate}
                                                                             onChange={handleDeadlineDate}
@@ -691,14 +694,12 @@ const Coompose = () => {
                                             onClick={() =>
                                                 selectFiles({ }, ({ name, size, source, file }) => {
                                                     console.log("Files Selected", { name, size, source, file });
-                                            })
+                                                })
                                             }
-                                        >
+                                            >
                                             Upload
                                         </Button>
                                         </div>
-
-
                                         {/* <Button
                                             type="submit"
                                             fullWidth
