@@ -61,6 +61,17 @@ export default function NavDashboard() {
                 console.log(err);
             })
     }, [loggedInClient.id])
+    const [requiredActions, setRequiredActions] = useState([])
+    useEffect(() => {
+    Axios.get(`${key}action-required`)
+      .then(res => {
+        console.log(res.data);
+        setRequiredActions(res.data)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [])
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -70,7 +81,7 @@ export default function NavDashboard() {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <MailCount countMailInfo={countMailInfo} />
+                            <MailCount countMailInfo={countMailInfo} requiredActions={requiredActions} />
                             <Chart countMailInfo={countMailInfo} />
                             {/* <VerifiedCustomer />
                             <UnverifiedCustomer />

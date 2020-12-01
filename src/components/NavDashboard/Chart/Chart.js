@@ -2,11 +2,11 @@ import { Avatar, Grid, List, ListItem, ListItemAvatar, ListItemText, makeStyles,
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
-    Bar, BarChart,
-    CartesianGrid,
-    Cell, Legend,
-    Pie, PieChart, Tooltip, XAxis,
-    YAxis
+  Bar, BarChart,
+  CartesianGrid,
+  Cell, Legend,
+  Pie, PieChart, Tooltip, XAxis,
+  YAxis
 } from "recharts";
 import { key } from "../../../apiKey";
 
@@ -44,54 +44,6 @@ const useStyles = makeStyles((theme) => ({
     padding: 5,
   },
 }));
-
-
-// const [countMail, setCountMail] = useState({})
-// useEffect(() => {
-//     Axios.get(`${key}count-mail-data`)
-//       .then(res => {
-//         console.log(res.data.deadline_over);
-//         setCountMail(res.data)
-//       })
-//       .catch(err => {
-//         console.log(err);
-//       })
-//   }, [])
-
-// const piData = [
-//   { name: "Mail Sent", value: countMail.sent_mail , color: "#0088FE" },
-
-//   { name: "Response Required", value: 300, color: "#00C49F" },
-//   { name: "Open Rate", value: countMail.open_rate, color: "#FFBB28" },
-//   { name: "Response Rate", value: countMail.response_rate, color: "#FF8042" },
-// ];
-
-// const RADIAN = Math.PI / 180;
-// const renderCustomizedLabel = ({
-//   cx,
-//   cy,
-//   midAngle,
-//   innerRadius,
-//   outerRadius,
-//   percent,
-//   index,
-// }) => {
-//   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-//   const x = cx + radius * Math.cos(-midAngle * RADIAN);
-//   const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-//   return (
-//     <text
-//       x={x}
-//       y={y}
-//       fill='white'
-//       textAnchor={x > cx ? "start" : "end"}
-//       dominantBaseline='central'
-//     >
-//       {`${(percent * 100).toFixed(0)}%`}
-//     </text>
-//   );
-// };
 
 const Chart = ({ countMailInfo }) => {
   const [requiredAction, setRequiredAction] = useState({})

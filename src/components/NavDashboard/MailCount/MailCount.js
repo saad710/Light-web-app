@@ -37,8 +37,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const MailCount = ({ countMailInfo }) => {
+const MailCount = ({ countMailInfo, requiredActions }) => {
     const classes = useStyles();
+    
     return (
         <React.Fragment>
                     <Typography className="pt-1 pb-4"> Overview </Typography>
@@ -72,7 +73,7 @@ const MailCount = ({ countMailInfo }) => {
                                         Required Actions
                                         </Typography>
                                     <Typography align="center">
-                                        <strong > 240 </strong>
+                                        <strong > { requiredActions !== null && requiredActions.Action_Required } </strong>
                                     </Typography>
                                 </div>
                             </CardContent>
