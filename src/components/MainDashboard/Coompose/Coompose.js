@@ -138,12 +138,6 @@ const Coompose = () => {
         if (checkBox.setDeadLine) {
             finalValue.deadline = deadlineDate
         }
-        // if (checkBox.quickReply) {
-        //     finalValue.quickReply = true
-        // }
-        // if (!checkBox.quickReply) {
-        //     finalValue.quickReply = false
-        // }
         if (checkBox.replyNeeded) {
             finalValue.replyNeeded = true
         }
@@ -158,11 +152,9 @@ const Coompose = () => {
         }
         finalValue.client_id = 1
         finalValue.mail_file = files?.name
-        
-        // if(checkBox.noReply) {
-        //     finalValue.noReply = "no reply"
-        // }
+
         console.log(finalValue);
+        
         Axios.post(`${key}send-mail-customer`, finalValue)
             .then(res => {
                 console.log(res);
@@ -178,23 +170,13 @@ const Coompose = () => {
     const handleSetSchdule = (e) => {
         e.preventDefault()
 
-        const schduleValue = { ...value, ...mailBody, ...schduleTime }
-        if (checkBox.setRemainder)
-            schduleValue.remainder1 = remainderDate1
-        if (remainder2) {
-            schduleValue.remainder2 = remainderDate2
-        }
-        if (remainder3) {
-            schduleValue.remainder3 = remainderDate3
+        // const schduleValue = { ...value, ...mailBody, ...schduleTime }
+        const schduleValue = { ...value, ...mailBody, quick_reply: quickReply, ...schduleTime}
+        if(checkBox.setRemainder) {
+            schduleValue.remainder = allRemainder
         }
         if (checkBox.setDeadLine) {
             schduleValue.deadline = deadlineDate
-        }
-        if (checkBox.quickReply) {
-            schduleValue.quickReply = true
-        }
-        if (!checkBox.quickReply) {
-            schduleValue.quickReply = false
         }
         if (checkBox.replyNeeded) {
             schduleValue.replyNeeded = true
@@ -202,14 +184,18 @@ const Coompose = () => {
         if (!checkBox.replyNeeded) {
             schduleValue.replyNeeded = false
         }
-        if (checkBox.hideContactInfo) {
+        if(checkBox.hideContactInfo) {
             schduleValue.hideContactInfo = true
         }
-        if (!checkBox.hideContactInfo) {
+        if(!checkBox.hideContactInfo) {
             schduleValue.hideContactInfo = false
         }
+        schduleValue.client_id = 1
+        schduleValue.mail_file = files?.name
+
         schduleValue.schduleDate = scheduleDate.toLocaleDateString()
-        // schduleValue.schduleTime = schduleTime
+
+        console.log(schduleValue);
 
         console.log('clicked hyse', schduleValue);
     }
