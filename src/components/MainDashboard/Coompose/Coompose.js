@@ -48,7 +48,10 @@ const Coompose = () => {
         setRemainder: false,
         setDeadLine: false
     });
-
+    // multiple cc
+    const [cc2, setCc2] = useState(false)
+    const [cc3, setCc3] = useState(false)
+    
     // *** remainder all functionality start *** //
     const date = new Date()
     const [allRemainder, setAllRemainder] = useState([])
@@ -110,7 +113,8 @@ const Coompose = () => {
     const handleChange = (event) => {
         setCheckBox({ ...checkBox, [event.target.name]: event.target.checked });
     };
-
+    const [cc, setCc] = useState([])
+    console.log("ccFromArray", cc);
     // input handle
     const handleInput = (e) => {
         e.preventDefault();
@@ -152,7 +156,8 @@ const Coompose = () => {
         }
         finalValue.client_id = 1
         finalValue.mail_file = files?.name
-
+        finalValue.customer_email = ['sajeebxn@gmail.com']
+        finalValue.cc = cc
         console.log(finalValue);
         
         Axios.post(`${key}send-mail-customer`, finalValue)
@@ -281,7 +286,88 @@ const Coompose = () => {
                                                     }}
                                                     variant="outlined"
                                                 />
+                                                
                                                 {
+                                                    ccOpen &&
+                                                    <TextField
+                                                    id="to"
+                                                    name="cc"
+                                                    onBlur={
+                                                        (e) => setCc([...cc, e.target.value])
+                                                    }
+                                                    InputProps={{
+                                                        startAdornment: <InputAdornment position="start">
+                                                            <div className="d-flex">
+                                                                <div>
+                                                                    Cc
+                                                                </div>
+                                                                <div className="d-flex" style={{ position: 'absolute', left: '90%' }}>
+                                                                    <div className="px-2" onClick={() => setCc2(!cc2)}>
+                                                                        {setCc2 ? <AddBoxRoundedIcon  /> : <IndeterminateCheckBoxRoundedIcon />} 
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </InputAdornment>,
+                                                    }}
+                                                    variant="outlined"
+                                                />
+                                                }
+
+                                                {
+                                                    cc2 && 
+                                                    <TextField
+                                                    id="to"
+                                                    name="cc"
+                                                    onBlur={
+                                                        (e) => setCc([...cc, e.target.value])
+                                                    }
+                                                    InputProps={{
+                                                        startAdornment: <InputAdornment position="start">
+                                                            <div className="d-flex">
+                                                                <div>
+                                                                    Cc
+                                                                </div>
+                                                                <div className="d-flex" style={{ position: 'absolute', left: '68%' }}>
+                                                                    <div className="px-2" onClick={() => setCc3(!cc3)}>
+                                                                        Add
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </InputAdornment>,
+                                                    }}
+                                                    variant="outlined"
+                                                />
+                                                }
+                                                {
+                                                    cc3 && 
+                                                    <TextField
+                                                    id="to"
+                                                    name="cc"
+                                                    onBlur={
+                                                        (e) => setCc([...cc, e.target.value])
+                                                    }
+                                                    InputProps={{
+                                                        startAdornment: <InputAdornment position="start">
+                                                            <div className="d-flex">
+                                                                <div>
+                                                                    Cc
+                                                                </div>
+                                                                <div className="d-flex" style={{ position: 'absolute', left: '68%' }}>
+                                                                    <div className="px-2" onClick={() => setCc3(!cc3)}>
+                                                                        Add
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </InputAdornment>,
+                                                    }}
+                                                    variant="outlined"
+                                                />
+                                                }
+
+                                                {/* {
                                                     ccOpen &&
                                                     <TextField
                                                         id="cc"
@@ -292,7 +378,8 @@ const Coompose = () => {
                                                         }}
                                                         variant="outlined"
                                                     />
-                                                }
+                                                } */}
+                                                
                                                 {
                                                     bccOpen &&
                                                     <TextField
@@ -311,7 +398,7 @@ const Coompose = () => {
                                                     <TextField
                                                         id="group"
                                                         name="group"
-                                                        onBlur={handleInput}
+                                                        // onBlur={handleInput}
                                                         InputProps={{
                                                             startAdornment: <InputAdornment position="start">Group</InputAdornment>,
                                                         }}
@@ -496,7 +583,7 @@ const Coompose = () => {
                                                                             margin="normal"
                                                                             id="date-picker-dialog"
                                                                             label="deadline"
-                                                                            format="MM/dd/yyyy"
+                                                                            format="M/d/y"
                                                                             disablePast="true"
                                                                             value={deadlineDate}
                                                                             onChange={handleDeadlineDate}
