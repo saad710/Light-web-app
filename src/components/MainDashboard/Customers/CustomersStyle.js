@@ -3,8 +3,12 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        width: '100%',
     },
+  container: {
+    maxHeight: 440,
+  },
 
     appBarSpacer: theme.mixins.toolbar,
     content: {
@@ -80,13 +84,13 @@ export const useStyles = makeStyles((theme) => ({
         borderRadius: '0',
         padding: '0.6rem 0'
     },
-    paginationBox: {
-        marginTop: 20,
-        display: "flex",
-        justifyContent: "center",
-    },
-    pagination: {
-        border: "1px solid #ddd",
-        backgroundColor: "#eee",
-    },
+    // paginationBox: {
+    //     marginTop: 20,
+    //     display: "flex",
+    //     justifyContent: "center",
+    // },
+    // pagination: {
+    //     border: "1px solid #ddd",
+    //     backgroundColor: "#eee",
+    // },
 }));

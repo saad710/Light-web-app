@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
-import { Checkbox, Container, CssBaseline, Divider, FormControlLabel, FormGroup, Grid, InputBase, ListItemIcon } from '@material-ui/core';
-import { useStyles } from './SearchFilterStyle';
-import './SearchFilter.css'
-import FilterListIcon from '@material-ui/icons/FilterList';
+import { Checkbox, Container, CssBaseline, FormControlLabel, FormGroup, Grid, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import SentFilter from '../SentFilter/SentFilter';
+import Axios from 'axios';
 import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
-import './SearchFilter.css'
+import React, { useState } from 'react';
+import { key } from '../../../apiKey';
+import './SearchFilter.css';
+import { useStyles } from './SearchFilterStyle';
 
 const SearchFilter = () => {
     const [openFilter, setOpenFilter] = useState(false)
@@ -39,6 +32,13 @@ const SearchFilter = () => {
         e.preventDefault();
         console.log(e.target.value);
     }
+    checkBox.quickReply && Axios(`${key}search-quick-reply`)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
 
     const classes = useStyles();
     return (

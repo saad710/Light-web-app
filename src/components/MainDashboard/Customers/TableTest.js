@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, TablePagination, TextField, Typography } from '@material-ui/core';
+import { Button, ButtonGroup, TextField, Typography } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,36 +7,25 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { Pagination } from "@material-ui/lab";
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './CustomersStyle';
-const columns = [
-  { id: 'first_name', label: 'Name', minWidth: 100 },
-  { id: 'email', label: 'Email', minWidth: 100 },
-  { id: 'phone', label: 'Phone', minWidth: 100 },
-  { id: 'group', label: 'Group', minWidth: 100 },
-  { id: 'tag', label: 'Tag', minWidth: 100 },
-  { id: 'address', label: 'Physical Address', minWidth: 100 },
-  { id: 'status', label: 'Status', minWidth: 100 },
-  { id: 'action', label: 'Action', minWidth: 100 },
-  
-];
 
-const Customers = () => {
+const TableTest = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [userModelOpen, setUserModelOpen] = useState(false)
     const [customers, setCustomers] = useState(null)
-    const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
     console.log(customers);
     useEffect(() => {
         Axios(`${key}customers`)
@@ -64,6 +53,8 @@ const Customers = () => {
             .then(res => {
                 console.log(res);
                 refetch()
+                // const newCustomers = customers.filter(customer => customer.id !== res.data.id)
+                // setCustomers(newCustomers)
             })
             .catch(err => {
                 console.log(err);
@@ -82,15 +73,6 @@ const Customers = () => {
     const handelUserModelClise = () => {
         setUserModelOpen(false)
     }
-    const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -106,63 +88,70 @@ const Customers = () => {
                         {/* <Button onClick={handleOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
                             ADD GROUP
                         </Button> */}
-                        <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {customers !== null && customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    <TableCell align='left' component='th' scope='row'>
-                        {`${row.first_name} ${row.last_name}`}
-                    </TableCell>
-                    <TableCell align='left'>{row.email}</TableCell>
-                    <TableCell align='center'>{row.phone}</TableCell>
-                    <TableCell align='center'>{row.group}</TableCell>
-                    <TableCell align='center'>{row.tag}</TableCell>
-                    <TableCell align='center'>{row.address}</TableCell>
-                    <TableCell align='center'>{row.status}</TableCell>
-                    <TableCell align="left">
-                        <div>
-                            <ButtonGroup
-                                variant="contained"
-                                color="primary"
-                                size="small"
-                                aria-label="contained primary button group"
+                        <TableContainer component={Paper} square elevation={0} className="mt-4">
+                            <Table className={classes.table} aria-label="simple table"
+                                size='small'
                             >
-                                <Button
-                                    onClick={() => handleRemoveCustomer(row.id)}
-                                    style={{fontSize: '10px'}} color="secondary">REMOVE</Button>
-                            </ButtonGroup>
-                        </div>
-                    </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[1,5,10, 25, 100]}
-        component="div"
-        count={customers !== null && customers.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
+                                <TableHead className={classes.tableHeader}>
+                                    <TableRow>
+                                        <TableCell> # </TableCell>
+                                        <TableCell align="center"> NAME </TableCell>
+                                        <TableCell align="center"> EMAIL </TableCell>
+                                        <TableCell align="center"> PHONE </TableCell>
+                                        <TableCell align="center"> GROUP </TableCell>
+                                        <TableCell align="center"> TAG </TableCell>
+                                        <TableCell align="center"> PHYSICAL ADDRESS </TableCell>
+                                        <TableCell align="center"> STATUS </TableCell>
+                                        <TableCell align="center"> ACTION </TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    { customers !== null &&
+                                        customers.map((customer, i) => (
+                                            <TableRow key={customer.id}>
+                                                <TableCell component="th" scope="row">
+                                                    {i + 1}
+                                                </TableCell>
+                                                <TableCell align="center">{ `${customer.first_name} ${customer.last_name}` }</TableCell>
+                                                <TableCell align="center">{customer.email === null ? 'N/A' : customer.email}</TableCell>
+                                                <TableCell align="center"> {customer.phone === null ? 'N/A' : customer.phone} </TableCell>
+                                                <TableCell align="center">{customer.group === null ? 'N/A': customer.group}</TableCell>
+                                                <TableCell align="center"> Tag-1 </TableCell>
+                                                <TableCell align="center"> {customer.address === null ? 'N/A' : customer.address} </TableCell>
+                                                <TableCell align="center">
+                                                    <Button
+                                                        variant="text"
+                                                        color="primary"
+                                                        size="small"
+                                                        style={{ fontSize: '12px' }}>
+                                                            { customer.status }
+                                                    </Button>
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    <div>
+                                                        <ButtonGroup
+                                                            variant="contained"
+                                                            color="primary"
+                                                            size="small"
+                                                            aria-label="contained primary button group"
+                                                        >
+                                                            <Button
+                                                                onClick={() => handleRemoveCustomer(customer.id)}
+                                                                style={{fontSize: '10px'}} color="secondary">REMOVE</Button>
+                                                        </ButtonGroup>
+                                                    </div>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))
+                                    }
+                                </TableBody>
+                                
+                            </Table>
+                            <div className={classes.paginationBox}>
+                                <Pagination count={10} className={classes.pagination} />
+                            </div>
+                            
+                        </TableContainer>
                         
 
                         {/* update/delete modal */}
@@ -339,14 +328,12 @@ const Customers = () => {
                                     <div className="mt-3">
                                         <Card className={classes.cardRoot}>
                                             <CardContent style={{ background: 'none !important' }}>
-
                                                 <div className={classes.paper}>
                                                     <Typography component="body1" variant="body1">
                                                         CREATE GROUP
                                                     </Typography>
                                                     <form className={classes.form} noValidate>
                                                         
-
                                                         <div>
                                                             <label htmlFor=""> Group </label>
                                                             <TextField
@@ -362,7 +349,6 @@ const Customers = () => {
                                                                 placeholder="grooup name"
                                                             />
                                                         </div>
-
                                                         <Button
                                                             type="submit"
                                                             fullWidth
@@ -390,4 +376,4 @@ const Customers = () => {
     );
 };
 
-export default Customers;
+export default TableTest;

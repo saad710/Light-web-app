@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CompanyDetails from "./components/MainDashboard/CompanyDetails/CompanyDetails";
 import Compose from "./components/MainDashboard/Coompose/Coompose";
 import Customers from "./components/MainDashboard/Customers/Customers";
+import TableTest from "./components/MainDashboard/Customers/TableTest";
 import Dashboard from "./components/MainDashboard/Dashboard";
 import EmailSignature from "./components/MainDashboard/EmailSignature/EmailSignature";
 import Group from "./components/MainDashboard/Group/Group";
@@ -52,7 +53,8 @@ function App() {
           <Route path='/group' component={Group} />
           <Route path='/filter' component={SentFilter} />
           <Route path='/dashboard' component={NavDashboard} />
-          <Route patho='/passwordReset' component={ForgetPassword} />
+          <Route path='/passwordReset' component={ForgetPassword} />
+          <Route path='/tableTest' component={TableTest} />
         </Switch>
       </Router>
     </div>

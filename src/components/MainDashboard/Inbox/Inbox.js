@@ -98,7 +98,7 @@ const Inbox = () => {
                                                 inbox.remainer !== null && <AccessAlarmSharpIcon fontSize="small" style={{color: '#A61414'}} />
                                             }
                                             <br />
-                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject } </strong> { `${inbox.mail_body.split(" ").splice(0,14).join(" ")}......`}
+                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject.slice(0,12) } </strong> { `${inbox.mail_body.replace(/<\/?[^>]+(>|$)/g, "").slice(0,90)}`}
                                         </Typography>
 
                                     </Link>
@@ -111,10 +111,11 @@ const Inbox = () => {
                                             color: '#fff',
                                             border: 'none',
                                             borderRadius: '5px',
-                                            // marginLeft: '30rem'
+                                            // position: 'relative',
+                                            // left: '1rem'
                                         }}>
                                         Report
-                                        </button>
+                                    </button>
                                 </Link>
                                 <Typography style={{ color: '#2d2d2d' }} variant="body1" align="right">
                                     <small> { moment(inbox.created_at).fromNow() } </small>
@@ -154,7 +155,7 @@ const Inbox = () => {
                                                 inbox.remainer !== null && <AccessAlarmSharpIcon fontSize="small" style={{color: '#A61414'}} />
                                             }
                                             <br />
-                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject } </strong> { `${inbox.mail_body.split(" ").splice(0,14).join(" ")}......`}
+                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject.slice(0,12) } </strong> { `${inbox.mail_body.replace(/<\/?[^>]+(>|$)/g, "").slice(0,90)}......`}
                                         </Typography>
 
                                     </Link>

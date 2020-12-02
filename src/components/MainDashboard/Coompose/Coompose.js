@@ -203,7 +203,14 @@ const Coompose = () => {
 
         console.log(schduleValue);
 
-        console.log('clicked hyse', schduleValue);
+        Axios.post(`${key}send-mail-customer`, schduleValue)
+            .then(res => {
+                console.log(res);
+                
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     // handle set schdule end

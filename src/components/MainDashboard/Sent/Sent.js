@@ -1,15 +1,13 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import AppBarDrawer from '../AppBarDrawer';
-import inboxData from '../../../data/inboxData';
 import { Avatar, Divider, Typography } from '@material-ui/core';
-import avatar from '../../../images/avatar.png'
-import { Link } from 'react-router-dom'
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import inboxData from '../../../data/inboxData';
+import avatar from '../../../images/avatar.png';
+import AppBarDrawer from '../AppBarDrawer';
 import ToolBar from '../ToolBar/ToolBar';
-import SentFilter from '../SentFilter/SentFilter';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,6 +47,7 @@ const Sent = () => {
     return (
         <div className={classes.root}>
             <CssBaseline />
+            {/* <SearchFilter /> */}
             <AppBarDrawer />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />

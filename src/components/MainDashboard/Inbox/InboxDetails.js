@@ -81,7 +81,7 @@ const InboxDetails = () => {
                             </Typography>
                         </div>
                         <Typography variant="body1" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
-                            {info.mail_body}
+                            {info.mail_body.replace(/<\/?[^>]+(>|$)/g, "")}
                         </Typography>
 
                     </Grid>
