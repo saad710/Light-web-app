@@ -6,6 +6,7 @@ import Customers from "./components/MainDashboard/Customers/Customers";
 import Dashboard from "./components/MainDashboard/Dashboard";
 import EmailSignature from "./components/MainDashboard/EmailSignature/EmailSignature";
 import Group from "./components/MainDashboard/Group/Group";
+import GroupDetails from "./components/MainDashboard/Inbox/GroupDetails";
 import InboxDetails from "./components/MainDashboard/Inbox/InboxDetails";
 import Invoice from "./components/MainDashboard/Invoice/Invoice";
 import Payment from "./components/MainDashboard/Payment/Payment";
@@ -32,6 +33,7 @@ function App() {
           <Route path='/inbox' component={Dashboard} />
           <Route path='/customers' component={Customers} />
           <Route path='/details/:inboxId' component={InboxDetails} />
+          <Route path='/groupDetails/:inboxId' component={GroupDetails} />
           <Route path='/sent' component={Sent} />
           <Route path='/sentDetails/:sentId' component={SentDetails} />
           <Route path='/profile' component={Profile} />

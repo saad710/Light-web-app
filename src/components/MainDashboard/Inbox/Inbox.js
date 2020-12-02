@@ -14,10 +14,9 @@ import { useStyles } from './InboxStyle';
 const Inbox = () => {
     const classes = useStyles()
     const [openPanel, setOpenPanel] = useState(false);
-
     const [singleClient, setSingleClient] = useState({})
-    
     const [allMail, setAllMail] = useState(null)
+    const [groupsMail, setGroupsMail] = useState(null)
     console.log(allMail);
     useEffect(() => {
         const client_id = singleClient.id
@@ -35,6 +34,16 @@ const Inbox = () => {
                 const data = res.data
                 const client = data.filter(client => client.email === localStorage.client)
                 setSingleClient(client[0])
+            })
+    }, [singleClient.id])
+    useEffect(() => {
+        Axios.get(`${key}client-all-group-mail/${singleClient.id}`)
+            .then(res => {
+                console.log(res.data);
+                setGroupsMail(res.data)
+            })
+            .catch(err => {
+                console.log(err);
             })
     }, [singleClient.id])
     return (
@@ -60,6 +69,62 @@ const Inbox = () => {
                         </di>
                     </div>
                 </Grid>
+                { groupsMail !== null &&
+                    groupsMail.map(inbox => (
+                        <div key={inbox.client_id}>
+                            <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
+                            <div className="d-flex justify-content-between align-items-center">
+                                <div className="d-flex align-items-center my-3" style={{ color: '#fff' }}>
+                                    <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
+                                        <img width="100%" src={avatar} alt="" />
+                                    </Avatar>
+                                    <Link to={`groupDetails/${inbox.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
+                                        <Typography variant="body1" style={{ margin: '0.5rem 0.5rem' }}>
+                                            <strong> {inbox.group_name} </strong>
+                                            {/* <Chip
+                                                style={{
+                                                    marginLeft: '1rem',
+                                                    fontSize: '11px',
+                                                    backgroundColor: '#203D79',
+                                                    height: '1.5rem',
+                                                    width: '5rem',
+                                                    color: '#fff',
+                                                }}
+                                                label="quick reply"
+                                                >
+                                                    
+                                                </Chip> */}
+                                            {
+                                                inbox.remainer !== null && <AccessAlarmSharpIcon fontSize="small" style={{color: '#A61414'}} />
+                                            }
+                                            <br />
+                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject } </strong> { `${inbox.mail_body.split(" ").splice(0,14).join(" ")}......`}
+                                        </Typography>
+
+                                    </Link>
+                                </div>
+                                <Link to="/report">
+                                    <button
+                                        style={{
+                                            background: '#4195D1',
+                                            padding: '5px 8px',
+                                            color: '#fff',
+                                            border: 'none',
+                                            borderRadius: '5px',
+                                            // marginLeft: '30rem'
+                                        }}>
+                                        Report
+                                        </button>
+                                </Link>
+                                <Typography style={{ color: '#2d2d2d' }} variant="body1" align="right">
+                                    <small> { moment(inbox.created_at).fromNow() } </small>
+                                </Typography>
+                            </div>
+                            <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
+                        </div>
+                    ))
+                }
+
                 { allMail !== null &&
                     allMail.map(inbox => (
                         <div key={inbox.client_id}>
@@ -94,7 +159,7 @@ const Inbox = () => {
 
                                     </Link>
                                 </div>
-                                <Link to="/report">
+                                {/* <Link to="/report">
                                     <button
                                         style={{
                                             background: '#4195D1',
@@ -105,7 +170,7 @@ const Inbox = () => {
                                         }}>
                                         Report
                                         </button>
-                                </Link>
+                                </Link> */}
                                 <Typography style={{ color: '#2d2d2d' }} variant="body1" align="right">
                                     <small> { moment(inbox.created_at).fromNow() } </small>
                                 </Typography>

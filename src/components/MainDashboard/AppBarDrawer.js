@@ -1,24 +1,19 @@
-import React from 'react';
-import clsx from 'clsx';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
+import { Avatar } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { Avatar, InputBase } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import avatar from '../../images/avatar.png'
-import MenuItem from '../../components/MainDashboard/MenuItem/MenuItem'
+import MenuIcon from '@material-ui/icons/Menu';
+import clsx from 'clsx';
+import React, { useState } from 'react';
+import MenuItem from '../../components/MainDashboard/MenuItem/MenuItem';
+import avatar from '../../images/avatar.png';
 import { useStyles } from './AppBarDrawerStyle';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import { useState } from 'react';
-import SentFilter from './SentFilter/SentFilter';
-import SearchFilter from './SearchFilter/SearchFilter';
 import LeftDrawer from './LeftDrawer';
+import SearchFilter from './SearchFilter/SearchFilter';
 
 
 const AppBarDrawer = () => {
