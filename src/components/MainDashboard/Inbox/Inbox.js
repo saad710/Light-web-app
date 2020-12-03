@@ -112,7 +112,7 @@ const Inbox = () => {
                                             border: 'none',
                                             borderRadius: '5px',
                                             position: 'relative',
-                                            left: '1rem'
+                                            left: '17rem'
                                         }}>
                                         Report
                                     </button>

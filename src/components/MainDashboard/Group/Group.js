@@ -336,9 +336,9 @@ const Group = () => {
                                                                 input={<Input />}
                                                                 MenuProps={MenuProps}
                                                             >
-                                                                {names.map((name) => (
-                                                                    <MenuItem key={name} value={name}>
-                                                                        {name}
+                                                                {groups !== null && groups.map((name) => (
+                                                                    <MenuItem key={name} value={name.customer_email}>
+                                                                        { showOldValue === name.id && name.customer_email}
                                                                     </MenuItem>
                                                                 ))}
                                                             </Select>

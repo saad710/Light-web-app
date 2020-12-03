@@ -846,17 +846,19 @@ const Coompose = () => {
                                                         }}
                                                         variant="static"
                                                     /> */}
-                                                        <TextField
+                                                        <div style={{background: '#fff'}}>
+                                                            <TextField
                                                             style={{color: '#fff'}}
                                                             id="datetime-local"
-                                                            label="Next appointment"
+                                                            label="Select schdule date time"
                                                             type="datetime-local"
-                                                            defaultValue="2017-05-24T10:30"
+                                                            defaultValue="2020-12-24T10:30"
                                                             // className={classes.textField}
                                                             InputLabelProps={{
                                                             shrink: true,
                                                             }}
                                                         />
+                                                        </div>
 
                                                    
                                                 </Grid>
