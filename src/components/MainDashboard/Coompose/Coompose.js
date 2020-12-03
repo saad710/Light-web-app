@@ -198,9 +198,9 @@ const Coompose = () => {
         }
         schduleValue.client_id = 1
         schduleValue.mail_file = files?.name
-
-        schduleValue.schduleDate = scheduleDate.toLocaleDateString()
-
+        schduleValue.cc = cc
+        // schduleValue.schedule = scheduleDate.toLocaleDateString()
+        schduleValue.schedule = '2020-11-10'
         console.log(schduleValue);
 
         Axios.post(`${key}send-mail-customer`, schduleValue)
@@ -592,7 +592,6 @@ const Coompose = () => {
                                                                             margin="normal"
                                                                             id="date-picker-dialog"
                                                                             label="deadline"
-                                                                            // format="M/d/y"
                                                                             format="MM/dd/yyyy"
                                                                             disablePast="true"
                                                                             value={deadlineDate}
@@ -839,7 +838,8 @@ const Coompose = () => {
                                                         margin="normal"
                                                         id="date-picker-dialog"
                                                         label="Date picker dialog"
-                                                        format="MM/dd/yyyy"
+                                                        // format="MM/dd/yyyy"
+                                                        format="M/d/y"
                                                         value={scheduleDate}
                                                         onChange={handleDateChange}
                                                         KeyboardButtonProps={{

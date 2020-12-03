@@ -3,49 +3,49 @@ import AccessAlarmSharpIcon from '@material-ui/icons/AccessAlarmSharp';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import Axios from 'axios';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
+import { MailboxContext } from '../../../Providers/MailboxProvider';
 import { useStyles } from './InboxStyle';
 
 const Inbox = () => {
     const classes = useStyles()
     const [openPanel, setOpenPanel] = useState(false);
-    const [singleClient, setSingleClient] = useState({})
-    const [allMail, setAllMail] = useState(null)
-    const [groupsMail, setGroupsMail] = useState(null)
-    console.log(allMail);
-    useEffect(() => {
-        const client_id = singleClient.id
-        Axios.get(`${key}client-all-mail/${client_id}`)
-            .then(res => {
-                console.log(res);
-                const mails = res.data.all_mail
-                setAllMail(mails)
-            })
-            .then(err => {
-                console.log(err);
-            })
-        Axios.get(`${key}clients`)
-            .then(res => {
-                const data = res.data
-                const client = data.filter(client => client.email === localStorage.client)
-                setSingleClient(client[0])
-            })
-    }, [singleClient.id])
-    useEffect(() => {
-        Axios.get(`${key}client-all-group-mail/${singleClient.id}`)
-            .then(res => {
-                console.log(res.data);
-                setGroupsMail(res.data)
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, [singleClient.id])
+    // const [singleClient, setSingleClient] = useState({})
+    // const [allMail, setAllMail] = useState(null)
+    // const [groupsMail, setGroupsMail] = useState(null)
+    // console.log(allMail);
+    // useEffect(() => {
+    //     const client_id = singleClient.id
+    //     Axios.get(`${key}client-all-mail/${client_id}`)
+    //         .then(res => {
+    //             console.log(res);
+    //             const mails = res.data.all_mail
+    //             setAllMail(mails)
+    //         })
+    //         .then(err => {
+    //             console.log(err);
+    //         })
+    //     Axios.get(`${key}clients`)
+    //         .then(res => {
+    //             const data = res.data
+    //             const client = data.filter(client => client.email === localStorage.client)
+    //             setSingleClient(client[0])
+    //         })
+    // }, [singleClient.id])
+    // useEffect(() => {
+    //     Axios.get(`${key}client-all-group-mail/${singleClient.id}`)
+    //         .then(res => {
+    //             console.log(res.data);
+    //             setGroupsMail(res.data)
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         })
+    // }, [singleClient.id])
+    const { groupsMail, allMail } = useContext(MailboxContext)
     return (
         <React.Fragment>
             <Container maxWidth="lg">
@@ -111,8 +111,8 @@ const Inbox = () => {
                                             color: '#fff',
                                             border: 'none',
                                             borderRadius: '5px',
-                                            // position: 'relative',
-                                            // left: '1rem'
+                                            position: 'relative',
+                                            left: '1rem'
                                         }}>
                                         Report
                                     </button>

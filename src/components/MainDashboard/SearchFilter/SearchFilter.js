@@ -2,16 +2,20 @@ import { Checkbox, Container, CssBaseline, FormControlLabel, FormGroup, Grid, In
 import SearchIcon from '@material-ui/icons/Search';
 import Axios from 'axios';
 import 'date-fns';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { key } from '../../../apiKey';
+import { MailboxContext } from '../../../Providers/MailboxProvider';
 import './SearchFilter.css';
 import { useStyles } from './SearchFilterStyle';
 
 const SearchFilter = () => {
     const [openFilter, setOpenFilter] = useState(false)
+    const [keywords, setKeywords] = useState('')
     const date = new Date()
     const [scheduleDate, setScheduleDate] = useState(date.setDate(date.getDate()))
     console.log("schedule date", scheduleDate);
+    const { allMail, setAllMail } = useContext(MailboxContext)
+    console.log(allMail);
     const handleScheduleDate = (date) => {
         setScheduleDate(date.toDateString());
     };
@@ -22,6 +26,17 @@ const SearchFilter = () => {
         setRemainder: false,
         setDeadLine: false
     });
+    
+    const handleKeyword = (e) => {
+        setKeywords(e.target.value)
+    }
+    // useEffect(() => {
+    //     async function proData() {
+    //         const results = await allMail.filter(product => product.name.toLowerCase().includes(keywords.toLowerCase()))
+    //         setAllMail(results)
+    //     }
+    //     proData()
+    // }, [allMail, keywords, setAllMail])
 
     // checkbox handle
     const handleChange = (event) => {
@@ -32,7 +47,7 @@ const SearchFilter = () => {
         e.preventDefault();
         console.log(e.target.value);
     }
-    checkBox.quickReply && Axios(`${key}search-quick-reply`)
+    checkBox.quickReply && Axios.post(`${key}search-quick-reply`)
             .then(res => {
                 console.log(res.data);
             })
@@ -58,6 +73,7 @@ const SearchFilter = () => {
                                 </div>
                                 <InputBase
                                     placeholder="Search…"
+                                    onClick={ handleKeyword }
                                     classes={{
                                         root: classes.inputRoot,
                                         input: classes.inputInput,

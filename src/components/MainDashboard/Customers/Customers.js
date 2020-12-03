@@ -100,13 +100,13 @@ const Customers = () => {
                 {/* <ToolBar /> */}
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <Button onClick={handelUserModelOpen} style={{ margin: '1.2rem auto' }} variant="contained" className={classes.btnStyle} >
+                        {/* <Button onClick={handelUserModelOpen} style={{ margin: '1.2rem auto' }} variant="contained" className={classes.btnStyle} >
                             ADD CONTACT
-                        </Button>
+                        </Button> */}
                         {/* <Button onClick={handleOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
                             ADD GROUP
                         </Button> */}
-                        <TableContainer className={classes.container}>
+                        <TableContainer className={classes.container} style={{ margin: '1.2rem auto' }} >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
