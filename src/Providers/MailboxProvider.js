@@ -3,15 +3,22 @@ import React, { useEffect, useState } from 'react';
 import { key } from '../apiKey';
 const { createContext } = require("react");
 
-export const MailboxContext = createContext({ client: 'loading' })
+export const MailboxContext = createContext({ mailbox: 'loading' })
 
 const MailboxProvider = (props) => {
     const [singleClient, setSingleClient] = useState({})
     const [allMail, setAllMail] = useState(null)
     const [groupsMail, setGroupsMail] = useState(null)
     const { children } = props
+    const client_id = singleClient && singleClient.id
     useEffect(() => {
-        const client_id = singleClient.id
+        Axios.get(`${key}clients`)
+            .then(res => {
+                const data = res.data
+                const client = data.filter(client => client.email === localStorage.client)
+                setSingleClient(client[0])
+            })
+            
         Axios.get(`${key}client-all-mail/${client_id}`)
             .then(res => {
                 console.log(res);
@@ -21,15 +28,12 @@ const MailboxProvider = (props) => {
             .then(err => {
                 console.log(err);
             })
-        Axios.get(`${key}clients`)
-            .then(res => {
-                const data = res.data
-                const client = data.filter(client => client.email === localStorage.client)
-                setSingleClient(client[0])
-            })
-    }, [singleClient.id])
+    }, [client_id])
+    // useEffect(() => {
+        
+    // }, [])
     useEffect(() => {
-        Axios.get(`${key}client-all-group-mail/${singleClient.id}`)
+        Axios.get(`${key}client-all-group-mail/${client_id}`)
             .then(res => {
                 console.log(res.data);
                 setGroupsMail(res.data)
@@ -37,7 +41,7 @@ const MailboxProvider = (props) => {
             .catch(err => {
                 console.log(err);
             })
-    }, [singleClient.id])
+    }, [client_id])
 
     return (
         <MailboxContext.Provider value={{ allMail, setAllMail, groupsMail, setGroupsMail }}>

@@ -46,6 +46,7 @@ const Inbox = () => {
     //         })
     // }, [singleClient.id])
     const { groupsMail, allMail } = useContext(MailboxContext)
+    // console.log(allMail);
     return (
         <React.Fragment>
             <Container maxWidth="lg">
