@@ -29,14 +29,9 @@ const SearchFilter = () => {
     
     const handleKeyword = (e) => {
         setKeywords(e.target.value)
+        
     }
-    // useEffect(() => {
-    //     async function proData() {
-    //         const results = await allMail.filter(product => product.name.toLowerCase().includes(keywords.toLowerCase()))
-    //         setAllMail(results)
-    //     }
-    //     proData()
-    // }, [allMail, keywords, setAllMail])
+
 
     // checkbox handle
     const handleChange = (event) => {

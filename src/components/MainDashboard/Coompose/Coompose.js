@@ -102,7 +102,7 @@ const Coompose = () => {
 
     // schedule date start
 
-    const [scheduleDate, setScheduleDate] = React.useState(new Date());
+    const [scheduleDate, setScheduleDate] = React.useState(new Date().toLocaleString());
 
     const handleDateChange = (date) => {
         setScheduleDate(date);
@@ -177,7 +177,7 @@ const Coompose = () => {
         e.preventDefault()
 
         // const schduleValue = { ...value, ...mailBody, ...schduleTime }
-        const schduleValue = { ...value, ...mailBody, quick_reply: quickReply, ...schduleTime}
+        const schduleValue = { ...value, ...mailBody, quick_reply: quickReply}
         if(checkBox.setRemainder) {
             schduleValue.remainder = allRemainder
         }
@@ -199,8 +199,8 @@ const Coompose = () => {
         schduleValue.client_id = 1
         schduleValue.mail_file = files?.name
         schduleValue.cc = cc
-        // schduleValue.schedule = scheduleDate.toLocaleDateString()
-        schduleValue.schedule = '2020-11-10'
+        schduleValue.schedule = scheduleDate
+        // schduleValue.schedule = '2020-11-10'
         console.log(schduleValue);
 
         Axios.post(`${key}send-mail-customer`, schduleValue)
@@ -834,22 +834,34 @@ const Coompose = () => {
                                                         }}
                                                     /> */}
 
-                                                    <KeyboardDatePicker
+                                                    {/* <KeyboardDatePicker
                                                         margin="normal"
                                                         id="date-picker-dialog"
                                                         label="Date picker dialog"
-                                                        // format="MM/dd/yyyy"
-                                                        format="M/d/y"
+                                                        format="MM/dd/yyyy"
                                                         value={scheduleDate}
                                                         onChange={handleDateChange}
                                                         KeyboardButtonProps={{
                                                             'aria-label': 'change date',
                                                         }}
                                                         variant="static"
-                                                    />
+                                                    /> */}
+                                                        <TextField
+                                                            style={{color: '#fff'}}
+                                                            id="datetime-local"
+                                                            label="Next appointment"
+                                                            type="datetime-local"
+                                                            defaultValue="2017-05-24T10:30"
+                                                            // className={classes.textField}
+                                                            InputLabelProps={{
+                                                            shrink: true,
+                                                            }}
+                                                        />
+
+                                                   
                                                 </Grid>
                                                 <Grid container justify="space-around">
-                                                    <TextField
+                                                    {/* <TextField
                                                         style={{ color: '#fff', backgroundColor: '#fff', width: "100%", border: '1px solid gray' }}
                                                         id="time"
                                                         label="Select Time"
@@ -861,9 +873,9 @@ const Coompose = () => {
                                                             shrink: true,
                                                         }}
                                                         inputProps={{
-                                                            step: 300, // 5 min
+                                                            step: 300, 
                                                         }}
-                                                    />
+                                                    /> */}
                                                 </Grid>
                                                 <Button onClick={handleSetSchdule} variant="contained" color="primary" fullWidth> SET SCHEDULE </Button>
                                             </div>
