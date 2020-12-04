@@ -13,32 +13,40 @@ const Group = () => {
     const classes = useStyles();
     const [addGroup, setAddGroup] = useState({});
     const [groups, setGroups] = useState(null)
+    const [updateEmail, setUpdateEmail] = useState([])
     const [updateValue, setUpdateValue] = useState({})
     const [showOldValue, setShowOldValue] = useState({})
     const [customers, setCustomers] = useState(null)
     const [singleClient, setSingleClinet] = useState({})
-    console.log(localStorage.client);
-    const handleTeamInput = (e) => {
+
+    const handleGroupInput = (e) => {
         const newGroup = { ...addGroup }
         newGroup[e.target.name] = e.target.value
         setAddGroup(newGroup)
     }
-    // const singleClients = clients !== 'loading' && clients.filter(cleint => cleint.email === localStorage.client)
+    // set emails from update 
+    const handleUpdateChange = (e) => {
+        setUpdateEmail(e.target.value)
+    }
+    
+    // current logged in clients start
     useEffect(() => {
         Axios.get(`${key}clients`)
         .then(res => {
             const data = res.data
             const client = data.filter(clients => clients.email === localStorage.client)
-            // console.log(client);
             setSingleClinet(client[0])
         })
     }, [])
+
+    // set emails for new group
     const [customerEmail, setCustomerEmail] = React.useState([]);
     console.log('person', customerEmail);
 
     const handleChange = (event) => {
         setCustomerEmail(event.target.value);
     };
+
     // load all customers
     useEffect(() => {
         Axios(`${key}customers`)
@@ -50,6 +58,7 @@ const Group = () => {
                 console.log(err);
             })
     }, [])
+
     // create group
     const handleGroup = (e) => {
         e.preventDefault();
@@ -80,20 +89,24 @@ const Group = () => {
                 console.log(err.message);
             })
     }
-    // handle group hupdate
+
+    // get single clicked id
     const handleOldValue = (id) => {
-        console.log(id);
         setShowOldValue(id)
     }
+
+    // handle group update
     const handleUpdateTagInput = (e) => {
-        const updateGroup = { ...updateValue }
+        const updateGroup = { ...updateValue, client_id : singleClient.id }
         updateGroup[e.target.name] = e.target.value
         setUpdateValue(updateGroup)
+        e.preventDefault()
     }
 
     const handleUpdateSubmit = (e) => {
         const newGroup = { ...updateValue }
-
+        newGroup.customer_email = updateEmail
+        console.log(newGroup);
         Axios.put(`${key}group-update/${showOldValue}`, newGroup)
             .then((res) => {
                 console.log(res.data);
@@ -103,9 +116,9 @@ const Group = () => {
         e.preventDefault();
     }
 
-    //get all
+    //get all 
     useEffect(() => {
-        Axios(`${key}all-group`)
+        Axios.get(`${key}all-group`)
             .then(res => {
                 const groups = res.data
                 setGroups(groups)
@@ -113,6 +126,7 @@ const Group = () => {
             .then(err => {
                 console.log(err);
             })
+
     }, [])
 
     const reFetch = () => {
@@ -137,21 +151,8 @@ const Group = () => {
         },
     };
 
-    const names = [
-        'Oliver Hansen',
-        'Van Henry',
-        'April Tucker',
-        'Ralph Hubbard',
-        'Omar Alexander',
-        'Carlos Abbott',
-        'Miriam Wagner',
-        'Bradley Wilkerson',
-        'Virginia Andrews',
-        'Kelly Snyder',
-    ];
 
     const [open, setOpen] = React.useState(false);
-    const [userModelOpen, setUserModelOpen] = useState(false)
 
     const handleOpen = () => {
         setOpen(true);
@@ -188,19 +189,9 @@ const Group = () => {
                                             autoComplete="group"
                                             autoFocus
                                             placeholder="group-1"
-                                            onChange={handleTeamInput}
+                                            onChange={handleGroupInput}
                                         />
                                     </div>
-
-                                    {/* <div class="form-group">
-                                        <select class="form-control" id="role" name="role" onChange={handleTeamInput}>
-                                            <option> mariewinter@gmail.com	 </option>
-                                            <option> mariewinter@gmail.com	 </option>
-                                            <option> mariewinter@gmail.com	 </option>
-                                            <option> mariewinter@gmail.com	 </option>
-                                            <option> mariewinter@gmail.com	 </option>
-                                        </select>
-                                    </div> */}
 
                                     <div>
                                         <FormControl className={classes.formControl} style={{margin: '0'}}>
@@ -249,6 +240,7 @@ const Group = () => {
                                             <TableRow>
                                                 <TableCell> # </TableCell>
                                                 <TableCell align="center"> GROUP NAME </TableCell>
+                                                {/* <TableCell align="center"> CUSTOMERS </TableCell> */}
                                                 <TableCell align="center"> ACTION </TableCell>
                                             </TableRow>
                                         </TableHead>
@@ -260,6 +252,7 @@ const Group = () => {
                                                             {i + 1}
                                                         </TableCell>
                                                         <TableCell align="center">{group.group_name}</TableCell>
+                                                        {/* <TableCell align="center">{group.customer_email}</TableCell> */}
                                                         <TableCell align="right">
                                                             <div>
                                                                 <ButtonGroup
@@ -326,22 +319,30 @@ const Group = () => {
                                                                     onChange={handleUpdateTagInput}
                                                                 />
                                                             </div>
-                                                            {/* <InputLabel id="demo-mutiple-name-label">Add Contact</InputLabel> */}
-                                                            <Select
-                                                                labelId="demo-mutiple-name-label"
-                                                                id="demo-mutiple-name"
-                                                                multiple
-                                                                value={customerEmail}
-                                                                onChange={handleChange}
-                                                                input={<Input />}
-                                                                MenuProps={MenuProps}
-                                                            >
-                                                                {groups !== null && groups.map((name) => (
-                                                                    <MenuItem key={name} value={name.customer_email}>
-                                                                        { showOldValue === name.id && name.customer_email}
-                                                                    </MenuItem>
-                                                                ))}
-                                                            </Select>
+                                                            
+                                                            <div>
+                                                                <FormControl className={classes.formControl} style={{margin: '0'}}>
+                                                                    <InputLabel id="demo-mutiple-name-label">Add Contact</InputLabel>
+                                                                    <Select
+                                                                        labelId="demo-mutiple-name-label"
+                                                                        id="demo-mutiple-name"
+                                                                        multiple
+                                                                        value={updateEmail}
+                                                                        onChange={handleUpdateChange}
+                                                                        input={<Input />}
+                                                                        MenuProps={MenuProps}
+                                                                        autoWidth='true'
+                                                                    >
+                                                                        {groups !== null && groups.map((name) => (name.customer_email !== null && name.customer_email.map(email => (
+                                                                                <MenuItem key={name.email} value={email} >
+                                                                                    {showOldValue !== name.id && email}
+                                                                                </MenuItem>
+                                                                            ))
+                                                                        ))}
+
+                                                                    </Select>
+                                                                </FormControl>
+                                                            </div>
                                                             <Button
                                                                     style={{
                                                                             padding: '0.5rem 0',
@@ -355,6 +356,7 @@ const Group = () => {
                                                                     color="primary"
                                                                     className={classes.submit}
                                                                     onClick={handleUpdateSubmit}
+                                                                    
                                                                 >
                                                                     UPDATE GROUP
                                                             </Button>

@@ -107,62 +107,62 @@ const Customers = () => {
                             ADD GROUP
                         </Button> */}
                         <TableContainer className={classes.container} style={{ margin: '1.2rem auto' }} >
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {customers !== null && customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    <TableCell align='left' component='th' scope='row'>
-                        {`${row.first_name} ${row.last_name}`}
-                    </TableCell>
-                    <TableCell align='left'>{row.email}</TableCell>
-                    <TableCell align='center'>{row.phone}</TableCell>
-                    <TableCell align='center'>{row.group}</TableCell>
-                    <TableCell align='center'>{row.tag}</TableCell>
-                    <TableCell align='center'>{row.address}</TableCell>
-                    <TableCell align='center'>{row.status}</TableCell>
-                    <TableCell align="left">
-                        <div>
-                            <ButtonGroup
-                                variant="contained"
-                                color="primary"
-                                size="small"
-                                aria-label="contained primary button group"
-                            >
-                                <Button
-                                    onClick={() => handleRemoveCustomer(row.id)}
-                                    style={{fontSize: '10px'}} color="secondary">REMOVE</Button>
-                            </ButtonGroup>
-                        </div>
-                    </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[1,5,10, 25, 100]}
-        component="div"
-        count={customers !== null && customers.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
+                            <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                    key={column.id}
+                                    align={column.align}
+                                    style={{ minWidth: column.minWidth }}
+                                    >
+                                    {column.label}
+                                    </TableCell>
+                                ))}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {customers !== null && customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                                return (
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                        <TableCell align='left' component='th' scope='row'>
+                                            {`${row.first_name} ${row.last_name}`}
+                                        </TableCell>
+                                        <TableCell align='left'>{row.email}</TableCell>
+                                        <TableCell align='center'>{row.phone}</TableCell>
+                                        <TableCell align='center'>{row.group}</TableCell>
+                                        <TableCell align='center'>{row.tag}</TableCell>
+                                        <TableCell align='center'>{row.address}</TableCell>
+                                        <TableCell align='center'>{row.status}</TableCell>
+                                        <TableCell align="left">
+                                            <div>
+                                                <ButtonGroup
+                                                    variant="contained"
+                                                    color="primary"
+                                                    size="small"
+                                                    aria-label="contained primary button group"
+                                                >
+                                                    <Button
+                                                        onClick={() => handleRemoveCustomer(row.id)}
+                                                        style={{fontSize: '10px'}} color="secondary">REMOVE</Button>
+                                                </ButtonGroup>
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                                })}
+                            </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <TablePagination
+                            rowsPerPageOptions={[1,5,10, 25, 100]}
+                            component="div"
+                            count={customers !== null && customers.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onChangePage={handleChangePage}
+                            onChangeRowsPerPage={handleChangeRowsPerPage}
+                        />
                         
 
                         {/* update/delete modal */}
