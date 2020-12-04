@@ -32,6 +32,19 @@ const MailboxProvider = (props) => {
     // useEffect(() => {
         
     // }, [])
+
+      const reFetch = () => {
+            Axios.get(`${key}client-all-mail/${client_id}`)
+            .then((res) => {
+                const mails = res.data.all_mail
+                setAllMail(mails)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        };
+ 
+  
     useEffect(() => {
         Axios.get(`${key}client-all-group-mail/${client_id}`)
             .then(res => {
@@ -44,7 +57,7 @@ const MailboxProvider = (props) => {
     }, [client_id])
 
     return (
-        <MailboxContext.Provider value={{ allMail, setAllMail, groupsMail, setGroupsMail }}>
+        <MailboxContext.Provider value={{ allMail, setAllMail, groupsMail, setGroupsMail,reFetch }}>
             { children }
         </MailboxContext.Provider>
     );

@@ -2,7 +2,7 @@ import { Checkbox, Container, CssBaseline, FormControlLabel, FormGroup, Grid, In
 import SearchIcon from '@material-ui/icons/Search';
 import Axios from 'axios';
 import 'date-fns';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
 import { MailboxContext } from '../../../Providers/MailboxProvider';
 import './SearchFilter.css';
@@ -14,7 +14,7 @@ const SearchFilter = () => {
     const date = new Date()
     const [scheduleDate, setScheduleDate] = useState(date.setDate(date.getDate()))
     console.log("schedule date", scheduleDate);
-    const { allMail, setAllMail } = useContext(MailboxContext)
+    const { allMail, setAllMail, reFetch } = useContext(MailboxContext)
     console.log(allMail);
     const handleScheduleDate = (date) => {
         setScheduleDate(date.toDateString());
@@ -22,7 +22,7 @@ const SearchFilter = () => {
     // check box state
     const [checkBox, setCheckBox] = useState({
         quickReply: false,
-        // noReply: false,
+        noReply: false,
         setRemainder: false,
         setDeadLine: false
     });
@@ -42,14 +42,35 @@ const SearchFilter = () => {
         e.preventDefault();
         console.log(e.target.value);
     }
-    checkBox.quickReply && Axios.post(`${key}search-quick-reply`)
-            .then(res => {
-                console.log(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-
+    
+        useEffect(() => {
+            checkBox.quickReply && Axios.get(`${key}search-quick-reply`)
+                .then(res => {
+                    console.log("search-quick-reply",res.data);
+                    setAllMail(res.data.status)
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+            checkBox.noReply && Axios.get(`${key}search-no-reply`)
+                .then(res => {
+                    console.log("search-no-reply",res.data);
+                    setAllMail(res.data.status)
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+            checkBox.setRemainder && Axios.get(`${key}search-reminder`)
+                .then(res => {
+                    console.log("search-reminder",res.data);
+                    setAllMail(res.data.status)
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }, [checkBox.noReply, checkBox.quickReply, checkBox.setRemainder, setAllMail])
+        
+        
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -92,9 +113,9 @@ const SearchFilter = () => {
                                 <FormControlLabel
                                     control={
                                         <Checkbox
-                                            checked={checkBox.setRemainder}
+                                            checked={checkBox.noReply}
                                             onChange={handleChange}
-                                            name="setRemainder"
+                                            name="noReply"
                                             style={{ color: '#4195D1' }}
                                         />
                                     }
@@ -103,13 +124,13 @@ const SearchFilter = () => {
                                 <FormControlLabel
                                     control={
                                         <Checkbox
-                                            checked={checkBox.setDeadLine}
+                                            checked={checkBox.setRemainder}
                                             onChange={handleChange}
-                                            name="setDeadLine"
+                                            name="setRemainder"
                                             style={{ color: '#4195D1' }}
                                         />
                                     }
-                                    label="Schedule Date"
+                                    label="Remainder"
                                 />
 
                                 <div className="pb-2" style={{color: '#2d2d2d'}}>

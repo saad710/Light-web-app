@@ -129,7 +129,7 @@ export default function ForgetPassword() {
                             color="primary"
                             className={classes.submit}
                         >
-                            GET RESET TOKEN
+                            GET NEW PASSWORD
                         </Button>
                     </form>
                 </div>
