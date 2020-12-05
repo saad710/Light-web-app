@@ -5,8 +5,10 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import Axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { key } from '../../apiKey';
 import './SignIn.css';
 
 
@@ -49,32 +51,32 @@ export default function ForgetPassword() {
     const classes = useStyles();
     const history = useHistory();
     const [loggedIn, setLoggedIn] = useState({
-        email: '',
-        password: ''
+        email: ''
+        // password: ''
     })
     console.log(loggedIn)
     const handleSubmit = (e) => {
         e.preventDefault();
-        // if (loggedIn.email && loggedIn.password) {
-        //     console.log(loggedIn.password);
-        //     const loginData = {
-        //         email: loggedIn.email,
-        //         password: loggedIn.password
-        //     }
-        //     Axios.post(`${key}client-login`, loginData)
-        //         .then(res => {
-        //             console.log(res.data);
-        //             if (res.data.login_status === "success") {
-        //                 history.push("/dashboard");
-        //             }
-        //             else {
-        //                 //show error info
-        //             }
-        //         })
-        //         .catch(err => {
-        //             console.log(err);
-        //         })
-        // }
+        if (loggedIn.email) {
+            console.log(loggedIn.email);
+            const loginData = {
+                email: loggedIn.email,
+                // password: loggedIn.password
+            }
+            console.log(loginData);
+            Axios.post(`${key}client-generate-password`, loginData)
+                .then(res => {
+                    console.log(res.data);
+                    // if (res.data.login_status === "success") {
+                    //     history.push("/dashboard");
+                    // }
+                    // else {
+                    // }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
     }
 
     return (

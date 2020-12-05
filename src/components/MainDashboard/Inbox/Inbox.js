@@ -112,8 +112,8 @@ const Inbox = () => {
                                             color: '#fff',
                                             border: 'none',
                                             borderRadius: '5px',
-                                            position: 'relative',
-                                            left: '17rem'
+                                            // position: 'relative',
+                                            // left: '10rem'
                                         }}>
                                         Report
                                     </button>
