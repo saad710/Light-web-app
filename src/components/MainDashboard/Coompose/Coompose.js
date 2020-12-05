@@ -9,22 +9,29 @@ import IndeterminateCheckBoxRoundedIcon from '@material-ui/icons/IndeterminateCh
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Axios from 'axios';
 import 'date-fns';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import { useFileUpload } from "use-file-upload";
 import { key } from '../../../apiKey';
+import { ComposeContext } from '../../../Providers/ComposeProvider';
+import { LoggedInContext } from '../../../Providers/LoggedInProvider';
 import AppBarDrawer from '../AppBarDrawer';
 import './Compose.css';
 import { useStyles } from './ComposeStyle';
 
 
+
 const Coompose = () => {
+    const {groups, allTag} = useContext(ComposeContext)
+    const {loggedInUser} = useContext(LoggedInContext)
+    // console.log('loggedInUser', loggedInUser);
+    // console.log(groups !== 'loading' && groups);
+    // console.log("alltag", allTag !== null && allTag);
     const classNamees = useStyles();
     // file upload state 
     const [files, selectFiles] = useFileUpload();
-    // logged in client
-    const [loggedInClient, setLoggedInCLient] = useState(localStorage.client)
+
     // input value state
     const [value, setValue] = useState({})
     const [quickReply, setQuickReply] = useState([])
@@ -39,7 +46,22 @@ const Coompose = () => {
 
     const [image, setImage] = useState('')
 
-    console.log('final value', value)
+    // select group dropdown
+    const [selectGroup, setSelectGroup] = React.useState([]);
+    console.log("group", selectGroup);
+    const handleGroup = (event) => {
+        setSelectGroup(event.target.value);
+    };
+
+    // select tag dropdown
+    const [selectTag, setSelectTag] = React.useState([]);
+    console.log("selectTag", selectTag);
+    const handleTag = (event) => {
+        setSelectTag(event.target.value);
+    };
+    
+
+    // console.log('final value', value)
     // check box state
     const [checkBox, setCheckBox] = useState({
         quickReply: false,
@@ -56,9 +78,9 @@ const Coompose = () => {
     // *** remainder all functionality start *** //
     const date = new Date()
     const [allRemainder, setAllRemainder] = useState([])
-    console.log("all remainder", allRemainder);
+    // console.log("all remainder", allRemainder);
     const [remainderDate1, setRemainderDate1] = useState(date.setDate(date.getDate() + 1))
-    console.log("remainder1", remainderDate1);
+    // console.log("remainder1", remainderDate1);
     const handleRemainderDate = (date) => {
         // setRemainderDate1(date.toDateString());
         setAllRemainder([...allRemainder, date.toDateString()]);
@@ -74,7 +96,7 @@ const Coompose = () => {
     };
 
     const [remainderDate3, setRemainderDate3] = useState(date.setDate(date.getDate() + 3))
-    console.log("remainder3", remainderDate3);
+    // console.log("remainder3", remainderDate3);
     const handleRemainderDate3 = (date) => {
         // setRemainderDate3(date.toDateString());
         setAllRemainder([...allRemainder, date.toDateString()])
@@ -90,7 +112,7 @@ const Coompose = () => {
     // deadline date
 
     const [deadlineDate, setDeadlineDate] = useState(date.setDate(date.getDate() + 2))
-    console.log(deadlineDate)
+    // console.log(deadlineDate)
     const handleDeadlineDate = (date) => {
         setDeadlineDate(date.toDateString());
     };
@@ -115,14 +137,14 @@ const Coompose = () => {
         setCheckBox({ ...checkBox, [event.target.name]: event.target.checked });
     };
     const [cc, setCc] = useState([])
-    console.log("ccFromArray", cc);
+    // console.log("ccFromArray", cc);
     // input handle
     const handleInput = (e) => {
         e.preventDefault();
         const newValue = ({...value})
         newValue[e.target.name] = e.target.value
         setValue(newValue)
-        console.log(newValue)
+        // console.log(newValue)
     }
 
     // schdule time handle
@@ -155,11 +177,13 @@ const Coompose = () => {
         if(!checkBox.hideContactInfo) {
             finalValue.hideContactInfo = false
         }
-        finalValue.client_id = 1
+        finalValue.client_id = loggedInUser.id
         finalValue.mail_file = files?.name
         finalValue.customer_email = ['sajeebxn@gmail.com']
         finalValue.cc = cc
-        console.log(finalValue);
+        // finalValue.group = selectGroup
+        // finalValue.tag = selectTag
+        console.log("finalValue", finalValue);
         
         Axios.post(`${key}send-mail-customer`, finalValue)
             .then(res => {
@@ -407,24 +431,48 @@ const Coompose = () => {
                                                     <TextField
                                                         id="group"
                                                         name="group"
+                                                        select
                                                         // onBlur={handleInput}
                                                         InputProps={{
                                                             startAdornment: <InputAdornment position="start">Group</InputAdornment>,
                                                         }}
+                                                        SelectProps={{
+                                                            native: true,
+                                                        }}
+                                                        value={selectGroup}
+                                                        onChange={handleGroup}
                                                         variant="outlined"
-                                                    />
+                                                    >
+                                                        {groups !== 'loading' && groups.map((option) => (
+                                                            <option key={option.id} value={option.id}>
+                                                            {option.group_name}
+                                                            </option>
+                                                        ))}
+                                                    </TextField>
                                                 }
                                                 {
                                                     tags &&
                                                     <TextField
                                                         id="tag"
                                                         name="tag"
-                                                        onBlur={handleInput}
+                                                        // onBlur={handleInput}
+                                                        select
                                                         InputProps={{
                                                             startAdornment: <InputAdornment position="start">Add Tag</InputAdornment>,
                                                         }}
                                                         variant="outlined"
-                                                    />
+                                                        SelectProps={{
+                                                            native: true,
+                                                        }}
+                                                        value={selectTag}
+                                                        onChange={handleTag}
+                                                    >
+                                                        {allTag !== null && allTag.map((option) => (
+                                                            <option key={option.id} value={option.id}>
+                                                            {option.tag_name}
+                                                            </option>
+                                                        ))}
+                                                    </TextField>
                                                 }
 
                                                 <TextField

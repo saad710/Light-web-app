@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import ClientProvider from './Providers/ClientProvider';
+import ComposeProvider from './Providers/ComposeProvider';
+import LoggedInProvider from './Providers/LoggedInProvider';
 import MailboxProvider from './Providers/MailboxProvider';
 import UserProvider from './Providers/UserProvider';
 import * as serviceWorker from './serviceWorker';
@@ -13,7 +15,11 @@ ReactDOM.render(
     <UserProvider>
       <ClientProvider>
         <MailboxProvider>
-        <App />
+          <ComposeProvider>
+            <LoggedInProvider>
+              <App />
+            </LoggedInProvider>
+        </ComposeProvider>
       </MailboxProvider>
       </ClientProvider>
     </UserProvider>
