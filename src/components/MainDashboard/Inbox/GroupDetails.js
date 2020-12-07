@@ -1,7 +1,8 @@
-import { Avatar, Button, Chip, Container, Grid, Typography } from '@material-ui/core';
+import { Avatar, Chip, Container, Grid, List, Typography } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import { useParams } from 'react-router-dom';
 import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
@@ -12,6 +13,8 @@ const GroupDetails = () => {
     const classes = useStyles();
     const [singleInbox, setSingleInbox] = useState(null)
     const [loggedInUser, setLoggedInUser] = useState({})
+    const [info, setInfo] = useState([])
+    console.log("info", info );
 
     useEffect(() => {
         const client_id = loggedInUser.id
@@ -34,9 +37,16 @@ const GroupDetails = () => {
             })
     }, [])
     const { inboxId } = useParams()
-    const message = singleInbox !== null && singleInbox.filter(singleMsg => singleMsg.id == inboxId)
-    console.log(message[0]);
-    const info = message[0]
+    useEffect(() => {
+        async function getInfo() {
+        const message = await singleInbox !== null && singleInbox.filter(singleMsg => singleMsg.id == inboxId)
+        console.log(message[0]);
+        setInfo(message[0])
+        }
+        getInfo()
+    }, [inboxId, singleInbox])
+    
+    // const info = message[0]
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -88,11 +98,26 @@ const GroupDetails = () => {
                             </Typography>
                         </div>
                         <Typography variant="body1" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
-                            {info.mail_body.replace(/<\/?[^>]+(>|$)/g, "")}
+                            {ReactHtmlParser(info.mail_body)}
                         </Typography>
 
                     </Grid>
-                    <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
+                    <div className={classes.replyStyle} >
+                        <List component="nav" className='d-flex-column' aria-label="mailbox folders" >
+                            
+                            {/* <ListItem button divider>
+                                <ListItemText primary="Drafts" />
+                            </ListItem>
+                            <ListItem button>
+                                <ListItemText primary="Trash" />
+                            </ListItem>
+                            <Divider light />
+                            <ListItem button>
+                                <ListItemText primary="Spam" />
+                            </ListItem> */}
+                        </List>
+                    </div>
+                    {/* <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
                         <Button variant="contained" className={classes.btnStyle} color="primary">
                             REPLY
                         </Button>
@@ -100,7 +125,7 @@ const GroupDetails = () => {
                         <Button style={{ margin: '0rem 1rem' }} variant="contained" className={classes.btnStyle} color="primary">
                             CLOSE
                         </Button>
-                    </div>
+                    </div> */}
                 </Container>
             </main>
             }

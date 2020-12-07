@@ -2,9 +2,11 @@ import { Avatar, Button, Chip, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
+import { Link, useParams } from 'react-router-dom';
 import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
 import AppBarDrawer from '../AppBarDrawer';
@@ -81,11 +83,44 @@ const InboxDetails = () => {
                             </Typography>
                         </div>
                         <Typography variant="body1" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
-                            {info.mail_body.replace(/<\/?[^>]+(>|$)/g, "")}
+                            {ReactHtmlParser(info.mail_body)}
                         </Typography>
+                        <div className={classes.downloadfileStyle}>
+                           <Typography variant="h6" component="h6" align="center"> {info.mail_file} </Typography>
+                                <Link to={`${key}file-down/${info.mail_file}`} target="_blank" download>
+                                    <Button
+                                    style={{ marginLeft: '4rem' }}
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                    startIcon={<CloudDownloadIcon />}
+                                    >
+                                        Download
+                                    </Button>
+                                </Link>
+                        </div>
+                        
 
                     </Grid>
-                    <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
+                    {/* <div className={classes.replyStyle} >
+                        <List component="nav" className='d-flex-column' aria-label="mailbox folders" >
+                            <ListItem button>
+                                <ListItemText primary="Inbox" />
+                            </ListItem>
+                            <Divider />
+                            <ListItem button divider>
+                                <ListItemText primary="Drafts" />
+                            </ListItem>
+                            <ListItem button>
+                                <ListItemText primary="Trash" />
+                            </ListItem>
+                            <Divider light />
+                            <ListItem button>
+                                <ListItemText primary="Spam" />
+                            </ListItem>
+                        </List>
+                    </div> */}
+                    {/* <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
                         <Button variant="contained" className={classes.btnStyle} color="primary">
                             REPLY
                         </Button>
@@ -93,7 +128,7 @@ const InboxDetails = () => {
                         <Button style={{ margin: '0rem 1rem' }} variant="contained" className={classes.btnStyle} color="primary">
                             CLOSE
                         </Button>
-                    </div>
+                    </div> */}
                 </Container>
             </main>
             }

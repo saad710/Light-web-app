@@ -1,12 +1,13 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import axios from "axios";
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import paymentImg from '../../../images/cardIcon.svg'
-import './Payment.css'
-import visa from '../../../images/Input.svg'
+import paymentImg from '../../../images/cardIcon.svg';
+import visa from '../../../images/Input.svg';
+import './Payment.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,12 +38,56 @@ const useStyles = makeStyles((theme) => ({
 
 const Payment = () => {
     const { register, handleSubmit, errors } = useForm();
-
-    const onSubmit = (data) => {
-        console.log(data);
-        window.location = './invoice'
-    };
     const classes = useStyles();
+    // For Billing Info
+    const [name, setName] = useState();
+    const [address, setAddress] = useState();
+    const [city, setCity] = useState();
+    const [zip, setZip] = useState();
+    const [country, setCountry] = useState();
+    //For Credit Card Info
+    const [card_number, setCardnum] = useState();
+    const [card_holder_name, setCardholder] = useState();
+    const [expire_date, setExpdate] = useState();
+    const [cvv, setCvv] = useState();
+    const client_id = 1;
+    const type = "STARTER";
+
+    const onSubmit = () => {
+        const newCustomer = {
+            name,
+            address,
+            city,
+            zip,
+            country,
+            card_number,
+            card_holder_name,
+            expire_date,
+            cvv,
+            client_id,
+            type
+        };
+
+        console.log(newCustomer);
+
+        axios
+            .post("http://127.0.0.1:8000/api/store-payment", newCustomer)
+            .then((res) => {
+                console.log(res);
+                setName("");
+                setAddress("");
+                setCity("");
+                setZip("");
+                setCountry("");
+                setCardnum("");
+                setCardholder("");
+                setExpdate("");
+                setCvv("");
+                window.location = './invoice'
+            })
+            .catch((err) => console.log(err));
+    };
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -54,17 +99,17 @@ const Payment = () => {
                             <div>
                                 <div style={{ textAlign: 'center', paddingBottom: '3rem'}}>
                                     <h1 style={{
-                                            fontSize: '40px',
-                                            fontWeight: 'bold'
-                                        }}>
-                                            Payment
+                                        fontSize: '40px',
+                                        fontWeight: 'bold'
+                                    }}>
+                                        Payment
                                     </h1>
                                     <p
                                         style={{
                                             fontSize: '14px',
                                             fontWeight: '400'
-                                        }}> 
-                                    
+                                        }}>
+
                                         Choose payment method bellow
                                     </p>
                                     <div >
@@ -72,7 +117,7 @@ const Payment = () => {
                                     </div>
                                 </div>
                                 <form className='paymentForm' onSubmit={handleSubmit(onSubmit)}>
-                                    <div className='d-flex'>  
+                                    <div className='d-flex'>
                                         <div className='' style={{ width: '40%', margin: '0 2rem'}}>
                                             <h6 className="my-4"
                                                 style={{
@@ -92,6 +137,7 @@ const Payment = () => {
                                                     className='mr-2'
                                                     ref={register({ required: true })}
                                                     placeholder='Marie Winter'
+                                                    onChange={(e) => setName(e.target.value)}
                                                 />
                                             </div>
                                             <br/>
@@ -104,6 +150,7 @@ const Payment = () => {
                                                     name='address'
                                                     ref={register({ required: true })}
                                                     placeholder='4098 Water Street'
+                                                    onChange={(e) => setAddress(e.target.value)}
                                                 />
                                             </div>
                                             <br/>
@@ -118,6 +165,7 @@ const Payment = () => {
                                                         name='city'
                                                         ref={register({ required: true })}
                                                         placeholder='San Francisco'
+                                                        onChange={(e) => setCity(e.target.value)}
                                                     />
                                                 </div>
                                                 <div>
@@ -129,6 +177,7 @@ const Payment = () => {
                                                         name='zipCode'
                                                         ref={register({ required: true })}
                                                         placeholder='45546'
+                                                        onChange={(e) => setZip(e.target.value)}
                                                     />
                                                 </div>
                                             </div>
@@ -142,6 +191,7 @@ const Payment = () => {
                                                     name='country'
                                                     className='mr-2'
                                                     ref={register({ required: true })}
+                                                    onChange={(e) => setCountry(e.target.value)}
                                                 >
 
                                                     <option value='United States'>United States</option>
@@ -172,7 +222,8 @@ const Payment = () => {
                                                         name='cardNumber'
                                                         className='mr-2'
                                                         ref={register({ required: true })}
-                                                        placeholder='42 42 42 42 42 42'
+                                                        placeholder='4242 4242 4242 4242'
+                                                        onChange={(e) => setCardnum(e.target.value)}
                                                     />
                                                     <img src={visa} alt="" />
                                                 </div>
@@ -187,6 +238,7 @@ const Payment = () => {
                                                     name='cardHolder'
                                                     ref={register({ required: true })}
                                                     placeholder='Marie Winter'
+                                                    onChange={(e) => setCardholder(e.target.value)}
                                                 />
                                             </div>
                                             <br/>
@@ -200,6 +252,7 @@ const Payment = () => {
                                                     name='expireDate'
                                                     ref={register({ required: true })}
                                                     placeholder='05/22'
+                                                    onChange={(e) => setExpdate(e.target.value)}
                                                 />
                                             </div>
                                             <br/>
@@ -212,12 +265,13 @@ const Payment = () => {
                                                 <input
                                                     name='cvv'
                                                     ref={register({ required: true })}
-                                                    placeholder='4098 Water Street'
+                                                    placeholder='4098'
+                                                    onChange={(e) => setCvv(e.target.value)}
                                                 />
                                             </div>
                                             <br/>
                                         </div>
-                                        
+
                                     </div>
                                     <input id="payment-btn" value='Continue' type='submit' />
                                 </form>

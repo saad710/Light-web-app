@@ -31,5 +31,17 @@ export const useStyles = makeStyles((theme) => ({
         color: '#fff',
         borderRadius: 0,
         padding: '0.5rem 5rem',
+    },
+    downloadfileStyle: {
+            padding: '1rem',
+            borderRadius: '1rem',
+            width: '35%',
+            border: '1px solid',
+            margin: '2rem auto'
+    },
+    replyStyle : {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
     }
 }));

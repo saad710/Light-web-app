@@ -154,11 +154,11 @@ const Coompose = () => {
         newTime[e.target.name] = e.target.value
         setSchduleTime(newTime)
     } 
-
+    const [closeCc, setCloseCc] = useState(false)
     // compose button handle
     const handleCompose = (e) => {
         e.preventDefault()
-        const finalValue = { ...value, ...mailBody, quick_reply: quickReply}
+        const finalValue = { ...value, ...mailBody, quick_reply: quickReply.length>0 && quickReply}
         if(checkBox.setRemainder) {
             finalValue.remainder = allRemainder
         }
@@ -180,9 +180,20 @@ const Coompose = () => {
         finalValue.client_id = loggedInUser.id
         finalValue.mail_file = files?.name
         finalValue.customer_email = ['sajeebxn@gmail.com']
-        finalValue.cc = cc
-        // finalValue.group = selectGroup
-        // finalValue.tag = selectTag
+        if(group){
+            // const groupValue = cc
+            setCc([])
+            setCloseCc(!closeCc)
+        }
+        if(cc.length>0) {
+            finalValue.cc = cc
+        }
+        if(selectGroup.length>0) {
+            finalValue.group = selectGroup
+        }
+        if(selectTag.length>0) {
+            finalValue.tag = selectTag
+        }
         console.log("finalValue", finalValue);
         
         Axios.post(`${key}send-mail-customer`, finalValue)
@@ -225,6 +236,8 @@ const Coompose = () => {
         schduleValue.cc = cc
         schduleValue.schedule = scheduleDate
         // schduleValue.schedule = '2020-11-10'
+        // schduleValue.group = parseInt(selectGroup)
+        schduleValue.tag = selectTag
         console.log(schduleValue);
 
         Axios.post(`${key}send-mail-customer`, schduleValue)
@@ -300,7 +313,7 @@ const Coompose = () => {
                                                                 <div>
                                                                     To
                                                                 </div>
-                                                                <div className="d-flex" style={{ position: 'absolute', left: '68%' }}>
+                                                                <div className="d-flex" style={{ position: 'absolute', left: '64%' }}>
                                                                     <div className="px-2" onClick={() => setCcOpen(!ccOpen)}>
                                                                         Cc
                                                                     </div>
@@ -323,6 +336,7 @@ const Coompose = () => {
                                                 {
                                                     ccOpen &&
                                                     <TextField
+                                                    className={closeCc === true && classNamees.ccShows}
                                                     id="to"
                                                     name="cc"
                                                     onBlur={
@@ -445,7 +459,7 @@ const Coompose = () => {
                                                     >
                                                         {groups !== 'loading' && groups.map((option) => (
                                                             <option key={option.id} value={option.id}>
-                                                            {option.group_name}
+                                                                {option.group_name}
                                                             </option>
                                                         ))}
                                                     </TextField>
@@ -468,7 +482,7 @@ const Coompose = () => {
                                                         onChange={handleTag}
                                                     >
                                                         {allTag !== null && allTag.map((option) => (
-                                                            <option key={option.id} value={option.id}>
+                                                            <option key={option.id} value={option.tag_name}>
                                                             {option.tag_name}
                                                             </option>
                                                         ))}

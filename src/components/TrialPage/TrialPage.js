@@ -1,16 +1,18 @@
-import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, Container } from '@material-ui/core';
+import Backdrop from '@material-ui/core/Backdrop';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import { Button, Container } from '@material-ui/core';
-import { Link } from 'react-router-dom'
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Fade from '@material-ui/core/Fade';
+import Grid from '@material-ui/core/Grid';
+import Modal from '@material-ui/core/Modal';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { key } from '../../apiKey';
 import Payment from '../MainDashboard/Payment/Payment';
 
 const useStyles = makeStyles((theme) => ({
@@ -57,6 +59,10 @@ const useStyles = makeStyles((theme) => ({
 const TrialPage = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [starter, setStarter] = useState([]);
+    const [prof, setProf] = useState([]);
+    const [advanced, setAdvanced] = useState([]);
+    
 
     const handleOpen = () => {
         setOpen(true);
@@ -64,6 +70,25 @@ const TrialPage = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    useEffect(() => {
+        axios.get(`${key}get-payment-package`)
+            .then((res) => {
+                console.log(res.data);
+                setStarter(res.data[0]);
+                setProf(res.data[1]);
+                setAdvanced(res.data[2]);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            })
+
+        
+    }, [])
+
+    
+
+
     return (
         <React.Fragment>
             <Container>
@@ -104,6 +129,12 @@ const TrialPage = () => {
                     </Link>
                 </div>
             </Grid> */}
+                    
+                    {/* {data.map((item, index) => (
+                        <p>{ item.package_name}</p>
+                    ))} */}
+
+                   
 
                     <Grid item xs={12} sm={8} md={8} elevation={6} square style={{margin: '0 auto'}}>
                         <Typography variant="body1" className="mb-3">
@@ -116,9 +147,11 @@ const TrialPage = () => {
                                         style={{
                                             fontSize: '12px',
                                             fontWeight: 'bold',
+                                            textTransform: 'uppercase'
                                         }}
                                     >
-                                        STARTER
+                                     
+                                         {starter.package_name}
                             </Typography>
                                     <div style={{ padding: '2rem 0' }}>
                                         <Typography variant="h3"
@@ -127,7 +160,7 @@ const TrialPage = () => {
                                                 fontWeight: 'regular',
                                             }}
                                         >
-                                            $8
+                                            ${starter.price}
                                 </Typography>
                                         <Typography variant="body1"
                                             style={{
@@ -145,7 +178,7 @@ const TrialPage = () => {
                                             marginBottom: '1rem'
                                         }}
                                     >
-                                        Starter features for your business to grow
+                                       {starter.short_description}
                             </Typography>
                                 </CardContent>
                                 <Link onClick={handleOpen}>
@@ -161,9 +194,10 @@ const TrialPage = () => {
                                         style={{
                                             fontSize: '12px',
                                             fontWeight: 'bold',
+                                            textTransform: 'uppercase'
                                         }}
                                     >
-                                        PROFESSIONAL
+                                         {prof.package_name}
                             </Typography>
                                     <div style={{ padding: '2rem 0' }}>
                                         <Typography variant="h3"
@@ -172,7 +206,7 @@ const TrialPage = () => {
                                                 fontWeight: 'regular',
                                             }}
                                         >
-                                            $18
+                                            ${prof.price}
                                 </Typography>
                                         <Typography variant="body1"
                                             style={{
@@ -190,7 +224,7 @@ const TrialPage = () => {
                                             marginBottom: '1rem'
                                         }}
                                     >
-                                        Starter features for your business to grow
+                                       {prof.short_description}
                             </Typography>
                                 </CardContent>
                                 <Link onClick={handleOpen}>
@@ -206,9 +240,10 @@ const TrialPage = () => {
                                         style={{
                                             fontSize: '12px',
                                             fontWeight: 'bold',
+                                            textTransform: 'uppercase'
                                         }}
                                     >
-                                        ADVANCED
+                                       {advanced.package_name}
                             </Typography>
                                     <div style={{ padding: '2rem 0' }}>
                                         <Typography variant="h3"
@@ -217,7 +252,7 @@ const TrialPage = () => {
                                                 fontWeight: 'regular',
                                             }}
                                         >
-                                            $48
+                                            ${advanced.price}
                                 </Typography>
                                         <Typography variant="body1"
                                             style={{
@@ -235,7 +270,7 @@ const TrialPage = () => {
                                             marginBottom: '1rem'
                                         }}
                                     >
-                                        Starter features for your business to grow
+                                        {advanced.short_description}
                             </Typography>
                                 </CardContent>
                                 <Link onClick={handleOpen}>

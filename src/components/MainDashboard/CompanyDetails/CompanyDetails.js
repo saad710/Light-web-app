@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { Button, TextareaAutosize, TextField, Typography } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Container from '@material-ui/core/Container';
@@ -5,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
+import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import EditIcon from '@material-ui/icons/Edit';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -12,11 +14,26 @@ import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './CompanyDetailsStyle';
 
+
+
 const CompanyDetails = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [formValue, setFormValue] = useState({});
-    const [companies, setCompanies] = useState(null)
+    const [companies, setCompanies] = useState(null);
+    const [show, setShow] = useState(false);
+    const [companyInfo,setCompanyInfo] = useState({});
+    const [updateLocation,setUpdateLocation] = useState({});
+    const [updateEmail,setUpdateEmail] = useState({});
+    const [updatePhone,setUpdatePhone] = useState({});
+    const [updateWebsite,setUpdateWebsite] = useState({});
+    const [updateName,setUpdateName] = useState({});
+    const handleStop = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [updateUser,setUpdateUser] = useState();
+    const [tagLine,setTagLine] = useState({});
+    const [companyId,setCompanyId] = useState();
+    const [Success,setSuccess] = useState(false)
 
     const handleOpen = () => {
         setOpen(true);
@@ -24,6 +41,54 @@ const CompanyDetails = () => {
     const handleClose = () => {
         setOpen(false);
     }; 
+    const handleLocationBlur = (e) => {
+        const newLocation ={...updateLocation}
+        console.log(newLocation);
+        newLocation[e.target.name] = e.target.value
+        
+        setUpdateLocation(newLocation)
+        
+    }
+    const handleEmailBlur = (e) => {
+        const newEmail ={...updateEmail}
+        console.log(newEmail);
+        newEmail[e.target.name] = e.target.value
+        
+        setUpdateEmail(newEmail)
+        
+    }
+    const handlePhoneBlur = (e) => {
+        const newPhone ={...updatePhone}
+        console.log(newPhone);
+        newPhone[e.target.name] = e.target.value
+        
+        setUpdatePhone(newPhone)
+        
+    }
+    const handleWebsiteBlur = (e) => {
+        const newWebsite ={...updateWebsite}
+        console.log(newWebsite);
+        newWebsite[e.target.name] = e.target.value
+        
+        setUpdateWebsite(newWebsite)
+        
+    }
+    const handleCompanyBlur = (e) => {
+        const newName ={...updateName}
+        console.log(newName);
+        newName[e.target.name] = e.target.value
+        
+        setUpdateName(newName)
+        
+    }
+    const handleTagBlur = (e) => {
+        const newTag ={...tagLine}
+        console.log(newTag);
+        newTag[e.target.name] = e.target.value
+        
+        setTagLine(newTag)
+        
+    }
 
     const handleBlur = (e) => {
         const value = { ...formValue };
@@ -33,12 +98,13 @@ const CompanyDetails = () => {
     // create company details
     const handleSubmit = (e) => {
         const finalValue = { ...formValue };
-        finalValue.client_id = 1
+        finalValue.client_id = updateUser.id;
         console.log(finalValue);
         Axios.post(`${key}create-company`, finalValue)
             .then(res => {
                 console.log(res);
                 // reFetch()
+                reSubmit()
             })
             .catch(err => {
                 console.log(err);
@@ -46,6 +112,80 @@ const CompanyDetails = () => {
 
         e.preventDefault();
     };
+
+    const reSubmit = () => {
+        getComapnyDetails()
+    }
+    const updateCompanyInfo = (e) => {
+        e.preventDefault();
+        const id = companyId;
+        const client_id = updateUser.id;
+
+        const companyUpdate = {...updateLocation, ...updateEmail, ...updatePhone, ...updateWebsite, ...updateName, ...tagLine, client_id};
+        console.log(companyUpdate);
+        Axios.put(`${key}update-company/${id}`,companyUpdate)
+        .then((response) => {
+            setSuccess(true);
+            reFetch()
+            console.log(response);
+
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
+    const reFetch = () => {
+        getComapnyDetails()
+    }
+
+    const handleUpdate = (id) => {
+        console.log(id);
+        setCompanyId(id);
+    }
+
+    const handleDelete = (id) => {
+        console.log(id);
+        // const id = companyId;
+        // const client_id = updateUser.id;
+        Axios.delete(`${key}delete-company/${id}`)
+            .then(res => {
+                console.log(res.data);
+                reDelete()
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+   
+    const reDelete = () => {
+        getComapnyDetails()
+    }
+    
+
+    useEffect(()=>{
+        Axios.get(`${key}all-company`)
+        .then((response)=>{
+            console.log(response.data);
+            const companyDetails = response.data;
+            // const singleCompany = companyDetails.filter(company=> company.email === localStorage.client);
+            setCompanyInfo(...companyDetails);
+            // console.log(singleCompany);
+        })
+    },[])
+
+    useEffect(()=>{
+        Axios.get(`${key}clients`)
+        .then((response)=>{
+            console.log(response.data);
+            const clients = response.data;
+            const singleClient = clients.filter(client => client.email === localStorage.client);
+            setUpdateUser(...singleClient);
+            console.log(singleClient);
+        })
+    },[])
+
+
 
     //get all
     const getComapnyDetails = () => {
@@ -63,9 +203,7 @@ const CompanyDetails = () => {
         getComapnyDetails()
     }, [])
 
-    const reFetch = () => {
-        getComapnyDetails()
-    }
+   
 
     return (
         <div className={classes.root}>
@@ -100,7 +238,73 @@ const CompanyDetails = () => {
                                             <Typography variant="h5" align="center"> { company.org_name } </Typography>
                                             <Typography variant="caption"> { company.tag_line } </Typography>
                                         </div>
-                                        <EditIcon style={{ color: '#4195D1'}} className="ml-3" />
+                                        <EditIcon style={{ color: '#4195D1'}} className="ml-3" data-toggle="modal" data-target="#exampleModalCenter" onClick={()=>handleUpdate(company.id)} />
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                <div className="row">
+                                                        <div className="col-md-12">
+                                                            <label htmlFor="">Company name</label>
+                                                            <input type="text" className="form-control" id="org_name" name="org_name" onBlur={handleCompanyBlur}/>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <label htmlFor="">Location</label>
+                                                            <input type="text" className="form-control" id="address" name="address" onBlur={handleLocationBlur}/>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <label htmlFor="">Email</label>
+                                                            <input type="email" className="form-control" id="email" name="email" onBlur={handleEmailBlur}/>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <label htmlFor="">Phone</label>
+                                                            <input type="tel" className="form-control" id="phone" name="phone" onBlur={handlePhoneBlur}/>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <label htmlFor="">Website</label>
+                                                            <input type="url" className="form-control" id="website" name="website" onBlur={handleWebsiteBlur}/>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <label htmlFor="">TagLine</label>
+                                                            <input type="text" className="form-control" id="tag_line" name="tag_line" onBlur={handleTagBlur}/>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                            { Success ? <div class="alert alert-success" role="alert">
+                                                Updated Your Organization Info
+                                                </div>:null}
+                    
+                                                <button type="button" class="btn btn-primary" onClick={updateCompanyInfo}>Save changes</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <Typography variant="body2" align="right" style={{color:"rgb(65, 149, 209)",marginLeft:"40px"}}
+                                            onClick={()=>handleDelete(company.id)}
+                                            >
+                                                {/* <UpdateIcon /> */}
+                                                <DeleteForeverSharpIcon />
+                                        </Typography>
+
 
                                     </div>
                                     <div className="mt-3 d-flex">

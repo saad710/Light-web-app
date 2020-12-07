@@ -1,5 +1,9 @@
+import DateFnsUtils from '@date-io/date-fns';
 import { Checkbox, Container, CssBaseline, FormControlLabel, FormGroup, Grid, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import {
+    KeyboardDatePicker, MuiPickersUtilsProvider
+} from '@material-ui/pickers';
 import Axios from 'axios';
 import 'date-fns';
 import React, { useContext, useEffect, useState } from 'react';
@@ -9,15 +13,26 @@ import './SearchFilter.css';
 import { useStyles } from './SearchFilterStyle';
 
 const SearchFilter = () => {
-    const [openFilter, setOpenFilter] = useState(false)
-    const [keywords, setKeywords] = useState('')
-    const date = new Date()
-    const [scheduleDate, setScheduleDate] = useState(date.setDate(date.getDate()))
-    console.log("schedule date", scheduleDate);
-    const { allMail, setAllMail, reFetch } = useContext(MailboxContext)
+ 
+    const { allMail, setAllMail, reFetch, groupsMail, setGroupsMail } = useContext(MailboxContext)
     console.log(allMail);
-    const handleScheduleDate = (date) => {
-        setScheduleDate(date.toDateString());
+
+    const [selectedDate, setSelectedDate] = React.useState(new Date());
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        console.log(date);
+        const id = 1
+        const newDate = selectedDate.toLocaleDateString()
+        console.log({date: newDate});
+        Axios.post(`${key}search-mail-date-wise/${id}`, {date: newDate} )
+            .then(res => {
+                // console.log(res.data.status);
+                // setAllMail(res.data.status)
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
     // check box state
     const [checkBox, setCheckBox] = useState({
@@ -27,10 +42,22 @@ const SearchFilter = () => {
         setDeadLine: false
     });
     
-    const handleKeyword = (e) => {
-        setKeywords(e.target.value)
+    // const handleKeyword = (e) => {
+    //     setKeywords(e.target.value)
         
-    }
+    // }
+    // useEffect(() => {
+    //     keywords.length > 0 &&
+    //     setGroupsMail(
+    //         groupsMail.filter(
+    //         (customer) =>
+    //             customer.subject
+    //             .toLowerCase()
+    //             .includes(keywords.toLowerCase()) 
+    //         )
+    //     );
+    // }, [groupsMail, keywords, setGroupsMail])
+
 
 
     // checkbox handle
@@ -40,9 +67,8 @@ const SearchFilter = () => {
 
     const handleDate = (e) => {
         e.preventDefault();
-        console.log(e.target.value);
+        console.log("date value",e.target.value);
     }
-    
         useEffect(() => {
             checkBox.quickReply && Axios.get(`${key}search-quick-reply`)
                 .then(res => {
@@ -89,7 +115,7 @@ const SearchFilter = () => {
                                 </div>
                                 <InputBase
                                     placeholder="Search…"
-                                    onClick={ handleKeyword }
+                                    // onClick={ handleKeyword }
                                     classes={{
                                         root: classes.inputRoot,
                                         input: classes.inputInput,
@@ -133,7 +159,7 @@ const SearchFilter = () => {
                                     label="Remainder"
                                 />
 
-                                <div className="pb-2" style={{color: '#2d2d2d'}}>
+                                {/* <div className="pb-2" style={{color: '#2d2d2d'}}>
                                     <input onBlur={handleDate} name="date" type="date" className="dateInput"
                                         style={{ 
                                             color: '#2d2d2d',
@@ -143,7 +169,25 @@ const SearchFilter = () => {
                                             borderRadius: '0.5rem'
                                         }}
                                     />
-                                </div>
+                                </div> */}
+
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                        <KeyboardDatePicker
+                                            
+                                            disableToolbar
+                                            variant="inline"
+                                            // format="MM/dd/yyyy"
+                                            format="yyyy/MM/dd"
+                                            margin="normal"
+                                            id="date-picker-inline"
+                                            // label="Date picker inline"
+                                            value={selectedDate}
+                                            onChange={handleDateChange}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change date',
+                                            }}
+                                            />
+                                        </MuiPickersUtilsProvider>
 
                                 
                             </FormGroup>
