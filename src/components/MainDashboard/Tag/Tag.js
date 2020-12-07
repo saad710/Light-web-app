@@ -1,15 +1,18 @@
-import { Backdrop, Button, ButtonGroup, Card, CardContent, Fade, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
+import { Backdrop, Button, ButtonGroup, Card, CardContent, Fade, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import { Pagination } from '@material-ui/lab';
 import React, { useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './TagStyle';
 const axios = require('axios');
 
-
+const columns = [
+  { id: 'tag_name', label: 'Tag Name', minWidth: 100 },
+  { id: 'action', label: 'Action', minWidth: 100 },
+  
+];
 const Tag = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -24,6 +27,8 @@ const Tag = () => {
     const [allTag, setAllTag] = useState(null);
     const [updateValue, setUpdateValue] = useState({})
     const [showOldValue, setShowOldValue] = useState({})
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     //get all
     useEffect(() => {
@@ -104,6 +109,15 @@ const Tag = () => {
         e.preventDefault();
     }
 
+        const handleChangePage = (event, newPage) => {
+            setPage(newPage);
+        };
+
+        const handleChangeRowsPerPage = (event) => {
+            setRowsPerPage(+event.target.value);
+            setPage(0);
+        };
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -148,59 +162,67 @@ const Tag = () => {
                                     ADD TAG
                                 </Button>
                             </form>
-                            <TableContainer component={Paper} square elevation={0} className="mt-4">
-                                <Table className={classes.table} aria-label="simple table"
-                                    size='small'
-                                >
-                                    <TableHead className={classes.tableHeader}>
-                                        <TableRow>
-                                            <TableCell> # </TableCell>
-                                            <TableCell align="center"> TAG NAME </TableCell>
-                                            <TableCell align="center"> ACTION </TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {allTag !== null &&
-                                            allTag.map((tag, i) => (
-                                                <TableRow key={tag.id}>
-                                                    <TableCell component="th" scope="row">
-                                                        {i + 1}
-                                                    </TableCell>
-                                                    <TableCell align="center"> {tag.tag_name} </TableCell>
-                                                    <TableCell align="right">
+                            
+                            <TableContainer className={classes.container} style={{ margin: '1.2rem auto' }} >
+                                        <Table stickyHeader aria-label="sticky table"  size='small'>
+                                        <TableHead>
+                                            <TableRow>
+                                            {columns.map((column) => (
+                                                <TableCell
+                                                key={column.id}
+                                                align={column.align}
+                                                style={{ minWidth: column.minWidth }}
+                                                >
+                                                {column.label}
+                                                </TableCell>
+                                            ))}
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {allTag !== null && allTag.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((tag) => {
+                                            return (
+                                                <TableRow hover role="checkbox" tabIndex={-1} key={tag.code}>
+                                                    <TableCell align='left'>{tag.tag_name}</TableCell>
+                                                    <TableCell align="left">
                                                         <div>
                                                             <ButtonGroup
-                                                                variant="contained"
-                                                                color="primary"
-                                                                size="small"
-                                                                aria-label="contained primary button group"
-                                                            >
-                                                                <Button
-                                                                    style={{ fontSize: '10px' }} color="primary"
-                                                                    onClick={() => { handleOpen(); handleOldValue(tag.tag_name) }}
+                                                                    variant="contained"
+                                                                    color="primary"
+                                                                    size="small"
+                                                                    aria-label="contained primary button group"
                                                                 >
-                                                                    UPDATE
-                                                                </Button>
-                                                                <Button
-                                                                    style={{ fontSize: '10px' }} color="secondary"
-                                                                    onClick={() => handleTagDelete(tag.tag_name)}
-                                                                >
-                                                                    DELETE
-                                                                </Button>
-                                                            </ButtonGroup>
+                                                                    <Button
+                                                                        style={{ fontSize: '10px' }} color="primary"
+                                                                        onClick={() => { handleOpen(); handleOldValue(tag.tag_name) }}
+                                                                    >
+                                                                        UPDATE
+                                                                    </Button>
+                                                                    <Button
+                                                                        style={{ fontSize: '10px' }} color="secondary"
+                                                                        onClick={() => handleTagDelete(tag.tag_name)}
+                                                                    >
+                                                                        DELETE
+                                                                    </Button>
+                                                                </ButtonGroup>
                                                         </div>
                                                     </TableCell>
                                                 </TableRow>
-                                            ))
-                                        }
-                                    </TableBody>
+                                            );
+                                            })}
+                                        </TableBody>
+                                        </Table>
+                                    </TableContainer>
+                                    <TablePagination
+                                        rowsPerPageOptions={[1,5,10, 25, 100]}
+                                        component="div"
+                                        count={allTag !== null && allTag.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onChangePage={handleChangePage}
+                                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                                    />
 
-                                </Table>
-                                <div className={classes.paginationBox}>
-                                    <Pagination count={10} className={classes.pagination} />
-                                </div>
 
-                            </TableContainer>
                             <Modal
                                 aria-labelledby="transition-modal-title"
                                 aria-describedby="transition-modal-description"

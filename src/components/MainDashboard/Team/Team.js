@@ -1,20 +1,37 @@
-import { Button, ButtonGroup, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
+import { Button, ButtonGroup, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import { Pagination } from '@material-ui/lab';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './TeamStyle';
 
-
+const columns = [
+  { id: '#', label: '#', minWidth: 100 },
+  { id: 'name', label: 'Name', minWidth: 100 },
+  { id: 'email', label: 'Email', minWidth: 100 },
+  { id: 'action', label: 'Action', minWidth: 100 },
+  
+];
 const Team = () => {
     const classes = useStyles();
     const [admin, setAdmin] = useState({});
     console.log(admin);
     const [allAdmin, setAllAdmin] = useState(null)
+
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const handleChangePage = (event, newPage) => {
+            setPage(newPage);
+        };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
     
     const handleTeamInput = (e) => {
         const newAdmin = {...admin}
@@ -192,23 +209,26 @@ const Team = () => {
                                 </Button>
                             </form>
 
-                            <TableContainer component={Paper} square elevation={0} className="mt-4">
-                                <Table className={classes.table} aria-label="simple table"
-                                    size='small'
-                                >
-                                    <TableHead className={classes.tableHeader}>
-                                        <TableRow>
-                                            <TableCell> # </TableCell>
-                                            <TableCell align="center"> NAME </TableCell>
-                                            <TableCell align="center"> EMAIL </TableCell>
-                                            <TableCell align="center"> ACTION </TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {   allAdmin !== null &&
-                                            allAdmin.map((admin, i) => (
-                                                <TableRow key={admin.id}>
-                                                    <TableCell component="th" scope="row">
+                            <TableContainer className={classes.container} style={{ margin: '1.2rem auto' }} >
+                                        <Table stickyHeader aria-label="sticky table"  size='small'>
+                                        <TableHead>
+                                            <TableRow>
+                                            {columns.map((column) => (
+                                                <TableCell
+                                                key={column.id}
+                                                align={column.align}
+                                                style={{ minWidth: column.minWidth }}
+                                                >
+                                                {column.label}
+                                                </TableCell>
+                                            ))}
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {allAdmin !== null && allAdmin.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((admin,i) => {
+                                            return (
+                                                <TableRow hover role="checkbox" tabIndex={-1} key={admin.code}>
+                                                     <TableCell component="th" scope="row">
                                                         {i + 1}
                                                     </TableCell>
                                                     <TableCell align="center"> { admin.name } </TableCell>
@@ -228,16 +248,20 @@ const Team = () => {
                                                         </div>
                                                     </TableCell>
                                                 </TableRow>
-                                            ))
-                                        }
-                                    </TableBody>
-
-                                </Table>
-                                <div className={classes.paginationBox}>
-                                    <Pagination count={10} className={classes.pagination} />
-                                </div>
-
-                            </TableContainer>
+                                            );
+                                            })}
+                                        </TableBody>
+                                        </Table>
+                                    </TableContainer>
+                                    <TablePagination
+                                        rowsPerPageOptions={[1,5,10, 25, 100]}
+                                        component="div"
+                                        count={allAdmin !== null && allAdmin.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onChangePage={handleChangePage}
+                                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                                    />
                         </div>
                     </Grid>
 

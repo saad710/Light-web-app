@@ -1,14 +1,21 @@
-import { Backdrop, Button, Card, CardContent, CardHeader, Fade, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextareaAutosize, TextField, Typography } from '@material-ui/core';
+import { Backdrop, Button, Card, CardContent, CardHeader, Fade, IconButton, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextareaAutosize, TextField, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
-import { Pagination } from '@material-ui/lab';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './TicketStyle';
+
+const columns = [
+  { id: '#', label: '#', minWidth: 100 },
+  { id: 'ticket_num', label: 'Ticket Num', minWidth: 100 },
+  { id: 'subject', label: 'Subject', minWidth: 100 },
+  { id: 'status', label: 'Status', minWidth: 100 },
+  
+];
 
 const Ticket = () => {
     const classes = useStyles();
@@ -17,6 +24,19 @@ const Ticket = () => {
     const [ticketValue, setTicketValue] = useState({});
     const [tickets, setTickets] = useState(null)
     const [singleDetails, setSingleDetails] = useState({})
+
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const handleChangePage = (event, newPage) => {
+            setPage(newPage);
+        };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
     const handleOpen = () => {
         setTicketModal(true);
     };
@@ -96,23 +116,27 @@ const Ticket = () => {
                                 Add Ticket
                             </Button>
                             <div>
-                                <TableContainer component={Paper} square elevation={0} className="mt-4">
-                                    <Table className={classes.table} aria-label="simple table"
-                                        size='small'
-                                    >
-                                        <TableHead className={classes.tableHeader}>
+                            
+                            <TableContainer className={classes.container} style={{ margin: '1.2rem auto' }} >
+                                        <Table stickyHeader aria-label="sticky table"  size='small'>
+                                        <TableHead>
                                             <TableRow>
-                                                <TableCell align="center"> # </TableCell>
-                                                <TableCell align="center"> Ticket Num </TableCell>
-                                                <TableCell align="center"> SUBJECT </TableCell>
-                                                <TableCell align="center"> STATUS </TableCell>
+                                            {columns.map((column) => (
+                                                <TableCell
+                                                key={column.id}
+                                                align={column.align}
+                                                style={{ minWidth: column.minWidth }}
+                                                >
+                                                {column.label}
+                                                </TableCell>
+                                            ))}
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {   tickets !== null &&
-                                                tickets.map((ticket, i) => (
-                                                    <TableRow key={ticket.id} onClick={() => handleDetailsOpen(ticket)} style={{cursor: 'pointer'}}>
-                                                        <TableCell component="th" scope="row">
+                                            {tickets !== null && tickets.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((ticket,i) => {
+                                            return (
+                                                <TableRow hover role="checkbox" tabIndex={-1} key={ticket.code} onClick={() => handleDetailsOpen(ticket)}>
+                                                    <TableCell component="th" scope="row">
                                                             {i + 1}
                                                         </TableCell>
                                                         <TableCell component="th" scope="row">
@@ -122,17 +146,22 @@ const Ticket = () => {
                                                         <TableCell align="center">
                                                             <Typography variant="body2" color="textPrimary"> {ticket.status} </Typography>
                                                         </TableCell>
-                                                    </TableRow>
-                                                ))
-                                            }
+                                                </TableRow>
+                                            );
+                                            })}
                                         </TableBody>
+                                        </Table>
+                                    </TableContainer>
+                                    <TablePagination
+                                        rowsPerPageOptions={[1,5,10, 25, 100]}
+                                        component="div"
+                                        count={tickets !== null && tickets.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onChangePage={handleChangePage}
+                                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                                    />
 
-                                    </Table>
-                                    <div className={classes.paginationBox}>
-                                        <Pagination count={10} className={classes.pagination} />
-                                    </div>
-
-                                </TableContainer>
                             </div>
 
                             <div>

@@ -1,13 +1,20 @@
-import { Backdrop, Button, ButtonGroup, Card, CardContent, Fade, FormControl, Input, InputLabel, MenuItem, Modal, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
+import { Backdrop, Button, ButtonGroup, Card, CardContent, Fade, FormControl, Input, InputLabel, MenuItem, Modal, Select, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import { Pagination } from '@material-ui/lab';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './GroupStyle';
+
+
+const columns = [
+  { id: 'grouo_name', label: 'Group Name', minWidth: 100 },
+  { id: 'action', label: 'Action', minWidth: 100 },
+  
+];
+
 
 const Group = () => {
     const classes = useStyles();
@@ -18,6 +25,8 @@ const Group = () => {
     const [showOldValue, setShowOldValue] = useState({})
     const [customers, setCustomers] = useState(null)
     const [singleClient, setSingleClinet] = useState({})
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     const handleGroupInput = (e) => {
         const newGroup = { ...addGroup }
@@ -160,6 +169,15 @@ const Group = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
+     const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
     
     return (
         <div className={classes.root}>
@@ -232,54 +250,57 @@ const Group = () => {
                                         Create GROUP
                                 </Button>
                                 </form>
-                                <TableContainer component={Paper} square elevation={0} className="mt-4">
-                                    <Table className={classes.table} aria-label="simple table"
-                                        size='small'
-                                    >
-                                        <TableHead className={classes.tableHeader}>
+                                    <TableContainer className={classes.container} style={{ margin: '1.2rem auto' }} >
+                                        <Table stickyHeader aria-label="sticky table"  size='small'>
+                                        <TableHead>
                                             <TableRow>
-                                                <TableCell> # </TableCell>
-                                                <TableCell align="center"> GROUP NAME </TableCell>
-                                                {/* <TableCell align="center"> CUSTOMERS </TableCell> */}
-                                                <TableCell align="center"> ACTION </TableCell>
+                                            {columns.map((column) => (
+                                                <TableCell
+                                                key={column.id}
+                                                align={column.align}
+                                                style={{ minWidth: column.minWidth }}
+                                                >
+                                                {column.label}
+                                                </TableCell>
+                                            ))}
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {   groups !== null &&
-                                                groups.map((group, i) => (
-                                                    <TableRow key={group.id}>
-                                                        <TableCell component="th" scope="row">
-                                                            {i + 1}
-                                                        </TableCell>
-                                                        <TableCell align="center">{group.group_name}</TableCell>
-                                                        {/* <TableCell align="center">{group.customer_email}</TableCell> */}
-                                                        <TableCell align="right">
-                                                            <div>
-                                                                <ButtonGroup
-                                                                    variant="contained"
-                                                                    color="primary"
-                                                                    size="small"
-                                                                    aria-label="contained primary button group"
-                                                                >
-                                                                    <Button
-                                                                        onClick={() => { handleOpen(); handleOldValue(group.id) }}
-                                                                        style={{ fontSize: '10px' }} color="primary" >UPDATE</Button>
-                                                                    <Button
-                                                                        style={{ fontSize: '10px' }} color="secondary" onClick={() => handleGroupDelete(group.id)}>DELETE</Button>
-                                                                </ButtonGroup>
-                                                            </div>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))
-                                            }
+                                            {groups !== null && groups.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((group) => {
+                                            return (
+                                                <TableRow hover role="checkbox" tabIndex={-1} key={group.code}>
+                                                    <TableCell align='left'>{group.group_name}</TableCell>
+                                                    <TableCell align="left">
+                                                        <div>
+                                                            <ButtonGroup
+                                                                                variant="contained"
+                                                                                color="primary"
+                                                                                size="small"
+                                                                                aria-label="contained primary button group"
+                                                                            >
+                                                                                <Button
+                                                                                    onClick={() => { handleOpen(); handleOldValue(group.id) }}
+                                                                                    style={{ fontSize: '10px' }} color="primary" >UPDATE</Button>
+                                                                                <Button
+                                                                                    style={{ fontSize: '10px' }} color="secondary" onClick={() => handleGroupDelete(group.id)}>DELETE</Button>
+                                                                            </ButtonGroup>
+                                                        </div>
+                                                    </TableCell>
+                                                </TableRow>
+                                            );
+                                            })}
                                         </TableBody>
-
-                                    </Table>
-                                    <div className={classes.paginationBox}>
-                                        <Pagination count={10} className={classes.pagination} />
-                                    </div>
-
-                                </TableContainer>
+                                        </Table>
+                                    </TableContainer>
+                                    <TablePagination
+                                        rowsPerPageOptions={[1,5,10, 25, 100]}
+                                        component="div"
+                                        count={customers !== null && customers.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onChangePage={handleChangePage}
+                                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                                    />
                             </div>
                         </div>
 
