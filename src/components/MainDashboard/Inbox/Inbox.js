@@ -19,63 +19,10 @@ const Inbox = () => {
     const [openPanel, setOpenPanel] = useState(false);
     const [userId, setUserId] = useState({})
 
-   
-    // const [singleClient, setSingleClient] = useState({})
-    // const [allMail, setAllMail] = useState(null)
-    // const [groupsMail, setGroupsMail] = useState(null)
-    // console.log(allMail);
-    // useEffect(() => {
-    //     const client_id = singleClient.id
-    //     Axios.get(`${key}client-all-mail/${client_id}`)
-    //         .then(res => {
-    //             console.log(res);
-    //             const mails = res.data.all_mail
-    //             setAllMail(mails)
-    //         })
-    //         .then(err => {
-    //             console.log(err);
-    //         })
-    //     Axios.get(`${key}clients`)
-    //         .then(res => {
-    //             const data = res.data
-    //             const client = data.filter(client => client.email === localStorage.client)
-    //             setSingleClient(client[0])
-    //         })
-    // }, [singleClient.id])
-    // useEffect(() => {
-    //     Axios.get(`${key}client-all-group-mail/${singleClient.id}`)
-    //         .then(res => {
-    //             console.log(res.data);
-    //             setGroupsMail(res.data)
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         })
-    // }, [singleClient.id])
     const { groupsMail, allMail } = useContext(MailboxContext)
     console.log(groupsMail);
     console.log(allMail);
     
-    // const [mailState, setMailState] = useState({});
-
-    // const handleAllChecked = (e) => {
-    //     groupsMail.forEach((groupMail) => {
-    //         groupMail.isChecked = e.target.checked;
-    //         setMailState({...groupMail})
-    //         // console.log('checked', mailState)
-    //     })
-    // }
-    // const handleCheck = (client_id) => {
-    //     console.log(client_id);
-    // }
-    // const handleCheckChieldElement = (e) => {
-    //     groupsMail.forEach((groupMail) => {
-    //        if(groupMail.value === e.target.value) {
-    //            groupMail.isChecked = e.target.checked;
-    //         }
-    //         setMailState({...groupMail})
-    //     })
-    // }
     const [allChecked, setAllChecked] = useState(false);
     // using an array to store the checked items
     const [isChecked, setIsChecked] = useState([]);
@@ -201,7 +148,7 @@ const Inbox = () => {
                                 color="primary"
                                
                             />
-                            <RefreshIcon />
+                            <RefreshIcon onClick={() => window.location.reload(false)} style={{ cursor: 'pointer' }} />
                             { showResults ? <Typography variant="body2" align="right" style={{color:"rgb(65, 149, 209)", paddingLeft:"20px"}}
                                             onClick={handleDeleteAll}
                                             >

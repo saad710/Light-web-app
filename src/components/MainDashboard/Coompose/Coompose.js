@@ -4,12 +4,12 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import IndeterminateCheckBoxRoundedIcon from '@material-ui/icons/IndeterminateCheckBoxRounded';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Axios from 'axios';
 import 'date-fns';
 import React, { useContext, useState } from 'react';
+import FileBase from 'react-file-base64';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import { useFileUpload } from "use-file-upload";
@@ -31,14 +31,24 @@ const Coompose = () => {
     const classNamees = useStyles();
     // file upload state 
     const [files, selectFiles] = useFileUpload();
+    console.log("files", files);
+    const [postData, setPostData] = useState({
+        slectedFile: null
+    })
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const fileValue = {...postData}
+        console.log("fileValue", fileValue);
+        // selectFiles(fileValue)
+    }
     // input value state
     const [value, setValue] = useState({})
     const [quickReply, setQuickReply] = useState([])
     const [mailBody, setMailBody] = useState({})
 
     const [schduleTime, setSchduleTime] = useState("")
-
+    console.log("schduleTime", schduleTime);
     const [ccOpen, setCcOpen] = useState(false)
     const [bccOpen, setBccOpen] = useState(false)
     const [group, setGroup] = useState(false)
@@ -178,8 +188,7 @@ const Coompose = () => {
             finalValue.hideContactInfo = false
         }
         finalValue.client_id = loggedInUser.id
-        finalValue.mail_file = files?.name
-        finalValue.customer_email = ['sajeebxn@gmail.com']
+        finalValue.mail_file = postData.selectedFile !== null && postData.selectedFile
         if(group){
             // const groupValue = cc
             setCc([])
@@ -210,9 +219,9 @@ const Coompose = () => {
 
     const handleSetSchdule = (e) => {
         e.preventDefault()
-
         // const schduleValue = { ...value, ...mailBody, ...schduleTime }
-        const schduleValue = { ...value, ...mailBody, quick_reply: quickReply}
+        const schduleValue = { ...value, ...mailBody, quick_reply: quickReply.length>0 && quickReply, ...schduleTime} 
+        // const schduleValue = { ...value, ...mailBody, quick_reply: quickReply}
         if(checkBox.setRemainder) {
             schduleValue.remainder = allRemainder
         }
@@ -231,13 +240,22 @@ const Coompose = () => {
         if(!checkBox.hideContactInfo) {
             schduleValue.hideContactInfo = false
         }
-        schduleValue.client_id = 1
-        schduleValue.mail_file = files?.name
-        schduleValue.cc = cc
-        schduleValue.schedule = scheduleDate
-        // schduleValue.schedule = '2020-11-10'
-        // schduleValue.group = parseInt(selectGroup)
-        schduleValue.tag = selectTag
+        schduleValue.client_id = loggedInUser.id
+        schduleValue.mail_file = postData.selectedFile !== null && postData.selectedFile
+        if(group){
+            // const groupValue = cc
+            setCc([])
+            setCloseCc(!closeCc)
+        }
+        if(cc.length>0) {
+            schduleValue.cc = cc
+        }
+        if(selectGroup.length>0) {
+            schduleValue.group = selectGroup
+        }
+        if(selectTag.length>0) {
+            schduleValue.tag = selectTag
+        }
         console.log(schduleValue);
 
         Axios.post(`${key}send-mail-customer`, schduleValue)
@@ -700,7 +718,6 @@ const Coompose = () => {
                                                                     }
                                                                 </div>
                                                             }
-
                                                             {
                                                                 deadline3 &&
                                                                 <div className="d-flex align-items-center">
@@ -754,19 +771,19 @@ const Coompose = () => {
                                         <div>
                                             {/* <img style={{width:'20%', padding: '1rem'}} src={files?.source || 'no selected file'} alt="preview" /> */}
                                             <span style={{color:'#fff'}}>{files?.name} </span>
-                                            <Button
-                                            variant="contained"
-                                            color="default"
-                                            // className={classes.button}
-                                            startIcon={<CloudUploadIcon />}
-                                            onClick={() =>
-                                                selectFiles({ }, ({ name, size, source, file }) => {
-                                                    console.log("Files Selected", { name, size, source, file });
-                                                })
-                                            }
-                                            >
-                                            Upload
-                                        </Button>
+                                            {/* <Button
+                                                variant="contained"
+                                                color="default"
+                                                className={classes.button}
+                                                startIcon={<CloudUploadIcon />}
+                                                onClick={() =>
+                                                    selectFiles({ }, ({ name, size, source, file }) => {
+                                                        console.log("Files Selected", { name, size, source, file });
+                                                    })
+                                                }
+                                                >
+                                                Upload
+                                            </Button> */}
                                         </div>
                                         {/* <Button
                                             type="submit"
@@ -859,6 +876,11 @@ const Coompose = () => {
                                             </div>
                                         </div>
                                     </form>
+                                    <form autoComplete="off" noValidate>
+                                          <div><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
+
+                                    </form>
+                                        {/* <Button variant="contained" color="primary" size="large" onClick={handleSubmit} fullWidth> Submit </Button> */}
                                 </CardContent>
                             </Card>
 
@@ -912,8 +934,11 @@ const Coompose = () => {
                                                             <TextField
                                                             style={{color: '#fff'}}
                                                             id="datetime-local"
+                                                            name="schedule"
                                                             label="Select schdule date time"
                                                             type="datetime-local"
+                                                            // value={scheduleDate}
+                                                            onChange={handleSetSchduleTime}
                                                             defaultValue="2020-12-24T10:30"
                                                             // className={classes.textField}
                                                             InputLabelProps={{

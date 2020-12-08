@@ -92,50 +92,16 @@ const Chart = ({ countMailInfo }) => {
         </text>
       );
     };
-  const data = [
-  {
-    name: "Day 1",
-    Total: countMailInfo !== null && countMailInfo.total_mail_count,
-    Sent: countMailInfo !== null && countMailInfo.sent_mail,
-    amt: 10,
-  },
-  {
-    name: "Week 2",
-    Total: 3000,
-    Sent: 1398,
-    // amt: 2210,
-  },
-  {
-    name: "Week 3",
-    Total: 2000,
-    Sent: 9800,
-    // amt: 2290,
-  },
-  {
-    name: "Week 4",
-    Total: 2780,
-    Sent: 3908,
-    // amt: 2000,
-  },
-  {
-    name: "Week 5",
-    Total: 1890,
-    Sent: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Week 6",
-    Total: 2390,
-    Sent: 3800,
-    amt: 100,
-  },
-  {
-    name: "Week 7",
-    Total: 3490,
-    Sent: 4300,
-    amt: 2100,
-  },
-];
+    console.log(countMailInfo !== null && countMailInfo.current_week);
+    
+    const data = countMailInfo !== null && countMailInfo.current_week.map((week) => (
+      {
+        name: week.week,
+        Total: countMailInfo !== null && countMailInfo.total_mail_count,
+        Sent: week.mail_sent,
+      }
+    ))
+  
     
   const classes = useStyles();
   return (

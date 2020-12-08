@@ -1,8 +1,9 @@
 import { Container, makeStyles } from "@material-ui/core";
 import moment from 'moment';
-import React from "react";
+import React, { useContext } from "react";
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { MailboxContext } from "../../../Providers/MailboxProvider";
 import AppBarDrawer from "../AppBarDrawer";
 
 const localizer = momentLocalizer(moment)
@@ -154,6 +155,11 @@ const events = [
 ];
 
 const SchedulePage = () => {
+  const { groupsMail, allMail } = useContext(MailboxContext)
+  console.log("allMail",allMail);
+  
+  console.log("groupsMail", groupsMail);
+   
   const classes = useStyles();
   console.log(events);
   return (
