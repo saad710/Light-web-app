@@ -23,7 +23,7 @@ const columns = [
   { id: 'email', label: 'Email', minWidth: 100 },
   { id: 'phone', label: 'Phone', minWidth: 100 },
   { id: 'group', label: 'Group', minWidth: 100 },
-  { id: 'tag', label: 'Tag', minWidth: 100 },
+//   { id: 'tag', label: 'Tag', minWidth: 100 },
   { id: 'address', label: 'Physical Address', minWidth: 100 },
   { id: 'status', label: 'Status', minWidth: 100 },
   { id: 'action', label: 'Action', minWidth: 100 },
@@ -131,7 +131,7 @@ const Customers = () => {
                                         <TableCell align='left'>{row.email}</TableCell>
                                         <TableCell align='center'>{row.phone}</TableCell>
                                         <TableCell align='center'>{row.group}</TableCell>
-                                        <TableCell align='center'>{row.tag}</TableCell>
+                                        {/* <TableCell align='center'>{row.tag}</TableCell> */}
                                         <TableCell align='center'>{row.address}</TableCell>
                                         <TableCell align='center'>{row.status}</TableCell>
                                         <TableCell align="left">

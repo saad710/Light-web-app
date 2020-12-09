@@ -9,70 +9,37 @@ import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/picker
 import Axios from 'axios';
 import 'date-fns';
 import React, { useContext, useState } from 'react';
-import FileBase from 'react-file-base64';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
-import { useFileUpload } from "use-file-upload";
-import { key } from '../../../apiKey';
 import { ComposeContext } from '../../../Providers/ComposeProvider';
-import { LoggedInContext } from '../../../Providers/LoggedInProvider';
 import AppBarDrawer from '../AppBarDrawer';
 import './Compose.css';
 import { useStyles } from './ComposeStyle';
 
 
-
-const Coompose = () => {
-    const {groups, allTag} = useContext(ComposeContext)
-    const {loggedInUser} = useContext(LoggedInContext)
-    // console.log('loggedInUser', loggedInUser);
-    // console.log(groups !== 'loading' && groups);
-    // console.log("alltag", allTag !== null && allTag);
-    const classNamees = useStyles();
-    // file upload state 
-    const [files, selectFiles] = useFileUpload();
-    console.log("files", files);
-    const [postData, setPostData] = useState({
-        slectedFile: null
-    })
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const fileValue = {...postData}
-        console.log("fileValue", fileValue);
-        // selectFiles(fileValue)
-    }
-    // input value state
-    const [value, setValue] = useState({})
-    const [quickReply, setQuickReply] = useState([])
-    const [mailBody, setMailBody] = useState({})
-
-    const [schduleTime, setSchduleTime] = useState("")
-    console.log("schduleTime", schduleTime);
-    const [ccOpen, setCcOpen] = useState(false)
-    const [bccOpen, setBccOpen] = useState(false)
-    const [group, setGroup] = useState(false)
-    const [tags, setTags] = useState(false)
-
-    const [image, setImage] = useState('')
-
-    // select group dropdown
-    const [selectGroup, setSelectGroup] = React.useState([]);
-    console.log("group", selectGroup);
-    const handleGroup = (event) => {
-        setSelectGroup(event.target.value);
-    };
-
-    // select tag dropdown
-    const [selectTag, setSelectTag] = React.useState([]);
-    console.log("selectTag", selectTag);
-    const handleTag = (event) => {
-        setSelectTag(event.target.value);
-    };
+const MailCompose = () => {
+    const date = new Date()
     
+    const { groups, allTag } = useContext(ComposeContext)
+    const classNamees = useStyles();
+    const [sender, setSender] = useState("");
+    const [receiver, setReceiver] = useState("");
+    const [client_id] = useState(1);
+    const [cc, setCc] = useState([]);
+    const [bcc, setBcc] = useState("");
+    const [mail_body, setMailBody] = useState("");
+    const [mail_file, setMailfile] = useState("");
+    const [selectGroup, setSelectGroup] = useState("");
+    const [selectTag, setSelectTag] = useState("");
+    const [subject, setSubject] = useState("");
+    console.log("mail body", mail_body);
+    const [allRemainder, setAllRemainder] = useState([])
+    const [quickReply, setQuickReply] = useState([])
+    console.log("quickReply", quickReply);
+    const [deadlineDate, setDeadlineDate] = useState(date.setDate(date.getDate() + 2))
+    console.log("deadlineDate", deadlineDate);
 
-    // console.log('final value', value)
-    // check box state
+    // checked
     const [checkBox, setCheckBox] = useState({
         quickReply: false,
         hideContactInfo: false,
@@ -81,13 +48,82 @@ const Coompose = () => {
         setRemainder: false,
         setDeadLine: false
     });
+
+    console.log(mail_file);
+
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData()
+        formData.append('sender', sender);
+        formData.append('receiver', receiver);
+        formData.append('client_id', client_id);
+        formData.append('cc', cc);
+        formData.append('bcc', bcc);
+        formData.append('group', selectGroup);
+        formData.append('tag', selectTag);
+        formData.append('subject', subject);
+        formData.append('mail_body', mail_body);
+        formData.append('mail_file', mail_file)
+        formData.append('remainder', allRemainder)
+        formData.append('deadline', deadlineDate)
+        formData.append('quick_reply', quickReply)
+        if (checkBox.replyNeeded) {
+            formData.append('reply_status', true)
+        }
+        if (!checkBox.replyNeeded) {
+            formData.append('reply_status', false)
+        }
+        if (checkBox.hideContactInfo) {
+            formData.append('hide_status', true)
+        }
+        if(!checkBox.hideContactInfo) {
+            formData.append('hide_status', false)
+        }
+        console.log(formData);
+        Axios.post('http://127.0.0.1:8000/api/send-mail-customer/', formData)
+            .then((res) => {
+                console.log("done", res)
+            }).catch((err) => {
+                console.log(err.message)
+            })
+    }
+
+    //dropdown state
+
+    const [ccOpen, setCcOpen] = useState(false)
+    const [bccOpen, setBccOpen] = useState(false)
+    const [group, setGroup] = useState(false)
+    const [tags, setTags] = useState(false)
+
+    const [closeCc, setCloseCc] = useState(false)
     // multiple cc
     const [cc2, setCc2] = useState(false)
     const [cc3, setCc3] = useState(false)
-    
+
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleChange = (event) => {
+        setCheckBox({ ...checkBox, [event.target.name]: event.target.checked });
+    };
+
+    // schedule 
+    const [schduleTime, setSchduleTime] = useState("")
+    console.log("schduleTime",schduleTime);
+    const handleSetSchduleTime = (e) => {
+        e.preventDefault()
+        const newTime = { ...schduleTime }
+        newTime[e.target.name] = e.target.value
+        setSchduleTime(newTime)
+    } 
+
     // *** remainder all functionality start *** //
-    const date = new Date()
-    const [allRemainder, setAllRemainder] = useState([])
     const [remainderDate1, setRemainderDate1] = useState(date.setDate(date.getDate() + 1))
     const handleRemainderDate = (date) => {
         setAllRemainder([...allRemainder, date.toDateString()]);
@@ -108,182 +144,16 @@ const Coompose = () => {
     const [remainder2, setRemainder2] = useState(false)
     const [remainder3, setRemainder3] = useState(false)
 
-
-    // *** remainder all functionality close *** //
-
-    // deadline date
-
-    const [deadlineDate, setDeadlineDate] = useState(date.setDate(date.getDate() + 2))
+    
     const handleDeadlineDate = (date) => {
         setDeadlineDate(date.toDateString());
     };
+    
 
-    // 2nd 3rd quick reply
+    // quick reply
+
     const [quickReply1, setQuickReply1] = useState(false)
     const [quickReply2, setQuickReply2] = useState(false)
-
-
-    // schedule date start
-
-    const [scheduleDate, setScheduleDate] = React.useState(new Date().toLocaleString());
-
-    const handleDateChange = (date) => {
-        setScheduleDate(date);
-    };
-
-    // schedule date end
-
-    // checkbox handle
-    const handleChange = (event) => {
-        setCheckBox({ ...checkBox, [event.target.name]: event.target.checked });
-    };
-    const [cc, setCc] = useState([])
-    // console.log("ccFromArray", cc);
-    // input handle
-    const handleInput = (e) => {
-        e.preventDefault();
-        const newValue = ({...value})
-        newValue[e.target.name] = e.target.value
-        setValue(newValue)
-        // console.log(newValue)
-    }
-
-    // schdule time handle
-    const handleSetSchduleTime = (e) => {
-        e.preventDefault()
-        const newTime = { ...schduleTime }
-        newTime[e.target.name] = e.target.value
-        setSchduleTime(newTime)
-    } 
-    const [closeCc, setCloseCc] = useState(false)
-    // compose button handle
-    const handleCompose = (e) => {
-        e.preventDefault()
-        const finalValue = { ...value, ...mailBody, quick_reply: quickReply.length>0 && quickReply}
-        if(checkBox.setRemainder) {
-            finalValue.remainder = allRemainder
-        }
-        if (checkBox.setDeadLine) {
-            finalValue.deadline = deadlineDate
-        }
-        if (checkBox.replyNeeded) {
-            finalValue.replyNeeded = true
-        }
-        if (!checkBox.replyNeeded) {
-            finalValue.replyNeeded = false
-        }
-        if(checkBox.hideContactInfo) {
-            finalValue.hideContactInfo = true
-        }
-        if(!checkBox.hideContactInfo) {
-            finalValue.hideContactInfo = false
-        }
-        finalValue.client_id = loggedInUser.id
-        finalValue.mail_file = postData.selectedFile !== null && postData.selectedFile
-        if(group){
-            // const groupValue = cc
-            setCc([])
-            setCloseCc(!closeCc)
-        }
-        if(cc.length>0) {
-            finalValue.cc = cc
-        }
-        if(selectGroup.length>0) {
-            finalValue.group = selectGroup
-        }
-        if(selectTag.length>0) {
-            finalValue.tag = selectTag
-        }
-        console.log("finalValue", finalValue);
-        
-        Axios.post(`${key}send-mail-customer`, finalValue)
-            .then(res => {
-                console.log(res);
-                
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
-    // handle set schdule start
-
-    const handleSetSchdule = (e) => {
-        e.preventDefault()
-        // const schduleValue = { ...value, ...mailBody, ...schduleTime }
-        const schduleValue = { ...value, ...mailBody, quick_reply: quickReply.length>0 && quickReply, ...schduleTime} 
-        // const schduleValue = { ...value, ...mailBody, quick_reply: quickReply}
-        if(checkBox.setRemainder) {
-            schduleValue.remainder = allRemainder
-        }
-        if (checkBox.setDeadLine) {
-            schduleValue.deadline = deadlineDate
-        }
-        if (checkBox.replyNeeded) {
-            schduleValue.replyNeeded = true
-        }
-        if (!checkBox.replyNeeded) {
-            schduleValue.replyNeeded = false
-        }
-        if(checkBox.hideContactInfo) {
-            schduleValue.hideContactInfo = true
-        }
-        if(!checkBox.hideContactInfo) {
-            schduleValue.hideContactInfo = false
-        }
-        schduleValue.client_id = loggedInUser.id
-        schduleValue.mail_file = postData.selectedFile !== null && postData.selectedFile
-        if(group){
-            // const groupValue = cc
-            setCc([])
-            setCloseCc(!closeCc)
-        }
-        if(cc.length>0) {
-            schduleValue.cc = cc
-        }
-        if(selectGroup.length>0) {
-            schduleValue.group = selectGroup
-        }
-        if(selectTag.length>0) {
-            schduleValue.tag = selectTag
-        }
-        console.log(schduleValue);
-
-        Axios.post(`${key}send-mail-customer`, schduleValue)
-            .then(res => {
-                console.log(res);
-                
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
-    // handle set schdule end
-
-    const [dateValue, onChange] = useState(new Date());
-
-    // modal handle with state start
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-    // // modal handle with state end
-
-    const handleBlur = (event) => {
-        // console.log({ editorValue: event });
-        const mail_body = {mail_body: event}
-        setMailBody(mail_body)
-    }
-    const handleImageUpload = (targetImgElement, index, state, imageInfo, remainingFilesCount) => {
-        // console.log(targetImgElement, index, state, imageInfo, remainingFilesCount)
-        console.log(imageInfo.name)
-        setImage(imageInfo.name)
-    }
-
 
     return (
         <div className={classNamees.root}>
@@ -298,42 +168,41 @@ const Coompose = () => {
                                 <CardHeader
                                 />
                                 <CardContent>
-                                    <form className={classNamees.form} noValidate>
-
+                                    <form className={classNamees.form} onSubmit={onFormSubmit} method="POST" encType="multipart/form-data">
                                         <div>
                                             <FormControl>
                                                 <TextField
-                                                    id="from"
+                                                    id="sender"
                                                     name="sender"
                                                     // defaultValue={loggedInClient}
-                                                    onBlur={handleInput}
+                                                    onChange={ (e)=>setSender(e.target.value)}
                                                     InputProps={{
                                                         startAdornment: <InputAdornment position="start">From</InputAdornment>,
                                                     }}
                                                     variant="outlined"
                                                 />
                                                 <TextField
-                                                    id="to"
+                                                    id="receiver"
                                                     name="receiver"
-                                                    onBlur={handleInput}
+                                                    onChange={ (e)=>setReceiver(e.target.value)}
                                                     InputProps={{
                                                         startAdornment: <InputAdornment position="start">
                                                             <div className="d-flex">
                                                                 <div>
-                                                                    To
+                                                                                            To
                                                                 </div>
                                                                 <div className="d-flex" style={{ position: 'absolute', left: '64%' }}>
                                                                     <div className="px-2" onClick={() => setCcOpen(!ccOpen)}>
-                                                                        Cc
+                                                                                                Cc
                                                                     </div>
                                                                     <div className="px-2" onClick={() => setBccOpen(!bccOpen)}>
-                                                                        Bcc
+                                                                                                Bcc
                                                                     </div>
                                                                     <div className="px-2" onClick={() => setGroup(!group)}>
-                                                                        Group
+                                                                                                Group
                                                                     </div>
                                                                     <div className="px-2" onClick={() => setTags(!tags)}>
-                                                                        Add Tag
+                                                                                                Add Tag
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -341,107 +210,87 @@ const Coompose = () => {
                                                     }}
                                                     variant="outlined"
                                                 />
-                                                
                                                 {
                                                     ccOpen &&
                                                     <TextField
-                                                    className={closeCc === true && classNamees.ccShows}
-                                                    id="to"
-                                                    name="cc"
-                                                    onBlur={
-                                                        (e) => setCc([...cc, e.target.value])
-                                                    }
-                                                    InputProps={{
-                                                        startAdornment: <InputAdornment position="start">
-                                                            <div className="d-flex">
-                                                                <div>
-                                                                    Cc
-                                                                </div>
-                                                                <div className="d-flex" style={{ position: 'absolute', left: '90%' }}>
-                                                                    <div className="px-2" onClick={() => setCc2(!cc2)}>
-                                                                        {setCc2 ? <AddBoxRoundedIcon  /> : <IndeterminateCheckBoxRoundedIcon />} 
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                        </InputAdornment>,
-                                                    }}
-                                                    variant="outlined"
-                                                />
-                                                }
-
-                                                {
-                                                    cc2 && 
-                                                    <TextField
-                                                    id="to"
-                                                    name="cc"
-                                                    onBlur={
-                                                        (e) => setCc([...cc, e.target.value])
-                                                    }
-                                                    InputProps={{
-                                                        startAdornment: <InputAdornment position="start">
-                                                            <div className="d-flex">
-                                                                <div>
-                                                                    Cc
-                                                                </div>
-                                                                <div className="d-flex" style={{ position: 'absolute', left: '68%' }}>
-                                                                    <div className="px-2" onClick={() => setCc3(!cc3)}>
-                                                                        Add
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                        </InputAdornment>,
-                                                    }}
-                                                    variant="outlined"
-                                                />
-                                                }
-                                                {
-                                                    cc3 && 
-                                                    <TextField
-                                                    id="to"
-                                                    name="cc"
-                                                    onBlur={
-                                                        (e) => setCc([...cc, e.target.value])
-                                                    }
-                                                    InputProps={{
-                                                        startAdornment: <InputAdornment position="start">
-                                                            <div className="d-flex">
-                                                                <div>
-                                                                    Cc
-                                                                </div>
-                                                                <div className="d-flex" style={{ position: 'absolute', left: '68%' }}>
-                                                                    <div className="px-2" onClick={() => setCc3(!cc3)}>
-                                                                        Add
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                        </InputAdornment>,
-                                                    }}
-                                                    variant="outlined"
-                                                />
-                                                }
-
-                                                {/* {
-                                                    ccOpen &&
-                                                    <TextField
+                                                        className={closeCc === true && classNamees.ccShows}
                                                         id="cc"
                                                         name="cc"
-                                                        onBlur={handleInput}
+                                                        onBlur={(e) => setCc([...cc, e.target.value])}
                                                         InputProps={{
-                                                            startAdornment: <InputAdornment position="start">Cc</InputAdornment>,
+                                                            startAdornment: <InputAdornment position="start">
+                                                                <div className="d-flex">
+                                                                    <div>
+                                                                                                Cc
+                                                                                        </div>
+                                                                    <div className="d-flex" style={{ position: 'absolute', left: '90%' }}>
+                                                                        <div className="px-2" onClick={() => setCc2(!cc2)}>
+                                                                            {setCc2 ? <AddBoxRoundedIcon /> : <IndeterminateCheckBoxRoundedIcon />}
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </InputAdornment>,
                                                         }}
                                                         variant="outlined"
                                                     />
-                                                } */}
-                                                
+                                                }
+
+                                                {
+                                                    cc2 &&
+                                                    <TextField
+                                                        id="cc"
+                                                        name="cc"
+                                                        onBlur={(e) => setCc([...cc, e.target.value])}
+                                                        InputProps={{
+                                                            startAdornment: <InputAdornment position="start">
+                                                                <div className="d-flex">
+                                                                    <div>
+                                                                                                Cc
+                                                                    </div>
+                                                                    <div className="d-flex" style={{ position: 'absolute', left: '68%' }}>
+                                                                        <div className="px-2" onClick={() => setCc3(!cc3)}>
+                                                                                                    Add
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </InputAdornment>,
+                                                        }}
+                                                        variant="outlined"
+                                                    />
+                                                }
+                                                {
+                                                    cc3 &&
+                                                    <TextField
+                                                        id="cc"
+                                                        name="cc"
+                                                        onBlur={(e) => setCc([...cc, e.target.value])}
+                                                        InputProps={{
+                                                            startAdornment: <InputAdornment position="start">
+                                                                <div className="d-flex">
+                                                                    <div>
+                                                                                                Cc
+                                                                    </div>
+                                                                    <div className="d-flex" style={{ position: 'absolute', left: '68%' }}>
+                                                                        <div className="px-2" onClick={() => setCc3(!cc3)}>
+                                                                                                    Add
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </InputAdornment>,
+                                                        }}
+                                                        variant="outlined"
+                                                    />
+                                                }
+
                                                 {
                                                     bccOpen &&
                                                     <TextField
                                                         id="bcc"
                                                         name="bcc"
-                                                        onBlur={handleInput}
+                                                        onChange={(e) => setBcc(e.target.value)}
                                                         InputProps={{
                                                             startAdornment: <InputAdornment position="start">Bcc</InputAdornment>,
                                                         }}
@@ -463,7 +312,7 @@ const Coompose = () => {
                                                             native: true,
                                                         }}
                                                         value={selectGroup}
-                                                        onChange={handleGroup}
+                                                        onChange={(e) => setSelectGroup(e.target.value)}
                                                         variant="outlined"
                                                     >
                                                         {groups !== 'loading' && groups.map((option) => (
@@ -488,11 +337,11 @@ const Coompose = () => {
                                                             native: true,
                                                         }}
                                                         value={selectTag}
-                                                        onChange={handleTag}
+                                                        onChange={(e) => setSelectTag(e.target.value)}
                                                     >
                                                         {allTag !== null && allTag.map((option) => (
                                                             <option key={option.id} value={option.tag_name}>
-                                                            {option.tag_name}
+                                                                {option.tag_name}
                                                             </option>
                                                         ))}
                                                     </TextField>
@@ -501,13 +350,12 @@ const Coompose = () => {
                                                 <TextField
                                                     id="subject"
                                                     name="subject"
-                                                    onBlur={handleInput}
+                                                    onChange={(e) => setSubject(e.target.value)}
                                                     InputProps={{
                                                         startAdornment: <InputAdornment position="start">Subject</InputAdornment>,
                                                     }}
                                                     variant="outlined"
                                                 />
-                                                {/* check boxes start */}
 
                                                 <div>
                                                     <FormGroup row style={{ color: '#fff' }} className="d-flex justify-content-between">
@@ -565,10 +413,6 @@ const Coompose = () => {
                                                     </FormGroup>
 
                                                 </div>
-
-                                                {/* check boxes end */}
-
-                                                {/* fuctional check boxes show start */}
 
                                                 <div className="d-flex justify-content-between">
                                                     <div>
@@ -678,148 +522,116 @@ const Coompose = () => {
                                                         </div>
                                                     }
 
-
-                                                </div>
-
-                                                {/* fuctional check boxes show end */}
-
-                                                <SunEditor
-                                                    width="100%"
-                                                    placeholder="Details..."
-                                                    name="editor"
-                                                    setOptions={{
-                                                        height: 100,
-                                                        buttonList: [
-                                                            ['font', 'fontSize', 'formatBlock'],
-                                                            ['bold', 'underline', 'italic',],
-                                                            ['align', 'horizontalRule', 'list', 'lineHeight'],
-                                                            // ['link','image'],
-                                                            ['fullScreen', 'codeView'],
-                                                        ]
-                                                    }}
-                                                    onChange={handleBlur}
+                                                    <SunEditor
+                                                        width="100%"
+                                                        placeholder="Details..."
+                                                        name="editor"
+                                                        setOptions={{
+                                                            height: 100,
+                                                            buttonList: [
+                                                                ['font', 'fontSize', 'formatBlock'],
+                                                                ['bold', 'underline', 'italic',],
+                                                                ['align', 'horizontalRule', 'list', 'lineHeight'],
+                                                                // ['link','image'],
+                                                                ['fullScreen', 'codeView'],
+                                                            ]
+                                                        }}
+                                                        onChange={(e) => setMailBody(e)}
                                                     // onImageUpload={handleImageUpload}
-                                                />
-                                            </FormControl>
-                                        </div>
-                                        <div>
-                                            {/* <img style={{width:'20%', padding: '1rem'}} src={files?.source || 'no selected file'} alt="preview" /> */}
-                                            <span style={{color:'#fff'}}>{files?.name} </span>
-                                            {/* <Button
-                                                variant="contained"
-                                                color="default"
-                                                className={classes.button}
-                                                startIcon={<CloudUploadIcon />}
-                                                onClick={() =>
-                                                    selectFiles({ }, ({ name, size, source, file }) => {
-                                                        console.log("Files Selected", { name, size, source, file });
-                                                    })
-                                                }
-                                                >
-                                                Upload
-                                            </Button> */}
-                                        </div>
-                                        {/* <Button
-                                            type="submit"
-                                            fullWidth
-                                            variant="contained"
-                                            color="secondary"
-                                            className={classNamees.btnStyle}
-                                            onClick={handleCompose}
-                                        >
-                                            Send
-                                        </Button> */}
-                                        <div className="d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <div>
-                                                    <FormControlLabel
-                                                        style={{ color: '#fff' }}
-                                                        control={
-                                                            <Checkbox
-                                                                checked={checkBox.quickReply}
-                                                                onChange={handleChange}
-                                                                name="quickReply"
-                                                                style={{ color: '#4195D1' }}
-                                                            />}
-                                                        label="Quick Reply"
                                                     />
-                                                </div>
-                                                <div>
-                                                    {
-                                                        checkBox.quickReply &&
-                                                        <div className="d-flex align-items-center">
-                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment1" onBlur={(e) => setQuickReply([...quickReply, e.target.value ]) } rows={2} placeholder="Quick Reply ..." />
-                                                            <div>
-                                                                {
-                                                                    quickReply1 !== true ?
-                                                                        <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply1(!quickReply1)} />
-                                                                        :
-                                                                        <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply1(!quickReply1)} />
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                </div>
-                                                <div >
-                                                    {
-                                                        quickReply1 &&
-                                                        <div className="d-flex align-items-center">
-                                                            <TextareaAutosize aria-label="quick reply" name="quickReplyComment2" onBlur={(e) => setQuickReply([...quickReply, e.target.value ]) } rows={2} placeholder="Quick Reply ..." />
-                                                            <div>
-                                                                {
-                                                                    quickReply2 !== true ?
-                                                                        <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />
-                                                                        :
-                                                                        <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />
-                                                                }
-                                                            </div>
-                                                        </div>
 
-                                                    }
+
                                                 </div>
 
-                                                {
-                                                    quickReply2 &&
-                                                    <div className="d-flex align-items-center">
-                                                        <TextareaAutosize aria-label="quick reply" name="quickReplyComment3" onBlur={(e) => setQuickReply([...quickReply, e.target.value ]) } rows={2} placeholder="Quick Reply ..." />
+                                                <div className="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <div>
+                                                            <FormControlLabel
+                                                                style={{ color: '#fff' }}
+                                                                control={
+                                                                    <Checkbox
+                                                                        checked={checkBox.quickReply}
+                                                                        onChange={handleChange}
+                                                                        name="quickReply"
+                                                                        style={{ color: '#4195D1' }}
+                                                                    />}
+                                                                label="Quick Reply"
+                                                            />
+                                                        </div>
                                                         <div>
                                                             {
-
-                                                                <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />
+                                                                checkBox.quickReply &&
+                                                                <div className="d-flex align-items-center">
+                                                                    <TextareaAutosize aria-label="quick reply" name="quickReplyComment1" onBlur={(e) => setQuickReply([...quickReply, e.target.value])} rows={2} placeholder="Quick Reply ..." />
+                                                                    <div>
+                                                                        {
+                                                                            quickReply1 !== true ?
+                                                                                <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply1(!quickReply1)} />
+                                                                                :
+                                                                                <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply1(!quickReply1)} />
+                                                                        }
+                                                                    </div>
+                                                                </div>
                                                             }
                                                         </div>
+                                                        <div >
+                                                            {
+                                                                quickReply1 &&
+                                                                <div className="d-flex align-items-center">
+                                                                    <TextareaAutosize aria-label="quick reply" name="quickReplyComment2" onBlur={(e) => setQuickReply([...quickReply, e.target.value])} rows={2} placeholder="Quick Reply ..." />
+                                                                    <div>
+                                                                        {
+                                                                            quickReply2 !== true ?
+                                                                                <AddBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />
+                                                                                :
+                                                                                <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />
+                                                                        }
+                                                                    </div>
+                                                                </div>
+
+                                                            }
+                                                        </div>
+
+                                                        {
+                                                            quickReply2 &&
+                                                            <div className="d-flex align-items-center">
+                                                                <TextareaAutosize aria-label="quick reply" name="quickReplyComment3" onBlur={(e) => setQuickReply([...quickReply, e.target.value])} rows={2} placeholder="Quick Reply ..." />
+                                                                <div>
+                                                                    {
+
+                                                                        <IndeterminateCheckBoxRoundedIcon style={{ color: '#fff' }} fontSize="large" onClick={() => setQuickReply2(!quickReply2)} />
+                                                                    }
+                                                                </div>
+                                                            </div>
+
+                                                        }
+
                                                     </div>
-
-                                                }
-
-                                            </div>
-                                            <div className="btn-group">
-                                                <button type="button" className="btn btn-primary"
-                                                    style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem' }}
-                                                    onClick={handleCompose}
-                                                >
-                                                    Send
-                                                </button>
-                                                <button type="button"
-                                                    style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem' }}
-                                                    className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                </button>
-                                                <div className="dropdown-menu" id="schedule-sent-droupdown" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
-                                                    <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
                                                 </div>
+
+                                            </FormControl>
+                                        </div>
+                                        <input type="file" id="mail_file" name="mail_file" onChange={(e) => setMailfile(e.target.files[0])} />
+                                        {/* <button type="submit">Upload</button>  */}
+                                        <div className="btn-group">
+                                            <button type="submit" className="btn btn-primary"
+                                                style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem' }}
+                                            // onClick={handleCompose}
+                                            >
+                                                Send
+                                                        </button>
+                                            <button type="button"
+                                                style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem' }}
+                                                className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            </button>
+                                            <div className="dropdown-menu" id="schedule-sent-droupdown" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
+                                                <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
                                             </div>
                                         </div>
                                     </form>
-                                    <form autoComplete="off" noValidate>
-                                          <div><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
-
-                                    </form>
-                                        {/* <Button variant="contained" color="primary" size="large" onClick={handleSubmit} fullWidth> Submit </Button> */}
+                                       
                                 </CardContent>
                             </Card>
-
-                            {/* calender popup for schedule mail */}
-
                             <Modal
                                 aria-labelledby="transition-modal-title"
                                 aria-describedby="transition-modal-description"
@@ -837,36 +649,9 @@ const Coompose = () => {
                                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                             <div className="">
                                                 <Grid container justify="space-around">
-                                                    {/* <KeyboardDatePicker
-                                                        margin="normal"
-                                                        id="date-picker-dialog"
-                                                        variant="static"
-                                                        label="Select Remainder"
-                                                        format="MM/dd/yyyy"
-                                                        disablePast="true"
-                                                        value={scheduleDate}
-                                                        onChange={scheduleDate}
-                                                        style={{ backgroundColor: '#fff' }}
-                                                        KeyboardButtonProps={{
-                                                            'aria-label': 'change date',
-                                                        }}
-                                                    /> */}
-
-                                                    {/* <KeyboardDatePicker
-                                                        margin="normal"
-                                                        id="date-picker-dialog"
-                                                        label="Date picker dialog"
-                                                        format="MM/dd/yyyy"
-                                                        value={scheduleDate}
-                                                        onChange={handleDateChange}
-                                                        KeyboardButtonProps={{
-                                                            'aria-label': 'change date',
-                                                        }}
-                                                        variant="static"
-                                                    /> */}
-                                                        <div style={{background: '#fff'}}>
-                                                            <TextField
-                                                            style={{color: '#fff'}}
+                                                    <div style={{ background: '#fff' }}>
+                                                        <TextField
+                                                            style={{ color: '#fff' }}
                                                             id="datetime-local"
                                                             name="schedule"
                                                             label="Select schdule date time"
@@ -876,31 +661,15 @@ const Coompose = () => {
                                                             defaultValue="2020-12-24T10:30"
                                                             // className={classes.textField}
                                                             InputLabelProps={{
-                                                            shrink: true,
+                                                                shrink: true,
                                                             }}
                                                         />
-                                                        </div>
+                                                    </div>
 
-                                                   
+
                                                 </Grid>
-                                                <Grid container justify="space-around">
-                                                    {/* <TextField
-                                                        style={{ color: '#fff', backgroundColor: '#fff', width: "100%", border: '1px solid gray' }}
-                                                        id="time"
-                                                        label="Select Time"
-                                                        type="time"
-                                                        name="schduleTime"
-                                                        onBlur={handleSetSchduleTime}
-                                                        defaultValue="07:30"
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
-                                                        inputProps={{
-                                                            step: 300, 
-                                                        }}
-                                                    /> */}
-                                                </Grid>
-                                                <Button onClick={handleSetSchdule} variant="contained" color="primary" fullWidth> SET SCHEDULE </Button>
+                                                
+                                                <Button  variant="contained" color="primary" fullWidth> SET SCHEDULE </Button>
                                             </div>
 
                                         </MuiPickersUtilsProvider>
@@ -908,12 +677,13 @@ const Coompose = () => {
 
                                 </Fade>
                             </Modal>
+
+                            
                         </div>
                     </Grid>
                 </Container>
             </main>
         </div>
-    );
-};
-
-export default Coompose;
+    )
+}
+export default MailCompose

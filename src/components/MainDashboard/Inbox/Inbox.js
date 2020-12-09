@@ -209,7 +209,7 @@ const Inbox = () => {
                                                 inbox.remainer !== null && <AccessAlarmSharpIcon fontSize="small" style={{color: '#A61414'}} />
                                             }
                                             <br />
-                                            <strong style={{ marginLeft: '0.5rem' }}> {inbox.subject !== null && inbox.subject.slice(0,12) } </strong> { `${inbox.mail_body.replace(/<\/?[^>]+(>|$)/g, "").slice(0,90)}`}
+                                            <strong style={{ marginLeft: '0.5rem' }}> {inbox.subject !== null && inbox.subject.slice(0,12) } </strong> { `${inbox.mail_body.replace(/<\/?[^>]+(>|$)/g, "").slice(0,80)}`}
                                         </Typography>
 
                                     </Link>
@@ -223,7 +223,7 @@ const Inbox = () => {
                                             border: 'none',
                                             borderRadius: '5px',
                                             position: 'absolute',
-                                            right: '16%'
+                                            right: '14%'
                                         }}>
                                         Report
                                     </button>
@@ -287,7 +287,7 @@ const Inbox = () => {
                                                 inbox.remainer !== null && <AccessAlarmSharpIcon fontSize="small" style={{color: '#A61414'}} />
                                             }
                                             <br />
-                                            <strong style={{ marginLeft: '0.5rem' }}> { inbox.subject.slice(0,12) } </strong> { `${inbox.mail_body.replace(/<\/?[^>]+(>|$)/g, "").slice(0,60)}......`}
+                                            <strong style={{ marginLeft: '0.5rem' }}> {inbox.subject !== null && inbox.subject.slice(0,12) } </strong> { `${inbox.mail_body.replace(/<\/?[^>]+(>|$)/g, "").slice(0,60)}......`}
                                         </Typography>
 
                                     </Link>
@@ -306,7 +306,7 @@ const Inbox = () => {
                                 </Link> */}
                               <div className="row">
                                   <div className="col-md-9">
-                                    <Typography style={{ color: '#2d2d2d' }} variant="body1">
+                                    <Typography style={{ color: '#2d2d2d' }} variant="body2">
                                         <small> { moment(inbox.created_at).fromNow() } </small>
                                     </Typography>
                                 </div>
