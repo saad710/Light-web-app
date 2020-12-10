@@ -7,21 +7,29 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import Axios from 'axios';
 import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
 import { MailboxContext } from '../../../Providers/MailboxProvider';
+import { ReportContext } from '../../../Providers/ReportProvider';
 import { useStyles } from './InboxStyle';
 
 
 const Inbox = () => {
     const classes = useStyles()
+    const history = useHistory()
     const [openPanel, setOpenPanel] = useState(false);
     const [userId, setUserId] = useState({})
 
     const { groupsMail, allMail } = useContext(MailboxContext)
+    const { groupMailId, setGroupMailId } = useContext(ReportContext)
+    console.log('groupMailId', groupMailId);
     // // console.log(groupsMail);
     // console.log(allMail);
+    const handleReport = (id) => {
+        setGroupMailId(id)
+        history.push('/report')
+    }
     
     const [allChecked, setAllChecked] = useState(false);
     // using an array to store the checked items
@@ -214,20 +222,22 @@ const Inbox = () => {
 
                                     </Link>
                                 </div>
-                                <Link to="/report">
+                                {/* <Link to="/report"> */}
                                     <button
+                                        onClick={() => handleReport(inbox.id)}
                                         style={{
                                             background: '#4195D1',
-                                            padding: '5px 8px',
+                                            padding: '7px 8px',
                                             color: '#fff',
                                             border: 'none',
                                             borderRadius: '5px',
                                             position: 'absolute',
-                                            right: '14%'
+                                            right: '16%'
                                         }}>
+                                        {/* <Typography varient="body2"> Report </Typography> */}
                                         Report
                                     </button>
-                                </Link>
+                                {/* </Link> */}
                                <div className="row" style={{marginRight:"10px"}}>
                                    <div className="col-md-9">
                                         <Typography style={{ color: '#2d2d2d' }} variant="body1" align="right">

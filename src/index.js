@@ -7,6 +7,7 @@ import ClientProvider from './Providers/ClientProvider';
 import ComposeProvider from './Providers/ComposeProvider';
 import LoggedInProvider from './Providers/LoggedInProvider';
 import MailboxProvider from './Providers/MailboxProvider';
+import ReportProvider from './Providers/ReportProvider';
 import UserProvider from './Providers/UserProvider';
 import * as serviceWorker from './serviceWorker';
 
@@ -17,7 +18,9 @@ ReactDOM.render(
         <MailboxProvider>
           <ComposeProvider>
             <LoggedInProvider>
-              <App />
+              <ReportProvider>
+                <App />
+              </ReportProvider>
             </LoggedInProvider>
         </ComposeProvider>
       </MailboxProvider>

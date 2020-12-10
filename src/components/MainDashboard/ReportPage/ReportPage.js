@@ -12,13 +12,16 @@ import TableRow from '@material-ui/core/TableRow';
 import { Pagination } from '@material-ui/lab';
 import Axios from "axios";
 import moment from "moment";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { key } from '../../../apiKey';
 import bar1 from '../../../images/bar1.svg';
+import { ReportContext } from '../../../Providers/ReportProvider';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './ReportPageStyle';
 
 const ReportPage = () => {
     const classes = useStyles();
+    const { groupMailId, setGroupMailId } = useContext(ReportContext)
     const [checked, setChecked] = React.useState(false);
     const [state,setState] = useState([]);
     const [remainder, setRemainder] = useState([]);
@@ -32,7 +35,7 @@ const ReportPage = () => {
     };
 
     useEffect(() => {
-        Axios.get("http://127.0.0.1:8000/api/group-report/1")
+        Axios.get(`${key}group-report/${groupMailId}`)
             .then(res => {
                 console.log(res.data);
                 setState(res.data);
@@ -43,7 +46,7 @@ const ReportPage = () => {
             .catch(err => {
                 console.log(err.message);
             })
-    },[])
+    },[groupMailId])
 
     console.log(userData.length);
 
