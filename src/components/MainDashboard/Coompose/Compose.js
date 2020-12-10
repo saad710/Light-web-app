@@ -38,6 +38,8 @@ const MailCompose = () => {
     console.log("quickReply", quickReply);
     const [deadlineDate, setDeadlineDate] = useState(date.setDate(date.getDate() + 2))
     console.log("deadlineDate", deadlineDate);
+    const [schduleTime, setSchduleTime] = useState("")
+    console.log("schduleTime", schduleTime);
 
     // checked
     const [checkBox, setCheckBox] = useState({
@@ -54,6 +56,7 @@ const MailCompose = () => {
     const onFormSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData()
+        // const dtime = {...schduleTime}
         formData.append('sender', sender);
         formData.append('receiver', receiver);
         formData.append('client_id', client_id);
@@ -79,7 +82,7 @@ const MailCompose = () => {
         if(!checkBox.hideContactInfo) {
             formData.append('hide_status', false)
         }
-        console.log(formData);
+        // formData.append('schedule', dtime)
         Axios.post('http://127.0.0.1:8000/api/send-mail-customer/', formData)
             .then((res) => {
                 console.log("done", res)
@@ -114,8 +117,6 @@ const MailCompose = () => {
     };
 
     // schedule 
-    const [schduleTime, setSchduleTime] = useState("")
-    console.log("schduleTime",schduleTime);
     const handleSetSchduleTime = (e) => {
         e.preventDefault()
         const newTime = { ...schduleTime }
@@ -669,7 +670,7 @@ const MailCompose = () => {
 
                                                 </Grid>
                                                 
-                                                <Button  variant="contained" color="primary" fullWidth> SET SCHEDULE </Button>
+                                                <Button type="submit" variant="contained" color="primary" fullWidth> SET SCHEDULE </Button>
                                             </div>
 
                                         </MuiPickersUtilsProvider>

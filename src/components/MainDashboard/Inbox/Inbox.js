@@ -20,8 +20,8 @@ const Inbox = () => {
     const [userId, setUserId] = useState({})
 
     const { groupsMail, allMail } = useContext(MailboxContext)
-    console.log(groupsMail);
-    console.log(allMail);
+    // // console.log(groupsMail);
+    // console.log(allMail);
     
     const [allChecked, setAllChecked] = useState(false);
     // using an array to store the checked items
@@ -51,7 +51,7 @@ const Inbox = () => {
             
       };
       
-      console.log(isChecked);
+    //   console.log(isChecked);
     const handleSingleCheck = e => {
       const {id} = e.target;
       
@@ -75,7 +75,7 @@ const Inbox = () => {
         isGroupChecked.push(id);
         setIsGroupChecked([...isGroupChecked]);
         setAllChecked(isGroupChecked.length === groupsMail.length)
-        console.log(isGroupChecked);
+        // console.log(isGroupChecked);
       };
  
 
@@ -90,27 +90,27 @@ const Inbox = () => {
         Axios.delete(`${key}remove-all-client-mail/${id}`)
         
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             })
     }
 
     const handleDeleteSingle = (id) => {
-        console.log(id);
+        // console.log(id);
         // const id = companyId;
         // const client_id = updateUser.id;
         Axios.delete(`${key}remove-client-mail/${id}`)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             })
     }
     const handleDeleteGroup = (id) => {
-        console.log(id);
+        // console.log(id);
         // const id = companyId;
         // const client_id = updateUser.id;
         Axios.delete(`${key}delete-specific-group-mail/${id}`)
@@ -125,10 +125,10 @@ const Inbox = () => {
     useEffect(()=>{
         Axios.get(`${key}clients`)
         .then((response)=>{
-            console.log(response.data);
+            // console.log(response.data);
             const clients = response.data;
             const singleClient = clients.filter(client=> client.email === localStorage.client);
-            console.log(singleClient);
+            // console.log(singleClient);
             setUserId(singleClient[0]);
            
         })

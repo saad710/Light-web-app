@@ -8,21 +8,25 @@ import Axios from 'axios';
 import 'date-fns';
 import React, { useContext, useEffect, useState } from 'react';
 import { key } from '../../../apiKey';
+import { LoggedInContext } from '../../../Providers/LoggedInProvider';
 import { MailboxContext } from '../../../Providers/MailboxProvider';
 import './SearchFilter.css';
 import { useStyles } from './SearchFilterStyle';
 
 const SearchFilter = () => {
- 
+    const { loggedInUser } = useContext(LoggedInContext)
+    const [id, setId] = useState(2)
     const { allMail, setAllMail, reFetch, groupsMail, setGroupsMail } = useContext(MailboxContext)
-    console.log(allMail);
+    console.log(id);
+    useEffect(() => {
+        setId(loggedInUser !== null && loggedInUser.id)
+    }, [loggedInUser])
 
     const [selectedDate, setSelectedDate] = React.useState(new Date());
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
         console.log(date);
-        const id = 1
         const newDate = selectedDate.toLocaleDateString()
         console.log({date: newDate});
         Axios.post(`${key}search-mail-date-wise/${id}`, {date: newDate} )
@@ -70,31 +74,34 @@ const SearchFilter = () => {
         console.log("date value",e.target.value);
     }
         useEffect(() => {
-            checkBox.quickReply && Axios.get(`${key}search-quick-reply`)
+            checkBox.quickReply && Axios.get(`${key}search-quick-reply/${id}`)
                 .then(res => {
                     console.log("search-quick-reply",res.data);
                     setAllMail(res.data.status)
+                    setGroupsMail(res.data.status)
                 })
                 .catch(err => {
                     console.log(err);
                 })
-            checkBox.noReply && Axios.get(`${key}search-no-reply`)
+            checkBox.noReply && Axios.get(`${key}search-no-reply/${id}`)
                 .then(res => {
                     console.log("search-no-reply",res.data);
                     setAllMail(res.data.status)
+                    setGroupsMail(res.data.status)
                 })
                 .catch(err => {
                     console.log(err);
                 })
-            checkBox.setRemainder && Axios.get(`${key}search-reminder`)
+            checkBox.setRemainder && Axios.get(`${key}search-reminder/${id}`)
                 .then(res => {
                     console.log("search-reminder",res.data);
                     setAllMail(res.data.status)
+                    setGroupsMail(res.data.status)
                 })
                 .catch(err => {
                     console.log(err);
                 })
-        }, [checkBox.noReply, checkBox.quickReply, checkBox.setRemainder, setAllMail])
+        }, [checkBox.noReply, checkBox.quickReply, checkBox.setRemainder, id, setAllMail, setGroupsMail])
         
         
     const classes = useStyles();
