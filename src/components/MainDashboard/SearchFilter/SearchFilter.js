@@ -28,7 +28,7 @@ const SearchFilter = () => {
         if(e.key === 'Enter') {
             console.log(" from search filter ", e.target.value);
             const val = groupsMail !== null && groupsMail.filter(group => group.group_name.toLowerCase().includes(e.target.value.toLowerCase()) )
-            console.log(" value from filter ", val);
+            setGroupsMail(val)
         }
     }
 

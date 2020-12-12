@@ -1,9 +1,10 @@
 import { Container, makeStyles } from "@material-ui/core";
+import Axios from "axios";
 import moment from 'moment';
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { MailboxContext } from "../../../Providers/MailboxProvider";
+import { key } from "../../../apiKey";
 import AppBarDrawer from "../AppBarDrawer";
 
 const localizer = momentLocalizer(moment)
@@ -94,18 +95,16 @@ const useStyles = makeStyles((theme) => ({
 
 const events = [
   {
-    title: "Event1",
-    backgroundColor: "#213f7e",
-    start: "2020-11-12T10:30:00",
-    display: "block",
-    end: "2020-11-12T11:30:00",
+    title: "Lunch",
+    start: "2020-12-12T11:30:00",
+    end: "2020-12-13T12:30:00",
   },
   {
     display: "block",
     title: "Event2",
     backgroundColor: "#4195d1",
-    start: "2020-12-12T11:30:00",
-    end: "2020-12-12T12:30:00",
+    start: "2020-10-12T11:30:00",
+    end: "2020-10-12T12:30:00",
   },
   {
     title: "Event3",
@@ -136,32 +135,38 @@ const events = [
     color: "#213f7e",
     display: "block",
   },
-  {
-    title: "Event7",
-    start: "Thu Nov 19 2020",
-    end: "Sat Nov 21 2020",
-    backgroundColor: "#378006",
-    color: "#213f7e",
-    display: "block",
-  },
-  {
-    title: "Event7",
-    start: "Thu Nov 26 2020",
-    end: "Sat Nov 28 2020",
-    backgroundColor: "#378006",
-    color: "#213f7e",
-    display: "block",
-  },
 ];
 
 const SchedulePage = () => {
-  const { groupsMail, allMail } = useContext(MailboxContext)
-  console.log("allMail",allMail);
+  const [schedule, setSchedule] = useState(null)
+  console.log("schedule", schedule);
+  useEffect(() => {
+    Axios.get(`${key}all-schedule-mail`)
+      .then(res => {
+        setSchedule(res.data)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
+  }, [])
+
+  const data = [ 
+    schedule !== null && schedule.map((event) => (
+      {
+        title: event.subject,
+        backgroundColor: "#213f7e",
+        start: event.schedule,
+        display: "block",
+        end: event.remainder !== null && event.remainder,
+      }
+    ))
+    ]
   
-  console.log("groupsMail", groupsMail);
-   
+  
+
+
   const classes = useStyles();
-  console.log(events);
   return (
     <div className={classes.root}>
       <AppBarDrawer />
@@ -169,7 +174,7 @@ const SchedulePage = () => {
         <div className={classes.appBarSpacer} />
         <Calendar
           localizer={localizer}
-          events={events}
+          events={data}
           startAccessor="start"
           endAccessor="end"
           style={{ height: 500 }}

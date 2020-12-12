@@ -6,6 +6,7 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { key } from '../../apiKey';
 import AppBarDrawer from '../MainDashboard/AppBarDrawer';
+import UpdateSchedule from '../MainDashboard/UpdateSchedule/UpdateSchedule';
 import Chart from './Chart/Chart';
 import MailCount from './MailCount/MailCount';
 
@@ -86,6 +87,7 @@ export default function NavDashboard() {
                             {/* <VerifiedCustomer />
                             <UnverifiedCustomer />
                             <PendingCustomers /> */}
+                            <UpdateSchedule />
                         </Grid>
                     </Grid>
                 </Container>

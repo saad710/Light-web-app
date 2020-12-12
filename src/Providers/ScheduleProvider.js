@@ -12,7 +12,7 @@ const ScheduleProvider = (props) => {
     const { loggedInUser } = useContext(LoggedInContext)
     const id = loggedInUser !== null && loggedInUser.id
     const [schedule, setSchedule] = useState([])
-    console.log("schedule Provider", schedule);
+    // console.log("schedule Provider", schedule);
     const [currentDate, setCurrentDate] = useState(new Date().toLocaleString())
     const d = moment(currentDate).format('MMMM Do YYYY, h:mm:ss a')
     // console.log("current date", d);

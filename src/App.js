@@ -20,6 +20,7 @@ import SentFilter from "./components/MainDashboard/SentFilter/SentFilter";
 import Tag from "./components/MainDashboard/Tag/Tag";
 import Team from "./components/MainDashboard/Team/Team";
 import Ticket from "./components/MainDashboard/Ticket/Ticket";
+import UpdateSchedule from "./components/MainDashboard/UpdateSchedule/UpdateSchedule";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
 import ForgetPassword from "./components/SignIn/ForgetPassword";
 import SignInSide from "./components/SignIn/SignIn";
@@ -54,7 +55,7 @@ function App() {
           <Route path='/filter' component={SentFilter} />
           <Route path='/dashboard' component={NavDashboard} />
           <Route path='/passwordReset' component={ForgetPassword} />
-          {/* <Route path='/updates' component={UpdateSchedule} /> */}
+          <Route path='/updates' component={UpdateSchedule} />
           <Route path='/test' component={MailCompose} />
         </Switch>
       </Router>

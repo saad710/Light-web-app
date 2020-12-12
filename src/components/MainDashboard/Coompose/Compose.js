@@ -538,28 +538,27 @@ const MailCompose = () => {
                                                                 </MuiPickersUtilsProvider>
                                                             </div>
                                                         </div>
+                                                        
                                                     }
-
-                                                    <SunEditor
-                                                        width="100%"
-                                                        placeholder="Details..."
-                                                        name="editor"
-                                                        setOptions={{
-                                                            height: 100,
-                                                            buttonList: [
-                                                                ['font', 'fontSize', 'formatBlock'],
-                                                                ['bold', 'underline', 'italic',],
-                                                                ['align', 'horizontalRule', 'list', 'lineHeight'],
-                                                                // ['link','image'],
-                                                                ['fullScreen', 'codeView'],
-                                                            ]
-                                                        }}
-                                                        onChange={(e) => setMailBody(e)}
-                                                    // onImageUpload={handleImageUpload}
-                                                    />
-
-
                                                 </div>
+
+                                                <SunEditor
+                                                    width="100%"
+                                                    placeholder="Details..."
+                                                    name="editor"
+                                                    setOptions={{
+                                                        height: 100,
+                                                        buttonList: [
+                                                            ['font', 'fontSize', 'formatBlock'],
+                                                            ['bold', 'underline', 'italic',],
+                                                            ['align', 'horizontalRule', 'list', 'lineHeight'],
+                                                            // ['link','image'],
+                                                            ['fullScreen', 'codeView'],
+                                                        ]
+                                                    }}
+                                                    onChange={(e) => setMailBody(e)}
+                                                // onImageUpload={handleImageUpload}
+                                                />
 
                                                 <div className="d-flex align-items-center justify-content-between">
                                                     <div>
@@ -631,7 +630,7 @@ const MailCompose = () => {
                                         </div>
                                         <input type="file" id="mail_file" name="mail_file" onChange={(e) => setMailfile(e.target.files[0])} />
                                         {/* <button type="submit">Upload</button>  */}
-                                        <div className="btn-group">
+                                        <div className="btn-group" style={{ marginLeft: '14rem' }}>
                                             <button type="submit" className="btn btn-primary"
                                                 style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem' }}
                                             // onClick={handleCompose}
@@ -663,7 +662,7 @@ const MailCompose = () => {
                                 }}
                             >
                                 <Fade in={open}>
-                                    <div>
+                                    <div style={{ marginLeft: '15rem' }}>
                                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                             <div className="">
                                                 <Grid container justify="space-around">

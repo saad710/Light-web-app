@@ -48,7 +48,15 @@ const ReportPage = () => {
             })
     },[groupMailId])
 
-    console.log(userData.length);
+    const closeMail = () => {
+        Axios.put(`${key}close-mail/${groupMailId}`)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     return <div className={classes.root}>
         <CssBaseline />
@@ -181,7 +189,7 @@ const ReportPage = () => {
                     <Grid item xs={12} md={4} style={{margin: ' 0 auto'}}>
                         <div style={{marginTop: '1rem', marginLeft: '5rem'}}>
                             <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                                <Button size="small" style={{ fontSize: '10px' }}>
+                                <Button onClick={closeMail} size="small" style={{ fontSize: '10px' }}>
                                     Close This Mail
                                 </Button>
                             </ButtonGroup>

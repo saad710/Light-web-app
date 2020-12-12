@@ -21,7 +21,7 @@ const MailboxProvider = (props) => {
             
         Axios.get(`${key}client-all-mail/${client_id}`)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 const mails = res.data.all_mail
                 setAllMail(mails)
             })
@@ -48,7 +48,7 @@ const MailboxProvider = (props) => {
     useEffect(() => {
         Axios.get(`${key}client-all-group-mail/${client_id}`)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 setGroupsMail(res.data)
             })
             .catch(err => {

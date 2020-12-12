@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import AppBarDrawer from './AppBarDrawer';
 import Inbox from './Inbox/Inbox';
-import UpdateSchedule from './UpdateSchedule/UpdateSchedule';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +47,6 @@ export default function Dashboard() {
             <Grid item xs={12}>
                 <Inbox />
             </Grid>
-            <UpdateSchedule />
           </Grid>
         </Container>
       </main>
