@@ -24,6 +24,14 @@ const SearchFilter = () => {
 
     const [selectedDate, setSelectedDate] = React.useState(new Date());
 
+    const handleKeyword = (e) => {
+        if(e.key === 'Enter') {
+            console.log(" from search filter ", e.target.value);
+            const val = groupsMail !== null && groupsMail.filter(group => group.group_name.toLowerCase().includes(e.target.value.toLowerCase()) )
+            console.log(" value from filter ", val);
+        }
+    }
+
     const handleDateChange = (date) => {
         setSelectedDate(date);
         console.log(date);
@@ -122,7 +130,9 @@ const SearchFilter = () => {
                                 </div>
                                 <InputBase
                                     placeholder="Search…"
-                                    // onClick={ handleKeyword }
+                                    name="search"
+                                    id="search"
+                                    onKeyPress={ handleKeyword }
                                     classes={{
                                         root: classes.inputRoot,
                                         input: classes.inputInput,
