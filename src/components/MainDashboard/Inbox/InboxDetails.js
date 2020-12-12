@@ -6,7 +6,7 @@ import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
 import AppBarDrawer from '../AppBarDrawer';
@@ -87,7 +87,8 @@ const InboxDetails = () => {
                         </Typography>
                         <div className={classes.downloadfileStyle}>
                            <Typography variant="h6" component="h6" align="center"> {info.mail_file} </Typography>
-                                <Link to={`${key}file-down/${info.mail_file}`} target="_blank" download>
+                                {/* <Link to={`${key}file-down/${info.mail_file}`} target="_blank" download> */}
+                                <a href={`${key}file-down/${info.mail_file}`}>
                                     <Button
                                     style={{ marginLeft: '4rem' }}
                                     variant="contained"
@@ -97,7 +98,8 @@ const InboxDetails = () => {
                                     >
                                         Download
                                     </Button>
-                                </Link>
+                                </a>
+                                {/* </Link> */}
                         </div>
                         
 

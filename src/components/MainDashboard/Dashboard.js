@@ -1,10 +1,11 @@
-import React from 'react';
-import {makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Inbox from './Inbox/Inbox'
+import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import AppBarDrawer from './AppBarDrawer';
+import Inbox from './Inbox/Inbox';
+import UpdateSchedule from './UpdateSchedule/UpdateSchedule';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +48,7 @@ export default function Dashboard() {
             <Grid item xs={12}>
                 <Inbox />
             </Grid>
+            <UpdateSchedule />
           </Grid>
         </Container>
       </main>

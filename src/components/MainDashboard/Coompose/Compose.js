@@ -24,12 +24,15 @@ const MailCompose = () => {
     const classNamees = useStyles();
     const [sender, setSender] = useState("");
     const [receiver, setReceiver] = useState("");
+    console.log("receiver test", receiver);
     const [client_id] = useState(1);
     const [cc, setCc] = useState([]);
+    console.log("cc test", cc);
     const [bcc, setBcc] = useState("");
     const [mail_body, setMailBody] = useState("");
     const [mail_file, setMailfile] = useState("");
     const [selectGroup, setSelectGroup] = useState("");
+    console.log(selectGroup);
     const [selectTag, setSelectTag] = useState("");
     const [subject, setSubject] = useState("");
     console.log("mail body", mail_body);
@@ -60,15 +63,21 @@ const MailCompose = () => {
         formData.append('sender', sender);
         formData.append('receiver', receiver);
         formData.append('client_id', client_id);
-        formData.append('cc', cc);
+        if(cc.length >0) {
+            formData.append('cc', cc);
+        }
         formData.append('bcc', bcc);
         formData.append('group', selectGroup);
         formData.append('tag', selectTag);
         formData.append('subject', subject);
         formData.append('mail_body', mail_body);
         formData.append('mail_file', mail_file)
-        formData.append('remainder', allRemainder)
-        formData.append('deadline', deadlineDate)
+        if(checkBox.setRemainder) {
+            formData.append('remainder', allRemainder)
+        }
+        if(checkBox.setDeadLine) {
+            formData.append('deadline', deadlineDate)
+        }
         formData.append('quick_reply', quickReply)
         if (checkBox.replyNeeded) {
             formData.append('reply_status', true)
@@ -82,7 +91,7 @@ const MailCompose = () => {
         if(!checkBox.hideContactInfo) {
             formData.append('hide_status', false)
         }
-        // formData.append('schedule', dtime)
+        formData.append('schedule', schduleTime)
         Axios.post('http://127.0.0.1:8000/api/send-mail-customer/', formData)
             .then((res) => {
                 console.log("done", res)
@@ -97,6 +106,13 @@ const MailCompose = () => {
     const [bccOpen, setBccOpen] = useState(false)
     const [group, setGroup] = useState(false)
     const [tags, setTags] = useState(false)
+
+    const handleGroup = () => {
+        setGroup(!group)
+        setReceiver("")
+    }
+    
+ 
 
     const [closeCc, setCloseCc] = useState(false)
     // multiple cc
@@ -119,9 +135,10 @@ const MailCompose = () => {
     // schedule 
     const handleSetSchduleTime = (e) => {
         e.preventDefault()
-        const newTime = { ...schduleTime }
-        newTime[e.target.name] = e.target.value
-        setSchduleTime(newTime)
+        // const newTime = { ...schduleTime }
+        // newTime[e.target.name] = e.target.value
+        setSchduleTime(e.target.value)
+        // console.log("date time test", newTime)
     } 
 
     // *** remainder all functionality start *** //
@@ -199,7 +216,7 @@ const MailCompose = () => {
                                                                     <div className="px-2" onClick={() => setBccOpen(!bccOpen)}>
                                                                                                 Bcc
                                                                     </div>
-                                                                    <div className="px-2" onClick={() => setGroup(!group)}>
+                                                                    <div className="px-2" onClick={handleGroup}>
                                                                                                 Group
                                                                     </div>
                                                                     <div className="px-2" onClick={() => setTags(!tags)}>
@@ -653,10 +670,11 @@ const MailCompose = () => {
                                                     <div style={{ background: '#fff' }}>
                                                         <TextField
                                                             style={{ color: '#fff' }}
-                                                            id="datetime-local"
+                                                            id="schedule"
                                                             name="schedule"
                                                             label="Select schdule date time"
                                                             type="datetime-local"
+                                                            format="MM/dd/yyyy"
                                                             // value={scheduleDate}
                                                             onChange={handleSetSchduleTime}
                                                             defaultValue="2020-12-24T10:30"
@@ -670,7 +688,7 @@ const MailCompose = () => {
 
                                                 </Grid>
                                                 
-                                                <Button type="submit" variant="contained" color="primary" fullWidth> SET SCHEDULE </Button>
+                                                <Button onClick={handleClose} variant="contained" color="primary" fullWidth> SET SCHEDULE </Button>
                                             </div>
 
                                         </MuiPickersUtilsProvider>

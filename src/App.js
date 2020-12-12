@@ -54,10 +54,12 @@ function App() {
           <Route path='/filter' component={SentFilter} />
           <Route path='/dashboard' component={NavDashboard} />
           <Route path='/passwordReset' component={ForgetPassword} />
+          {/* <Route path='/updates' component={UpdateSchedule} /> */}
           <Route path='/test' component={MailCompose} />
         </Switch>
       </Router>
     </div>
+
   );
 }
 

@@ -8,6 +8,7 @@ import ComposeProvider from './Providers/ComposeProvider';
 import LoggedInProvider from './Providers/LoggedInProvider';
 import MailboxProvider from './Providers/MailboxProvider';
 import ReportProvider from './Providers/ReportProvider';
+import ScheduleProvider from './Providers/ScheduleProvider';
 import UserProvider from './Providers/UserProvider';
 import * as serviceWorker from './serviceWorker';
 
@@ -19,7 +20,9 @@ ReactDOM.render(
           <ComposeProvider>
             <LoggedInProvider>
               <ReportProvider>
-                <App />
+                <ScheduleProvider>
+                    <App />
+                </ScheduleProvider>
               </ReportProvider>
             </LoggedInProvider>
         </ComposeProvider>
