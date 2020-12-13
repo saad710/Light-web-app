@@ -1,9 +1,12 @@
-import { Avatar, Chip, Container, Grid, List, Typography } from '@material-ui/core';
+import { Avatar, Card, CardHeader, Chip, Container, Grid, IconButton, Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { useParams } from 'react-router-dom';
+import SunEditor from 'suneditor-react';
+import 'suneditor/dist/css/suneditor.min.css';
 import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
 import AppBarDrawer from '../AppBarDrawer';
@@ -14,7 +17,32 @@ const GroupDetails = () => {
     const [singleInbox, setSingleInbox] = useState(null)
     const [loggedInUser, setLoggedInUser] = useState({})
     const [info, setInfo] = useState([])
-    console.log("info", info );
+    const [quiclReply, setQuickReply] = useState([])
+    console.log("info", quiclReply );
+    const [mail_body, setMailBody] = useState("");
+    const [mail_file, setMailfile] = useState("");
+
+    const [showReplyBox, setShowReplyBox] = useState(false)
+
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+        const data = {
+            client_id: 1,
+            mail_body: mail_body,
+            mail_file: mail_file
+        }
+        console.log(data);
+        // const formData = new FormData()
+        //     formData.append('client_id', 1);
+        //     formData.append('mail_body', mail_body);
+        //     formData.append('mail_file', mail_file)
+        // Axios.post('http://127.0.0.1:8000/api/send-mail-customer/', formData)
+        //     .then((res) => {
+        //         console.log("done", res)
+        //     }).catch((err) => {
+        //         console.log(err.message)
+        //     })
+    }
 
     useEffect(() => {
         const client_id = loggedInUser.id
@@ -40,13 +68,13 @@ const GroupDetails = () => {
     useEffect(() => {
         async function getInfo() {
         const message = await singleInbox !== null && singleInbox.filter(singleMsg => singleMsg.id == inboxId)
-        console.log(message[0]);
+        console.log(message);
+        setQuickReply(message)
         setInfo(message[0])
         }
         getInfo()
     }, [inboxId, singleInbox])
-    
-    // const info = message[0]
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -81,51 +109,92 @@ const GroupDetails = () => {
                                 </small>
                                 <br />
 
-                                <Chip
-                                    style={{
-                                            marginLeft: '1rem',
-                                            marginTop: '0.5rem',
-                                            fontSize: '11px',
-                                            backgroundColor: '#203D79',
-                                            height: '1.5rem',
-                                            width: '5rem',
-                                            color: '#fff',
-                                    }}
-                                    label={info.type}
-                                
-                                />
+                                    <div className="d-flex align-items-center justify-content-between">
+                                        <Chip
+                                            style={{
+                                                marginLeft: '1rem',
+                                                marginTop: '0.5rem',
+                                                fontSize: '11px',
+                                                backgroundColor: '#203D79',
+                                                height: '1.5rem',
+                                                width: '5rem',
+                                                color: '#fff',
+                                            }}
+                                            label={info.type}
+
+                                        />
+                                        <div>
+                                            {
+                                                info.deadline && `Deadline : ${info.deadline}`
+                                            }
+                                        </div>
+                                        <div>
+                                            
+                                        </div>
+                                </div>
 
                             </Typography>
+                                <div>
+                                    {
+                                        
+                                    }
+                                </div>
                         </div>
                         <Typography variant="body1" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
                             {ReactHtmlParser(info.mail_body)}
                         </Typography>
 
                     </Grid>
-                    <div className={classes.replyStyle} >
-                        <List component="nav" className='d-flex-column' aria-label="mailbox folders" >
-                            
-                            {/* <ListItem button divider>
-                                <ListItemText primary="Drafts" />
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemText primary="Trash" />
-                            </ListItem>
-                            <Divider light />
-                            <ListItem button>
-                                <ListItemText primary="Spam" />
-                            </ListItem> */}
-                        </List>
-                    </div>
-                    {/* <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
-                        <Button variant="contained" className={classes.btnStyle} color="primary">
+                    <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
+                    <hr />
+                            <Card className={classes.root}>
+                                <CardHeader
+                                    avatar={
+                                        <Avatar aria-label="recipe" className={classes.avatar}>
+                                            R
+                                    </Avatar>
+                                    }
+                                    action={
+                                        <IconButton aria-label="settings">
+                                            {/* <MoreVertIcon /> */}
+                                        </IconButton>
+                                    }
+                                    title="Shrimp and Chorizo Paella"
+                                    subheader="September 14, 2016"
+                                />
+                            </Card>
+                    <hr/>
+                        <Button onClick={(e) => setShowReplyBox(!showReplyBox) } variant="contained" className={classes.btnStyle} color="primary">
                             REPLY
                         </Button>
-
-                        <Button style={{ margin: '0rem 1rem' }} variant="contained" className={classes.btnStyle} color="primary">
-                            CLOSE
-                        </Button>
-                    </div> */}
+                    </div>
+                    {   showReplyBox &&
+                        <div className="my-5">
+                            <form noValidate onSubmit={onFormSubmit} autoComplete="off" method="POST" encType="multipart/form-data">
+                                <SunEditor
+                                    width="100%"
+                                    placeholder="Details..."
+                                    name="editor"
+                                    setOptions={{
+                                        height: 100,
+                                        buttonList: [
+                                            ['font', 'fontSize', 'formatBlock'],
+                                            ['bold', 'underline', 'italic',],
+                                            ['align', 'horizontalRule', 'list', 'lineHeight'],
+                                            // ['link','image'],
+                                            ['fullScreen', 'codeView'],
+                                        ]
+                                    }}
+                                    onChange={(e) => setMailBody(e)}
+                                // onImageUpload={handleImageUpload}
+                                />
+                                <input type="file" id="mail_file" name="mail_file" onChange={(e) => setMailfile(e.target.files[0])} />
+                                <Button type="submit" variant="contained" className={classes.btnStyle} color="primary">
+                                    SEND
+                                </Button>
+                        </form>
+                    </div>
+                    }
                 </Container>
             </main>
             }

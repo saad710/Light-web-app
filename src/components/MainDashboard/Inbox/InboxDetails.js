@@ -67,7 +67,7 @@ const InboxDetails = () => {
                                 </small>
                                 <br />
 
-                                    <div className="d-flex align-items-center">
+                                    <div className="d-flex align-items-center justify-content-between">
                                         <Chip
                                             style={{
                                                 marginLeft: '1rem',
@@ -82,7 +82,9 @@ const InboxDetails = () => {
 
                                         />
                                         <div>
-                                            
+                                            {
+                                                info.deadline && `Deadline : ${info.deadline}`
+                                            }
                                         </div>
                                 </div>
 
@@ -110,24 +112,7 @@ const InboxDetails = () => {
                         
 
                     </Grid>
-                    {/* <div className={classes.replyStyle} >
-                        <List component="nav" className='d-flex-column' aria-label="mailbox folders" >
-                            <ListItem button>
-                                <ListItemText primary="Inbox" />
-                            </ListItem>
-                            <Divider />
-                            <ListItem button divider>
-                                <ListItemText primary="Drafts" />
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemText primary="Trash" />
-                            </ListItem>
-                            <Divider light />
-                            <ListItem button>
-                                <ListItemText primary="Spam" />
-                            </ListItem>
-                        </List>
-                    </div> */}
+                    
                     {/* <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
                         <Button variant="contained" className={classes.btnStyle} color="primary">
                             REPLY
