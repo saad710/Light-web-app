@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CompanyDetails from "./components/MainDashboard/CompanyDetails/CompanyDetails";
 import MailCompose from "./components/MainDashboard/Coompose/Compose";
-import Compose from "./components/MainDashboard/Coompose/Coompose";
 import Customers from "./components/MainDashboard/Customers/Customers";
 import Dashboard from "./components/MainDashboard/Dashboard";
 import EmailSignature from "./components/MainDashboard/EmailSignature/EmailSignature";
@@ -42,7 +41,7 @@ function App() {
           {/* <Route path='/privacy' component={Privacy} /> */}
           <Route path='/team' component={Team} />
           <Route path='/companydetails' component={CompanyDetails} />
-          <Route path='/compose' component={Compose} />
+          <Route path='/compose' component={MailCompose} />
           <Route path='/ticket' component={Ticket} />
           <Route path='/calender' component={SchedulePage} />
           <Route path='/email-signature' component={EmailSignature} />
@@ -56,7 +55,7 @@ function App() {
           <Route path='/dashboard' component={NavDashboard} />
           <Route path='/passwordReset' component={ForgetPassword} />
           <Route path='/updates' component={UpdateSchedule} />
-          <Route path='/test' component={MailCompose} />
+          {/* <Route path='/test' component={MailCompose} /> */}
         </Switch>
       </Router>
     </div>

@@ -86,14 +86,14 @@ const Group = () => {
         // group_name.customer_email = customerEmail.toString()
         group_name.customer_email = customerEmail
         console.log(group_name);
-        Axios.post(`${key}create-group`, group_name)
-            .then(res => {
-                console.log(res);
-                reFetch()
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        // Axios.post(`${key}create-group`, group_name)
+        //     .then(res => {
+        //         console.log(res);
+        //         reFetch()
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
     }
 
     // delete feature
@@ -572,8 +572,9 @@ const Group = () => {
                                                                         autoWidth='true'
                                                                     >
                                                                         {groups !== null && groups.map((name) => (name.customer_email !== null && name.customer_email.map(email => (
-                                                                                <MenuItem key={name.email} value={email} >
-                                                                                    {showOldValue !== name.id && email}
+                                                                            <MenuItem key={name.email} value={email} >
+                                                                                {/* {showOldValue !== name.id && email} */}
+                                                                                {showOldValue !== name.id && email}
                                                                                 </MenuItem>
                                                                             ))
                                                                         ))}

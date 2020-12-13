@@ -32,6 +32,7 @@ const InboxDetails = () => {
     const message = singleInbox !== null && singleInbox.filter(singleMsg => singleMsg.id == inboxId)
     console.log(message[0]);
     const info = message[0]
+    console.log("details", info);
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -66,19 +67,24 @@ const InboxDetails = () => {
                                 </small>
                                 <br />
 
-                                <Chip
-                                    style={{
-                                            marginLeft: '1rem',
-                                            marginTop: '0.5rem',
-                                            fontSize: '11px',
-                                            backgroundColor: '#203D79',
-                                            height: '1.5rem',
-                                            width: '5rem',
-                                            color: '#fff',
-                                    }}
-                                    label={info.type}
-                                
-                                />
+                                    <div className="d-flex align-items-center">
+                                        <Chip
+                                            style={{
+                                                marginLeft: '1rem',
+                                                marginTop: '0.5rem',
+                                                fontSize: '11px',
+                                                backgroundColor: '#203D79',
+                                                height: '1.5rem',
+                                                width: '5rem',
+                                                color: '#fff',
+                                            }}
+                                            label={info.type}
+
+                                        />
+                                        <div>
+                                            
+                                        </div>
+                                </div>
 
                             </Typography>
                         </div>

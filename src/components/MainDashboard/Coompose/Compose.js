@@ -1,5 +1,5 @@
 import DateFnsUtils from '@date-io/date-fns';
-import { Backdrop, Button, Card, CardContent, CardHeader, Checkbox, Fade, FormControl, FormControlLabel, FormGroup, InputAdornment, Modal, TextareaAutosize, TextField, Typography } from '@material-ui/core';
+import { Backdrop, Button, Card, CardContent, CardHeader, Checkbox, CircularProgress, Fade, FormControl, FormControlLabel, FormGroup, InputAdornment, Modal, Slide, Snackbar, TextareaAutosize, TextField, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +15,10 @@ import { ComposeContext } from '../../../Providers/ComposeProvider';
 import AppBarDrawer from '../AppBarDrawer';
 import './Compose.css';
 import { useStyles } from './ComposeStyle';
+
+function TransitionLeft(props) {
+    return <Slide {...props} direction="left" />;
+}
 
 
 const MailCompose = () => {
@@ -32,17 +36,21 @@ const MailCompose = () => {
     const [mail_body, setMailBody] = useState("");
     const [mail_file, setMailfile] = useState("");
     const [selectGroup, setSelectGroup] = useState("");
-    console.log(selectGroup);
+    // console.log(selectGroup);
     const [selectTag, setSelectTag] = useState("");
     const [subject, setSubject] = useState("");
-    console.log("mail body", mail_body);
+    // console.log("mail body", mail_body);
     const [allRemainder, setAllRemainder] = useState([])
     const [quickReply, setQuickReply] = useState([])
-    console.log("quickReply", quickReply);
+    // console.log("quickReply", quickReply);
     const [deadlineDate, setDeadlineDate] = useState(date.setDate(date.getDate() + 2))
-    console.log("deadlineDate", deadlineDate);
+    // console.log("deadlineDate", deadlineDate);
     const [schduleTime, setSchduleTime] = useState("")
-    console.log("schduleTime", schduleTime);
+    // console.log("schduleTime", schduleTime);
+
+    const [progess, setProgress] = useState()
+
+    console.log("progess", progess);
 
     // checked
     const [checkBox, setCheckBox] = useState({
@@ -63,8 +71,11 @@ const MailCompose = () => {
         formData.append('sender', sender);
         formData.append('receiver', receiver);
         formData.append('client_id', client_id);
+        console.log(cc)
+        console.log(allRemainder)
         if(cc.length >0) {
-            formData.append('cc', cc);
+            cc.forEach((item) => formData.append("cc[]", item))
+            // formData.append('cc', cc);
         }
         formData.append('bcc', bcc);
         formData.append('group', selectGroup);
@@ -73,7 +84,8 @@ const MailCompose = () => {
         formData.append('mail_body', mail_body);
         formData.append('mail_file', mail_file)
         if(checkBox.setRemainder) {
-            formData.append('remainder', allRemainder)
+            allRemainder.forEach((item) => formData.append("remainder[]", item))
+            // formData.append('remainder', allRemainder)
         }
         if(checkBox.setDeadLine) {
             formData.append('deadline', deadlineDate)
@@ -91,14 +103,28 @@ const MailCompose = () => {
         if(!checkBox.hideContactInfo) {
             formData.append('hide_status', false)
         }
+        setProgress(true)
         formData.append('schedule', schduleTime)
+        // const val = {
+        //     sender : sender,
+        //     receiver: receiver,
+        //     client_id: 1,
+        //     cc: cc,
+        //     subject: subject,
+        //     mail_body: mail_body,
+        //     mail_file: mail_file
+        // }
+        // console.log(val)
+        // console.log(formData.getAll('cc'));
         Axios.post('http://127.0.0.1:8000/api/send-mail-customer/', formData)
             .then((res) => {
                 console.log("done", res)
+                setProgress(false)
             }).catch((err) => {
                 console.log(err.message)
             })
     }
+
 
     //dropdown state
 
@@ -173,6 +199,21 @@ const MailCompose = () => {
     const [quickReply1, setQuickReply1] = useState(false)
     const [quickReply2, setQuickReply2] = useState(false)
 
+    // progress message
+    const [msgOpen, setMsgOpen] = React.useState(false);
+    const [transition, setTransition] = React.useState(undefined);
+
+    const handleClick = (Transition) => () => {
+        if(!progess) {
+            setTransition(() => Transition);
+            setMsgOpen(true);
+        }
+    };
+
+    const handleMsgClose = () => {
+        setMsgOpen(false);
+    };
+
     return (
         <div className={classNamees.root}>
             <CssBaseline />
@@ -239,11 +280,11 @@ const MailCompose = () => {
                                                             startAdornment: <InputAdornment position="start">
                                                                 <div className="d-flex">
                                                                     <div>
-                                                                                                Cc
-                                                                                        </div>
+                                                                            Cc
+                                                                    </div>
                                                                     <div className="d-flex" style={{ position: 'absolute', left: '90%' }}>
                                                                         <div className="px-2" onClick={() => setCc2(!cc2)}>
-                                                                            {setCc2 ? <AddBoxRoundedIcon /> : <IndeterminateCheckBoxRoundedIcon />}
+                                                                            {setCc ? <AddBoxRoundedIcon /> : <IndeterminateCheckBoxRoundedIcon />}
                                                                         </div>
 
                                                                     </div>
@@ -264,11 +305,11 @@ const MailCompose = () => {
                                                             startAdornment: <InputAdornment position="start">
                                                                 <div className="d-flex">
                                                                     <div>
-                                                                                                Cc
+                                                                        Cc
                                                                     </div>
-                                                                    <div className="d-flex" style={{ position: 'absolute', left: '68%' }}>
+                                                                    <div className="d-flex" style={{ position: 'absolute', left: '90%' }}>
                                                                         <div className="px-2" onClick={() => setCc3(!cc3)}>
-                                                                                                    Add
+                                                                            {setCc3 ? <AddBoxRoundedIcon /> : <IndeterminateCheckBoxRoundedIcon />}
                                                                         </div>
 
                                                                     </div>
@@ -288,11 +329,11 @@ const MailCompose = () => {
                                                             startAdornment: <InputAdornment position="start">
                                                                 <div className="d-flex">
                                                                     <div>
-                                                                                                Cc
+                                                                         Cc
                                                                     </div>
-                                                                    <div className="d-flex" style={{ position: 'absolute', left: '68%' }}>
+                                                                    <div className="d-flex" style={{ position: 'absolute', left: '90%' }}>
                                                                         <div className="px-2" onClick={() => setCc3(!cc3)}>
-                                                                                                    Add
+                                                                            {setCc3 ? <AddBoxRoundedIcon /> : <IndeterminateCheckBoxRoundedIcon />}
                                                                         </div>
 
                                                                     </div>
@@ -559,7 +600,7 @@ const MailCompose = () => {
                                                     onChange={(e) => setMailBody(e)}
                                                 // onImageUpload={handleImageUpload}
                                                 />
-
+                                                <input type="file" id="mail_file" name="mail_file" onChange={(e) => setMailfile(e.target.files[0])} />
                                                 <div className="d-flex align-items-center justify-content-between">
                                                     <div>
                                                         <div>
@@ -624,13 +665,40 @@ const MailCompose = () => {
                                                         }
 
                                                     </div>
+                                                    <div className="btn-group" style={{ marginLeft: '14rem' }}>
+                                                        <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem' }}
+                                                            onClick={handleClick(TransitionLeft)}
+                                                            
+                                                        >
+                                                            {
+                                                                progess && <CircularProgress size="1.5rem" color="secondary" />
+                                                            }
+                                                            
+                                                            Send
+                                                        </button>
+                                                        <button type="button"
+                                                            style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem' }}
+                                                            className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        </button>
+                                                        <div className="dropdown-menu" id="schedule-sent-droupdown" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
+                                                            <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
+                                                        </div>
+                                                        <Snackbar
+                                                            open={msgOpen}
+                                                            onClose={handleMsgClose}
+                                                            TransitionComponent={transition}
+                                                            message=" Mail successfully send "
+                                                            key={transition ? transition.name : ''}
+                                                        />
+                                                    </div>
                                                 </div>
 
                                             </FormControl>
                                         </div>
-                                        <input type="file" id="mail_file" name="mail_file" onChange={(e) => setMailfile(e.target.files[0])} />
+                                                        
+                                        {/* <input type="file" id="mail_file" name="mail_file" onChange={(e) => setMailfile(e.target.files[0])} /> */}
                                         {/* <button type="submit">Upload</button>  */}
-                                        <div className="btn-group" style={{ marginLeft: '14rem' }}>
+                                        {/* <div className="btn-group" style={{ marginLeft: '14rem' }}>
                                             <button type="submit" className="btn btn-primary"
                                                 style={{ backgroundColor: '#4195D1', padding: '0.5rem 1.5rem' }}
                                             // onClick={handleCompose}
@@ -644,7 +712,7 @@ const MailCompose = () => {
                                             <div className="dropdown-menu" id="schedule-sent-droupdown" style={{ backgroundColor: '#4195D1', padding: '0.5rem 0.4rem', color: '#fff', cursor: 'pointer' }}>
                                                 <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </form>
                                        
                                 </CardContent>

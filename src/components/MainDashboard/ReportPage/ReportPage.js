@@ -27,6 +27,7 @@ const ReportPage = () => {
     const [remainder, setRemainder] = useState([]);
     const [userEmails, setEmails] = useState([]);
     const [userData, setUserData] = useState([]);
+    console.log(userData);
 
     console.log(checked);
 
