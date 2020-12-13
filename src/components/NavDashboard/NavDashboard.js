@@ -87,6 +87,12 @@ export default function NavDashboard() {
                             {/* <VerifiedCustomer />
                             <UnverifiedCustomer />
                             <PendingCustomers /> */}
+                            {/* useEffect(() => {
+                                const interval = setInterval(() => {
+                                                        handleUpdate()
+                                                    }, 4000);
+                                return () => clearInterval(interval);
+                            },) */}
                             <UpdateSchedule />
                         </Grid>
                     </Grid>

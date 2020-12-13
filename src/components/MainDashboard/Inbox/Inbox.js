@@ -12,6 +12,7 @@ import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
 import { MailboxContext } from '../../../Providers/MailboxProvider';
 import { ReportContext } from '../../../Providers/ReportProvider';
+import UpdateSchedule from '../UpdateSchedule/UpdateSchedule';
 import { useStyles } from './InboxStyle';
 
 
@@ -333,6 +334,7 @@ const Inbox = () => {
                     ))
                 }
             </Container>
+            <UpdateSchedule />
         </React.Fragment>
     );
 };
