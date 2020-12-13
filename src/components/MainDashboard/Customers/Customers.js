@@ -36,8 +36,24 @@ const Customers = () => {
     const [userModelOpen, setUserModelOpen] = useState(false)
     const [customers, setCustomers] = useState(null)
     const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [email, setEmail] = useState("")
     console.log(customers);
+
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+        // const validate = customers !== null && customers.filter(customer => customer.email !== email)
+  
+        const value = {...email}
+        Axios.post(`${key}invite-customer`, value)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     useEffect(() => {
         Axios(`${key}customers`)
             .then(res => {
@@ -101,7 +117,7 @@ const Customers = () => {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <Button onClick={handelUserModelOpen} style={{ margin: '1.2rem auto' }} variant="contained" className={classes.btnStyle} >
-                            ADD CONTACT
+                            Add new Contact
                         </Button>
                         {/* <Button onClick={handleOpen} style={{ margin: '1rem auto' }} variant="contained" className={classes.btnStyle} >
                             ADD GROUP
@@ -259,10 +275,22 @@ const Customers = () => {
                                                 
                                                 <div className={classes.paper}>
                                                     <Typography component="body1" variant="body1">
-                                                        ADD CONTACT
+                                                        Invite new customer
                                                     </Typography>
-                                                    <form className={classes.form} noValidate>
-                                                        <div class="btn-group" style={{width: '100%', height: '2.5rem'}}>
+                                                    <form className={classes.form} noValidate onSubmit={onFormSubmit}>
+                                                        <input
+                                                            id="email"
+                                                            name="email"
+                                                            onChange={(e) => setEmail(e.target.value)}
+                                                            style={{
+                                                                width: '100%',
+                                                                padding: '0.7rem 1rem',
+                                                                borderRadius: '0.4rem'
+                                                            }}
+                                                            placeholder="Enter Email..."
+                                                         
+                                                        />
+                                                        {/* <div class="btn-group" style={{width: '100%', height: '2.5rem'}}>
                                                             <input
                                                                 id="search"
                                                                 style={{
@@ -280,12 +308,6 @@ const Customers = () => {
                                                                 // value={currentItem}
                                                             />
                                                             <div class="dropdown-menu" id="contact-dropdown">
-                                                                {/* {
-                                                                    products.map(item => (
-                                                                        <a class="dropdown-item" onClick={() => handleSubmit(item)}>  {item.name} </a>
-                                                                        <li class="dropdown-item" onClick={() => handleSubmit(item)}>  {item.name} </li>
-                                                                    ))
-                                                                } */}
                                                                 <div className="d-flex py-1">
                                                                     <li class="dropdown-item">  mariewinter@gmail.com </li>
                                                                     <Button variant="outlined" color="primary" size="small"> invite </Button>
@@ -299,7 +321,7 @@ const Customers = () => {
                                                                     <Button variant="outlined" color="primary" size="small"> invite </Button>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> */}
                                                         <Button
                                                             type="submit"
                                                             fullWidth
