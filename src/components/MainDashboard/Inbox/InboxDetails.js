@@ -51,17 +51,17 @@ const InboxDetails = () => {
         // }
         // console.log(data);
         const formData = new FormData()
-            formData.append('client_mail_id', inboxId);
-            formData.append('mail_body', mail_body);
-            formData.append('mail_file', mail_file)
-            Axios.post('http://127.0.0.1:8000/api/reply-mail-to-customer/', formData)
-                .then((res) => {
-                    console.log("done", res)
-                }).catch((err) => {
-                    console.log(err.message)
-                })
+        formData.append('client_mail_id', inboxId);
+        formData.append('mail_body', mail_body);
+        formData.append('mail_file', mail_file)
+        Axios.post('http://127.0.0.1:8000/api/reply-mail-to-customer/', formData)
+            .then((res) => {
+                console.log("done", res)
+            }).catch((err) => {
+                console.log(err.message)
+            })
     }
-    
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -141,9 +141,9 @@ const InboxDetails = () => {
 
 
                         </Grid>
-                        { mailDetails.reply_status !== null &&
-                            <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
-                                { allReply !== null && allReply.map((reply) => (
+                        {mailDetails.reply_status !== null &&
+                            <div style={{ marginLeft: '3rem', marginTop: '35vh' }}>
+                                {allReply !== null && allReply.map((reply) => (
                                     <div>
                                         <hr />
                                         <Card className={classes.root}>
@@ -158,9 +158,9 @@ const InboxDetails = () => {
                                                         {/* <MoreVertIcon /> */}
                                                     </IconButton>
                                                 }
-                                                title={reply.sender }
+                                                title={reply.sender}
                                                 subheader={moment(reply.created_at).fromNow()}
-                                                
+
                                             />
                                             <CardContent>
                                                 <Typography variant="body2" color="textSecondary" component="p">
@@ -172,8 +172,8 @@ const InboxDetails = () => {
                                         <hr />
                                     </div>
                                 ))
-                                
-                            }
+
+                                }
                                 <Button onClick={(e) => setShowReplyBox(!showReplyBox)} variant="contained" className={classes.btnStyle} color="primary">
                                     REPLY
                                 </Button>
@@ -206,11 +206,11 @@ const InboxDetails = () => {
                                 </form>
                             </div>
                         }
-                        
+
                     </Container>
                 </main>
             }
-            
+
         </div>
     );
 };

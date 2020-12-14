@@ -34,13 +34,14 @@ const EmailSignature = () => {
     const [updatePhone, setUpdatePhone] = useState({})
     const [signatureId, setSignatureId] = useState()
     const [newSignature, setNewSignature] = useState({})
-    const [signSuccess,setSignSuccess] = useState(false)
+    const [signSuccess, setSignSuccess] = useState(false)
     const [updateFacebook, setUpdateFacebook] = useState({})
     const [updateTwitter, setUpdateTwitter] = useState({})
     const [updateInstagram, setUpdateInstagram] = useState({})
     const [updateWebsite, setUpdateWebsite] = useState({})
+    const [signClient, setSignClient] = useState({})
 
-    
+
     console.log(updateValue);
     console.log(showOldValue);
 
@@ -57,92 +58,123 @@ const EmailSignature = () => {
     };
 
     const handleUpdateEmailModalClose = () => {
-        setUpdateEmailModal (false);
+        setUpdateEmailModal(false);
     };
-    const handleBlurSignature =(e) => {
-        const editSignature = {...newSignature}
+    const handleBlurSignature = (e) => {
+        const editSignature = { ...newSignature }
         editSignature[e.target.name] = e.target.value;
+        console.log(editSignature);
         setNewSignature(editSignature);
     }
 
-    const handleBlurName =(e) => {
-        const newName = {...updateName}
+    const handleBlurName = (e) => {
+        const newName = { ...updateName }
         newName[e.target.name] = e.target.value;
         setUpdateName(newName);
     }
-    const handleBlurDesignation =(e) => {
-        const newDesignation = {...updateDesignation}
+    const handleBlurDesignation = (e) => {
+        const newDesignation = { ...updateDesignation }
         newDesignation[e.target.name] = e.target.value;
         setUpdateDesignation(newDesignation);
     }
-    const handleBlurPhone =(e) => {
-        const newPhone = {...updatePhone}
+    const handleBlurPhone = (e) => {
+        const newPhone = { ...updatePhone }
         newPhone[e.target.name] = e.target.value;
         setUpdatePhone(newPhone);
     }
-    const handleBlurAddress =(e) => {
-        const newAddress = {...updateAddress}
+    const handleBlurAddress = (e) => {
+        const newAddress = { ...updateAddress }
         newAddress[e.target.name] = e.target.value;
         setUpdateAddress(newAddress);
     }
-    const handleBlurFacebook =(e) => {
-        const newFacebook = {...updateFacebook}
+    const handleBlurFacebook = (e) => {
+        const newFacebook = { ...updateFacebook }
         newFacebook[e.target.name] = e.target.value;
         setUpdateFacebook(newFacebook);
     }
-    const handleBlurTwitter =(e) => {
-        const newTwitter = {...updateTwitter}
+    const handleBlurTwitter = (e) => {
+        const newTwitter = { ...updateTwitter }
         newTwitter[e.target.name] = e.target.value;
         setUpdateTwitter(newTwitter);
     }
-    const handleBlurInstagram =(e) => {
-        const newInstagram = {...updateInstagram}
+    const handleBlurInstagram = (e) => {
+        const newInstagram = { ...updateInstagram }
         newInstagram[e.target.name] = e.target.value;
         setUpdateInstagram(newInstagram);
     }
-    const handleBlurWebsite =(e) => {
-        const newWebsite = {...updateWebsite}
+    const handleBlurWebsite = (e) => {
+        const newWebsite = { ...updateWebsite }
         newWebsite[e.target.name] = e.target.value;
         setUpdateWebsite(newWebsite);
     }
 
-    
-    const updateSignatureInfo = (value) => {
-        // e.preventDefault();
-        console.log(value);
+
+    // const updateSignatureInfo = (singnature) => {
+    //     singnature.preventDefault();
+    //     const client_id = signatureId;
+
+    //     const signatureUpdate = {...newSignature, ...updateName, ...updateDesignation, ...updatePhone, ...updateAddress, ...updateFacebook, ...updateTwitter, ...updateInstagram, ...updateWebsite};
+    //     console.log(signatureUpdate);
+    //     Axios.put(`${key}update-signature/${client_id}`,signatureUpdate)
+    //     .then((response) => {
+    //         console.log(response);
+    //         setSignSuccess(true);
+    //         reUpdate()
+
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     })
+    // }
+
+    const updateSignatureInfo = (e) => {
+        e.preventDefault();
+
         const client_id = signatureId;
 
-        const signatureUpdate = {...newSignature, ...updateName, ...updateDesignation, ...updatePhone, ...updateAddress, ...updateFacebook, ...updateTwitter, ...updateInstagram, ...updateWebsite};
+        const signatureUpdate = { ...newSignature, ...updateName, ...updateDesignation, ...updatePhone, ...updateAddress, ...updateFacebook, ...updateTwitter, ...updateInstagram, ...updateWebsite };
         console.log(signatureUpdate);
-        Axios.put(`${key}update-signature/${client_id}`,signatureUpdate)
-        .then((response) => {
-            console.log(response);
-            setSignSuccess(true);
-            reUpdate()
+        Axios.put(`${key}update-signature/${client_id}`, signatureUpdate)
+            .then((response) => {
+                console.log(response);
+                setSignSuccess(true);
+                reUpdate()
 
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
     const reUpdate = () => {
         Axios(`${key}all-signature`)
-        .then(res => {
-            const signatures = res.data
-            setAllSignatures(signatures)
-        })
-        .then(err => {
-            console.log(err);
-        })
+            .then(res => {
+                const signatures = res.data
+                setAllSignatures(signatures)
+            })
+            .then(err => {
+                console.log(err);
+            })
     }
 
 
-    
-    const handleSignatureUpdate = (id) => {
-        console.log(id);
 
-        setSignatureId(id);
+    const handleSignatureUpdate = (singnature) => {
+
+        console.log(singnature)
+        setSignClient(singnature)
+
+
+        // console.log(singnature.id);
+
+        setSignatureId(singnature.id);
     }
+    // const handleSignatureUpdate = (id) => {
+    //     // setSignClient(singnature);
+    //     // console.log(signClient)
+
+    //     setSignatureId(id);
+    //     console.log(signatureId)
+    // }
 
     const handleBlur = (e) => {
         const value = { ...formValue };
@@ -202,7 +234,7 @@ const EmailSignature = () => {
                 console.log(err);
             })
     }
-    
+
     // update feature
     // const handleOldValue = (id) => {
     //     console.log(id);
@@ -246,7 +278,7 @@ const EmailSignature = () => {
                                 </Button> */}
                             </div>
                             {
-                                allSignatures !== null && 
+                                allSignatures !== null &&
                                 allSignatures.map((singnature) => (
                                     <div className={classes.signatureBox}>
                                         <div className="d-flex" style={{ marginLeft: '0.5rem' }}>
@@ -254,112 +286,112 @@ const EmailSignature = () => {
                                                 <img className="pt-2" width="50%" src={avatar} alt="" />
                                             </div>
                                             <div style={{ color: '#2d2d2d', marginLeft: '-1.5rem' }}>
-                                        <EditIcon style={{ color: '#4195D1'}} className="ml-3" data-toggle="modal" data-target="#exampleModalCenter" onClick={() => handleSignatureUpdate(singnature.client_id)} />
-                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Update Your Signature</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                <div className="row">
-                                                        <div className="col-md-12">
-                                                            <label htmlFor="">Signature</label>
-                                                            <input type="text" className="form-control" id="signature" name="signature" onBlur={handleBlurSignature} />
-                                                        </div>
-                                                    </div>
-                                                <div className="row">
-                                                        <div className="col-md-12">
-                                                            <label htmlFor="">Name</label>
-                                                            <input type="text" className="form-control" id="name" name="name" onBlur={handleBlurName} />
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-12">
-                                                            <label htmlFor="">Designation</label>
-                                                            <input type="text" className="form-control" id="designation" name="designation" onBlur={handleBlurDesignation} />
-                                                        </div>
-                                                    </div>
-                                                   
-                                                    <div className="row">
-                                                        <div className="col-md-12">
-                                                            <label htmlFor="">Phone</label>
-                                                            <input type="tel" className="form-control" id="phone" name="phone" onBlur={handleBlurPhone} />
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-12">
-                                                            <label htmlFor="">Address</label>
-                                                            <input type="url" className="form-control" id="address" name="address" onBlur={handleBlurAddress}/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-12">
-                                                            <label htmlFor="">Facebook Profile Link</label>
-                                                            <input type="url" className="form-control" id="facebook" name="facebook" onBlur={handleBlurFacebook}/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-12">
-                                                            <label htmlFor="">Twitter Profile Link</label>
-                                                            <input type="url" className="form-control" id="twitter" name="twitter" onBlur={handleBlurTwitter}/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-12">
-                                                            <label htmlFor="">Instagram Profile Link</label>
-                                                            <input type="url" className="form-control" id="instagram" name="instagram" onBlur={handleBlurInstagram}/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="row">
-                                                        <div className="col-md-12">
-                                                            <label htmlFor="">Website Address</label>
-                                                            <input type="url" className="form-control" id="website" name="website" onBlur={handleBlurWebsite}/>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                { signSuccess ? <div class="alert alert-success" role="alert">
-                                                Updated Your Signature
-                                                </div>:null}
+                                                <EditIcon style={{ color: '#4195D1' }} className="ml-3" data-toggle="modal" data-target="#exampleModalCenter" onClick={() => handleSignatureUpdate(singnature)} />
+                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Update Your Signature</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form>
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <label htmlFor="">Signature</label>
+                                                                            <input type="text" className="form-control" id="signature" name="signature" defaultValue={signClient.signature} onBlur={handleBlurSignature} />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <label htmlFor="">Name</label>
+                                                                            <input type="text" className="form-control" id="name" name="name" defaultValue={signClient.name} onBlur={handleBlurName} />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <label htmlFor="">Designation</label>
+                                                                            <input type="text" className="form-control" id="designation" name="designation" defaultValue={signClient.designation} onBlur={handleBlurDesignation} />
+                                                                        </div>
+                                                                    </div>
 
-                                                                <button type="button" class="btn btn-primary" onClick={(e) => updateSignatureInfo(singnature)}>Save changes</button>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                                 <Typography variant="body2" align="right" style={{marginRight: '18rem', marginTop: '-1.4rem', color: '#4195D1'}}
-                                                    onClick={() => handleSignatureDelete(singnature.client_id) }
-                                                 >
-                                                     {/* <UpdateIcon /> */}
-                                                     <DeleteForeverSharpIcon />
-                                                 </Typography>
-                                                <h6> { singnature.name } </h6>
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <label htmlFor="">Phone</label>
+                                                                            <input type="tel" className="form-control" id="phone" name="phone" defaultValue={signClient.phone} onBlur={handleBlurPhone} />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <label htmlFor="">Address</label>
+                                                                            <input type="url" className="form-control" id="address" name="address" defaultValue={signClient.address} onBlur={handleBlurAddress} />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <label htmlFor="">Facebook Profile Link</label>
+                                                                            <input type="url" className="form-control" id="facebook" name="facebook" defaultValue={signClient.facebook} onBlur={handleBlurFacebook} />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <label htmlFor="">Twitter Profile Link</label>
+                                                                            <input type="url" className="form-control" id="twitter" name="twitter" defaultValue={signClient.twitter} onBlur={handleBlurTwitter} />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <label htmlFor="">Instagram Profile Link</label>
+                                                                            <input type="url" className="form-control" id="instagram" name="instagram" defaultValue={signClient.instagram} onBlur={handleBlurInstagram} />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <label htmlFor="">Website Address</label>
+                                                                            <input type="url" className="form-control" id="website" name="website" defaultValue={signClient.website} onBlur={handleBlurWebsite} />
+                                                                        </div>
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                {signSuccess ? <div class="alert alert-success" role="alert">
+                                                                    Updated Your Signature
+                                                </div> : null}
+
+                                                                <button type="button" class="btn btn-primary" onClick={(e) => updateSignatureInfo(e)}>Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <Typography variant="body2" align="right" style={{ marginRight: '18rem', marginTop: '-1.4rem', color: '#4195D1' }}
+                                                    onClick={() => handleSignatureDelete(singnature.client_id)}
+                                                >
+                                                    {/* <UpdateIcon /> */}
+                                                    <DeleteForeverSharpIcon />
+                                                </Typography>
+                                                <h6> {singnature.name} </h6>
                                                 <p> <strong> {singnature.designation} </strong> </p>
                                                 <p>
                                                     <span> Phone : {singnature.phone} </span>
-                                                    <span style={{ padding: '0 1rem' }}> Address : { singnature.address } </span>
+                                                    <span style={{ padding: '0 1rem' }}> Address : {singnature.address} </span>
                                                 </p>
-                                               
+
                                                 <hr style={{ backgroundColor: '#4195D1', padding: '0.5px 0' }} />
                                                 <div style={{ margin: '0 4.5rem' }}>
-                                                    <a href={ singnature.facebook } target="_blank" style={{color: "#2d2d2d"}}>
+                                                    <a href={singnature.facebook} target="_blank" style={{ color: "#2d2d2d" }}>
                                                         <FacebookIcon style={{ margin: '0 1rem' }} />
                                                     </a>
-                                                    <a href={ singnature.twitter } target="_blank" style={{color: "#2d2d2d"}}>
+                                                    <a href={singnature.twitter} target="_blank" style={{ color: "#2d2d2d" }}>
                                                         <TwitterIcon style={{ margin: '0 1rem' }} />
                                                     </a>
-                                                    <a href={ singnature.instagram } target="_blank" style={{color: "#2d2d2d"}}>
+                                                    <a href={singnature.instagram} target="_blank" style={{ color: "#2d2d2d" }}>
                                                         <InstagramIcon style={{ margin: '0 1rem' }} />
                                                     </a>
-                                                    <a href={ singnature.website } target="_blank" style={{color: "#2d2d2d"}}>
-                                                       <LanguageIcon style={{ margin: '0 1rem' }} />
+                                                    <a href={singnature.website} target="_blank" style={{ color: "#2d2d2d" }}>
+                                                        <LanguageIcon style={{ margin: '0 1rem' }} />
                                                     </a>
                                                 </div>
                                             </div>
@@ -368,7 +400,7 @@ const EmailSignature = () => {
                                 ))
                             }
 
-                            
+
 
                         </div>
 
@@ -388,7 +420,7 @@ const EmailSignature = () => {
                             >
                                 <Fade in={addEmailModal}>
                                     <div className={classes.emailModal}>
-                                        <h6 className="text-center" style={{color: '#fff', padding: '0.5rem 0'}}> Add new Signature </h6>
+                                        <h6 className="text-center" style={{ color: '#fff', padding: '0.5rem 0' }}> Add new Signature </h6>
                                         <form className={classes.form} noValidate>
                                             <div style={{ margin: "1rem 0" }}>
                                                 <TextField
@@ -502,7 +534,7 @@ const EmailSignature = () => {
                                                     name='instagram'
                                                     autoComplete='instagram'
                                                     autoFocus
-                                                    placeholder='Instagram Profile link' 
+                                                    placeholder='Instagram Profile link'
                                                     onBlur={handleBlur}
                                                 />
                                             </div>
@@ -553,7 +585,7 @@ const EmailSignature = () => {
                             >
                                 <Fade in={updateEmailModal}>
                                     <div className={classes.emailModal}>
-                                        <h6 className="text-center" style={{color: '#fff', padding: '0.5rem 0'}}> Add new Signature </h6>
+                                        <h6 className="text-center" style={{ color: '#fff', padding: '0.5rem 0' }}> Add new Signature </h6>
                                         <form className={classes.form} noValidate>
                                             <div style={{ margin: "1rem 0" }}>
                                                 <TextField
@@ -667,7 +699,7 @@ const EmailSignature = () => {
                                                     name='instagram'
                                                     autoComplete='instagram'
                                                     autoFocus
-                                                    placeholder='Instagram Profile link' 
+                                                    placeholder='Instagram Profile link'
                                                     onBlur={handleUpdateSignInput}
                                                 />
                                             </div>
