@@ -36,17 +36,12 @@ const MailCompose = () => {
     const [mail_body, setMailBody] = useState("");
     const [mail_file, setMailfile] = useState("");
     const [selectGroup, setSelectGroup] = useState("");
-    // console.log(selectGroup);
     const [selectTag, setSelectTag] = useState("");
     const [subject, setSubject] = useState("");
-    // console.log("mail body", mail_body);
     const [allRemainder, setAllRemainder] = useState([])
     const [quickReply, setQuickReply] = useState([])
-    // console.log("quickReply", quickReply);
     const [deadlineDate, setDeadlineDate] = useState(date.setDate(date.getDate() + 2))
-    // console.log("deadlineDate", deadlineDate);
     const [schduleTime, setSchduleTime] = useState("")
-    // console.log("schduleTime", schduleTime);
 
     const [progess, setProgress] = useState()
 
@@ -67,7 +62,6 @@ const MailCompose = () => {
     const onFormSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData()
-        // const dtime = {...schduleTime}
         formData.append('sender', sender);
         formData.append('receiver', receiver);
         formData.append('client_id', client_id);
@@ -75,7 +69,6 @@ const MailCompose = () => {
         console.log(allRemainder)
         if(cc.length >0) {
             cc.forEach((item) => formData.append("cc[]", item))
-            // formData.append('cc', cc);
         }
         formData.append('bcc', bcc);
         formData.append('group', selectGroup);
@@ -85,7 +78,6 @@ const MailCompose = () => {
         formData.append('mail_file', mail_file)
         if(checkBox.setRemainder) {
             allRemainder.forEach((item) => formData.append("remainder[]", item))
-            // formData.append('remainder', allRemainder)
         }
         if(checkBox.setDeadLine) {
             formData.append('deadline', deadlineDate)
@@ -95,27 +87,17 @@ const MailCompose = () => {
             formData.append('reply_status', true)
         }
         if (!checkBox.replyNeeded) {
-            formData.append('reply_status', false)
+            formData.append('reply_status', null)
         }
         if (checkBox.hideContactInfo) {
             formData.append('hide_status', true)
         }
         if(!checkBox.hideContactInfo) {
-            formData.append('hide_status', false)
+            formData.append('hide_status', null)
         }
         setProgress(true)
         formData.append('schedule', schduleTime)
-        // const val = {
-        //     sender : sender,
-        //     receiver: receiver,
-        //     client_id: 1,
-        //     cc: cc,
-        //     subject: subject,
-        //     mail_body: mail_body,
-        //     mail_file: mail_file
-        // }
-        // console.log(val)
-        // console.log(formData.getAll('cc'));
+        
         Axios.post('http://127.0.0.1:8000/api/send-mail-customer/', formData)
             .then((res) => {
                 console.log("done", res)

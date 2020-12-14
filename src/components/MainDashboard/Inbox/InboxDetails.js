@@ -51,7 +51,7 @@ const InboxDetails = () => {
         // }
         // console.log(data);
         const formData = new FormData()
-            formData.append('client_mail_id', 1);
+            formData.append('client_mail_id', inboxId);
             formData.append('mail_body', mail_body);
             formData.append('mail_file', mail_file)
             Axios.post('http://127.0.0.1:8000/api/reply-mail-to-customer/', formData)
