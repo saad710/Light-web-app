@@ -7,7 +7,6 @@ import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { key } from '../../../apiKey';
-import avatar from '../../../images/avatar.png';
 import { MailboxContext } from '../../../Providers/MailboxProvider';
 import { ReportContext } from '../../../Providers/ReportProvider';
 import UpdateSchedule from '../UpdateSchedule/UpdateSchedule';
@@ -316,6 +315,7 @@ const Inbox = () => {
                         onMouseEnter={() => setOnGroupFocus(true)}
                         onMouseLeave={() => setOnGroupFocus(false)}
                         >
+                            
                             <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center my-3" style={{ color: '#fff' }}>
@@ -328,7 +328,7 @@ const Inbox = () => {
                                 }
                                    
                                     <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
-                                        <img width="100%" src={avatar} alt="" />
+                                        <img src={`http://127.0.0.1:8000/uploads/client_pro_pic/${inbox.profile_picture}`} alt="" style={{ width: '100%' }} />
                                     </Avatar>
                                     <Link to={`details/${inbox.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
                                         <Typography variant="body1" style={{ margin: '0.5rem 0.5rem' }}>
