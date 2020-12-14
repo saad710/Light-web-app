@@ -19,10 +19,8 @@ const Inbox = () => {
     const history = useHistory()
     const [openPanel, setOpenPanel] = useState(false);
     const [userId, setUserId] = useState({})
-
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -34,9 +32,8 @@ const Inbox = () => {
 
     const { groupsMail, allMail } = useContext(MailboxContext)
     const { groupMailId, setGroupMailId } = useContext(ReportContext)
-    console.log('groupMailId', groupMailId);
-    // // console.log(groupsMail);
-    // console.log(allMail);
+    
+    console.log("allMail", allMail);
     const handleReport = (id) => {
         setGroupMailId(id)
         history.push('/report')
@@ -224,7 +221,8 @@ const Inbox = () => {
                                         
                                      />:null }
                                     <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
-                                        <img width="100%" src={avatar} alt="" />
+                                        {/* <img width="100%" src={`http://127.0.0.1:8000/uploads/client_pro_pic/${inbox !== null && inbox.loggedInUser}`} alt="" /> */}
+                                        
                                     </Avatar>
                                     <Link to={`groupDetails/${inbox.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
                                         <Typography variant="body1" style={{ margin: '0.5rem 0.5rem' }}>

@@ -4,25 +4,28 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import Axios from 'axios';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { useParams } from 'react-router-dom';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
+import { LoggedInContext } from '../../../Providers/LoggedInProvider';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './InboxDetailsStyle';
 
 const InboxDetails = () => {
     const { inboxId } = useParams()
+    const { loggedInUser } = useContext(LoggedInContext)
     const classes = useStyles();
     const [mailDetails, setMailDetails] = useState(null)
     const [allReply, setReply] = useState(null)
     const [customerInfo, setCustomerInfo] = useState(null)
     const [mail_body, setMailBody] = useState("");
     const [mail_file, setMailfile] = useState("");
-    console.log("details", allReply);
+    console.log("allReply", allReply);
+    // console.log("pic test", customerInfo.profile_picture !== null && customerInfo.profile_picture);
     useEffect(() => {
         // const client_id = 1
         Axios(`${key}get-specific-client-mail/${inboxId}`)
@@ -149,9 +152,15 @@ const InboxDetails = () => {
                                         <Card className={classes.root}>
                                             <CardHeader
                                                 avatar={
+                                                    
                                                     <Avatar aria-label="recipe" className={classes.avatar}>
-                                                        R
-                                            </Avatar>
+                                                        {reply.type === "customer" ?
+                                                            <img src={`http://127.0.0.1:8000/uploads/customer_pro_pic/${customerInfo !== null && customerInfo.profile_picture}`} alt="" style={{ width: '100%' }} />
+                                                            :
+                                                            <img src={`http://127.0.0.1:8000/uploads/client_pro_pic/${loggedInUser !== null && loggedInUser.profile_picture}`} alt="" style={{ width: '100%' }} />
+                                                            
+                                                        }
+                                                    </Avatar>
                                                 }
                                                 action={
                                                     <IconButton aria-label="settings">
