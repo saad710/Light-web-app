@@ -20,7 +20,11 @@ const Inbox = () => {
     const [openPanel, setOpenPanel] = useState(false);
     const [userId, setUserId] = useState({})
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(3);
+
+    const [pageDiretMail, setPageDiretMail] = React.useState(0);
+    const [rowsPerPageDiretMail, setRowsPerPageDiretMail] = React.useState(3);
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -28,6 +32,13 @@ const Inbox = () => {
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
+    };
+    const handleChangePageDiretMail = (event, directNewPage) => {
+        setPageDiretMail(directNewPage);
+    };
+    const handleChangeRowsPerPageDiretMail = (event) => {
+        setRowsPerPageDiretMail(+event.target.value);
+        setPageDiretMail(0);
     };
 
     const { groupsMail, allMail } = useContext(MailboxContext)
@@ -194,7 +205,7 @@ const Inbox = () => {
                     <Typography varient="h5"> Group Mail </Typography>
                     <div style={{ padding: '0 2rem', marginLeft: '6rem' }}>
                         <TablePagination
-                            rowsPerPageOptions={[1, 5, 10, 25, 100]}
+                            rowsPerPageOptions={[1, 3, 5, 10, 25, 100]}
                             component="div"
                             count={groupsMail !== null && groupsMail.length}
                             rowsPerPage={rowsPerPage}
@@ -284,9 +295,23 @@ const Inbox = () => {
                     ))
                 }
                 
+                <div className="d-flex align-items-center justify-content-between">
+                    <Typography varient="h5"> Direct Mail </Typography>
+                    <div style={{ padding: '0 2rem', marginLeft: '6rem' }}>
+                        <TablePagination
+                            rowsPerPageOptions={[1, 3, 5, 10, 25, 100]}
+                            component="div"
+                            count={allMail !== null && allMail.length}
+                            rowsPerPage={rowsPerPageDiretMail}
+                            page={pageDiretMail}
+                            onChangePage={handleChangePageDiretMail}
+                            onChangeRowsPerPage={handleChangeRowsPerPageDiretMail}
+                        />
+                    </div>
+                </div>
 
                 { allMail !== null &&
-                    allMail.map(inbox => (
+                    allMail !== null && allMail.slice(pageDiretMail * rowsPerPageDiretMail, pageDiretMail * rowsPerPageDiretMail + rowsPerPageDiretMail).map((inbox, i) => (
                         <div key={inbox.client_id}
                         onMouseEnter={() => setOnGroupFocus(true)}
                         onMouseLeave={() => setOnGroupFocus(false)}
