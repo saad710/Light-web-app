@@ -1,71 +1,100 @@
-import { Avatar, Button, Chip, Typography } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
+import { Avatar, Card, CardContent, CardHeader, Chip, Container, Grid, IconButton, Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import Axios from 'axios';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { useParams } from 'react-router-dom';
+import SunEditor from 'suneditor-react';
+import 'suneditor/dist/css/suneditor.min.css';
 import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './InboxDetailsStyle';
 
 const InboxDetails = () => {
+    const { inboxId } = useParams()
     const classes = useStyles();
-    const [singleInbox, setSingleInbox] = useState(null)
+    const [mailDetails, setMailDetails] = useState(null)
+    const [allReply, setReply] = useState(null)
+    const [customerInfo, setCustomerInfo] = useState(null)
+    const [mail_body, setMailBody] = useState("");
+    const [mail_file, setMailfile] = useState("");
+    console.log("details", allReply);
     useEffect(() => {
-        const client_id = 1
-        Axios(`${key}client-all-mail/${client_id}`)
+        // const client_id = 1
+        Axios(`${key}get-specific-client-mail/${inboxId}`)
             .then(res => {
                 console.log(res);
-                const mails = res.data.all_mail
-                setSingleInbox(mails)
+                const mails = res.data.mail_details
+                setMailDetails(mails)
+                const customer_info = res.data.customer_info
+                setCustomerInfo(customer_info)
+                const all_reply_mail = res.data.all_reply_mail
+                setReply(all_reply_mail)
             })
             .then(err => {
                 console.log(err);
             })
-    }, [])
-    const { inboxId } = useParams()
-    console.log(inboxId);
-    const message = singleInbox !== null && singleInbox.filter(singleMsg => singleMsg.id == inboxId)
-    console.log(message[0]);
-    const info = message[0]
-    console.log("details", info);
+    }, [inboxId])
+
+    const [showReplyBox, setShowReplyBox] = useState(false)
+
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+        // const data = {
+        //     client_id: 1,
+        //     mail_body: mail_body,
+        //     mail_file: mail_file
+        // }
+        // console.log(data);
+        const formData = new FormData()
+            formData.append('client_mail_id', 1);
+            formData.append('mail_body', mail_body);
+            formData.append('mail_file', mail_file)
+            Axios.post('http://127.0.0.1:8000/api/reply-mail-to-customer/', formData)
+                .then((res) => {
+                    console.log("done", res)
+                }).catch((err) => {
+                    console.log(err.message)
+                })
+    }
+    
     return (
         <div className={classes.root}>
             <CssBaseline />
             <AppBarDrawer />
             {
-                info !== undefined &&
+                (mailDetails && customerInfo) !== null &&
                 <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-                <Container maxWidth="md" className={classes.container}>
-                    <Grid container spacing={3}>
-                        <div className="d-flex align-items-center my-3" style={{ color: '#2d2d2d' }}>
-                            <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
-                                <img width="100%" src={avatar} alt="" />
-                            </Avatar>
-                            <Typography variant="body1" style={{ margin: '0.5rem 0.5rem', color: '#2d2d2d' }}>
-                                <strong style={{ marginLeft: '1rem' }}> { `${info.first_name} ${info.last_name}` } </strong> <br />
-                                <small style={{ marginLeft: '1rem' }}> 
-                                    From : {info.sender}
-                                </small>
-                                <br/>
-                                
-                                <small style={{ marginLeft: '1rem' }}>
-                                    To : {info.receiver}
-                                </small>
-                                <br />
-                                <small style={{ marginLeft: '1rem' }}>
-                                    Cc : { info.cc }
-                                </small>
-                                <br />
-                                <small style={{ marginLeft: '1rem' }}>
-                                    Subject : { info.subject }
-                                </small>
-                                <br />
+                    <div className={classes.appBarSpacer} />
+                    <Container maxWidth="md" className={classes.container}>
+                        <Grid container spacing={3}>
+                            <div className="d-flex align-items-center my-3" style={{ color: '#2d2d2d' }}>
+                                <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
+                                    <img width="100%" src={avatar} alt="" />
+                                </Avatar>
+                                <Typography variant="body1" style={{ margin: '0.5rem 0.5rem', color: '#2d2d2d' }}>
+                                    <strong style={{ marginLeft: '1rem' }}> {`${customerInfo.first_name} ${customerInfo.last_name}`} </strong> <br />
+                                    <small style={{ marginLeft: '1rem' }}>
+                                        From : {mailDetails.sender}
+                                    </small>
+                                    <br />
+
+                                    <small style={{ marginLeft: '1rem' }}>
+                                        To : {mailDetails.receiver}
+                                    </small>
+                                    <br />
+                                    <small style={{ marginLeft: '1rem' }}>
+                                        Cc : {mailDetails.cc}
+                                    </small>
+                                    <br />
+                                    <small style={{ marginLeft: '1rem' }}>
+                                        Subject : {mailDetails.subject}
+                                    </small>
+                                    <br />
 
                                     <div className="d-flex align-items-center justify-content-between">
                                         <Chip
@@ -78,53 +107,110 @@ const InboxDetails = () => {
                                                 width: '5rem',
                                                 color: '#fff',
                                             }}
-                                            label={info.type}
+                                            label={mailDetails.type}
 
                                         />
                                         <div>
                                             {
-                                                info.deadline && `Deadline : ${info.deadline}`
+                                                mailDetails.deadline && `Deadline : ${mailDetails.deadline}`
                                             }
                                         </div>
-                                </div>
+                                    </div>
 
+                                </Typography>
+                            </div>
+                            <Typography variant="body1" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
+                                {ReactHtmlParser(mailDetails.mail_body)}
                             </Typography>
-                        </div>
-                        <Typography variant="body1" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
-                            {ReactHtmlParser(info.mail_body)}
-                        </Typography>
-                        <div className={classes.downloadfileStyle}>
-                           <Typography variant="h6" component="h6" align="center"> {info.mail_file} </Typography>
+                            <div className={classes.downloadfileStyle}>
+                                <Typography variant="h6" component="h6" align="center"> {mailDetails.mail_file} </Typography>
                                 {/* <Link to={`${key}file-down/${info.mail_file}`} target="_blank" download> */}
-                                <a href={`${key}file-down/${info.mail_file}`}>
+                                <a href={`${key}file-down/${mailDetails.mail_file}`}>
                                     <Button
-                                    style={{ marginLeft: '4rem' }}
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                    startIcon={<CloudDownloadIcon />}
+                                        style={{ marginLeft: '4rem' }}
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.button}
+                                        startIcon={<CloudDownloadIcon />}
                                     >
                                         Download
                                     </Button>
                                 </a>
                                 {/* </Link> */}
-                        </div>
+                            </div>
+
+
+                        </Grid>
+                        { mailDetails.reply_status !== null &&
+                            <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
+                                { allReply !== null && allReply.map((reply) => (
+                                    <div>
+                                        <hr />
+                                        <Card className={classes.root}>
+                                            <CardHeader
+                                                avatar={
+                                                    <Avatar aria-label="recipe" className={classes.avatar}>
+                                                        R
+                                            </Avatar>
+                                                }
+                                                action={
+                                                    <IconButton aria-label="settings">
+                                                        {/* <MoreVertIcon /> */}
+                                                    </IconButton>
+                                                }
+                                                title={reply.sender }
+                                                subheader={moment(reply.created_at).fromNow()}
+                                                
+                                            />
+                                            <CardContent>
+                                                <Typography variant="body2" color="textSecondary" component="p">
+                                                    {ReactHtmlParser(reply.mail_body)}
+                                                </Typography>
+                                            </CardContent>
+
+                                        </Card>
+                                        <hr />
+                                    </div>
+                                ))
+                                
+                            }
+                                <Button onClick={(e) => setShowReplyBox(!showReplyBox)} variant="contained" className={classes.btnStyle} color="primary">
+                                    REPLY
+                                </Button>
+                            </div>
+                        }
+                        {(showReplyBox && allReply !== null) &&
+                            <div className="my-5">
+                                <form noValidate onSubmit={onFormSubmit} autoComplete="off" method="POST" encType="multipart/form-data">
+                                    <SunEditor
+                                        width="100%"
+                                        placeholder="Details..."
+                                        name="editor"
+                                        setOptions={{
+                                            height: 100,
+                                            buttonList: [
+                                                ['font', 'fontSize', 'formatBlock'],
+                                                ['bold', 'underline', 'italic',],
+                                                ['align', 'horizontalRule', 'list', 'lineHeight'],
+                                                // ['link','image'],
+                                                ['fullScreen', 'codeView'],
+                                            ]
+                                        }}
+                                        onChange={(e) => setMailBody(e)}
+                                    // onImageUpload={handleImageUpload}
+                                    />
+                                    <input type="file" id="mail_file" name="mail_file" onChange={(e) => setMailfile(e.target.files[0])} />
+                                    <Button type="submit" variant="contained" className={classes.btnStyle} color="primary">
+                                        SEND
+                                </Button>
+                                </form>
+                            </div>
+                        }
                         
-
-                    </Grid>
-                    
-                    {/* <div style={{marginLeft:'3rem', marginTop: '35vh'}}>
-                        <Button variant="contained" className={classes.btnStyle} color="primary">
-                            REPLY
-                        </Button>
-
-                        <Button style={{ margin: '0rem 1rem' }} variant="contained" className={classes.btnStyle} color="primary">
-                            CLOSE
-                        </Button>
-                    </div> */}
-                </Container>
-            </main>
+                    </Container>
+                </main>
             }
+            
         </div>
     );
 };
