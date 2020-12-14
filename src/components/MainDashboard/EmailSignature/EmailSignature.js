@@ -107,8 +107,9 @@ const EmailSignature = () => {
     }
 
     
-    const updateSignatureInfo = (e) => {
-        e.preventDefault();
+    const updateSignatureInfo = (value) => {
+        // e.preventDefault();
+        console.log(value);
         const client_id = signatureId;
 
         const signatureUpdate = {...newSignature, ...updateName, ...updateDesignation, ...updatePhone, ...updateAddress, ...updateFacebook, ...updateTwitter, ...updateInstagram, ...updateWebsite};
@@ -328,7 +329,7 @@ const EmailSignature = () => {
                                                 Updated Your Signature
                                                 </div>:null}
 
-                                                <button type="button" class="btn btn-primary" onClick={(e)=>updateSignatureInfo(e)}>Save changes</button>
+                                                                <button type="button" class="btn btn-primary" onClick={(e) => updateSignatureInfo(singnature)}>Save changes</button>
                                             </div>
                                             </div>
                                         </div>

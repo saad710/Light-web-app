@@ -1,7 +1,5 @@
-import { Avatar, Checkbox, Container, Divider, Grid, Typography } from '@material-ui/core';
+import { Avatar, Checkbox, Container, Divider, Grid, TablePagination, Typography } from '@material-ui/core';
 import AccessAlarmSharpIcon from '@material-ui/icons/AccessAlarmSharp';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import Axios from 'axios';
@@ -21,6 +19,18 @@ const Inbox = () => {
     const history = useHistory()
     const [openPanel, setOpenPanel] = useState(false);
     const [userId, setUserId] = useState({})
+
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
 
     const { groupsMail, allMail } = useContext(MailboxContext)
     const { groupMailId, setGroupMailId } = useContext(ReportContext)
@@ -167,20 +177,38 @@ const Inbox = () => {
                             
                            
                         </div>
-                        <div className="d-flex" style={{ marginLeft: '48rem' }}>
-                            <div style={{ padding: '0 2rem' }}>
-                                1 of 21
-                            </div>
-                            <div>
-                                <ArrowBackIosIcon fontSize="small" />
-                                <ArrowForwardIosIcon fontSize="small" />
-                            </div>
+                        <div className="d-flex">
+                            {/* <div style={{ padding: '0 2rem', marginLeft:'6rem' }}>
+                                <TablePagination
+                                    rowsPerPageOptions={[1, 5, 10, 25, 100]}
+                                    component="div"
+                                    count={groupsMail !== null && groupsMail.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onChangePage={handleChangePage}
+                                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                                />
+                            </div> */}
                         </div>
                     </div>
                    
                 </Grid>
+                <div className="d-flex align-items-center justify-content-between">
+                    <Typography varient="h5"> Group Mail </Typography>
+                    <div style={{ padding: '0 2rem', marginLeft: '6rem' }}>
+                        <TablePagination
+                            rowsPerPageOptions={[1, 5, 10, 25, 100]}
+                            component="div"
+                            count={groupsMail !== null && groupsMail.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onChangePage={handleChangePage}
+                            onChangeRowsPerPage={handleChangeRowsPerPage}
+                        />
+                    </div>
+                </div>
                 { groupsMail !== null &&
-                    groupsMail.map(inbox => (
+                    groupsMail !== null && groupsMail.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((inbox, i) => (
                         <div key={inbox.client_id}
                             onMouseEnter={() => setOnGroupFocus(true)}
                             onMouseLeave={() => setOnGroupFocus(false)}>
@@ -257,6 +285,7 @@ const Inbox = () => {
                         </div>
                     ))
                 }
+                
 
                 { allMail !== null &&
                     allMail.map(inbox => (
