@@ -233,7 +233,7 @@ const Inbox = () => {
                                      />:null }
                                     <Avatar aria-label="recipe" variant="rounded" className={classes.avatar}>
                                         {/* <img width="100%" src={`http://127.0.0.1:8000/uploads/client_pro_pic/${inbox !== null && inbox.loggedInUser}`} alt="" /> */}
-                                        
+                                        G
                                     </Avatar>
                                     <Link to={`groupDetails/${inbox.id}`} style={{ textDecoration: 'none', color: '#2d2d2d' }}>
                                         <Typography variant="body1" style={{ margin: '0.5rem 0.5rem' }}>

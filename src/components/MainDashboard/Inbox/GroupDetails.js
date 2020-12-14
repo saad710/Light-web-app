@@ -16,7 +16,7 @@ const GroupDetails = () => {
     const classes = useStyles();
     const [mailDetails, setMailDetails] = useState(null)
     const [allReply, setReply] = useState(null)
-    // const [customerInfo, setCustomerInfo] = useState(null)
+    const [customerInfo, setCustomerInfo] = useState(null)
     // const [mail_body, setMailBody] = useState("");
     // const [mail_file, setMailfile] = useState("");
     useEffect(() => {
@@ -25,8 +25,8 @@ const GroupDetails = () => {
                 console.log(res);
                 const mails = res.data.mail_details
                 setMailDetails(mails)
-                // const customer_info = res.data.customer_info
-                // setCustomerInfo(customer_info)
+                const customer_info = res.data.customer_info
+                setCustomerInfo(customer_info)
                 const all_reply_mail = res.data.all_reply
                 setReply(all_reply_mail)
             })
@@ -114,15 +114,15 @@ const GroupDetails = () => {
                                             <CardHeader
                                                 avatar={
                                                     <Avatar aria-label="recipe" className={classes.avatar}>
-                                                        C
-                                            </Avatar>
+                                                        <img src={`http://127.0.0.1:8000/uploads/customer_pro_pic/${customerInfo !== null && customerInfo.profile_picture}`} alt="" style={{ width: '100%' }} />
+                                                    </Avatar>
                                                 }
                                                 action={
                                                     <IconButton aria-label="settings">
                                                         {/* <MoreVertIcon /> */}
                                                     </IconButton>
                                                 }
-                                                title={reply.sender}
+                                                title={customerInfo !== null && `${customerInfo.first_name} ${customerInfo.last_name}`}
                                                 subheader={moment(reply.created_at).fromNow()}
 
                                             />

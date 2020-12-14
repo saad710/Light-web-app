@@ -167,7 +167,7 @@ const InboxDetails = () => {
                                                         {/* <MoreVertIcon /> */}
                                                     </IconButton>
                                                 }
-                                                title={reply.sender}
+                                                title={customerInfo !== null && `${customerInfo.first_name} ${customerInfo.last_name}`}
                                                 subheader={moment(reply.created_at).fromNow()}
 
                                             />
