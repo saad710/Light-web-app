@@ -12,6 +12,7 @@ import Invoice from "./components/MainDashboard/Invoice/Invoice";
 import Payment from "./components/MainDashboard/Payment/Payment";
 import Profile from "./components/MainDashboard/Profile/Profile";
 import ReportPage from "./components/MainDashboard/ReportPage/ReportPage";
+import ScheduleCalender from './components/MainDashboard/SchedulePage/SchduleCalender';
 import SchedulePage from "./components/MainDashboard/SchedulePage/SchedulePage";
 import Sent from "./components/MainDashboard/Sent/Sent";
 import SentDetails from "./components/MainDashboard/Sent/SentDetails";
@@ -55,6 +56,7 @@ function App() {
           <Route path='/dashboard' component={NavDashboard} />
           <Route path='/passwordReset' component={ForgetPassword} />
           <Route path='/updates' component={UpdateSchedule} />
+          <Route path='/cal' component={ScheduleCalender} />
           {/* <Route path='/test' component={MailCompose} /> */}
         </Switch>
       </Router>

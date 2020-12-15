@@ -6,7 +6,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { key } from "../../../apiKey";
 import AppBarDrawer from "../AppBarDrawer";
-
+moment.locale('en-GB');
 const localizer = momentLocalizer(moment)
 
 const useStyles = makeStyles((theme) => ({
@@ -93,57 +93,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const events = [
-  {
-    title: "Lunch",
-    start: "2020-12-12T11:30:00",
-    end: "2020-12-13T12:30:00",
-  },
-  {
-    display: "block",
-    title: "Event2",
-    backgroundColor: "#4195d1",
-    start: "2020-10-12T11:30:00",
-    end: "2020-10-12T12:30:00",
-  },
-  {
-    title: "Event3",
-    display: "block",
-    backgroundColor: "#213f7e",
-    start: "2020-10-15T10:30:00",
-    end: "2020-10-15T11:30:00",
-  },
-  {
-    title: "Event4",
-    display: "block",
-    backgroundColor: "#378006",
-    start: "2020-10-16T10:30:00",
-    end: "2020-10-16T11:30:00",
-  },
-  {
-    title: "Event5",
-    backgroundColor: "#213f7e",
-    start: "2020-10-20T10:30:00",
-    display: "block",
-    end: "2020-10-20T11:30:00",
-  },
-  {
-    title: "Event6",
-    start: "2020-10-24T10:30:00",
-    end: "2020-10-24T11:30:00",
-    backgroundColor: "#378006",
-    color: "#213f7e",
-    display: "block",
-  },
-];
+
 
 const SchedulePage = () => {
-  const [schedule, setSchedule] = useState(null)
-  console.log("schedule", schedule);
+  const [evts, setSchedule] = useState(null)
+  const [allMail, setAllMail] = useState(null)
+  console.log("allMail", allMail);
+  const events = [
+    {
+      title: "Lunch",
+      start: "2020-12-12T11:30:00",
+      end: "2020-12-13T12:30:00",
+    },
+    {
+      display: "block",
+      title: "Event2",
+      backgroundColor: "#4195d1",
+      start: "2020-10-12T11:30:00",
+      end: "2020-10-12T12:30:00",
+    },
+    {
+      title: "Event3",
+      display: "block",
+      backgroundColor: "#213f7e",
+      start: "2020-10-15T10:30:00",
+      end: "2020-10-15T11:30:00",
+    },
+  ];
   useEffect(() => {
-    Axios.get(`${key}all-schedule-mail`)
+    Axios.get(`${key}client-all-mail/${1}`)
       .then(res => {
-        setSchedule(res.data)
+        console.log(res.data.all_mail);
+        setAllMail(res.data.all_mail)
       })
       .catch(err => {
         console.log(err);
@@ -151,19 +132,22 @@ const SchedulePage = () => {
 
   }, [])
 
-  const data = [ 
-    schedule !== null && schedule.map((event) => (
+
+  
+  useEffect(( ) => {
+    const d = allMail !== null && allMail.map(m => (
       {
-        title: event.subject,
-        backgroundColor: "#213f7e",
-        start: event.schedule,
-        display: "block",
-        end: event.remainder !== null && event.remainder,
+        title: m.subject
       }
     ))
-    ]
-  
-  
+    setSchedule(d)
+    console.log("d", d);
+  }, [allMail])
+
+  console.log("static data", events);
+  console.log("dynamic data", evts !== null && evts);
+
+
 
 
   const classes = useStyles();
@@ -174,9 +158,10 @@ const SchedulePage = () => {
         <div className={classes.appBarSpacer} />
         <Calendar
           localizer={localizer}
-          events={data}
+          events={events}
           startAccessor="start"
           endAccessor="end"
+          culture='en-GB'
           style={{ height: 500 }}
         />
       </Container>

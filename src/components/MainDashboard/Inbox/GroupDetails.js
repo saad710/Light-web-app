@@ -104,7 +104,7 @@ const GroupDetails = () => {
                             {mailDetails.mail_file !== null &&
                                 <div className={classes.downloadfileStyle}>
                                     <Typography variant="h6" component="h6" align="center"> {mailDetails.mail_file} </Typography>
-                                    <a target="_blank" href={`${key}file-down/${mailDetails.mail_file}`}>
+                                <a href={`${key}group-mail-file-down/${mailDetails.mail_file}`}>
                                         <Button
                                             style={{ marginLeft: '4rem' }}
                                             variant="contained"
