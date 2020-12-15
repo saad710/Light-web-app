@@ -86,14 +86,14 @@ const Group = () => {
         // group_name.customer_email = customerEmail.toString()
         group_name.customer_email = customerEmail
         console.log(group_name);
-        // Axios.post(`${key}create-group`, group_name)
-        //     .then(res => {
-        //         console.log(res);
-        //         reFetch()
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
+        Axios.post(`${key}create-group`, group_name)
+            .then(res => {
+                console.log(res);
+                reFetch()
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     // delete feature
@@ -110,8 +110,8 @@ const Group = () => {
     }
 
     // get single clicked id
-    const handleOldValue = (id) => {
-        setShowOldValue(id)
+    const handleOldValue = (value) => {
+        setShowOldValue(value)
     }
 
     // handle group update
@@ -125,8 +125,9 @@ const Group = () => {
     const handleUpdateSubmit = (e) => {
         const newGroup = { ...updateValue }
         newGroup.customer_email = updateEmail
+        const group_id = showOldValue.id
         console.log(newGroup);
-        Axios.put(`${key}group-update/${showOldValue}`, newGroup)
+        Axios.put(`${key}group-update/${group_id}`, newGroup)
             .then((res) => {
                 console.log(res.data);
                 reFetch()
@@ -496,7 +497,7 @@ const Group = () => {
                                                                                 aria-label="contained primary button group"
                                                                             >
                                                                                 <Button
-                                                                                    onClick={() => { handleOpen(); handleOldValue(group.id) }}
+                                                                                    onClick={() => { handleOpen(); handleOldValue(group) }}
                                                                                     style={{ fontSize: '10px' }} color="primary" >UPDATE</Button>
                                                                                 <Button
                                                                                     style={{ fontSize: '10px' }} color="secondary" onClick={() => handleGroupDelete(group.id)}>DELETE</Button>
@@ -553,6 +554,7 @@ const Group = () => {
                                                                     name="group_name"
                                                                     autoComplete="group"
                                                                     autoFocus
+                                                                    defaultValue={showOldValue.group_name}
                                                                     placeholder="group-1"
                                                                     onChange={handleUpdateTagInput}
                                                                 />
@@ -573,8 +575,8 @@ const Group = () => {
                                                                     >
                                                                         {groups !== null && groups.map((name) => (name.customer_email !== null && name.customer_email.map(email => (
                                                                             <MenuItem key={name.email} value={email} >
+                                                                                {showOldValue !== name.customer_email && email}
                                                                                 {/* {showOldValue !== name.id && email} */}
-                                                                                {showOldValue !== name.id && email}
                                                                                 </MenuItem>
                                                                             ))
                                                                         ))}

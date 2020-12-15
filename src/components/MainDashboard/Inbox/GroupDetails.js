@@ -1,5 +1,7 @@
 import { Avatar, Card, CardContent, CardHeader, Chip, Container, Grid, IconButton, Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import Axios from 'axios';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
@@ -10,7 +12,6 @@ import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './InboxDetailsStyle';
-
 const GroupDetails = () => {
     const { inboxId } = useParams()
     const classes = useStyles();
@@ -83,26 +84,39 @@ const GroupDetails = () => {
                                             label={mailDetails.type}
 
                                         />
-                                        <div>
+                                        <div className="mx-2"> 
                                             {
-                                                mailDetails.deadline && `Deadline : ${mailDetails.deadline}`
+                                                mailDetails.deadline && `Deadline : ${moment(mailDetails.deadline).subtract(10, 'days').calendar()}`
                                             }
                                         </div>
-                                        <div>
-                                            
+                                        <div className="mx-2">
+                                            {
+                                                mailDetails.remainder !== null  && `Remainder : ${moment(mailDetails.remainder).subtract(10, 'days').calendar()}`
+                                            }
                                         </div>
                                 </div>
 
                             </Typography>
-                                <div>
-                                    {
-                                        
-                                    }
-                                </div>
                         </div>
                         <Typography variant="body1" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
                                 {ReactHtmlParser(mailDetails.mail_body)}
                         </Typography>
+                            {mailDetails.mail_file !== null &&
+                                <div className={classes.downloadfileStyle}>
+                                    <Typography variant="h6" component="h6" align="center"> {mailDetails.mail_file} </Typography>
+                                    <a target="_blank" href={`${key}file-down/${mailDetails.mail_file}`}>
+                                        <Button
+                                            style={{ marginLeft: '4rem' }}
+                                            variant="contained"
+                                            color="primary"
+                                            className={classes.button}
+                                            startIcon={<CloudDownloadIcon />}
+                                        >
+                                            Download
+                                        </Button>
+                                    </a>
+                                </div>
+                            }
 
                     </Grid>
                         {mailDetails.reply_status !== null &&

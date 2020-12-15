@@ -14,7 +14,6 @@ import avatar from '../../../images/avatar.png';
 import { LoggedInContext } from '../../../Providers/LoggedInProvider';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './InboxDetailsStyle';
-
 const InboxDetails = () => {
     const { inboxId } = useParams()
     const { loggedInUser } = useContext(LoggedInContext)
@@ -113,9 +112,14 @@ const InboxDetails = () => {
                                             label={mailDetails.type}
 
                                         />
-                                        <div>
+                                        <div className="mx-2">
                                             {
-                                                mailDetails.deadline && `Deadline : ${mailDetails.deadline}`
+                                                mailDetails.deadline && `Deadline : ${moment(mailDetails.deadline).subtract(10, 'days').calendar()}`
+                                            }
+                                        </div>
+                                        <div className="mx-2">
+                                            {
+                                                mailDetails.remainder !== null && `Remainder : ${mailDetails.remainder}`
                                             }
                                         </div>
                                     </div>
@@ -125,27 +129,27 @@ const InboxDetails = () => {
                             <Typography variant="body1" style={{ marginLeft: '4rem', color: '#2d2d2d', lineHeight: '2' }}>
                                 {ReactHtmlParser(mailDetails.mail_body)}
                             </Typography>
-                            <div className={classes.downloadfileStyle}>
-                                <Typography variant="h6" component="h6" align="center"> {mailDetails.mail_file} </Typography>
-                                {/* <Link to={`${key}file-down/${info.mail_file}`} target="_blank" download> */}
-                                <a href={`${key}file-down/${mailDetails.mail_file}`}>
-                                    <Button
-                                        style={{ marginLeft: '4rem' }}
-                                        variant="contained"
-                                        color="primary"
-                                        className={classes.button}
-                                        startIcon={<CloudDownloadIcon />}
-                                    >
-                                        Download
-                                    </Button>
-                                </a>
-                                {/* </Link> */}
-                            </div>
+                            {mailDetails.mail_file !== null &&
+                                <div className={classes.downloadfileStyle}>
+                                    <Typography variant="h6" component="h6" align="center"> {mailDetails.mail_file} </Typography>
+                                    <a href={`${key}file-down/${mailDetails.mail_file}`}>
+                                        <Button
+                                            style={{ marginLeft: '4rem' }}
+                                            variant="contained"
+                                            color="primary"
+                                            className={classes.button}
+                                            startIcon={<CloudDownloadIcon />}
+                                        >
+                                            Download
+                                        </Button>
+                                    </a>
+                                </div>
+                            }
 
 
                         </Grid>
                         {mailDetails.reply_status !== null &&
-                            <div style={{ marginLeft: '3rem', marginTop: '35vh' }}>
+                            <div style={{ marginLeft: '3rem', marginTop: '10vh' }}>
                                 {allReply !== null && allReply.map((reply) => (
                                     <div>
                                         <hr />
