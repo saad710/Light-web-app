@@ -666,7 +666,7 @@ const MailCompose = () => {
                                                             <Typography variant="body2" onClick={handleOpen}> Schedule Sent </Typography>
                                                         </div>
                                                         <Snackbar
-                                                            open={msgOpen}
+                                                            // open={msgOpen}
                                                             onClose={handleMsgClose}
                                                             TransitionComponent={transition}
                                                             message=" Mail successfully send "

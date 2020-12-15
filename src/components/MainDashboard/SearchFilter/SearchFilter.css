@@ -5,12 +5,15 @@
     color: #fff;
     width: 100%;
 }
+
 .dropdown-menu.dropdown-menu-right.show {
     background-color: #213F7E;
 }
+
 #dropdown-icon {
     margin-left: -4rem;
 }
+
 .dropdown.dropdown-lg .dropdown-menu {
     margin-top: -1px;
     padding: 6px 20px;
@@ -58,7 +61,25 @@
     .dropdown.dropdown-lg .dropdown-menu {
         min-width: 500px;
     }
+
     .input-group {
         width: 20rem;
+    }
+}
+
+#searchRes {
+    width: 56rem;
+}
+
+@media screen and (max-width: 500px) {
+    #searchRes {
+        width: 0rem;
+    }
+
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+    #searchRes {
+        width: 0rem;
     }
 }

@@ -119,64 +119,61 @@ const SearchFilter = () => {
             <main className={classes.content}>
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <div className="input-group" style={{ width: '56rem' }}>
-                            {/* <SearchIcon color="primary" /> */}
-                            {/* <input type="text" className="form-control" placeholder="Search..."
-                                style={{ borderRadius: '1rem' }}
-                                /> */}
-                            <div className={classes.search}>
-                                <div className={classes.searchIcon} >
-                                    <SearchIcon />
+                        <Grid item xs={12} md={6}>
+                            <div className="input-group" id="searchRes">
+                                <div className={classes.search}>
+                                    <div className={classes.searchIcon} >
+                                        <SearchIcon />
+                                    </div>
+                                    <InputBase
+                                        placeholder="Search…"
+                                        name="search"
+                                        id="search"
+                                        onKeyPress={handleKeyword}
+                                        classes={{
+                                            root: classes.inputRoot,
+                                            input: classes.inputInput,
+                                        }}
+                                        style={{ color: '#2d2d2d' }}
+                                        inputProps={{ 'aria-label': 'search' }}
+                                    />
                                 </div>
-                                <InputBase
-                                    placeholder="Search…"
-                                    name="search"
-                                    id="search"
-                                    onKeyPress={ handleKeyword }
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                    }}
-                                    style={{ color: '#2d2d2d' }}
-                                    inputProps={{ 'aria-label': 'search' }}
-                                />
-                            </div>
-                            <FormGroup row style={{ color: '#2d2d2d', marginLeft:'1rem' }} className="d-flex flex-row">
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={checkBox.quickReply}
-                                            onChange={handleChange}
-                                            size="small"
-                                            name="quickReply"
-                                            style={{ color: '#4195D1' }}
-                                        />}
-                                    label="Quick Reply"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={checkBox.noReply}
-                                            onChange={handleChange}
-                                            name="noReply"
-                                            style={{ color: '#4195D1' }}
-                                        />
-                                    }
-                                    label="No Reply"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={checkBox.setRemainder}
-                                            onChange={handleChange}
-                                            name="setRemainder"
-                                            style={{ color: '#4195D1' }}
-                                        />
-                                    }
-                                    label="Remainder"
-                                />
+                                <FormGroup row style={{ color: '#2d2d2d', marginLeft: '1rem' }} className="d-flex flex-row">
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={checkBox.quickReply}
+                                                onChange={handleChange}
+                                                size="small"
+                                                name="quickReply"
+                                                style={{ color: '#4195D1' }}
+                                            />}
+                                        label="Quick Reply"
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={checkBox.noReply}
+                                                onChange={handleChange}
+                                                name="noReply"
+                                                style={{ color: '#4195D1' }}
+                                            />
+                                        }
+                                        label="No Reply"
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={checkBox.setRemainder}
+                                                onChange={handleChange}
+                                                name="setRemainder"
+                                                style={{ color: '#4195D1' }}
+                                            />
+                                        }
+                                        label="Remainder"
+                                    />
 
-                                {/* <div className="pb-2" style={{color: '#2d2d2d'}}>
+                                    {/* <div className="pb-2" style={{color: '#2d2d2d'}}>
                                     <input onBlur={handleDate} name="date" type="date" className="dateInput"
                                         style={{ 
                                             color: '#2d2d2d',
@@ -188,9 +185,9 @@ const SearchFilter = () => {
                                     />
                                 </div> */}
 
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                         <KeyboardDatePicker
-                                            
+
                                             disableToolbar
                                             variant="inline"
                                             // format="MM/dd/yyyy"
@@ -203,12 +200,13 @@ const SearchFilter = () => {
                                             KeyboardButtonProps={{
                                                 'aria-label': 'change date',
                                             }}
-                                            />
-                                        </MuiPickersUtilsProvider>
+                                        />
+                                    </MuiPickersUtilsProvider>
 
-                                
-                            </FormGroup>
-                        </div>
+
+                                </FormGroup>
+                            </div>
+                        </Grid>
                     </Grid>
                 </Container>
             </main>
