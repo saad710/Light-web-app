@@ -15,7 +15,7 @@ import { useStyles } from './SearchFilterStyle';
 
 const SearchFilter = () => {
     const { loggedInUser } = useContext(LoggedInContext)
-    const [id, setId] = useState(2)
+    const [id, setId] = useState(1)
     const { allMail, setAllMail, reFetch, groupsMail, setGroupsMail } = useContext(MailboxContext)
     console.log(id);
     useEffect(() => {

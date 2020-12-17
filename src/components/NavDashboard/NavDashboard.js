@@ -6,7 +6,6 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { key } from '../../apiKey';
 import AppBarDrawer from '../MainDashboard/AppBarDrawer';
-import UpdateSchedule from '../MainDashboard/UpdateSchedule/UpdateSchedule';
 import Chart from './Chart/Chart';
 import MailCount from './MailCount/MailCount';
 
@@ -43,7 +42,7 @@ export default function NavDashboard() {
     const classes = useStyles();
     const [loggedInClient, setLoggedInClient] = useState({})
     const [countMailInfo, setCountMailInfo] = useState(null)
-    console.log(countMailInfo);
+    // console.log(countMailInfo);
     useEffect(() => {
         Axios.get(`${key}clients`)
         .then(res => {
@@ -52,25 +51,25 @@ export default function NavDashboard() {
             setLoggedInClient(clients[0])
         })
         .catch(err => {
-            console.log(err);
+            // console.log(err);
         })
         Axios.get(`${key}count-client-mail-data/${loggedInClient.id}`)
             .then(res => {
                 setCountMailInfo(res.data)
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             })
     }, [loggedInClient.id])
     const [requiredActions, setRequiredActions] = useState([])
     useEffect(() => {
     Axios.get(`${key}action-required`)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setRequiredActions(res.data)
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       })
   }, [])
     return (
@@ -93,7 +92,7 @@ export default function NavDashboard() {
                                                     }, 4000);
                                 return () => clearInterval(interval);
                             },) */}
-                            <UpdateSchedule />
+                            {/* <UpdateSchedule /> */}
                         </Grid>
                     </Grid>
                 </Container>

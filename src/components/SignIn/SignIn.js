@@ -1,3 +1,4 @@
+import { CircularProgress } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +12,7 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 import { key } from '../../apiKey';
 import { UserContext } from '../../Providers/UserProvider';
 import './SignIn.css';
+
 
 
 
@@ -58,6 +60,7 @@ export default function SignInSide() {
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [deactiveStatus, setDeactiveStatus] = useState(false)
+    const [progress, setProgress] = useState()
 
     const [loggedIn, setLoggedIn] = useState({
         email: '',
@@ -66,6 +69,7 @@ export default function SignInSide() {
     // console.log(loggedIn)
     const handleSubmit = (e) => {
         e.preventDefault();
+        setProgress(true)
         if (loggedIn.email && loggedIn.password) {
             console.log(loggedIn.password);
             const loginData = {
@@ -80,6 +84,7 @@ export default function SignInSide() {
                     //     setUser(res.data);
                     if (res.data.login_status === "success") {
                         localStorage.setItem("client", res.data.client_email);
+                        setProgress(false)
                         history.push("/dashboard");
                         setUser(res.data);
                     }
@@ -191,6 +196,9 @@ export default function SignInSide() {
                             color="primary"
                             className={classes.submit}
                         >
+                            {
+                                progress && <CircularProgress size="1.5rem" color="secondary" />
+                            }
                             Sign In
                         </Button>
                         <Grid container>
