@@ -208,6 +208,7 @@ const Inbox = () => {
                             component="div"
                             count={groupsMail !== null && groupsMail.length}
                             rowsPerPage={rowsPerPage}
+                            labelRowsPerPage={""}
                             page={page}
                             onChangePage={handleChangePage}
                             onChangeRowsPerPage={handleChangeRowsPerPage}
@@ -302,6 +303,7 @@ const Inbox = () => {
                             component="div"
                             count={allMail !== null && allMail.length}
                             rowsPerPage={rowsPerPageDiretMail}
+                            labelRowsPerPage={""}
                             page={pageDiretMail}
                             onChangePage={handleChangePageDiretMail}
                             onChangeRowsPerPage={handleChangeRowsPerPageDiretMail}

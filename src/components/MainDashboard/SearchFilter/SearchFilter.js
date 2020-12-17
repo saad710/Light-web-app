@@ -26,9 +26,11 @@ const SearchFilter = () => {
 
     const handleKeyword = (e) => {
         if(e.key === 'Enter') {
-            console.log(" from search filter ", e.target.value);
             const val = groupsMail !== null && groupsMail.filter(group => group.group_name.toLowerCase().includes(e.target.value.toLowerCase()) )
             setGroupsMail(val)
+        }
+        else{
+            console.log('nothing');
         }
     }
 
@@ -36,9 +38,10 @@ const SearchFilter = () => {
         setSelectedDate(date);
         console.log(date);
         const newDate = selectedDate.toLocaleDateString()
-        console.log({date: newDate});
-        Axios.post(`${key}search-mail-date-wise/${id}`, {date: newDate} )
+        console.log(newDate);
+        Axios.post(`${key}search-mail-date-wise/${id}`, newDate )
             .then(res => {
+                console.log(res);
                 // console.log(res.data.status);
                 // setAllMail(res.data.status)
             })
@@ -190,8 +193,8 @@ const SearchFilter = () => {
 
                                             disableToolbar
                                             variant="inline"
-                                            // format="MM/dd/yyyy"
-                                            format="yyyy/MM/dd"
+                                            format="MM/dd/yyyy"
+                                            // format="yyyy/MM/dd"
                                             margin="normal"
                                             id="date-picker-inline"
                                             // label="Date picker inline"
