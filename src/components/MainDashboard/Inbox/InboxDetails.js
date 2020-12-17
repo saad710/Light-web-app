@@ -5,6 +5,7 @@ import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import Axios from 'axios';
 import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
+import { Alert } from 'react-bootstrap';
 import ReactHtmlParser from 'react-html-parser';
 import { useParams } from 'react-router-dom';
 import SunEditor from 'suneditor-react';
@@ -23,7 +24,9 @@ const InboxDetails = () => {
     const [customerInfo, setCustomerInfo] = useState(null)
     const [mail_body, setMailBody] = useState("");
     const [mail_file, setMailfile] = useState("");
-    console.log("allReply", allReply);
+    const [errorAlert, setErrorAlert] = useState("");
+    const [successAlert, setSuccessAlert] = useState("");
+    // console.log("allReply", allReply);
     // console.log("pic test", customerInfo.profile_picture !== null && customerInfo.profile_picture);
     useEffect(() => {
         // const client_id = 1
@@ -58,6 +61,7 @@ const InboxDetails = () => {
         formData.append('mail_file', mail_file)
         Axios.post(`${key}reply-mail-to-customer/`, formData)
             .then((res) => {
+                setSuccessAlert(true)
                 console.log("done", res)
             }).catch((err) => {
                 console.log(err.message)
@@ -195,6 +199,22 @@ const InboxDetails = () => {
                         {(showReplyBox && allReply !== null) &&
                             <div className="my-5">
                                 <form noValidate onSubmit={onFormSubmit} autoComplete="off" method="POST" encType="multipart/form-data">
+                                {successAlert === true &&
+                                    <Alert variant="success" onClose={() => setSuccessAlert(false)} dismissible>
+                                        {/* <Alert.Heading>Successfull! Invitation link sended to the customer email!</Alert.Heading> */}
+                                        <p>
+                                            Reply send Successfull!
+                                            </p>
+                                    </Alert>
+                                }
+                                {errorAlert === true &&
+                                    <Alert variant="danger" onClose={() => setErrorAlert(false)} dismissible>
+                                        {/* <Alert.Heading>Please enter valid information! or Try again later!</Alert.Heading> */}
+                                        <p>
+                                            Please enter valid information!
+                                            </p>
+                                    </Alert>
+                                }
                                     <SunEditor
                                         width="100%"
                                         placeholder="Details..."
