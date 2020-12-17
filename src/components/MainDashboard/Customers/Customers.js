@@ -15,9 +15,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-bootstrap';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './CustomersStyle';
+
 const columns = [
   { id: 'first_name', label: 'Name', minWidth: 100 },
   { id: 'email', label: 'Email', minWidth: 100 },
@@ -38,7 +40,8 @@ const Customers = () => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [email, setEmail] = useState("")
-    console.log(customers);
+    const [errorAlert, setErrorAlert] = useState("");
+    const [successAlert, setSuccessAlert] = useState("");
 
     const onFormSubmit = (e) => {
         e.preventDefault();
@@ -48,9 +51,11 @@ const Customers = () => {
         Axios.post(`${key}invite-customer`, value)
             .then(res => {
                 console.log(res);
+                setSuccessAlert(true)
             })
             .catch(err => {
                 console.log(err);
+                setErrorAlert(true)
             })
     }
 
@@ -62,6 +67,7 @@ const Customers = () => {
             })
             .catch(err => {
                 console.log(err);
+                
             })
     }, [])
     const refetch = () => {
@@ -277,6 +283,26 @@ const Customers = () => {
                                                     <Typography component="body1" variant="body1">
                                                         Invite new customer
                                                     </Typography>
+                                                    {successAlert === true &&
+                                                        <Alert variant="success" onClose={() => setSuccessAlert(false)} dismissible>
+                                                            <Alert.Heading>Successfull! Invitation link sended to the customer email!</Alert.Heading>
+                                                            {/* <p>
+                                                                Change this and that and try again. Duis mollis, est non commodo
+                                                                luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                                                                Cras mattis consectetur purus sit amet fermentum.
+                                                            </p> */}
+                                                        </Alert>
+                                                    }
+                                                    { errorAlert === true &&
+                                                        <Alert variant="danger" onClose={() => setErrorAlert(false)} dismissible>
+                                                            <Alert.Heading>Please enter valid information! or Try again later!</Alert.Heading>
+                                                            {/* <p>
+                                                                Change this and that and try again. Duis mollis, est non commodo
+                                                                luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                                                                Cras mattis consectetur purus sit amet fermentum.
+                                                            </p> */}
+                                                        </Alert>
+                                                    }
                                                     <form className={classes.form} noValidate onSubmit={onFormSubmit}>
                                                         <input
                                                             id="email"
@@ -332,6 +358,7 @@ const Customers = () => {
                                                             ADD CONTACT
                                                         </Button>
                                                     </form>
+                                                    
                                                 </div>
                                             </CardContent>
                                         </Card>

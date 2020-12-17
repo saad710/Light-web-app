@@ -10,6 +10,7 @@ import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
 import EditIcon from '@material-ui/icons/Edit';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-bootstrap';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './CompanyDetailsStyle';
@@ -35,6 +36,8 @@ const CompanyDetails = () => {
     const [companyId, setCompanyId] = useState();
     const [Success, setSuccess] = useState(false)
     const [companyData, setCompanyData] = useState({})
+    const [errorAlert, setErrorAlert] = useState("");
+    const [successAlert, setSuccessAlert] = useState("");
     const handleOpen = () => {
         setOpen(true);
     };
@@ -103,6 +106,7 @@ const CompanyDetails = () => {
         Axios.post(`${key}create-company`, finalValue)
             .then(res => {
                 console.log(res);
+                setSuccessAlert(true)
                 // reFetch()
                 reSubmit()
             })
@@ -432,6 +436,22 @@ const CompanyDetails = () => {
                                 <div className={classes.modalPaper}>
                                     <div className="mt-3">
                                         <form className={classes.form} noValidate>
+                                            {successAlert === true &&
+                                                <Alert variant="success" onClose={() => setSuccessAlert(false)} dismissible>
+                                                    {/* <Alert.Heading>Successfull! Invitation link sended to the customer email!</Alert.Heading> */}
+                                                    <p>
+                                                        Company Info Successfully created!
+                                                                    </p>
+                                                </Alert>
+                                            }
+                                            {errorAlert === true &&
+                                                <Alert variant="danger" onClose={() => setErrorAlert(false)} dismissible>
+                                                    {/* <Alert.Heading>Please enter valid information! or Try again later!</Alert.Heading> */}
+                                                    <p>
+                                                        Please enter valid information
+                                                                    </p>
+                                                </Alert>
+                                            }
                                             <div style={{ margin: "1rem 0" }}>
                                                 <TextField
                                                     style={{ backgroundColor: "#fff" }}

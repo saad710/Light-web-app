@@ -13,6 +13,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-bootstrap';
 import 'suneditor/dist/css/suneditor.min.css';
 import { key } from '../../../apiKey';
 import avatar from '../../../images/avatar.png';
@@ -40,6 +41,8 @@ const EmailSignature = () => {
     const [updateInstagram, setUpdateInstagram] = useState({})
     const [updateWebsite, setUpdateWebsite] = useState({})
     const [signClient, setSignClient] = useState({})
+    const [errorAlert, setErrorAlert] = useState("");
+    const [successAlert, setSuccessAlert] = useState("");
 
 
     console.log(updateValue);
@@ -209,6 +212,7 @@ const EmailSignature = () => {
         Axios.post(`${key}create-signature`, finalValue)
             .then(res => {
                 console.log(res);
+                setSuccessAlert(true)
                 reFetch()
             })
             .catch(err => {
@@ -422,6 +426,22 @@ const EmailSignature = () => {
                                     <div className={classes.emailModal}>
                                         <h6 className="text-center" style={{ color: '#fff', padding: '0.5rem 0' }}> Add new Signature </h6>
                                         <form className={classes.form} noValidate>
+                                            {successAlert === true &&
+                                                <Alert variant="success" onClose={() => setSuccessAlert(false)} dismissible>
+                                                    {/* <Alert.Heading>Successfull! Invitation link sended to the customer email!</Alert.Heading> */}
+                                                    <p>
+                                                        Email Signature Successfully created!
+                                                                    </p>
+                                                </Alert>
+                                            }
+                                            {errorAlert === true &&
+                                                <Alert variant="danger" onClose={() => setErrorAlert(false)} dismissible>
+                                                    {/* <Alert.Heading>Please enter valid information! or Try again later!</Alert.Heading> */}
+                                                    <p>
+                                                        Please enter valid information
+                                                                    </p>
+                                                </Alert>
+                                            }
                                             <div style={{ margin: "1rem 0" }}>
                                                 <TextField
                                                     style={{ backgroundColor: "#fff" }}

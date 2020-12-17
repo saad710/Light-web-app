@@ -128,7 +128,7 @@ const GroupDetails = () => {
                                             <CardHeader
                                                 avatar={
                                                     <Avatar aria-label="recipe" className={classes.avatar}>
-                                                        <img src={`http://127.0.0.1:8000/uploads/customer_pro_pic/${customerInfo !== null && customerInfo.profile_picture}`} alt="" style={{ width: '100%' }} />
+                                                        <img src={`http://lightletters.sswarehouses.com/uploads/customer_pro_pic/${customerInfo !== null && customerInfo.profile_picture}`} alt="" style={{ width: '100%' }} />
                                                     </Avatar>
                                                 }
                                                 action={

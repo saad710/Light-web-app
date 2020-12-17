@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-bootstrap';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './TagStyle';
@@ -23,12 +24,15 @@ const Tag = () => {
     const handleClose = () => {
         setOpen(false);
     };
-    const [addTag, setAddTag] = useState({});
+    const [addTag, setAddTag] = useState("");
     const [allTag, setAllTag] = useState(null);
     const [updateValue, setUpdateValue] = useState({})
     const [showOldValue, setShowOldValue] = useState({})
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const [errorAlert, setErrorAlert] = useState("");
+    const [successAlert, setSuccessAlert] = useState("");
 
     //get all
     useEffect(() => {
@@ -60,15 +64,18 @@ const Tag = () => {
         setAddTag(newTag)
     }
     const handleSubmit = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         const tag_name = { ...addTag }
-        console.log(tag_name);
         axios.post(`${key}create-tag`, tag_name)
             .then(res => {
+                setSuccessAlert(true)
                 reFetch()
+                setAddTag("")
+                document.getElementById("tag").reset("")
             })
             .catch(err => {
                 console.log(err);
+                // setErrorAlert(true)
             })
         e.preventDefault();
     }
@@ -130,6 +137,22 @@ const Tag = () => {
                             <Typography className="pt-2" style={{ margin: ' 0 auto ' }} component="body2" variant="body2">
                                 Add Tags
                             </Typography>
+                            {successAlert === true &&
+                                <Alert variant="success" onClose={() => setSuccessAlert(false)} dismissible>
+                                    {/* <Alert.Heading>Successfull! Invitation link sended to the customer email!</Alert.Heading> */}
+                                    <p>
+                                        Tag Successfully created!
+                                            </p>
+                                </Alert>
+                            }
+                            {errorAlert === true &&
+                                <Alert variant="danger" onClose={() => setErrorAlert(false)} dismissible>
+                                    {/* <Alert.Heading>Please enter valid information! or Try again later!</Alert.Heading> */}
+                                    <p>
+                                        Please enter valid information!
+                                            </p>
+                                </Alert>
+                            }
                             <form className={classes.form} noValidate>
 
                                 <div>

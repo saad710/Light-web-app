@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
+import { Collapse } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import SettingsIcon from "@material-ui/icons/Settings";
-import { Collapse } from '@material-ui/core';
-import {Link} from 'react-router-dom'
-import PersonIcon from "@material-ui/icons/Person";
-import LabelImportantIcon from "@material-ui/icons/LabelImportant";
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import BusinessIcon from "@material-ui/icons/Business";
-
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import DataUsageIcon from '@material-ui/icons/DataUsage';
+import LabelImportantIcon from "@material-ui/icons/LabelImportant";
+import PersonIcon from "@material-ui/icons/Person";
+import SettingsIcon from "@material-ui/icons/Settings";
+import clsx from 'clsx';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 
 const drawerWidth = 240;
@@ -83,7 +83,7 @@ const LeftDrawer = () => {
                 onClick={handleDrawerOpen}
                 className={clsx(open && classes.hide)}
             >
-                <SettingsIcon style={{ color: '#2d2d2d' }} />
+                <SettingsIcon style={{ color: '#2d2d2d', marginLeft: '-2rem' }} />
             </IconButton>
 
             <Drawer

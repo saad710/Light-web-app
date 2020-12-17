@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-bootstrap';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './TeamStyle';
@@ -23,6 +24,9 @@ const Team = () => {
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const [errorAlert, setErrorAlert] = useState("");
+    const [successAlert, setSuccessAlert] = useState("");
 
     const handleChangePage = (event, newPage) => {
             setPage(newPage);
@@ -84,6 +88,7 @@ const Team = () => {
         Axios.post(`${key}admin-create`, adminData)
             .then(res => {
                 reFetch()
+                setSuccessAlert(true)
             })
             .catch(err => {
                 console.log(err);
@@ -104,7 +109,22 @@ const Team = () => {
                                 Add Admin
                             </Typography>
                             <form className={classes.form} noValidate>
-                                
+                                {successAlert === true &&
+                                    <Alert variant="success" onClose={() => setSuccessAlert(false)} dismissible>
+                                        {/* <Alert.Heading>Successfull! Invitation link sended to the customer email!</Alert.Heading> */}
+                                        <p>
+                                            Admin Successfully created!
+                                                                    </p>
+                                    </Alert>
+                                }
+                                {errorAlert === true &&
+                                    <Alert variant="danger" onClose={() => setErrorAlert(false)} dismissible>
+                                        {/* <Alert.Heading>Please enter valid information! or Try again later!</Alert.Heading> */}
+                                        <p>
+                                            Please enter valid information
+                                                                    </p>
+                                    </Alert>
+                                }
                                 <div>
                                     <label> Name </label>
                                     <TextField

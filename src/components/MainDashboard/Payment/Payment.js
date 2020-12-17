@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from "axios";
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { key } from '../../../apiKey';
 import paymentImg from '../../../images/cardIcon.svg';
 import visa from '../../../images/Input.svg';
 import './Payment.css';
@@ -71,7 +72,7 @@ const Payment = () => {
         console.log(newCustomer);
 
         axios
-            .post("http://127.0.0.1:8000/api/store-payment", newCustomer)
+            .post(`${key}store-payment`, newCustomer)
             .then((res) => {
                 console.log(res);
                 setName("");

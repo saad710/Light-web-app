@@ -56,7 +56,7 @@ const InboxDetails = () => {
         formData.append('client_mail_id', inboxId);
         formData.append('mail_body', mail_body);
         formData.append('mail_file', mail_file)
-        Axios.post('http://127.0.0.1:8000/api/reply-mail-to-customer/', formData)
+        Axios.post(`${key}reply-mail-to-customer/`, formData)
             .then((res) => {
                 console.log("done", res)
             }).catch((err) => {
@@ -159,9 +159,9 @@ const InboxDetails = () => {
                                                     
                                                     <Avatar aria-label="recipe" className={classes.avatar}>
                                                         {reply.type === "customer" ?
-                                                            <img src={`http://127.0.0.1:8000/uploads/customer_pro_pic/${customerInfo !== null && customerInfo.profile_picture}`} alt="" style={{ width: '100%' }} />
+                                                            <img src={`http://lightletters.sswarehouses.com/uploads/customer_pro_pic/${customerInfo !== null && customerInfo.profile_picture}`} alt="" style={{ width: '100%' }} />
                                                             :
-                                                            <img src={`http://127.0.0.1:8000/uploads/client_pro_pic/${loggedInUser !== null && loggedInUser.profile_picture}`} alt="" style={{ width: '100%' }} />
+                                                            <img src={`http://lightletters.sswarehouses.com/uploads/client_pro_pic/${loggedInUser !== null && loggedInUser.profile_picture}`} alt="" style={{ width: '100%' }} />
                                                             
                                                         }
                                                     </Avatar>

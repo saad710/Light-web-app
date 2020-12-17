@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-bootstrap';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './GroupStyle';
@@ -33,6 +34,8 @@ const Group = () => {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     const [expanded, setExpanded] = React.useState(false);
+    const [errorAlert, setErrorAlert] = useState("");
+    const [successAlert, setSuccessAlert] = useState("");
 
     const handleChangeAccordian = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -89,10 +92,12 @@ const Group = () => {
         Axios.post(`${key}create-group`, group_name)
             .then(res => {
                 console.log(res);
+                setSuccessAlert(true)
                 reFetch()
             })
             .catch(err => {
                 console.log(err);
+                setErrorAlert(true)
             })
     }
 
@@ -410,8 +415,23 @@ const Group = () => {
                                 Create Groups
                             </Typography>
                             <div>
+                                    {successAlert === true &&
+                                        <Alert variant="success" onClose={() => setSuccessAlert(false)} dismissible>
+                                            {/* <Alert.Heading>Successfull! Invitation link sended to the customer email!</Alert.Heading> */}
+                                            <p>
+                                                Group Successfully created
+                                            </p>
+                                        </Alert>
+                                    }
+                                    {errorAlert === true &&
+                                        <Alert variant="danger" onClose={() => setErrorAlert(false)} dismissible>
+                                            {/* <Alert.Heading>Please enter valid information! or Try again later!</Alert.Heading> */}
+                                            <p>
+                                                Please enter valid information!
+                                            </p>
+                                        </Alert>
+                                    }
                                 <form className={classes.form} noValidate>
-
                                     <div>
                                         <label htmlFor=""> Group Name </label>
                                         <TextField

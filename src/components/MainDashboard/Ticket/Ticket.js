@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-bootstrap';
 import { key } from '../../../apiKey';
 import AppBarDrawer from '../AppBarDrawer';
 import { useStyles } from './TicketStyle';
@@ -27,6 +28,8 @@ const Ticket = () => {
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [errorAlert, setErrorAlert] = useState("");
+    const [successAlert, setSuccessAlert] = useState("");
 
     const handleChangePage = (event, newPage) => {
             setPage(newPage);
@@ -70,6 +73,7 @@ const Ticket = () => {
         Axios.post(`${key}create-ticket`, createTicket)
             .then(res => {
                 console.log(res);
+                setSuccessAlert(true)
                 reFetch()
             })
             .catch(err => {
@@ -194,6 +198,22 @@ const Ticket = () => {
                                                     />
                                                     <CardContent>
                                                         <form className={classes.form} noValidate>
+                                                            {successAlert === true &&
+                                                                <Alert variant="success" onClose={() => setSuccessAlert(false)} dismissible>
+                                                                    {/* <Alert.Heading>Successfull! Invitation link sended to the customer email!</Alert.Heading> */}
+                                                                    <p>
+                                                                        Report Successfully created!
+                                                                    </p>
+                                                                </Alert>
+                                                            }
+                                                            {errorAlert === true &&
+                                                                <Alert variant="danger" onClose={() => setErrorAlert(false)} dismissible>
+                                                                    {/* <Alert.Heading>Please enter valid information! or Try again later!</Alert.Heading> */}
+                                                                    <p>
+                                                                        Please enter valid information!
+                                                                    </p>
+                                                                </Alert>
+                                                            }
                                                             <div style={{ margin: "1rem 0" }}>
                                                                 <TextField
                                                                     style={{ backgroundColor: "#fff" }}
@@ -206,6 +226,7 @@ const Ticket = () => {
                                                                     autoComplete='title'
                                                                     autoFocus
                                                                     onBlur={handleBlur}
+                                                                    placeholder='Name'
                                                                 />
                                                             </div>
                                                             <div>
@@ -220,6 +241,7 @@ const Ticket = () => {
                                                                     autoComplete='email'
                                                                     autoFocus
                                                                     onBlur={handleBlur}
+                                                                    placeholder='Email'
                                                                 />
                                                             </div>
                                                             <br />

@@ -11,6 +11,7 @@ import 'date-fns';
 import React, { useContext, useState } from 'react';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
+import { key } from '../../../apiKey';
 import { ComposeContext } from '../../../Providers/ComposeProvider';
 import AppBarDrawer from '../AppBarDrawer';
 import './Compose.css';
@@ -98,7 +99,7 @@ const MailCompose = () => {
         setProgress(true)
         formData.append('schedule', schduleTime)
         
-        Axios.post('http://127.0.0.1:8000/api/send-mail-customer/', formData)
+        Axios.post(`${key}send-mail-customer/`, formData)
             .then((res) => {
                 console.log("done", res)
                 setProgress(false)

@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Alert, Form } from 'react-bootstrap';
 import { key } from '../../../apiKey';
 import editIcon from '../../../images/editIcon.png';
 import AppBarDrawer from '../AppBarDrawer';
@@ -24,6 +24,8 @@ const Profile = () => {
     const [newPassword, setNewPassword] = useState({})
     const [confirmPassword, setConfirmPassword] = useState({})
     // const [updateImage, setUpdateImage] = useState('')
+    const [errorAlert, setErrorAlert] = useState("");
+    const [successAlert, setSuccessAlert] = useState("");
 
 
     const [success, setSuccess] = useState(false)
@@ -90,8 +92,9 @@ const Profile = () => {
         //     name
         // }
         // console.log(newData);
-        Axios.post(`http://127.0.0.1:8000/api/client-update/${client_id}`, formData)
+        Axios.post(`${key}client-update/${client_id}`, formData)
             .then((res) => {
+                setSuccessAlert(true)
                 reFetch()
                 console.log("done", res)
 
@@ -155,8 +158,24 @@ const Profile = () => {
 
                         <div className={classes.paper}>
                             <Form onSubmit={onFormSubmit} method="post" encType="multipart/form-data">
+                                {successAlert === true &&
+                                    <Alert variant="success" onClose={() => setSuccessAlert(false)} dismissible>
+                                        {/* <Alert.Heading>Successfull! Invitation link sended to the customer email!</Alert.Heading> */}
+                                        <p>
+                                            Profile Successfully Update!
+                                                                    </p>
+                                    </Alert>
+                                }
+                                {errorAlert === true &&
+                                    <Alert variant="danger" onClose={() => setErrorAlert(false)} dismissible>
+                                        {/* <Alert.Heading>Please enter valid information! or Try again later!</Alert.Heading> */}
+                                        <p>
+                                            Please enter valid information
+                                                                    </p>
+                                    </Alert>
+                                }
                                 <div style={{ margin: ' 0 auto', textAlign: 'center' }}>
-                                    <img className="pt-2" style={{ position: 'relative' }} width="20%" src={`http://127.0.0.1:8000/uploads/client_pro_pic/${updateClient.profile_picture}`} alt="" />
+                                    <img className="pt-2" style={{ position: 'relative' }} width="20%" src={`http://lightletters.sswarehouses.com/uploads/client_pro_pic/${updateClient.profile_picture}`} alt="" />
                                     {/* <Form.Group>
                                     <Form.File   id="icon-button-file" label="Change your picture" style={{color:"black"}} name="profile_picture" onChange={ (e)=>setProfile(e.target.files[0])} />
                                     
@@ -210,17 +229,19 @@ const Profile = () => {
                                         autoComplete="name"
 
                                         autoFocus
-                                        placeholder="Marie Winter"
+                                        placeholder="Enter Name"
                                         onChange={(e) => setName(e.target.value)}
                                     />
 
                                 </div>
                                 <div className="pb-2">
                                     <label htmlFor="" style={{ color: "black" }}> Email </label>
+                                    <br/>
+                                    <small style={{color:'#2d2d2d'}}> NB: Email not changeable </small>
                                     <TextField
                                         // disabled={disable ? disable : ''}
                                         disabled
-                                        style={{ borderRadius: '4px' }}
+                                        style={{ borderRadius: '4px'}}
                                         variant="outlined"
                                         margin="normal"
                                         required
