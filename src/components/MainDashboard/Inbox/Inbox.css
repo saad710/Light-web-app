@@ -1,0 +1,12 @@
+.main-group:hover a {
+  visibility: visible;
+}
+.delete-group a {
+  visibility: hidden;
+}
+.all-main:hover a {
+  visibility: visible;
+}
+.delete-single a {
+  visibility: hidden;
+}

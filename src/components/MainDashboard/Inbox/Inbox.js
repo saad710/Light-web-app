@@ -11,6 +11,7 @@ import { MailboxContext } from '../../../Providers/MailboxProvider';
 import { ReportContext } from '../../../Providers/ReportProvider';
 import UpdateSchedule from '../UpdateSchedule/UpdateSchedule';
 import { useStyles } from './InboxStyle';
+import "./Inbox.css";
 
 
 const Inbox = () => {
@@ -217,10 +218,9 @@ const Inbox = () => {
                 </div>
                 { groupsMail !== null &&
                     groupsMail !== null && groupsMail.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((inbox, i) => (
-                        <div key={inbox.client_id}
-                            onMouseEnter={() => setOnGroupFocus(true)}
-                            onMouseLeave={() => setOnGroupFocus(false)}>
-                            <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
+                        <div key={inbox.client_id} className="main-group"
+                          >
+                            <Divider  style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center my-3" style={{ color: '#fff' }}>
                                     { showResults ?  <Checkbox
@@ -282,10 +282,10 @@ const Inbox = () => {
                                             <small> { moment(inbox.created_at).fromNow() } </small>
                                         </Typography>
                                     </div>
-                                    <div className="col-md-3">
-                                        {onGroupFocus && <Typography variant="body2" align="right" style={{color:"rgb(65, 149, 209)",marginLeft: '28px'}} onClick={()=> handleDeleteGroup(inbox.id)} >
+                                    <div className="col-md-3 delete-group">
+                                      <a href="">   <Typography variant="body2" align="right" style={{color:"rgb(65, 149, 209)",marginLeft: '28px'}} onClick={()=> handleDeleteGroup(inbox.id)} >
                                             <DeleteForeverSharpIcon />
-                                        </Typography>}
+                                        </Typography> </a>
                                     </div>
                                </div>
 
@@ -313,9 +313,8 @@ const Inbox = () => {
 
                 { allMail !== null &&
                     allMail !== null && allMail.slice(pageDiretMail * rowsPerPageDiretMail, pageDiretMail * rowsPerPageDiretMail + rowsPerPageDiretMail).map((inbox, i) => (
-                        <div key={inbox.client_id}
-                        onMouseEnter={() => setOnGroupFocus(true)}
-                        onMouseLeave={() => setOnGroupFocus(false)}
+                        <div key={inbox.client_id} className="all-main"
+                        
                         >
                             
                             <Divider style={{ margin: '0 auto', backgroundColor: 'rgba(0, 0, 0, 0.1)' }} />
@@ -375,11 +374,11 @@ const Inbox = () => {
                                         <small> { moment(inbox.created_at).fromNow() } </small>
                                     </Typography>
                                 </div>
-                                <div className="col-md-3">
-                                  {onGroupFocus && <Typography variant="body2" style={{color:"rgb(65, 149, 209)"}} onClick={()=>handleDeleteSingle(inbox.id)}>
-                                        <DeleteForeverSharpIcon />
-                                    </Typography>}
-                                </div>
+                                <div className="col-md-3 delete-single">
+                                      <a href="">   <Typography variant="body2" align="right" style={{color:"rgb(65, 149, 209)",marginLeft: '28px'}} onClick={()=> handleDeleteSingle(inbox.id)} >
+                                            <DeleteForeverSharpIcon />
+                                        </Typography> </a>
+                                    </div>
                               </div>
 
                             </div>
